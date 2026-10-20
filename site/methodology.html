@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Methodology - Top 100 Digital AI Companies 2026</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="topbar">
+    <div class="topbar-inner">
+      <div class="brand">
+        <div class="brand-mark">100</div>
+        <span>Digital AI 2026</span>
+      </div>
+      <nav class="nav">
+        <a href="index.html">Overview</a>
+        <a href="ranking.html">Ranking</a>
+        <a href="methodology.html">Methodology</a>
+        <a href="exclusions.html">Exclusions</a>
+        <a href="about.html">About</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <h1>Methodology</h1>
+    <p class="subtitle">
+      Everything you need to defend, attack, or reproduce the ranking.
+    </p>
+
+    <div class="prose">
+      <div class="card">
+        <h2>1. The problem</h2>
+        <p>
+          AI startups sit on a four-decade spread: a small enterprise research lab
+          can sit at <strong>$1B valuation, $10M ARR</strong> while a foundation-model
+          leader sits at <strong>$965B valuation, $30B ARR</strong>. Both are arguably
+          "top of the AI market", but they are not directly comparable.
+        </p>
+        <p>
+          A naive ranking that just sums dollars turns this list into "the
+          companies with the most dollars", which is not interesting: Salesforce
+          and Palantir would always win. A ranking that only uses revenue
+          penalises pre-revenue research labs like Safe Superintelligence and
+          Thinking Machines, which are arguably the most strategically important
+          AI companies in the world.
+        </p>
+        <p>
+          We want a composite that respects <strong>scale of capital</strong>
+          (valuation) and <strong>scale of revenue</strong> (ARR), with a
+          normalisation that does not let the biggest player crush everything
+          else.
+        </p>
+      </div>
+
+      <div class="card">
+        <h2>2. Eligibility: pure-play digital AI</h2>
+        <p>
+          A company must be primarily a digital AI business to be ranked.
+          Concretely, we exclude the entire chip, datacenter hardware, humanoid
+          robotics, autonomous vehicles, and physical-world-AI category:
+        </p>
+        <ul>
+          <li><strong>Hardware / silicon:</strong> NVIDIA, Cerebras, Groq, Tenstorrent, Rebellions, SambaNova, FuriosaAI, Lightmatter, Etched, Positron, MatX</li>
+          <li><strong>Datacenter / GPU-cloud infra:</strong> CoreWeave, Lambda Labs, Crusoe, Applied Digital, Northern Data, Nebius</li>
+          <li><strong>Robotics:</strong> Figure, 1X, Apptronik, Sanctuary, Agility, Skild AI, Physical Intelligence, Skydio</li>
+          <li><strong>Autonomous vehicles:</strong> Waymo, Cruise, Zoox, Aurora, Tesla autonomy, Mobileye</li>
+          <li><strong>Physical/industrial AI:</strong> Anduril, Shield AI, KoBold Metals, Relativity Space, Hadrian</li>
+        </ul>
+        <p>
+          <a href="exclusions.html">Full exclusion list with rationale &rarr;</a>
+        </p>
+        <p>
+          Companies like Databricks, xAI, Palantir, ServiceNow, Salesforce, and
+          C3.ai are included despite also selling adjacent offerings, because
+          their AI segment is the primary value driver and dominant revenue line.
+        </p>
+      </div>
+
+      <div class="card">
+        <h2>3. The two input axes</h2>
+        <p>
+          For each eligible company we collect:
+        </p>
+        <ol>
+          <li>
+            <strong>Valuation</strong> &mdash; the most recent primary or tender
+            round, public market cap, or transaction valuation. We always prefer
+            a primary-source figure disclosed within the last 18 months.
+          </li>
+          <li>
+            <strong>ARR</strong> &mdash; disclosed annualised revenue run-rate
+            (or the most recent published revenue figure, if ARR is not given).
+            We never substitute forecasts, but a few late-stage companies
+            (OpenAI, Anthropic, Cursor, Anthropic) publish run-rates internally
+            that we cite verbatim.
+          </li>
+        </ol>
+      </div>
+
+      <div class="card">
+        <h2>4. Why log-scale?</h2>
+        <p>
+          Valuation and ARR each span 5+ orders of magnitude across the
+          eligible set. In a linear scale, Salesforce's $38B ARR is
+          <strong>3,800&times;</strong> Reworkd AI's $10M ARR &mdash; a single company
+          becomes ~40% of the entire axis range just from being the largest.
+          The histogram becomes unrecoverable below the giants.
+        </p>
+        <p>
+          Taking <code>log10</code> compresses extremes into a much more
+          information-dense scale. After log, Salesforce is at 4.58,
+          Reworkd is at 1.00 &mdash; a 4.6&times; ratio, not 3,800&times;.
+          This is the standard treatment for financial
+          power-law distributions (Schumpeter, Axtell, etc.).
+        </p>
+        <pre>log_val = log10(valuation_USD_b)
+log_arr = log10(arr_USD_m)</pre>
+      </div>
+
+      <div class="card">
+        <h2>5. Min-max rescaling</h2>
+        <p>
+          We linearly rescale each axis to [0, 1] using the minimum and maximum
+          observed log values. The top observation is 1.0, the bottom 0.0. This
+          is the simplest approach and is enough for this kind of heterogeneous
+          cross-sectional ranking.
+        </p>
+        <pre>z_log(x) = (log10(x) - log_min) / (log_max - log_min)</pre>
+        <p>
+          For the 2026 ranked set:
+        </p>
+        <ul>
+          <li>Valuation: log<sub>10</sub> ranges from -1.00 (~$0.1B) to 2.98 (~$965B)</li>
+          <li>ARR: log<sub>10</sub> ranges from 1.00 (~$10M) to 4.58 (~$38B)</li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <h2>6. The composite</h2>
+        <p>
+          Composite score is the equal-weighted average of the two rescaled
+          axes, expressed on a 0-100 scale:
+        </p>
+        <pre>S = 100 * (W_VAL * z_log(val) + W_ARR * z_log(arr))
+with W_VAL = W_ARR = 0.5</pre>
+        <p>
+          This is the simplest justifiable weighting that doesn't privilege
+          private-market hype over disclosed revenue (or vice versa). It also
+          makes the score interpretable: a score of 100 means best on both
+          axes; a score of 50 means average on both axes.
+        </p>
+        <h3>Why not a geometric mean?</h3>
+        <p>
+          A geometric mean would punish companies strong on one axis but
+          weak on the other. We deliberately do not do this: pre-revenue labs
+          like SSI and Thinking Machines are strategically important even
+          though their ARR is 0 &mdash; a pure valuation signal deserves
+          credit for them. Likewise, high-revenue companies without a recent
+          funding round (e.g. C3.ai, PolyAI, DeepL) are correctly rewarded.
+          The arithmetic mean treats the axes as complements, not
+          substitutes.
+        </p>
+
+        <h3>Why equal weights?</h3>
+        <p>
+          Sensitivity to the weight choice is a real concern. We tested the
+          ranking with W_VAL = 0.6 / W_ARR = 0.4 (used in some
+          VC-readiness scorecards) and with W_VAL = 0.4 / W_ARR = 0.6
+          (used in some growth-investing scorecards). The top 10 was stable;
+          reordering happened mostly in the 30-70 range, which is what we'd
+          expect from any composite.
+        </p>
+      </div>
+
+      <div class="card">
+        <h2>7. Missing data rules</h2>
+        <p>
+          Two kinds of missing data are common in 2026:
+        </p>
+        <ol>
+          <li>
+            <strong>Valuation missing, ARR present</strong> (e.g. Midjourney,
+            Suno, Aleph Alpha). These are mature, profitable businesses that
+            have no need for outside capital. The valuation axis is set to 0
+            (worst observed), so they compete on the ARR axis only.
+          </li>
+          <li>
+            <strong>ARR missing, valuation present</strong> (e.g. DeepSeek,
+            SSI, Thinking Machines). These are pre-revenue frontier labs
+            whose capital signal is the most important available. The ARR axis
+            is set to 0, and they compete on valuation only.
+          </li>
+          <li>
+            <strong>Both missing</strong>. We drop them entirely.
+          </li>
+        </ol>
+        <p>
+          This is a permissive rule. A strict alternative would be to lower
+          missing values to a sentinel below the observed minimum (e.g. log
+          value = log_min - 0.5). We chose 0 because it is interpretable and
+          makes the missing-data penalty visible in the score.
+        </p>
+      </div>
+
+      <div class="card">
+        <h2>8. Worked example: Anthropic</h2>
+        <p>
+          Anthropic is the #1 company in the 2026 ranking. Inputs:
+        </p>
+        <pre>valuation_USD_b = 965
+arr_USD_m       = 30000</pre>
+        <p>
+          After <code>log10</code>:
+        </p>
+        <pre>log_val = 2.984 (within [−1.00, 2.984])
+log_arr = 4.477 (within [1.00, 4.580])</pre>
+        <p>
+          Rescaled:
+        </p>
+        <pre>z_val = (2.984 − (−1.00)) / (2.984 − (−1.00)) = 1.000
+z_arr = (4.477 − 1.00) / (4.580 − 1.00) = 0.971</pre>
+        <p>
+          Composite:
+        </p>
+        <pre>S = 100 * (0.5 * 1.000 + 0.5 * 0.971) = 98.57 / 100</pre>
+        <p>
+          Sits at the top because (a) its valuation is at the upper edge of
+          the observed range, and (b) its ARR is the highest of any private
+          company. OpenAI is #2 with very similar numbers (1.0 valuation
+          normalised, 0.939 ARR normalised &rarr; 96.78).
+        </p>
+      </div>
+
+      <div class="card">
+        <h2>9. Reproducing the ranking</h2>
+        <p>
+          The data file is in <code>data/companies.json</code>. Run:
+        </p>
+        <pre>$ python scripts/score.py
+Top 10:
+  #  1  Anthropic               val=$965.0B   arr=$30000M   score=98.57
+  #  2  OpenAI                  val=$852.0B   arr=$25000M   score=96.78
+  #  3  Salesforce              val=$280.0B   arr=$38000M   score=93.26
+  ...</pre>
+        <p>
+          This regenerates <code>site/ranked.json</code> and a CSV at
+          <code>data/ranked.csv</code>. Open <code>site/index.html</code> in a
+          browser to view the site.
+        </p>
+      </div>
+
+      <div class="card">
+        <h2>10. Limitations</h2>
+        <ul>
+          <li>
+            <strong>Stale numbers.</strong> Private-market round prices change
+            fast. We use the latest figure we could verify through October 2026.
+          </li>
+          <li>
+            <strong>Annualised vs. real.</strong> Many companies publish
+            "run-rate ARR" rather than booked ARR. We accept run-rate but
+            flag it in the source column.
+          </li>
+          <li>
+            <strong>Public companies.</strong> For Palantir, Salesforce,
+            ServiceNow, C3.ai, Samsara, Tempus, Schrodinger, Recursion &mdash;
+            we use the full company's revenue and market cap, not a
+            subtraction of pre-AI business. This biases <em>upward</em> for
+            these names.
+          </li>
+          <li>
+            <strong>Category boundaries.</strong> Some companies straddle
+            categories (Databricks = data + AI; Scale AI = data labeling +
+            defense). They sit where they sit on company self-description.
+          </li>
+        </ul>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <div>
+      Built October 2026. Code and data on GitHub.
+    </div>
+  </footer>
+</body>
+</html>

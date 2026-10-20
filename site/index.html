@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Top 100 Pure-Play Digital AI Companies 2026</title>
+  <meta name="description" content="The Top 100 Pure-Play Digital AI Companies in 2026, ranked by a normalised composite of valuation and ARR. Methodology, dataset, sources.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="topbar">
+    <div class="topbar-inner">
+      <div class="brand">
+        <div class="brand-mark">100</div>
+        <span>Digital AI 2026</span>
+      </div>
+      <nav class="nav">
+        <a href="index.html">Overview</a>
+        <a href="ranking.html">Ranking</a>
+        <a href="methodology.html">Methodology</a>
+        <a href="exclusions.html">Exclusions</a>
+        <a href="about.html">About</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <span class="eyebrow">2026 Edition · Updated October 2026</span>
+      <h1>The Top 100 Pure-Play<br/>Digital AI Companies</h1>
+      <p>
+        A normalised score that combines each digital AI company's
+        <strong>valuation</strong> and <strong>annual recurring revenue (ARR)</strong>
+        into a single comparable number &mdash; weighted 50/50, log-scaled to
+        compress extremes.
+        Pure-play digital only: hardware, robotics, semiconductors and physical-AI
+        are excluded. <a href="methodology.html">Full methodology &rarr;</a>
+      </p>
+
+      <div class="hero-stats">
+        <div class="stat"><span class="v" id="hero-companies">100</span><span class="l">companies ranked</span></div>
+        <div class="stat"><span class="v">2</span><span class="l">input axes</span></div>
+        <div class="stat"><span class="v">log+min-max</span><span class="l">normalisation</span></div>
+        <div class="stat"><span class="v">50 / 50</span><span class="l">weights</span></div>
+      </div>
+    </section>
+
+    <div class="kpi-grid">
+      <div class="kpi">
+        <span class="cat-chip">#1 ranked</span>
+        <div class="v">Anthropic</div>
+        <div class="l">$965B valuation · ~$30B ARR run-rate · score 98.6</div>
+      </div>
+      <div class="kpi">
+        <span class="cat-chip">#2 ranked</span>
+        <div class="v">OpenAI</div>
+        <div class="l">$852B valuation · ~$25B ARR run-rate · score 96.8</div>
+      </div>
+      <div class="kpi">
+        <span class="cat-chip">Highest ARR</span>
+        <div class="v">Salesforce</div>
+        <div class="l">$38B ARR · Agentforce + AI platform · score 93.3</div>
+      </div>
+      <div class="kpi">
+        <span class="cat-chip">Pure-research lab to crack top 25</span>
+        <div class="v">SSI / TML</div>
+        <div class="l">$32B &amp; $50B valuations, $0 ARR · score ~57</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>What this is</h2>
+      <p>
+        AI startup headlines usually mix private valuations with public-market caps,
+        and conflate revenue with projections, with hardware, and with services.
+        This site isolates the <strong>pure-play digital AI</strong> business &mdash;
+        foundation models, AI applications, agent platforms, AI coding, voice and
+        video gen, AI-native data, etc. &mdash; and ranks them with one transparent
+        scoring rule.
+      </p>
+      <p style="margin-top:12px;">
+        Want to skim the list or sort by ARR/valuation? Go to the
+        <a href="ranking.html">full ranking</a>. Care about the math? See
+        <a href="methodology.html">methodology</a>. Curious about who got cut? See
+        <a href="exclusions.html">exclusions</a>.
+      </p>
+    </div>
+
+    <div class="card">
+      <h2>Score distribution</h2>
+      <p style="color:var(--text-dim);margin-bottom:16px;">
+        Score is the composite of log-min-max normalised valuation and ARR axes;
+        see <a href="methodology.html">methodology</a> for the exact formula.
+      </p>
+      <div id="score-buckets" class="chart-wrap" style="margin:0;"></div>
+    </div>
+
+    <div class="card">
+      <h2>By category</h2>
+      <div id="cat-breakdown" class="chart-wrap" style="margin:0;"></div>
+    </div>
+  </main>
+
+  <footer>
+    <div>
+      Source data compiled from public filings, press reports, and disclosed company statements.
+      See <a href="about.html">about</a> for the full source list.
+    </div>
+  </footer>
+
+  <script src="app.js"></script>
+  <script>
+    // Score-distribution chart on overview page
+    document.addEventListener("DOMContentLoaded", async () => {
+      const res = await fetch("ranked.json", { cache: "no-store" });
+      const data = await res.json();
+      const rows = data.companies;
+      const buckets = [0, 0, 0, 0, 0];
+      rows.forEach((r) => {
+        if (r.score >= 80) buckets[0]++;
+        else if (r.score >= 60) buckets[1]++;
+        else if (r.score >= 40) buckets[2]++;
+        else if (r.score >= 20) buckets[3]++;
+        else buckets[4]++;
+      });
+      const total = rows.length;
+      const labels = ["80-100", "60-80", "40-60", "20-40", "0-20"];
+      const root = document.getElementById("score-buckets");
+      const max = Math.max(...buckets);
+      root.innerHTML = labels.map((l, i) => `
+        <div style="margin-bottom:10px;">
+          <div style="display:flex;justify-content:space-between;font-size:13px;color:var(--text-dim);margin-bottom:4px;">
+            <span>Score ${l}</span>
+            <span>${buckets[i]} companies (${((buckets[i] / total) * 100).toFixed(0)}%)</span>
+          </div>
+          <div style="background:var(--panel-2);border-radius:6px;height:22px;overflow:hidden;">
+            <div style="width:${(buckets[i] / max) * 100}%;height:100%;background:linear-gradient(90deg, var(--accent), var(--accent-2));"></div>
+          </div>
+        </div>
+      `).join("");
+
+      // Category breakdown
+      const catCounts = {};
+      rows.forEach((r) => {
+        const c = r.category || "Other";
+        catCounts[c] = (catCounts[c] || 0) + 1;
+      });
+      const sortedCats = Object.entries(catCounts).sort((a, b) => b[1] - a[1]).slice(0, 12);
+      const catMax = Math.max(...sortedCats.map((c) => c[1]));
+      document.getElementById("cat-breakdown").innerHTML = sortedCats.map(([cat, n]) => `
+        <div style="margin-bottom:8px;">
+          <div style="display:flex;justify-content:space-between;font-size:13px;color:var(--text-dim);margin-bottom:4px;">
+            <span>${cat}</span>
+            <span>${n}</span>
+          </div>
+          <div style="background:var(--panel-2);border-radius:6px;height:16px;overflow:hidden;">
+            <div style="width:${(n / catMax) * 100}%;height:100%;background:linear-gradient(90deg, var(--accent), var(--accent-2));"></div>
+          </div>
+        </div>
+      `).join("");
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ranking - Top 100 Pure-Play Digital AI Companies 2026</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="topbar">
+    <div class="topbar-inner">
+      <div class="brand">
+        <div class="brand-mark">100</div>
+        <span>Digital AI 2026</span>
+      </div>
+      <nav class="nav">
+        <a href="index.html">Overview</a>
+        <a href="ranking.html">Ranking</a>
+        <a href="methodology.html">Methodology</a>
+        <a href="exclusions.html">Exclusions</a>
+        <a href="about.html">About</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <h1>Full ranking</h1>
+    <p class="subtitle">
+      100 pure-play digital AI companies, ranked by the composite
+      valuation &times; ARR score. Click any column header to re-sort.
+      Use the filter box to find a specific company or vertical.
+    </p>
+
+    <div class="filters">
+      <input data-filter="query" type="text" placeholder="Search by name, HQ, or category…" class="grow">
+      <select data-filter="category" aria-label="Filter by category">
+        <option value="">All categories</option>
+      </select>
+      <button class="btn" data-action="export-csv">Export CSV</button>
+    </div>
+
+    <div id="showing" style="color:var(--text-dim);font-size:13px;margin-bottom:10px;"></div>
+
+    <div class="table-wrap">
+      <table class="rank">
+        <thead>
+          <tr>
+            <th data-key="rank">#</th>
+            <th data-key="name">Company</th>
+            <th data-key="category">Category</th>
+            <th data-key="valuation_usd_b" class="num">Valuation</th>
+            <th data-key="arr_usd_m" class="num">ARR</th>
+            <th data-key="score" class="num">Score</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </div>
+
+    <div class="card">
+      <h3>How is the score built?</h3>
+      <p style="color:var(--text-dim);">
+        Each company's valuation and ARR are first log-transformed, then
+        min-max rescaled to [0,1] across the surviving set. The composite score
+        is <code>100 &times; (0.5 &times; z_val + 0.5 &times; z_arr)</code>.
+        See the <a href="methodology.html">methodology</a> page for the full
+        treatment, including missing-data rules and edge cases.
+      </p>
+    </div>
+  </main>
+
+  <footer>
+    <div>
+      Score is sensitive to the most recent disclosed valuation and ARR figures,
+      which are reported across multiple dated press cycles. Rerank with any
+      updated numbers by re-running <code>scripts/score.py</code>.
+    </div>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>

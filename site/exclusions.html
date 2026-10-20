@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Exclusions - Top 100 Digital AI Companies 2026</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="topbar">
+    <div class="topbar-inner">
+      <div class="brand">
+        <div class="brand-mark">100</div>
+        <span>Digital AI 2026</span>
+      </div>
+      <nav class="nav">
+        <a href="index.html">Overview</a>
+        <a href="ranking.html">Ranking</a>
+        <a href="methodology.html">Methodology</a>
+        <a href="exclusions.html">Exclusions</a>
+        <a href="about.html">About</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <h1>Who got excluded?</h1>
+    <p class="subtitle">
+      This list is intentionally narrower than "AI startups of 2026". It's only
+      pure-play <strong>digital</strong> AI businesses. Below is the explicit
+      exclusion set, with the reason for each cut.
+    </p>
+
+    <div class="card prose" id="ex-list">
+      <p>Loading…</p>
+    </div>
+  </main>
+
+  <footer>
+    <div>
+      If a company here should actually be included (or vice versa), open an issue on
+      GitHub.
+    </div>
+  </footer>
+
+  <script>
+    async function load() {
+      const res = await fetch("ranked.json", { cache: "no-store" });
+      const data = await res.json();
+      const grouped = {};
+      (data.exclusions?.examples || []).forEach((c) => {
+        const key = c.why.split(" ")[0];
+        grouped[key] = grouped[key] || [];
+        grouped[key].push(c);
+      });
+      const root = document.getElementById("ex-list");
+      root.innerHTML = `
+        <p style="color:var(--text-dim);">
+          ${data.exclusions?.reason || "Hardware/robotics/semis excluded."}
+        </p>
+        ${Object.entries(grouped).map(([k, list]) => `
+          <h3 style="margin-top:24px;">${k}</h3>
+          <ul style="list-style:none;padding:0;">
+            ${list.map((c) => `
+              <li style="padding:8px 0;border-bottom:1px solid var(--border);display:flex;justify-content:space-between;gap:12px;">
+                <strong>${c.name}</strong>
+                <span style="color:var(--text-dim);font-size:13px;">${c.why}</span>
+              </li>
+            `).join("")}
+          </ul>
+        `).join("")}
+      `;
+    }
+    document.addEventListener("DOMContentLoaded", load);
+  </script>
+</body>
+</html>
