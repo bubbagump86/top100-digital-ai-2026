@@ -8,28 +8,28 @@ Hardware (AI silicon, robotics, autonomous vehicles, physical-world AI) is
 intentionally excluded. See the [exclusions page](site/exclusions.html) for
 the full cut list and rationale.
 
-Live site: https://<your-username>.github.io/top100-ai-2026/
+Live site: https://bubbagump86.github.io/top100-digital-ai-2026/
+Repository: https://github.com/bubbagump86/top100-digital-ai-2026
 
 ## What's in the box
 
 ```
-top100-ai-2026/
+top100-ai-2026/                # repo root - served as the static site
+├── index.html                 # landing page
+├── ranking.html               # sortable, filterable top-100 table
+├── methodology.html           # full scoring explanation
+├── exclusions.html            # who got cut and why
+├── company.html               # per-company deep-dive template
+├── about.html                 # sources, license, how to reproduce
+├── style.css                  # dark theme
+├── app.js                     # sortable/filterable table, CSV export
+├── ranked.json                # data file served to the browser
 ├── data/
-│   ├── companies.json     # raw input data (101 entries after de-dupe)
-│   ├── ranked.json        # top 100 with scores
-│   └── ranked.csv         # flat CSV
+│   ├── companies.json         # raw input data (101 entries)
+│   ├── ranked.json            # top 100 with scores (mirror)
+│   └── ranked.csv             # flat CSV
 ├── scripts/
-│   └── score.py           # scoring engine (Python, stdlib only)
-├── site/                  # the static website
-│   ├── index.html
-│   ├── ranking.html
-│   ├── methodology.html
-│   ├── exclusions.html
-│   ├── about.html
-│   ├── company.html       # template for per-company deep-dives
-│   ├── ranked.json        # served by the site
-│   ├── app.js             # frontend logic
-│   └── style.css
+│   └── score.py               # scoring engine (Python, stdlib only)
 ├── README.md
 └── LICENSE
 ```
@@ -63,14 +63,14 @@ policy, and the sensitivity analysis — see
 ## Reproducing the ranking
 
 ```bash
-git clone https://github.com/<your-username>/top100-ai-2026.git
-cd top100-ai-2026
+git clone https://github.com/bubbagump86/top100-digital-ai-2026.git
+cd top100-digital-ai-2026
 python scripts/score.py
 ```
 
-This regenerates `data/ranked.json`, `data/ranked.csv`, and
-`site/ranked.json`. Open `site/index.html` in a browser to view the site
-(no build step).
+This regenerates `data/ranked.json`, `data/ranked.csv`, and the
+site-level `ranked.json` (used by the live site). Open `index.html` in a
+browser to view the site (no build step).
 
 To tweak the scoring, change the weights at the top of `scripts/score.py`:
 

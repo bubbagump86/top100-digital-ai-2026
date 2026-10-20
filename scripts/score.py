@@ -41,7 +41,9 @@ ROOT = Path(__file__).resolve().parents[1]
 DATA = ROOT / "data" / "companies.json"
 OUT_JSON = ROOT / "data" / "ranked.json"
 OUT_CSV = ROOT / "data" / "ranked.csv"
-OUT_PUBLIC_RANKED = ROOT / "site" / "ranked.json"
+# GitHub Pages deploys from repo root, so the live site needs
+# ranked.json at /ranked.json too.
+OUT_PUBLIC_RANKED = ROOT / "ranked.json"
 
 
 def is_skipped(company: dict) -> bool:
