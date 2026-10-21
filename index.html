@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Top 100 Pure-Play Digital AI Companies 2026</title>
-  <meta name="description" content="The Top 100 Pure-Play Digital AI Companies in 2026, ranked by a normalised composite of valuation and ARR. Methodology, dataset, sources.">
+  <title>Top 100 Digital AI Companies 2026</title>
+  <meta name="description" content="The Top 100 Digital AI Companies in 2026, ranked by a normalised composite of AI-attributed ARR and valuation. Includes pure-play AI labs and the AI businesses of the megacaps, on one like-for-like basis. Methodology, dataset, sources.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -30,13 +30,14 @@
   <main>
     <section class="hero">
       <span class="eyebrow">2026 Edition · Updated October 2026</span>
-      <h1>The Top 100 Pure-Play<br/>Digital AI Companies</h1>
+      <h1>The Top 100<br/>Digital AI Companies</h1>
       <p>
         A normalised score that combines each digital AI company's
-        <strong>valuation</strong> and <strong>annual recurring revenue (ARR)</strong>
+        <strong>valuation</strong> and <strong>AI-attributed ARR</strong>
         into a single comparable number &mdash; weighted 50/50, log-scaled to
         compress extremes.
-        Pure-play digital only: hardware, robotics, semiconductors and physical-AI
+        Pure-play AI labs <em>and</em> the AI businesses of the megacaps, on one
+        like-for-like basis. Hardware, robotics, semiconductors and physical-AI
         are excluded. <a href="methodology.html">Full methodology &rarr;</a>
       </p>
 
@@ -45,6 +46,7 @@
         <div class="stat"><span class="v">2</span><span class="l">input axes</span></div>
         <div class="stat"><span class="v">log+min-max</span><span class="l">normalisation</span></div>
         <div class="stat"><span class="v">50 / 50</span><span class="l">weights</span></div>
+        <div class="stat"><span class="v">20&times;</span><span class="l">peer multiple</span></div>
       </div>
     </section>
 
@@ -52,34 +54,64 @@
       <div class="kpi">
         <span class="cat-chip">#1 ranked</span>
         <div class="v">Anthropic</div>
-        <div class="l">$965B valuation · ~$30B ARR run-rate · score 100.0</div>
+        <div class="l">$965B valuation · $100B AI ARR · score 100.0</div>
       </div>
       <div class="kpi">
         <span class="cat-chip">#2 ranked</span>
         <div class="v">OpenAI</div>
-        <div class="l">$852B valuation · ~$25B ARR run-rate · score 98.2</div>
+        <div class="l">$852B valuation · $50B AI ARR · score 95.6</div>
       </div>
       <div class="kpi">
-        <span class="cat-chip">Highest pure-AI ARR (public company)</span>
-        <div class="v">ServiceNow</div>
-        <div class="l">$1.5B Now Assist forecast · AI-attributed only · score 72.7</div>
+        <span class="cat-chip">Big tech enters at #3</span>
+        <div class="v">Microsoft</div>
+        <div class="l">$37B AI ARR → $740B implied AI valuation · score 93.2</div>
       </div>
       <div class="kpi">
-        <span class="cat-chip">Highest pure-AI ARR (listed)</span>
-        <div class="v">Databricks</div>
-        <div class="l">$7B ARR (all AI) · score 82.1</div>
+        <span class="cat-chip">Merged entity</span>
+        <div class="v">SpaceXAI</div>
+        <div class="l">xAI + Cursor + X · $310B valuation · $14.2B ARR · #7</div>
       </div>
     </div>
 
     <div class="card">
+      <h2>How big tech fits in</h2>
       <p>
-        <strong>Note on the ARR column.</strong> For traditional-tech
-        companies that sell AI features alongside non-AI software
-        (Salesforce, ServiceNow, Palantir, Samsara, Schrodinger), we use
-        the AI-attributed ARR disclosed by the company &mdash; not the
-        total company revenue. That's the only way to rank them fairly
-        against pure-AI companies like Anthropic. The full breakdown is
-        on the <a href="methodology.html">methodology</a> page, section 3.
+        Alphabet, Meta, Microsoft, Amazon, Alibaba, Baidu and Tencent have
+        enormous AI businesses, but they are not AI companies &mdash; their market
+        caps are priced mostly on search, ads, e-commerce and gaming. Using
+        full market caps would let a search business win an AI ranking on
+        non-AI revenue.
+      </p>
+      <p style="margin-top:12px;">
+        So the valuation axis means one thing everywhere: <strong>"what is this
+        AI business worth?"</strong> Three bases:
+      </p>
+      <ul style="color:var(--text-dim);margin-top:12px;line-height:1.8;">
+        <li>
+          <span class="basis-chip basis-actual">Pure-play</span>
+          &mdash; it <em>is</em> an AI company; its market valuation is already an
+          AI valuation. Used as-is.
+        </li>
+        <li>
+          <span class="basis-chip basis-derived">AI-attributed</span>
+          &mdash; diversified, but discloses AI revenue. We value that revenue at
+          the pure-play median EV/Revenue multiple (<strong>20&times;</strong>,
+          derived from 81 pure-play companies) to get an implied standalone AI
+          valuation.
+        </li>
+        <li>
+          <span class="basis-chip basis-proxy">Proxy</span>
+          &mdash; no AI-revenue disclosure at all; full market cap used as a
+          flagged proxy and the ARR axis scored at zero.
+        </li>
+      </ul>
+      <p style="margin-top:12px;">
+        Result: Microsoft <strong>#3</strong>, Google <strong>#4</strong>, Amazon
+        <strong>#5</strong>, Meta <strong>#6</strong>, Alibaba <strong>#8</strong>,
+        Baidu <strong>#10</strong>, Tencent <strong>#11</strong> &mdash; on a
+        like-for-like AI basis. Full working, including the sensitivity of the
+        20&times; multiple, is on the
+        <a href="methodology.html">methodology</a> page (section 6b).
       </p>
     </div>
 
@@ -87,11 +119,11 @@
       <h2>What this is</h2>
       <p>
         AI startup headlines usually mix private valuations with public-market caps,
-        and conflate revenue with projections, with hardware, and with services.
-        This site isolates the <strong>pure-play digital AI</strong> business &mdash;
+        conflate revenue with projections, mix in hardware, and mix in services.
+        This site isolates the <strong>digital AI</strong> business &mdash;
         foundation models, AI applications, agent platforms, AI coding, voice and
-        video gen, AI-native data, etc. &mdash; and ranks them with one transparent
-        scoring rule.
+        video gen, AI-native data, and the AI businesses of the large caps &mdash;
+        and ranks them with one transparent scoring rule.
       </p>
       <p style="margin-top:12px;">
         Want to skim the list or sort by ARR/valuation? Go to the
@@ -113,6 +145,15 @@
     <div class="card">
       <h2>By category</h2>
       <div id="cat-breakdown" class="chart-wrap" style="margin:0;"></div>
+    </div>
+
+    <div class="card">
+      <h2>By valuation basis</h2>
+      <p style="color:var(--text-dim);margin-bottom:16px;">
+        How the 100 ranked companies are constructed. See
+        <a href="methodology.html">methodology</a> section 6b.
+      </p>
+      <div id="basis-breakdown" class="chart-wrap" style="margin:0;"></div>
     </div>
   </main>
 
@@ -173,6 +214,37 @@
           </div>
         </div>
       `).join("");
+
+      // Valuation-basis breakdown
+      const basisMeta = {
+        actual:  { label: "Pure-play AI (market-set AI valuation)", color: "var(--accent)" },
+        derived: { label: "AI-attributed (valuation derived at peer multiple)", color: "var(--accent-2)" },
+        proxy:   { label: "Market-cap proxy (no AI revenue disclosure)", color: "var(--warn)" },
+      };
+      const basisCounts = {};
+      rows.forEach((r) => {
+        basisCounts[r.valuation_basis] = (basisCounts[r.valuation_basis] || 0) + 1;
+      });
+      const bMax = Math.max(...Object.values(basisCounts));
+      document.getElementById("basis-breakdown").innerHTML = Object.entries(basisMeta).map(([k, m]) => {
+        const n = basisCounts[k] || 0;
+        return `
+        <div style="margin-bottom:10px;">
+          <div style="display:flex;justify-content:space-between;font-size:13px;color:var(--text-dim);margin-bottom:4px;">
+            <span>${m.label}</span>
+            <span>${n} companies</span>
+          </div>
+          <div style="background:var(--panel-2);border-radius:6px;height:18px;overflow:hidden;">
+            <div style="width:${(n / bMax) * 100}%;height:100%;background:${m.color};"></div>
+          </div>
+        </div>`;
+      }).join("") + `
+        <p class="sub-note" style="margin-top:14px;">
+          Peer multiple used for derived rows:
+          <strong>${data.peer_multiple.median_ev_revenue}&times;</strong>
+          (median across ${data.peer_multiple.pool_size} pure-play companies;
+          IQR ${data.peer_multiple.p25}&times;&ndash;${data.peer_multiple.p75}&times;).
+        </p>`;
     });
   </script>
 </body>

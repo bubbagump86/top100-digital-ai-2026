@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Ranking - Top 100 Pure-Play Digital AI Companies 2026</title>
+  <title>Ranking - Top 100 Digital AI Companies 2026</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -29,9 +29,9 @@
   <main>
     <h1>Full ranking</h1>
     <p class="subtitle">
-      100 pure-play digital AI companies, ranked by the composite
-      valuation &times; ARR score. Click any column header to re-sort.
-      Use the filter box to find a specific company or vertical.
+      100 digital AI companies, ranked by the composite
+      AI-valuation &times; AI-ARR score. Click any column header to re-sort.
+      Use the filter box to find a specific company, vertical, or valuation basis.
     </p>
 
     <div class="filters">
@@ -39,7 +39,28 @@
       <select data-filter="category" aria-label="Filter by category">
         <option value="">All categories</option>
       </select>
+      <select data-filter="basis" aria-label="Filter by valuation basis">
+        <option value="">All valuation bases</option>
+        <option value="actual">Pure-play AI</option>
+        <option value="derived">AI-attributed (derived)</option>
+        <option value="proxy">Market-cap proxy</option>
+      </select>
       <button class="btn" data-action="export-csv">Export CSV</button>
+    </div>
+
+    <div class="legend">
+      <div class="legend-item">
+        <span class="basis-chip basis-actual">Pure-play</span>
+        <span>AI company &mdash; its market valuation is already an AI valuation</span>
+      </div>
+      <div class="legend-item">
+        <span class="basis-chip basis-derived">AI-attributed</span>
+        <span>Diversified &mdash; valuation derived as AI ARR &times; peer multiple</span>
+      </div>
+      <div class="legend-item">
+        <span class="basis-chip basis-proxy">Proxy</span>
+        <span>No AI-revenue disclosure &mdash; market cap used as flagged proxy</span>
+      </div>
     </div>
 
     <div id="showing" style="color:var(--text-dim);font-size:13px;margin-bottom:10px;"></div>
@@ -52,7 +73,7 @@
             <th data-key="name">Company</th>
             <th data-key="category">Category</th>
             <th data-key="valuation_usd_b" class="num">Valuation</th>
-            <th data-key="arr_usd_m" class="num">ARR</th>
+            <th data-key="arr_usd_m" class="num">AI ARR</th>
             <th data-key="score" class="num">Score</th>
           </tr>
         </thead>
@@ -63,11 +84,17 @@
     <div class="card">
       <h3>How is the score built?</h3>
       <p style="color:var(--text-dim);">
-        Each company's valuation and ARR are first log-transformed, then
+        Each company's valuation and AI-attributed ARR are first log-transformed, then
         min-max rescaled to [0,1] across the surviving set. The composite score
         is <code>100 &times; (0.5 &times; z_val + 0.5 &times; z_arr)</code>.
-        See the <a href="methodology.html">methodology</a> page for the full
-        treatment, including missing-data rules and edge cases.
+      </p>
+      <p style="color:var(--text-dim);">
+        For diversified companies (Microsoft, Google, Amazon, Meta, Alibaba, Baidu,
+        Tencent, Salesforce, ServiceNow) the valuation is
+        <strong>derived</strong>: AI-attributed ARR &times; the pure-play median
+        EV/Revenue multiple. For companies with no AI-revenue disclosure, the full
+        market cap is used as a flagged proxy.
+        See the <a href="methodology.html">methodology</a> page, sections 3 and 6b.
       </p>
     </div>
   </main>

@@ -381,6 +381,107 @@ table.rank tbody td {
   white-space: nowrap;
 }
 
+/* --- Basis badges & sub-notes ------------------------------------- */
+.sub-note {
+  font-size: 11px;
+  color: var(--text-mute);
+  margin-top: 3px;
+  line-height: 1.35;
+}
+.sub-note.warn {
+  color: var(--warn);
+}
+.basis-chip {
+  display: inline-block;
+  font-size: 11px;
+  font-weight: 700;
+  padding: 3px 9px;
+  border-radius: 999px;
+  letter-spacing: 0.03em;
+}
+.basis-chip.basis-actual {
+  background: rgba(92, 200, 255, 0.16);
+  border: 1px solid rgba(92, 200, 255, 0.45);
+  color: var(--accent);
+}
+.basis-chip.basis-derived {
+  background: rgba(176, 140, 255, 0.16);
+  border: 1px solid rgba(176, 140, 255, 0.45);
+  color: var(--accent-2);
+}
+.basis-chip.basis-proxy {
+  background: rgba(250, 204, 21, 0.14);
+  border: 1px solid rgba(250, 204, 21, 0.42);
+  color: var(--warn);
+}
+
+.basis-callout {
+  background: var(--panel-2);
+  border: 1px solid rgba(176, 140, 255, 0.35);
+  border-left: 3px solid var(--accent-2);
+  border-radius: var(--r-md);
+  padding: 20px 22px;
+  margin-bottom: 16px;
+}
+.basis-callout.pure {
+  border-color: rgba(92, 200, 255, 0.35);
+  border-left-color: var(--accent);
+}
+.basis-callout.warn {
+  border-color: rgba(250, 204, 21, 0.35);
+  border-left-color: var(--warn);
+}
+.basis-callout h3 {
+  font-size: 15px;
+  margin-bottom: 10px;
+}
+.basis-callout p {
+  color: var(--text-dim);
+  font-size: 14px;
+  line-height: 1.65;
+  margin-bottom: 10px;
+}
+.basis-callout pre {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: var(--r-sm);
+  padding: 14px 16px;
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 12.5px;
+  line-height: 1.7;
+  overflow-x: auto;
+  margin: 10px 0;
+  color: var(--text);
+}
+.src-block {
+  font-size: 13px;
+  color: var(--text-dim);
+  line-height: 1.7;
+  background: var(--panel-2);
+  border: 1px solid var(--border);
+  border-radius: var(--r-sm);
+  padding: 12px 14px;
+}
+
+/* Legend */
+.legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 18px;
+  padding: 14px 16px;
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: var(--r-md);
+  margin-bottom: 16px;
+  font-size: 13px;
+  color: var(--text-dim);
+}
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
 /* Company detail page */
 .detail {
   display: grid;

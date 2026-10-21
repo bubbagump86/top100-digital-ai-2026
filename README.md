@@ -1,15 +1,50 @@
-# Top 100 Pure-Play Digital AI Companies 2026
+# Top 100 Digital AI Companies 2026
 
 A standalone, transparent ranking of the top 100 **digital** AI companies in
-2026, scored on a normalised composite of **valuation** and **ARR**.
+2026, scored on a normalised composite of **valuation** and **AI-attributed ARR**.
 
-This is *not* "AI startups" — it is exclusively digital-AI businesses.
-Hardware (AI silicon, robotics, autonomous vehicles, physical-world AI) is
-intentionally excluded. See the [exclusions page](site/exclusions.html) for
-the full cut list and rationale.
+This is not "AI startups" — it covers pure-play digital AI businesses **and**
+the AI businesses of the megacaps, on one like-for-like basis. Hardware (AI
+silicon, robotics, autonomous vehicles, physical-world AI) is intentionally
+excluded. See the [exclusions page](exclusions.html) for the full cut list.
 
 Live site: https://bubbagump86.github.io/top100-digital-ai-2026/
 Repository: https://github.com/bubbagump86/top100-digital-ai-2026
+
+## Methodology in 60 seconds
+
+For each company we collect:
+
+- `valuation_usd_b`: an **AI valuation** — either the company's own
+  market/transaction valuation (pure-play AI) or a derived figure (see below).
+- `arr_usd_m`: **AI-attributed ARR** — for diversified companies, only the
+  AI slice, never total company revenue.
+
+Both axes span 5+ orders of magnitude, so we **log-transform** each value and
+**min-max rescale** to `[0, 1]`. The composite is the equal-weighted average:
+
+```
+S = 100 * (0.5 * z_log(valuation) + 0.5 * z_log(ARR))
+```
+
+where `z_log(x) = (log10(x) - log_min) / (log_max - log_min)`.
+
+### The three-basis model (how big tech fits in)
+
+| Basis | Who | How the valuation is set |
+|---|---|---|
+| **Pure-play** | Anthropic, OpenAI, Databricks, SpaceXAI, Mistral, Cursor-era AI labs… | The company's own market/transaction valuation. It already *is* an AI valuation. |
+| **AI-attributed** | Microsoft, Google, Amazon, Meta, Alibaba, Baidu, Tencent, Salesforce, ServiceNow, Notion AI | `AI-attributed ARR × 20×` — the pure-play median EV/Revenue multiple (n=81, IQR 15–40×). Answers *"what would this AI business be worth standalone?"* |
+| **Market-cap proxy** | Palantir, Samsara, Schrodinger, ByteDance, Cohesity, Talkdesk | No AI-revenue disclosure, so no AI valuation can be derived. Full market cap used as a flagged proxy; ARR axis scored 0. |
+
+The peer multiple is derived from the pure-play pool only, so the imputation
+never feeds back into its own input.
+
+Missing data: if one axis is undisclosed it scores 0 (worst observed). If
+both are missing the company is dropped.
+
+Full treatment, worked examples, and sensitivity analysis — see
+[`methodology.html`](methodology.html), section 6b.
 
 ## What's in the box
 
@@ -25,11 +60,13 @@ top100-ai-2026/                # repo root - served as the static site
 ├── app.js                     # sortable/filterable table, CSV export
 ├── ranked.json                # data file served to the browser
 ├── data/
-│   ├── companies.json         # raw input data (101 entries)
+│   ├── companies.json         # raw input data (107 entries)
 │   ├── ranked.json            # top 100 with scores (mirror)
 │   └── ranked.csv             # flat CSV
 ├── scripts/
-│   └── score.py               # scoring engine (Python, stdlib only)
+│   ├── score.py               # scoring engine (Python, stdlib only)
+│   ├── migrate_v2.py          # Oct-2026 dataset migration (M&A, big tech)
+│   └── migrate_v3.py          # market-cap annotations, extra exclusions
 ├── README.md
 └── LICENSE
 ```
@@ -84,17 +121,17 @@ W_ARR = 0.5
 The 2025-2026 cycle has several high-profile consolidations, and this site
 treats them with explicit annotations:
 
-- **Cursor / Anysphere** &mdash; acquired by **SpaceX** (all-stock, $60B).
-  Deal signed Jun 16, 2026; closed Aug 14, 2026. Now a wholly-owned
-  subsidiary inside the SpaceXAI division. ARR ($4B) is the June 2026
-  run-rate as of the close.
-- **xAI** &mdash; acquired by **SpaceX** (all-stock, $250B / $1.25T
-  combined). Closed Feb 2, 2026. Now the **SpaceXAI** division alongside
-  Cursor. SpaceX went public on Nasdaq Jun 12, 2026 at ~$1.77T.
-- **Codeium / Windsurf** &mdash; acquired by **Cognition** (undisclosed;
-  ~$250M est.). Closed Jul 14, 2025 with $82M ARR. Now a Cognition product
-  line. The standalone Codeium row has been **dropped** from this ranking
-  because its ARR is now rolled up into Cognition's ($48B, 2026 round).
+- **SpaceXAI (xAI + Cursor + X)** — presented as **one consolidated entity**.
+  xAI acquired by **SpaceX** (all-stock, $250B, closed Feb 2, 2026); Cursor
+  acquired (all-stock, $60B, signed Jun 16, 2026, closed Aug 14, 2026).
+  Combined valuation **$310B** (the sum of the two disclosed transaction
+  prices) and ~$14.2B ARR.
+- **Codeium / Windsurf** — acquired by **Cognition** (undisclosed; ~$250M est.),
+  closed Jul 14, 2025 with $82M ARR. The standalone Codeium row has been
+  **dropped** because its ARR is now rolled into Cognition's consolidated
+  figure.
+- **Hugging Face** — acquired by NVIDIA in 2025; its $12.93B acquisition price
+  remains a valid AI valuation, so it stays.
 
 Full sources are in the per-company entry in
 [`data/companies.json`](data/companies.json); the methodology page,
@@ -102,22 +139,23 @@ section 10, has the same commentary.
 
 ## Top 10 (2026 edition)
 
-| Rank | Company                                | Valuation | ARR (AI-attributed)  | Score |
-|------|----------------------------------------|-----------|----------------------|-------|
-| 1    | Anthropic                              | $965B     | $30,000M            | 100.00 |
-| 2    | OpenAI                                 | $852B     | $25,000M            | 98.18 |
-| 3    | Databricks                             | $190B     | $7,000M             | 82.06 |
-| 4    | xAI *(now SpaceXAI)*                   | $250B     | $1,500M             | 73.93 |
-| 5    | ServiceNow (Now Assist AI)             | $200B     | $1,500M (Now Assist)| 72.71 |
-| 6    | Anysphere / Cursor *(now SpaceXAI)*    | $60B      | $4,000M             | 72.28 |
-| 7    | Salesforce (Agentforce / AI)           | $280B     | $800M (Agentforce)  | 70.62 |
-| 8    | VAST Data                              | $30B      | $2,000M             | 64.17 |
-| 9    | Scale AI                               | $29B      | $2,000M             | 63.99 |
-| 10   | Mistral AI                             | $24B      | $1,000M             | 58.63 |
+| Rank | Company                            | AI Valuation      | AI ARR               | Score |
+|------|------------------------------------|-------------------|----------------------|-------|
+| 1    | Anthropic                          | $965B             | $100,000M            | 100.00 |
+| 2    | OpenAI                             | $852B             | $50,000M             | 95.56 |
+| 3    | Microsoft (AI business)            | $740B *derived*   | $37,000M             | 93.16 |
+| 4    | Google / Alphabet (AI)             | $600B *derived*   | $30,000M             | 90.87 |
+| 5    | Amazon (AWS AI)                    | $500B *derived*   | $25,000M             | 88.89 |
+| 6    | Meta (AI)                          | $400B *derived*   | $20,000M             | 86.46 |
+| 7    | SpaceXAI (xAI + Cursor + X)        | $310B             | $14,200M             | 83.22 |
+| 8    | Alibaba (AI)                       | $186B *derived*   | $9,300M              | 78.13 |
+| 9    | Databricks                         | $190B             | $7,000M              | 76.71 |
+| 10   | Baidu (AI)                         | $149B *derived*   | $7,440M              | 75.71 |
 
-The full ranking is in [`ranking.html`](ranking.html).
+\* derived = AI-attributed ARR × the 20× pure-play median EV/Revenue multiple.
 
-> **ARR policy.** For companies that sell AI alongside non-AI software (Salesforce, ServiceNow, Palantir, Samsara, Schrodinger), we use the AI-attributed disclosure only &mdash; not total company revenue. See the [methodology page](methodology.html), section 3.
+The full ranking is in [`ranking.html`](ranking.html), and you can filter it
+by valuation basis there.
 
 The full ranking is in [`site/ranking.html`](site/ranking.html).
 

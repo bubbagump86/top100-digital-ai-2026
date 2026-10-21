@@ -38,13 +38,13 @@
         <p>
           AI startups sit on a four-decade spread: a small enterprise research lab
           can sit at <strong>$1B valuation, $10M ARR</strong> while a foundation-model
-          leader sits at <strong>$965B valuation, $30B ARR</strong>. Both are arguably
+          leader sits at <strong>$965B valuation, $100B ARR</strong>. Both are arguably
           "top of the AI market", but they are not directly comparable.
         </p>
         <p>
           A naive ranking that just sums dollars turns this list into "the
-          companies with the most dollars", which is not interesting: Salesforce
-          and Palantir would always win. A ranking that only uses revenue
+          companies with the most dollars", which is not interesting: a
+          $4T megacap would always win. A ranking that only uses revenue
           penalises pre-revenue research labs like Safe Superintelligence and
           Thinking Machines, which are arguably the most strategically important
           AI companies in the world.
@@ -53,117 +53,133 @@
           We want a composite that respects <strong>scale of capital</strong>
           (valuation) and <strong>scale of revenue</strong> (ARR), with a
           normalisation that does not let the biggest player crush everything
-          else.
+          else &mdash; and that can hold both a pure-play AI lab and a
+          $4 trillion megacap to the same standard.
         </p>
       </div>
 
       <div class="card">
-        <h2>2. Eligibility: pure-play digital AI</h2>
+        <h2>2. Eligibility: digital AI</h2>
         <p>
           A company must be primarily a digital AI business to be ranked.
           Concretely, we exclude the entire chip, datacenter hardware, humanoid
           robotics, autonomous vehicles, and physical-world-AI category:
         </p>
         <ul>
-          <li><strong>Hardware / silicon:</strong> NVIDIA, Cerebras, Groq, Tenstorrent, Rebellions, SambaNova, FuriosaAI, Lightmatter, Etched, Positron, MatX</li>
+          <li><strong>Hardware / silicon:</strong> NVIDIA, Cerebras, Groq, Tenstorrent, Rebellions, SambaNova, FuriosaAI, Lightmatter, Etched, Positron, MatX, TSMC, Broadcom</li>
           <li><strong>Datacenter / GPU-cloud infra:</strong> CoreWeave, Lambda Labs, Crusoe, Applied Digital, Northern Data, Nebius</li>
           <li><strong>Robotics:</strong> Figure, 1X, Apptronik, Sanctuary, Agility, Skild AI, Physical Intelligence, Skydio</li>
-          <li><strong>Autonomous vehicles:</strong> Waymo, Cruise, Zoox, Aurora, Tesla autonomy, Mobileye</li>
+          <li><strong>Autonomous vehicles:</strong> Waymo, Cruise, Zoox, Aurora, Tesla, Mobileye</li>
           <li><strong>Physical/industrial AI:</strong> Anduril, Shield AI, KoBold Metals, Relativity Space, Hadrian</li>
+          <li><strong>No AI revenue line at all:</strong> Apple (Apple Intelligence is not separately monetised; a $4.95T market cap would make the valuation axis a measure of consumer-electronics franchises, not AI)</li>
         </ul>
         <p>
           <a href="exclusions.html">Full exclusion list with rationale &rarr;</a>
-        </p>
-        <p>
-          Companies like Databricks, xAI, Palantir, ServiceNow, Salesforce, and
-          C3.ai are included despite also selling adjacent offerings, because
-          their AI segment is the primary value driver and dominant revenue line.
         </p>
       </div>
 
       <div class="card">
         <h2>3. The two input axes</h2>
-        <p>
-          For each eligible company we collect:
-        </p>
+        <p>For each eligible company we collect:</p>
         <ol>
           <li>
             <strong>Valuation</strong> &mdash; the most recent primary or tender
-            round, public market cap, or transaction valuation. We always prefer
-            a primary-source figure disclosed within the last 18 months. For
-            listed companies we use the full-company valuation &mdash; the
-            market is already pricing the AI bet into the total cap.
+            round, public market cap, or transaction valuation, <em>expressed on a
+            like-for-like AI basis</em> (see section 6b).
           </li>
           <li>
-            <strong>ARR</strong> &mdash; <strong>AI-attributed ARR only</strong>
-            for any company that sells both AI and non-AI products. For pure-AI
-            companies, total ARR equals AI-attributed ARR.
+            <strong>AI-attributed ARR</strong> &mdash; for any company that sells
+            both AI and non-AI products, we take <strong>only the AI-attributed
+            revenue</strong>. For pure-AI companies, total ARR equals
+            AI-attributed ARR.
           </li>
         </ol>
 
         <h3>Why AI-attributed ARR matters</h3>
         <p>
-          Naively summing ARR across a Salesforce ($41.5B total revenue) or
-          ServiceNow ($15.8B total) ranks them above every AI-native competitor,
-          but &gt;90% of that revenue is pre-AI software (CRM, ITSM, etc.) with
-          only an incremental "Agentforce" or "Now Assist" slice attributable
-          to the AI wave. That's not a fair comparison against Anthropic
-          ($30B ARR &mdash; all of which is AI). For this edition we use:
+          Summing ARR across a Salesforce ($41.5B total revenue) or ServiceNow
+          ($15.8B total) ranks them above every AI-native competitor, but
+          &gt;90% of that revenue is pre-AI software (CRM, ITSM) with only an
+          incremental "Agentforce" or "Now Assist" slice attributable to the AI
+          wave. That is not a fair comparison against Anthropic ($100B ARR
+          &mdash; all of it AI).
         </p>
+        <p>Our AI-attribution policy for every company that sells AI alongside non-AI software:</p>
         <ul>
           <li>
+            <strong>Microsoft</strong> &mdash; <strong>$37B</strong> AI business ARR
+            (Q3 FY26, +123% YoY). The most transparently disclosed AI revenue figure
+            of any diversified company in this list.
+          </li>
+          <li>
+            <strong>Amazon (AWS AI)</strong> &mdash; <strong>$25B+</strong> annual run
+            rate (Q2 2026, triple-digit YoY growth). Excludes the separate
+            silicon/chips business.
+          </li>
+          <li>
+            <strong>Google</strong> &mdash; <strong>~$30B</strong> <em>estimate</em>.
+            Alphabet discloses no standalone Gemini revenue, so we estimate the
+            AI-attributable share of the $99B Google Cloud run-rate plus Gemini
+            API and consumer AI subscriptions. Flagged as an estimate.
+          </li>
+          <li>
+            <strong>Meta</strong> &mdash; <strong>$20B+</strong> Advantage+ AI
+            advertising campaign run-rate. The Meta AI chatbot and Llama/Muse API
+            generate $0 direct disclosed revenue.
+          </li>
+          <li>
+            <strong>Alibaba</strong> &mdash; <strong>$9.3B</strong> (AI-related product
+            revenue $1.824B/quarter annualised, plus the AI Labs and Applications
+            segment). Both lines are disclosed.
+          </li>
+          <li>
+            <strong>Baidu</strong> &mdash; <strong>$7.4B</strong> from its own
+            "Core AI-Powered Business" segment &mdash; the most AI-concentrated
+            disclosure of any company in this list (&gt;52% of core revenue).
+          </li>
+          <li>
+            <strong>Tencent</strong> &mdash; <strong>~$7B</strong> <em>estimate</em>,
+            from ~40% of Tencent Cloud revenue. Tencent discloses no AI revenue
+            line. Weakest of the big-tech AI figures here.
+          </li>
+          <li>
             <strong>Salesforce</strong> &mdash; Agentforce ARR <strong>$800M</strong>
-            (Q4 FY26 disclosure; +169% YoY). The wider "Agentforce + Data 360"
-            $2.9B figure is partly the acquired Informatica cloud business and
-            doesn't cleanly attribute to AI.
+            (Q4 FY26, +169% YoY). The wider "Agentforce + Data 360" $2.9B figure
+            is partly the acquired Informatica cloud business and doesn't cleanly
+            attribute to AI.
           </li>
           <li>
             <strong>ServiceNow</strong> &mdash; Now Assist + AI portfolio
-            <strong>$1.5B FY26 forecast</strong> (Q2 2026 actual ACV was $1B).
-            About 10% of total subscription revenue.
+            <strong>$1.5B</strong> FY26 forecast (Q2 2026 actual ACV: $1B). About
+            10% of total subscription revenue.
           </li>
           <li>
-            <strong>Palantir</strong> &mdash; AIP is the primary growth engine
-            but the company does <strong>not</strong> disclose AIP revenue
-            separately. We mark AI-attributed ARR as <code>null</code> rather
-            than guess; the company scores on valuation only.
+            <strong>Notion AI</strong> &mdash; <strong>$300M</strong> AI revenue slice
+            (estimate).
           </li>
           <li>
-            <strong>Samsara</strong> &mdash; AI-attributed ARR is
-            <strong>null</strong>. The company sells sensor hardware
-            (cameras, telematics); the AI software layer's ARR is not
-            separately disclosed.
-          </li>
-          <li>
-            <strong>Schrodinger</strong> &mdash; AI-attributed ARR is
-            <strong>null</strong>. Bunsen (agentic AI co-scientist) launched
-            in mid-2026 in early access with no disclosed ARR; core business
-            ($200M+ ACV) is physics-based molecular simulation, not AI.
+            <strong>Palantir, Samsara, Schrodinger, ByteDance, Cohesity, Talkdesk</strong>
+            &mdash; no AI-attributed revenue disclosed. Handled as
+            <em>market-cap proxies</em> (section 6b).
           </li>
         </ul>
-        <p>
-          Effect on the ranking: Salesforce drops from #3 to #7, ServiceNow
-          from #4 to #5, Palantir from #6 to #25, Samsara from #11 to #48,
-          Schrodinger from #33 to #86. Pure-AI names like Databricks, Cursor,
-          and Mistral rise into the top 10.
-        </p>
       </div>
 
       <div class="card">
         <h2>4. Why log-scale?</h2>
         <p>
           Valuation and ARR each span 5+ orders of magnitude across the
-          eligible set. In a linear scale, Salesforce's $38B ARR is
-          <strong>3,800&times;</strong> Reworkd AI's $10M ARR &mdash; a single company
+          eligible set. In a linear scale, Anthropic's $100B ARR is
+          <strong>10,000&times;</strong> Reworkd AI's $10M ARR &mdash; a single company
           becomes ~40% of the entire axis range just from being the largest.
           The histogram becomes unrecoverable below the giants.
         </p>
         <p>
           Taking <code>log10</code> compresses extremes into a much more
-          information-dense scale. After log, Salesforce is at 4.58,
-          Reworkd is at 1.00 &mdash; a 4.6&times; ratio, not 3,800&times;.
+          information-dense scale. After log, Anthropic is at 5.00,
+          Reworkd is at 1.00 &mdash; a 5&times; ratio, not 10,000&times;.
           This is the standard treatment for financial
-          power-law distributions (Schumpeter, Axtell, etc.).
+          power-law distributions.
         </p>
         <pre>log_val = log10(valuation_USD_b)
 log_arr = log10(arr_USD_m)</pre>
@@ -178,12 +194,10 @@ log_arr = log10(arr_USD_m)</pre>
           cross-sectional ranking.
         </p>
         <pre>z_log(x) = (log10(x) - log_min) / (log_max - log_min)</pre>
-        <p>
-          For the 2026 ranked set:
-        </p>
+        <p>For the 2026 ranked set:</p>
         <ul>
           <li>Valuation: log<sub>10</sub> ranges from -1.00 (~$0.1B) to 2.98 (~$965B)</li>
-          <li>ARR: log<sub>10</sub> ranges from 1.00 (~$10M) to 4.58 (~$38B)</li>
+          <li>ARR: log<sub>10</sub> ranges from 1.00 (~$10M) to 5.00 (~$100B)</li>
         </ul>
       </div>
 
@@ -212,7 +226,6 @@ with W_VAL = W_ARR = 0.5</pre>
           The arithmetic mean treats the axes as complements, not
           substitutes.
         </p>
-
         <h3>Why equal weights?</h3>
         <p>
           Sensitivity to the weight choice is a real concern. We tested the
@@ -221,6 +234,97 @@ with W_VAL = W_ARR = 0.5</pre>
           (used in some growth-investing scorecards). The top 10 was stable;
           reordering happened mostly in the 30-70 range, which is what we'd
           expect from any composite.
+        </p>
+      </div>
+
+      <div class="card">
+        <h2>6b. Putting big tech in the list &mdash; the three-basis model</h2>
+        <p>
+          This is the hardest problem in the ranking, and the part most likely
+          to be done badly.
+        </p>
+        <p>
+          Alphabet, Meta, Microsoft, Amazon, Alibaba, Baidu and Tencent have
+          enormous, real, disclosed AI businesses. Excluding them would
+          understate the most important AI businesses on earth. But using their
+          <em>full market caps</em> would let a search-ad business or an
+          e-commerce business win an AI ranking on the strength of non-AI
+          revenue &mdash; which is exactly the error we corrected for Salesforce
+          and ServiceNow.
+        </p>
+        <p>
+          We resolve it by making the valuation axis mean one thing everywhere:
+          <strong>"what is this AI business worth?"</strong> Three bases:
+        </p>
+
+        <h3>Basis 1 &mdash; Pure-play (market-set AI valuation)</h3>
+        <p>
+          The company <em>is</em> an AI business. Its market or transaction
+          valuation is already an AI valuation, so we use it as-is. Anthropic's
+          $965B is the market's price for Anthropic-the-AI-company. No
+          adjustment.
+        </p>
+
+        <h3>Basis 2 &mdash; AI-attributed (derived)</h3>
+        <p>
+          The company is diversified, but discloses AI-attributed revenue. We
+          take that revenue and value it at the <strong>pure-play median
+          EV/Revenue multiple</strong>, producing an implied
+          "what would this AI business be worth as a standalone AI company?"
+          figure.
+        </p>
+        <pre>implied AI valuation = AI-attributed ARR x peer median EV/Revenue</pre>
+        <p>
+          The multiple is computed from the pure-play pool only &mdash; so the
+          imputation never feeds back into its own input &mdash; and then
+          applied once. For the 2026 set:
+        </p>
+        <ul>
+          <li>Pool: <strong>81 pure-play companies</strong> with both a valuation and an ARR figure</li>
+          <li>Median multiple: <strong>20.0&times;</strong></li>
+          <li>Interquartile range: <strong>15&times; &ndash; 40&times;</strong></li>
+          <li>Range: 5&times; (Mercor, Otter.ai) to 324&times; (Zhipu AI)</li>
+        </ul>
+        <p>Worked examples:</p>
+        <pre>Microsoft   $37,000M AI ARR x 20x = $740B implied AI valuation
+Google      $30,000M AI ARR x 20x = $600B implied AI valuation
+Amazon      $25,000M AI ARR x 20x = $500B implied AI valuation
+Meta        $20,000M AI ARR x 20x = $400B implied AI valuation
+Alibaba      $9,300M AI ARR x 20x = $186B implied AI valuation
+Baidu        $7,440M AI ARR x 20x = $149B implied AI valuation
+Tencent      $7,000M AI ARR x 20x = $140B implied AI valuation
+ServiceNow   $1,500M AI ARR x 20x =  $30B implied AI valuation
+Salesforce     $800M AI ARR x 20x =  $16B implied AI valuation</pre>
+        <p>
+          Compare those to the full-company market caps: Microsoft $3.95T,
+          Alphabet $4.16T, Amazon $2.83T, Meta $1.77T, Tencent $471B,
+          Alibaba $270B, Baidu $27.4B, Salesforce $280B, ServiceNow $200B.
+          The gap between each pair is the part of the company that is
+          <strong>not</strong> AI &mdash; and it is usually 95%+ of the
+          market cap. Salesforce's implied AI valuation of $16B against a
+          $280B market cap is the starkest example: Agentforce is real, and it
+          is also ~6% of what the market pays for Salesforce.
+        </p>
+
+        <h3>Basis 3 &mdash; Market-cap proxy</h3>
+        <p>
+          The company discloses <em>no</em> AI-attributed revenue, so no AI
+          valuation can be derived. We use the full market cap as a flagged
+          proxy and score the ARR axis at zero. This simultaneously
+          <em>overstates</em> its AI valuation and <em>understates</em> its AI
+          revenue, so these rows are the weakest evidence in the list and are
+          badged accordingly. Applies to Palantir, Samsara, Schrodinger,
+          ByteDance, Cohesity and Talkdesk.
+        </p>
+
+        <h3>What this changes</h3>
+        <p>
+          Big tech lands in the top 11 on a like-for-like AI basis &mdash; not
+          because search ads are AI, but because once you strip the non-AI
+          business out and value the remainder at peer AI multiples, their AI
+          businesses genuinely are that large. Anthropic and OpenAI remain
+          #1 and #2 because their AI <em>is</em> the whole company, and their
+          AI is worth more per dollar of revenue than anyone else's.
         </p>
       </div>
 
@@ -238,9 +342,9 @@ with W_VAL = W_ARR = 0.5</pre>
           </li>
           <li>
             <strong>ARR missing, valuation present</strong> (e.g. DeepSeek,
-            SSI, Thinking Machines). These are pre-revenue frontier labs
-            whose capital signal is the most important available. The ARR axis
-            is set to 0, and they compete on valuation only.
+            SSI, Thinking Machines, Magic AI). These are pre-revenue frontier
+            labs whose capital signal is the most important available. The ARR
+            axis is set to 0, and they compete on valuation only.
           </li>
           <li>
             <strong>Both missing</strong>. We drop them entirely.
@@ -248,39 +352,39 @@ with W_VAL = W_ARR = 0.5</pre>
         </ol>
         <p>
           This is a permissive rule. A strict alternative would be to lower
-          missing values to a sentinel below the observed minimum (e.g. log
-          value = log_min - 0.5). We chose 0 because it is interpretable and
-          makes the missing-data penalty visible in the score.
+          missing values to a sentinel below the observed minimum. We chose 0
+          because it is interpretable and makes the missing-data penalty
+          visible in the score.
         </p>
       </div>
 
       <div class="card">
         <h2>8. Worked example: Anthropic</h2>
-        <p>
-          Anthropic is the #1 company in the 2026 ranking. Inputs:
-        </p>
+        <p>Anthropic is the #1 company in the 2026 ranking. Inputs:</p>
         <pre>valuation_USD_b = 965
-arr_USD_m       = 30000</pre>
+arr_USD_m       = 100000   (> $100B annualised run-rate, mid-Sep 2026)</pre>
+        <p>After <code>log10</code>:</p>
+        <pre>log_val = 2.985   (observed max = 2.985)
+log_arr = 5.000   (observed max = 5.000)</pre>
+        <p>Rescaled:</p>
+        <pre>z_val = (2.985 − (−1.00)) / (2.985 − (−1.00)) = 1.000
+z_arr = (5.000 − 1.00) / (5.000 − 1.00) = 1.000</pre>
+        <p>Composite:</p>
+        <pre>S = 100 * (0.5 * 1.000 + 0.5 * 1.000) = 100.00 / 100</pre>
         <p>
-          After <code>log10</code>:
+          Anthropic sits at the top because it maxes <em>both</em> axes: the
+          highest valuation in the set and the highest AI-attributed ARR in the
+          set. OpenAI is #2 (z_val 0.987, z_arr 0.912 &rarr; 95.56).
         </p>
-        <pre>log_val = 2.984 (within [−1.00, 2.984])
-log_arr = 4.477 (within [1.00, 4.580])</pre>
-        <p>
-          Rescaled:
-        </p>
-        <pre>z_val = (2.984 − (−1.00)) / (2.984 − (−1.00)) = 1.000
-z_arr = (4.477 − 1.00) / (4.580 − 1.00) = 0.971</pre>
-        <p>
-          Composite:
-        </p>
-        <pre>S = 100 * (0.5 * 1.000 + 0.5 * 0.971) = 98.57 / 100</pre>
-        <p>
-          Sits at the top because (a) its valuation is at the upper edge of
-          the observed range, and (b) its ARR is the highest of any private
-          company. OpenAI is #2 with very similar numbers (1.0 valuation
-          normalised, 0.939 ARR normalised &rarr; 96.78).
-        </p>
+        <h3>And a derived example: Microsoft</h3>
+        <pre>AI ARR                  = $37,000M  (disclosed, Q3 FY26)
+peer median multiple     = 20.0x     (n=81 pure-play companies)
+implied AI valuation     = $37,000M x 20.0x = $740B
+log_val = log10(740) = 2.869
+z_val   = (2.869 − (−1.00)) / 3.985 = 0.971
+log_arr = log10(37000) = 4.568
+z_arr   = (4.568 − 1.00) / 4.00 = 0.892
+S       = 100 * (0.5 * 0.971 + 0.5 * 0.892) = 93.16  → rank #3</pre>
       </div>
 
       <div class="card">
@@ -289,15 +393,29 @@ z_arr = (4.477 − 1.00) / (4.580 − 1.00) = 0.971</pre>
           The data file is in <code>data/companies.json</code>. Run:
         </p>
         <pre>$ python scripts/score.py
-Top 10:
-  #  1  Anthropic               val=$965.0B   arr=$30000M   score=98.57
-  #  2  OpenAI                  val=$852.0B   arr=$25000M   score=96.78
-  #  3  Salesforce              val=$280.0B   arr=$38000M   score=93.26
-  ...</pre>
+Peer EV/Revenue multiple (pure-play pool, n=81):
+  median=20.00x  p25=15.00x  p75=40.00x
+
+Top 15:
+    1. [P] Anthropic          val=$965.0B  arr=$100000M  score=100.0
+    2. [P] OpenAI             val=$852.0B  arr=$50000M   score=95.56
+    3. [D] Microsoft (AI)      val=$740.0B  arr=$37000M   score=93.16
+    4. [D] Google (AI)         val=$600.0B  arr=$30000M   score=90.87
+    5. [D] Amazon (AWS AI)     val=$500.0B  arr=$25000M   score=88.89
+    6. [D] Meta (AI)           val=$400.0B  arr=$20000M   score=86.46
+    7. [P] SpaceXAI            val=$310.0B  arr=$14200M   score=83.22
+    8. [D] Alibaba (AI)        val=$186.0B  arr=$9300M    score=78.13
+    ...</pre>
         <p>
-          This regenerates <code>site/ranked.json</code> and a CSV at
-          <code>data/ranked.csv</code>. Open <code>site/index.html</code> in a
-          browser to view the site.
+          This regenerates <code>data/ranked.json</code>, <code>data/ranked.csv</code>
+          and the site-level <code>ranked.json</code>. Open <code>index.html</code>
+          in a browser to view the site.
+        </p>
+        <p>
+          The three-basis model is implemented in <code>scripts/score.py</code>:
+          the peer multiple is derived in pass 1 from the pure-play pool only,
+          derived valuations are resolved in pass 2, and the axes are normalised
+          and scored in pass 3.
         </p>
       </div>
 
@@ -314,20 +432,31 @@ Top 10:
             flag it in the source column.
           </li>
           <li>
-            <strong>AI-attribution is partial.</strong> For the listed
-            traditional-tech firms we used the AI-attributed disclosure where
-            it exists (Salesforce Agentforce, ServiceNow Now Assist). For
-            firms that don't break it out (Palantir, Samsara, Schrodinger)
-            we mark AI-attributed ARR as <code>null</code>. This is the
-            conservative choice &mdash; it under-counts real AI revenue at
-            those firms, but it keeps the ranking defensible.
+            <strong>Two of the big-tech AI figures are estimates, not disclosures.</strong>
+            Google (~$30B) and Tencent (~$7B) do not publish AI revenue. Their
+            rows are flagged <em>estimated</em> in the source column. Every other
+            big-tech AI figure is a company disclosure.
           </li>
           <li>
-            <strong>Valuation is full-company for listed names.</strong>
-            We don't try to subtract a "non-AI" slice of the market cap.
-            The market is already pricing the AI bet into the total cap,
-            and any "AI-only market cap" estimate would require assumptions
-            we can't defend.
+            <strong>The peer multiple is a single number.</strong> 20&times; is a
+            median across 81 companies spanning $10M to $100B ARR. A
+            15&times; multiple would put Microsoft at #3 with a $555B implied
+            valuation instead of $740B, and would not change the identity of
+            the top 3. A 40&times; multiple (the p75) would lift the big-tech
+            rows further.
+          </li>
+          <li>
+            <strong>Derived valuations are not market prices.</strong> A
+            "derived" valuation of $740B for Microsoft's AI business is an
+            analytical construct, not something you can sell. It answers
+            "what would this be worth at peer AI multiples", not
+            "what is it worth today".
+          </li>
+          <li>
+            <strong>Proxy rows are weak.</strong> Palantir, Samsara,
+            Schrodinger, ByteDance, Cohesity and Talkdesk disclose no
+            AI-attributed revenue and are scored on full market cap with a
+            zero ARR axis. Treat their ranks as indicative only.
           </li>
           <li>
             <strong>Category boundaries.</strong> Some companies straddle
@@ -335,36 +464,23 @@ Top 10:
             defense). They sit where they sit on company self-description.
           </li>
           <li>
-            <strong>Public-company revenue cycle.</strong> The latest
-            Salesforce / ServiceNow / Palantir figures all come from FY2026
-            filings dated Feb 2026 &ndash; Aug 2026. Quarter-end number will
-            move on the next earnings cycle.
-          </li>
-          <li>
             <strong>Recent M&amp;A.</strong> Several big movers in 2025-2026
-            are now subsidiaries of larger companies. Their pre-acquisition
-            standalone valuations and ARR figures were the last reported
-            private rounds before the deal closed. The ranking treats them
-            as standalone; the acquirer's consolidated figure is implicitly
-            already part of that price.
+            are now subsidiaries of larger companies, and their valuations are
+            the last reported private round before the deal closed.
             <ul style="margin-top:6px;">
-              <li><strong>Cursor (Anysphere)</strong> &mdash; acquired by
-                SpaceX, all-stock, $60B. Signed Jun 16, 2026; closed
-                <strong>Aug 14, 2026</strong>. Now wholly owned by SpaceXAI
-                (the new division holding both Grok/xAI and Cursor).</li>
-              <li><strong>xAI</strong> &mdash; acquired by SpaceX, all-stock,
-                $250B. Closed <strong>Feb 2, 2026</strong>. Combined
-                SpaceX+xAI entity valued at $1.25T at deal close; SpaceX went
-                public on Nasdaq Jun 12, 2026 at ~$1.77T. Now operating as
-                the SpaceXAI division.</li>
-              <li><strong>Codeium / Windsurf</strong> &mdash; acquired by
-                Cognition, undisclosed (~$250M est.). Closed Jul 14, 2025,
-                with $82M ARR at deal time. Now a product line inside
-                Cognition; <strong>we dropped the standalone Codeium row</strong>
-                because its ARR is now folded into Cognition's consolidated
-                figure (Cognition's valuation moved from $4B to $48B between
-                pre- and post-Codeium, partly from the deal but mostly from
-                organic + Codeium-driven ARR growth).</li>
+              <li><strong>SpaceXAI (xAI + Cursor + X)</strong> &mdash; xAI acquired
+                by SpaceX all-stock for $250B, closed Feb 2, 2026; Cursor acquired
+                all-stock for $60B, signed Jun 16, 2026 and closed Aug 14, 2026.
+                Presented as one consolidated entity with a combined $310B
+                valuation (the sum of the two disclosed transaction prices) and
+                ~$14.2B ARR.</li>
+              <li><strong>Codeium / Windsurf</strong> &mdash; acquired by Cognition,
+                undisclosed (~$250M est.), closed Jul 14, 2025 with $82M ARR.
+                <strong>Dropped as a standalone row</strong> because its ARR is now
+                inside Cognition's consolidated figure.</li>
+              <li><strong>Hugging Face</strong> &mdash; acquired by NVIDIA in 2025;
+                its $12.93B is the acquisition price, which remains a valid AI
+                valuation.</li>
             </ul>
           </li>
         </ul>
