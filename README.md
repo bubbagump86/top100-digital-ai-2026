@@ -79,20 +79,41 @@ W_VAL = 0.5
 W_ARR = 0.5
 ```
 
+## Recent M&A reflected in the ranking
+
+The 2025-2026 cycle has several high-profile consolidations, and this site
+treats them with explicit annotations:
+
+- **Cursor / Anysphere** &mdash; acquired by **SpaceX** (all-stock, $60B).
+  Deal signed Jun 16, 2026; closed Aug 14, 2026. Now a wholly-owned
+  subsidiary inside the SpaceXAI division. ARR ($4B) is the June 2026
+  run-rate as of the close.
+- **xAI** &mdash; acquired by **SpaceX** (all-stock, $250B / $1.25T
+  combined). Closed Feb 2, 2026. Now the **SpaceXAI** division alongside
+  Cursor. SpaceX went public on Nasdaq Jun 12, 2026 at ~$1.77T.
+- **Codeium / Windsurf** &mdash; acquired by **Cognition** (undisclosed;
+  ~$250M est.). Closed Jul 14, 2025 with $82M ARR. Now a Cognition product
+  line. The standalone Codeium row has been **dropped** from this ranking
+  because its ARR is now rolled up into Cognition's ($48B, 2026 round).
+
+Full sources are in the per-company entry in
+[`data/companies.json`](data/companies.json); the methodology page,
+section 10, has the same commentary.
+
 ## Top 10 (2026 edition)
 
-| Rank | Company                       | Valuation | ARR (AI-attributed)  | Score |
-|------|-------------------------------|-----------|----------------------|-------|
-| 1    | Anthropic                     | $965B     | $30,000M            | 100.00 |
-| 2    | OpenAI                        | $852B     | $25,000M            | 98.18 |
-| 3    | Databricks                    | $190B     | $7,000M             | 82.06 |
-| 4    | xAI                           | $230B     | $1,500M             | 73.48 |
-| 5    | ServiceNow (Now Assist AI)    | $200B     | $1,500M (Now Assist)| 72.71 |
-| 6    | Anysphere (Cursor)            | $60B      | $4,000M             | 72.28 |
-| 7    | Salesforce (Agentforce / AI)  | $280B     | $800M (Agentforce)  | 70.62 |
-| 8    | VAST Data                     | $30B      | $2,000M             | 64.17 |
-| 9    | Scale AI                      | $29B      | $2,000M             | 63.99 |
-| 10   | Mistral AI                    | $24B      | $1,000M             | 58.63 |
+| Rank | Company                                | Valuation | ARR (AI-attributed)  | Score |
+|------|----------------------------------------|-----------|----------------------|-------|
+| 1    | Anthropic                              | $965B     | $30,000M            | 100.00 |
+| 2    | OpenAI                                 | $852B     | $25,000M            | 98.18 |
+| 3    | Databricks                             | $190B     | $7,000M             | 82.06 |
+| 4    | xAI *(now SpaceXAI)*                   | $250B     | $1,500M             | 73.93 |
+| 5    | ServiceNow (Now Assist AI)             | $200B     | $1,500M (Now Assist)| 72.71 |
+| 6    | Anysphere / Cursor *(now SpaceXAI)*    | $60B      | $4,000M             | 72.28 |
+| 7    | Salesforce (Agentforce / AI)           | $280B     | $800M (Agentforce)  | 70.62 |
+| 8    | VAST Data                              | $30B      | $2,000M             | 64.17 |
+| 9    | Scale AI                               | $29B      | $2,000M             | 63.99 |
+| 10   | Mistral AI                             | $24B      | $1,000M             | 58.63 |
 
 The full ranking is in [`ranking.html`](ranking.html).
 

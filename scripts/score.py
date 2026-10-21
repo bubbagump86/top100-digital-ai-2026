@@ -47,17 +47,23 @@ OUT_PUBLIC_RANKED = ROOT / "ranked.json"
 
 
 def is_skipped(company: dict) -> bool:
-    """Skip rows that are placeholders / duplicates / missing fields."""
+    """Skip rows that are placeholders / duplicates / rolled up into another
+    entry / or missing fields."""
     cat = (company.get("category") or "").lower().strip()
+    name = (company.get("name") or "").lower().strip()
     if cat in {"skip", "duplicate"}:
         return True
-    if "duplicate" in cat:
+    if "duplicate" in cat or "duplicate" in name:
+        return True
+    if "now part of" in name or "rolls into" in name:
+        return True
+    # Pre-acquisition standalone figures that have been superseded
+    # by the acquirer's consolidated valuation.
+    if company.get("duplicate_in_ranking_with"):
         return True
     val = company.get("valuation_usd_b")
     arr = company.get("arr_usd_m")
     # To qualify for ranking, a company needs at least one disclosed value.
-    # Companies with absolutely nothing disclosed (val AND arr both None)
-    # are dropped.
     if val is None and arr is None:
         return True
     return False

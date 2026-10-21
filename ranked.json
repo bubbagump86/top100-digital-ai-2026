@@ -13,7 +13,7 @@
   },
   "counts": {
     "input": 101,
-    "after_filter": 101,
+    "after_filter": 100,
     "ranked": 100
   },
   "axes": {
@@ -235,21 +235,21 @@
       "rank": 3
     },
     {
-      "name": "xAI",
+      "name": "xAI (now SpaceXAI)",
       "category": "Foundation Models / Consumer AI",
-      "hq": "San Francisco, USA",
+      "hq": "San Francisco, USA (SpaceXAI division)",
       "founded": 2023,
-      "valuation_usd_b": 230.0,
-      "valuation_date": "2025 Series E (with SpaceX merger)",
-      "valuation_source": "Bloomberg / Reuters",
+      "valuation_usd_b": 250.0,
+      "valuation_date": "Feb 2, 2026 (SpaceX all-stock acquisition closed)",
+      "valuation_source": "Reuters / Bloomberg / SpaceX SEC filings; 0.1433 SpaceX shares per xAI share",
       "arr_usd_m": 1500,
       "arr_date": "2026 (estimated run-rate via Grok API + X)",
       "arr_source": "Press reports",
-      "summary": "Grok models; integrated with X (formerly Twitter). Spun with SpaceX in 2026; large Memphis data-center build-out.",
-      "z_val": 0.8437,
+      "summary": "Grok models; integrated with X. Acquired by SpaceX on Feb 2, 2026 (all-stock, $250B xAI / $1.25T combined). Now operates as SpaceXAI division.",
+      "z_val": 0.8528,
       "z_arr": 0.6258,
       "missing_axes": "",
-      "score": 73.48,
+      "score": 73.93,
       "rank": 4
     },
     {
@@ -271,17 +271,17 @@
       "rank": 5
     },
     {
-      "name": "Anysphere (Cursor)",
+      "name": "Anysphere / Cursor (now SpaceXAI division)",
       "category": "AI Coding Agent",
-      "hq": "San Francisco, USA",
+      "hq": "San Francisco, USA (SpaceXAI division)",
       "founded": 2022,
       "valuation_usd_b": 60.0,
-      "valuation_date": "2026 (acquired by SpaceX)",
-      "valuation_source": "Press reports",
+      "valuation_date": "Aug 14, 2026 (SpaceX all-stock acquisition closed)",
+      "valuation_source": "Yahoo Finance / CNBC / SpaceX SEC 8-K (all-stock, ~391M SpaceX Class A shares)",
       "arr_usd_m": 4000,
-      "arr_date": "2026",
-      "arr_source": "Leaked internal docs",
-      "summary": "Cursor AI code editor; >$4B ARR, fastest software company to scale. Acquired by SpaceX in 2026.",
+      "arr_date": "Jun 2026 (run-rate)",
+      "arr_source": "Press / SpaceX SEC filings",
+      "summary": "Cursor AI code editor; $4B+ ARR (one of the fastest SaaS ramps in history). Acquired by SpaceX (deals signed Jun 16, 2026; closed Aug 14, 2026; $60B all-stock). Now operates as a wholly-owned subsidiary inside the SpaceXAI division, alongside xAI's Grok.",
       "z_val": 0.6972,
       "z_arr": 0.7483,
       "missing_axes": "",
@@ -919,24 +919,6 @@
       "rank": 41
     },
     {
-      "name": "Codeium (Windsurf)",
-      "category": "AI Coding",
-      "hq": "Mountain View, USA",
-      "founded": 2021,
-      "valuation_usd_b": 3.0,
-      "valuation_date": "2025 (pre-Cognition deal)",
-      "valuation_source": "Press",
-      "arr_usd_m": 100,
-      "arr_date": "2025",
-      "arr_source": "Press estimates",
-      "summary": "Free + enterprise AI code completion; acquired into Cognition 2025.",
-      "z_val": 0.3707,
-      "z_arr": 0.2876,
-      "missing_axes": "",
-      "score": 32.92,
-      "rank": 42
-    },
-    {
       "name": "Moveworks",
       "category": "Enterprise AI / IT Support",
       "hq": "Mountain View, USA",
@@ -952,7 +934,7 @@
       "z_arr": 0.2876,
       "missing_axes": "",
       "score": 32.64,
-      "rank": 43
+      "rank": 42
     },
     {
       "name": "DeepL",
@@ -970,7 +952,7 @@
       "z_arr": 0.3204,
       "missing_axes": "",
       "score": 32.34,
-      "rank": 44
+      "rank": 43
     },
     {
       "name": "Invisible Technologies",
@@ -988,7 +970,7 @@
       "z_arr": 0.3204,
       "missing_axes": "",
       "score": 32.34,
-      "rank": 45
+      "rank": 44
     },
     {
       "name": "Safe Superintelligence (SSI)",
@@ -1006,7 +988,7 @@
       "z_arr": null,
       "missing_axes": "arr",
       "score": 31.44,
-      "rank": 46
+      "rank": 45
     },
     {
       "name": "EvenUp",
@@ -1024,7 +1006,7 @@
       "z_arr": 0.2995,
       "missing_axes": "",
       "score": 31.3,
-      "rank": 47
+      "rank": 46
     },
     {
       "name": "Samsara",
@@ -1042,7 +1024,7 @@
       "z_arr": null,
       "missing_axes": "arr",
       "score": 31.08,
-      "rank": 48
+      "rank": 47
     },
     {
       "name": "Reflection AI",
@@ -1060,7 +1042,7 @@
       "z_arr": null,
       "missing_axes": "arr",
       "score": 30.09,
-      "rank": 49
+      "rank": 48
     },
     {
       "name": "Kore.ai",
@@ -1078,7 +1060,7 @@
       "z_arr": 0.2876,
       "missing_axes": "",
       "score": 29.14,
-      "rank": 50
+      "rank": 49
     },
     {
       "name": "Lightricks",
@@ -1096,7 +1078,7 @@
       "z_arr": 0.2876,
       "missing_axes": "",
       "score": 29.14,
-      "rank": 51
+      "rank": 50
     },
     {
       "name": "Moonshot AI",
@@ -1114,7 +1096,7 @@
       "z_arr": null,
       "missing_axes": "arr",
       "score": 28.87,
-      "rank": 52
+      "rank": 51
     },
     {
       "name": "Decart",
@@ -1132,7 +1114,7 @@
       "z_arr": 0.201,
       "missing_axes": "",
       "score": 28.77,
-      "rank": 53
+      "rank": 52
     },
     {
       "name": "You.com",
@@ -1150,7 +1132,7 @@
       "z_arr": 0.2744,
       "missing_axes": "",
       "score": 28.48,
-      "rank": 54
+      "rank": 53
     },
     {
       "name": "Sourcegraph (Amp / Cody)",
@@ -1168,7 +1150,7 @@
       "z_arr": 0.201,
       "missing_axes": "",
       "score": 28.01,
-      "rank": 55
+      "rank": 54
     },
     {
       "name": "Jasper AI",
@@ -1186,7 +1168,7 @@
       "z_arr": 0.2597,
       "missing_axes": "",
       "score": 27.74,
-      "rank": 56
+      "rank": 55
     },
     {
       "name": "Cresta",
@@ -1204,7 +1186,7 @@
       "z_arr": 0.2517,
       "missing_axes": "",
       "score": 27.69,
-      "rank": 57
+      "rank": 56
     },
     {
       "name": "Writer",
@@ -1222,7 +1204,7 @@
       "z_arr": 0.2238,
       "missing_axes": "",
       "score": 27.24,
-      "rank": 58
+      "rank": 57
     },
     {
       "name": "Deepgram",
@@ -1240,7 +1222,7 @@
       "z_arr": 0.2597,
       "missing_axes": "",
       "score": 26.96,
-      "rank": 59
+      "rank": 58
     },
     {
       "name": "Speak",
@@ -1258,7 +1240,7 @@
       "z_arr": 0.2876,
       "missing_axes": "",
       "score": 26.93,
-      "rank": 60
+      "rank": 59
     },
     {
       "name": "Weights & Biases",
@@ -1276,7 +1258,7 @@
       "z_arr": 0.2597,
       "missing_axes": "",
       "score": 26.75,
-      "rank": 61
+      "rank": 60
     },
     {
       "name": "ADA (Ada Support)",
@@ -1294,7 +1276,7 @@
       "z_arr": 0.2597,
       "missing_axes": "",
       "score": 26.53,
-      "rank": 62
+      "rank": 61
     },
     {
       "name": "Hippocratic AI",
@@ -1312,7 +1294,7 @@
       "z_arr": 0.1372,
       "missing_axes": "",
       "score": 26.24,
-      "rank": 63
+      "rank": 62
     },
     {
       "name": "Fireflies.ai",
@@ -1330,7 +1312,7 @@
       "z_arr": 0.2597,
       "missing_axes": "",
       "score": 25.53,
-      "rank": 64
+      "rank": 63
     },
     {
       "name": "Observe.AI",
@@ -1348,7 +1330,7 @@
       "z_arr": 0.2597,
       "missing_axes": "",
       "score": 25.53,
-      "rank": 65
+      "rank": 64
     },
     {
       "name": "Ambience Healthcare",
@@ -1366,7 +1348,7 @@
       "z_arr": 0.2238,
       "missing_axes": "",
       "score": 24.95,
-      "rank": 66
+      "rank": 65
     },
     {
       "name": "Midjourney",
@@ -1384,7 +1366,7 @@
       "z_arr": 0.4886,
       "missing_axes": "valuation",
       "score": 24.43,
-      "rank": 67
+      "rank": 66
     },
     {
       "name": "AI21 Labs",
@@ -1402,7 +1384,7 @@
       "z_arr": 0.201,
       "missing_axes": "",
       "score": 24.43,
-      "rank": 68
+      "rank": 67
     },
     {
       "name": "Snorkel AI",
@@ -1420,7 +1402,7 @@
       "z_arr": 0.201,
       "missing_axes": "",
       "score": 24.03,
-      "rank": 69
+      "rank": 68
     },
     {
       "name": "Stability AI",
@@ -1438,7 +1420,7 @@
       "z_arr": 0.2238,
       "missing_axes": "",
       "score": 23.74,
-      "rank": 70
+      "rank": 69
     },
     {
       "name": "Otter.ai",
@@ -1456,7 +1438,7 @@
       "z_arr": 0.2876,
       "missing_axes": "",
       "score": 23.15,
-      "rank": 71
+      "rank": 70
     },
     {
       "name": "Baichuan Intelligence",
@@ -1474,7 +1456,7 @@
       "z_arr": 0.0866,
       "missing_axes": "",
       "score": 22.83,
-      "rank": 72
+      "rank": 71
     },
     {
       "name": "HeyGen",
@@ -1492,7 +1474,7 @@
       "z_arr": 0.2597,
       "missing_axes": "",
       "score": 22.75,
-      "rank": 73
+      "rank": 72
     },
     {
       "name": "Character.AI",
@@ -1510,7 +1492,7 @@
       "z_arr": 0.201,
       "missing_axes": "",
       "score": 22.6,
-      "rank": 74
+      "rank": 73
     },
     {
       "name": "Labelbox",
@@ -1528,7 +1510,7 @@
       "z_arr": 0.201,
       "missing_axes": "",
       "score": 22.6,
-      "rank": 75
+      "rank": 74
     },
     {
       "name": "Typeface",
@@ -1546,7 +1528,7 @@
       "z_arr": 0.201,
       "missing_axes": "",
       "score": 22.6,
-      "rank": 76
+      "rank": 75
     },
     {
       "name": "AssemblyAI",
@@ -1564,7 +1546,7 @@
       "z_arr": 0.201,
       "missing_axes": "",
       "score": 22.6,
-      "rank": 77
+      "rank": 76
     },
     {
       "name": "Forethought",
@@ -1582,7 +1564,7 @@
       "z_arr": 0.201,
       "missing_axes": "",
       "score": 22.6,
-      "rank": 78
+      "rank": 77
     },
     {
       "name": "Vapi",
@@ -1600,7 +1582,7 @@
       "z_arr": 0.1565,
       "missing_axes": "",
       "score": 21.8,
-      "rank": 79
+      "rank": 78
     },
     {
       "name": "Factory",
@@ -1618,7 +1600,7 @@
       "z_arr": 0.1372,
       "missing_axes": "",
       "score": 21.62,
-      "rank": 80
+      "rank": 79
     },
     {
       "name": "Suki AI",
@@ -1636,7 +1618,7 @@
       "z_arr": 0.2238,
       "missing_axes": "",
       "score": 20.95,
-      "rank": 81
+      "rank": 80
     },
     {
       "name": "01.AI (Yi)",
@@ -1654,7 +1636,7 @@
       "z_arr": 0.1372,
       "missing_axes": "",
       "score": 19.41,
-      "rank": 82
+      "rank": 81
     },
     {
       "name": "Arize AI",
@@ -1672,7 +1654,7 @@
       "z_arr": 0.1731,
       "missing_axes": "",
       "score": 19.26,
-      "rank": 83
+      "rank": 82
     },
     {
       "name": "PolyAI",
@@ -1690,7 +1672,7 @@
       "z_arr": 0.201,
       "missing_axes": "",
       "score": 18.82,
-      "rank": 84
+      "rank": 83
     },
     {
       "name": "Suno",
@@ -1708,7 +1690,7 @@
       "z_arr": 0.3742,
       "missing_axes": "valuation",
       "score": 18.71,
-      "rank": 85
+      "rank": 84
     },
     {
       "name": "Schrodinger",
@@ -1726,7 +1708,7 @@
       "z_arr": null,
       "missing_axes": "arr",
       "score": 18.54,
-      "rank": 86
+      "rank": 85
     },
     {
       "name": "Stepfun",
@@ -1744,7 +1726,7 @@
       "z_arr": 0.1144,
       "missing_axes": "",
       "score": 18.27,
-      "rank": 87
+      "rank": 86
     },
     {
       "name": "LangChain",
@@ -1762,7 +1744,7 @@
       "z_arr": 0.1144,
       "missing_axes": "",
       "score": 18.27,
-      "rank": 88
+      "rank": 87
     },
     {
       "name": "Augment Code",
@@ -1780,7 +1762,7 @@
       "z_arr": 0.1144,
       "missing_axes": "",
       "score": 17.7,
-      "rank": 89
+      "rank": 88
     },
     {
       "name": "Roboflow",
@@ -1798,7 +1780,7 @@
       "z_arr": 0.1372,
       "missing_axes": "",
       "score": 16.63,
-      "rank": 90
+      "rank": 89
     },
     {
       "name": "Inflection AI",
@@ -1816,7 +1798,7 @@
       "z_arr": null,
       "missing_axes": "arr",
       "score": 16.33,
-      "rank": 91
+      "rank": 90
     },
     {
       "name": "Inworld AI",
@@ -1834,7 +1816,7 @@
       "z_arr": 0.1372,
       "missing_axes": "",
       "score": 15.63,
-      "rank": 92
+      "rank": 91
     },
     {
       "name": "Pika",
@@ -1852,7 +1834,7 @@
       "z_arr": 0.1372,
       "missing_axes": "",
       "score": 15.29,
-      "rank": 93
+      "rank": 92
     },
     {
       "name": "Magic AI",
@@ -1870,7 +1852,7 @@
       "z_arr": null,
       "missing_axes": "arr",
       "score": 14.76,
-      "rank": 94
+      "rank": 93
     },
     {
       "name": "Tome",
@@ -1888,7 +1870,7 @@
       "z_arr": 0.1565,
       "missing_axes": "",
       "score": 13.81,
-      "rank": 95
+      "rank": 94
     },
     {
       "name": "Reka AI",
@@ -1906,7 +1888,7 @@
       "z_arr": 0.0506,
       "missing_axes": "",
       "score": 12.3,
-      "rank": 96
+      "rank": 95
     },
     {
       "name": "Tavus",
@@ -1924,7 +1906,7 @@
       "z_arr": 0.1144,
       "missing_axes": "",
       "score": 9.5,
-      "rank": 97
+      "rank": 96
     },
     {
       "name": "Aleph Alpha",
@@ -1942,7 +1924,7 @@
       "z_arr": 0.1372,
       "missing_axes": "valuation",
       "score": 6.86,
-      "rank": 98
+      "rank": 97
     },
     {
       "name": "MindsDB",
@@ -1960,7 +1942,7 @@
       "z_arr": 0.0506,
       "missing_axes": "",
       "score": 6.31,
-      "rank": 99
+      "rank": 98
     },
     {
       "name": "Bardeen AI",
@@ -1978,6 +1960,24 @@
       "z_arr": 0.0506,
       "missing_axes": "",
       "score": 4.74,
+      "rank": 99
+    },
+    {
+      "name": "Reworkd AI",
+      "category": "Web Agents",
+      "hq": "San Francisco, USA",
+      "founded": 2023,
+      "valuation_usd_b": 0.1,
+      "valuation_date": "2024",
+      "valuation_source": "Press",
+      "arr_usd_m": 10,
+      "arr_date": "2024",
+      "arr_source": "Press estimates",
+      "summary": "Web-scraping + browser agents as a service.",
+      "z_val": 0.0,
+      "z_arr": 0.0,
+      "missing_axes": "",
+      "score": 0.0,
       "rank": 100
     }
   ]
