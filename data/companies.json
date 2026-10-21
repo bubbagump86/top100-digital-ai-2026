@@ -1,7 +1,7 @@
 {
   "metadata": {
-    "title": "Top 100 Pure-Play Digital AI Companies 2026",
-    "subtitle": "Ranked by a normalized composite of ARR and Valuation",
+    "title": "Top 100 Digital AI Companies 2026",
+    "subtitle": "Ranked by a normalized composite of AI-attributed ARR and AI valuation",
     "generated_at": "2026-10-21",
     "scoring": {
       "formula": "score = 100 * (0.5 * z_log(valuation_USD) + 0.5 * z_log(ARR_USD))",
