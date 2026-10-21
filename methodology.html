@@ -90,16 +90,63 @@
           <li>
             <strong>Valuation</strong> &mdash; the most recent primary or tender
             round, public market cap, or transaction valuation. We always prefer
-            a primary-source figure disclosed within the last 18 months.
+            a primary-source figure disclosed within the last 18 months. For
+            listed companies we use the full-company valuation &mdash; the
+            market is already pricing the AI bet into the total cap.
           </li>
           <li>
-            <strong>ARR</strong> &mdash; disclosed annualised revenue run-rate
-            (or the most recent published revenue figure, if ARR is not given).
-            We never substitute forecasts, but a few late-stage companies
-            (OpenAI, Anthropic, Cursor, Anthropic) publish run-rates internally
-            that we cite verbatim.
+            <strong>ARR</strong> &mdash; <strong>AI-attributed ARR only</strong>
+            for any company that sells both AI and non-AI products. For pure-AI
+            companies, total ARR equals AI-attributed ARR.
           </li>
         </ol>
+
+        <h3>Why AI-attributed ARR matters</h3>
+        <p>
+          Naively summing ARR across a Salesforce ($41.5B total revenue) or
+          ServiceNow ($15.8B total) ranks them above every AI-native competitor,
+          but &gt;90% of that revenue is pre-AI software (CRM, ITSM, etc.) with
+          only an incremental "Agentforce" or "Now Assist" slice attributable
+          to the AI wave. That's not a fair comparison against Anthropic
+          ($30B ARR &mdash; all of which is AI). For this edition we use:
+        </p>
+        <ul>
+          <li>
+            <strong>Salesforce</strong> &mdash; Agentforce ARR <strong>$800M</strong>
+            (Q4 FY26 disclosure; +169% YoY). The wider "Agentforce + Data 360"
+            $2.9B figure is partly the acquired Informatica cloud business and
+            doesn't cleanly attribute to AI.
+          </li>
+          <li>
+            <strong>ServiceNow</strong> &mdash; Now Assist + AI portfolio
+            <strong>$1.5B FY26 forecast</strong> (Q2 2026 actual ACV was $1B).
+            About 10% of total subscription revenue.
+          </li>
+          <li>
+            <strong>Palantir</strong> &mdash; AIP is the primary growth engine
+            but the company does <strong>not</strong> disclose AIP revenue
+            separately. We mark AI-attributed ARR as <code>null</code> rather
+            than guess; the company scores on valuation only.
+          </li>
+          <li>
+            <strong>Samsara</strong> &mdash; AI-attributed ARR is
+            <strong>null</strong>. The company sells sensor hardware
+            (cameras, telematics); the AI software layer's ARR is not
+            separately disclosed.
+          </li>
+          <li>
+            <strong>Schrodinger</strong> &mdash; AI-attributed ARR is
+            <strong>null</strong>. Bunsen (agentic AI co-scientist) launched
+            in mid-2026 in early access with no disclosed ARR; core business
+            ($200M+ ACV) is physics-based molecular simulation, not AI.
+          </li>
+        </ul>
+        <p>
+          Effect on the ranking: Salesforce drops from #3 to #7, ServiceNow
+          from #4 to #5, Palantir from #6 to #25, Samsara from #11 to #48,
+          Schrodinger from #33 to #86. Pure-AI names like Databricks, Cursor,
+          and Mistral rise into the top 10.
+        </p>
       </div>
 
       <div class="card">
@@ -267,16 +314,31 @@ Top 10:
             flag it in the source column.
           </li>
           <li>
-            <strong>Public companies.</strong> For Palantir, Salesforce,
-            ServiceNow, C3.ai, Samsara, Tempus, Schrodinger, Recursion &mdash;
-            we use the full company's revenue and market cap, not a
-            subtraction of pre-AI business. This biases <em>upward</em> for
-            these names.
+            <strong>AI-attribution is partial.</strong> For the listed
+            traditional-tech firms we used the AI-attributed disclosure where
+            it exists (Salesforce Agentforce, ServiceNow Now Assist). For
+            firms that don't break it out (Palantir, Samsara, Schrodinger)
+            we mark AI-attributed ARR as <code>null</code>. This is the
+            conservative choice &mdash; it under-counts real AI revenue at
+            those firms, but it keeps the ranking defensible.
+          </li>
+          <li>
+            <strong>Valuation is full-company for listed names.</strong>
+            We don't try to subtract a "non-AI" slice of the market cap.
+            The market is already pricing the AI bet into the total cap,
+            and any "AI-only market cap" estimate would require assumptions
+            we can't defend.
           </li>
           <li>
             <strong>Category boundaries.</strong> Some companies straddle
             categories (Databricks = data + AI; Scale AI = data labeling +
             defense). They sit where they sit on company self-description.
+          </li>
+          <li>
+            <strong>Public-company revenue cycle.</strong> The latest
+            Salesforce / ServiceNow / Palantir figures all come from FY2026
+            filings dated Feb 2026 &ndash; Aug 2026. Quarter-end number will
+            move on the next earnings cycle.
           </li>
         </ul>
       </div>

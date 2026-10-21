@@ -23,7 +23,7 @@
     },
     "arr_usd_m": {
       "log_min": 1.0,
-      "log_max": 4.57978359661681
+      "log_max": 4.477121254719663
     }
   },
   "weights": {
@@ -193,9 +193,9 @@
       "arr_source": "Company statement; The Information",
       "summary": "Builder of Claude family of models. API + Claude Code enterprise traction; backed by Google and Amazon.",
       "z_val": 1.0,
-      "z_arr": 0.9713,
+      "z_arr": 1.0,
       "missing_axes": "",
-      "score": 98.57,
+      "score": 100.0,
       "rank": 1
     },
     {
@@ -211,46 +211,10 @@
       "arr_source": "Reports to staff; The Information, Reuters",
       "summary": "Creator of GPT-4/5, ChatGPT (800M+ MAUs), DALL-E, Sora. Largest private AI company by both valuation and ARR.",
       "z_val": 0.9864,
-      "z_arr": 0.9492,
+      "z_arr": 0.9772,
       "missing_axes": "",
-      "score": 96.78,
+      "score": 98.18,
       "rank": 2
-    },
-    {
-      "name": "Salesforce (Agentforce / AI)",
-      "category": "Enterprise CRM + AI Agents",
-      "hq": "San Francisco, USA",
-      "founded": 1999,
-      "valuation_usd_b": 280.0,
-      "valuation_date": "2025 market cap",
-      "valuation_source": "Public market",
-      "arr_usd_m": 38000,
-      "arr_date": "FY2026",
-      "arr_source": "Public filings",
-      "summary": "CRM + Agentforce AI agents; listed.",
-      "z_val": 0.8651,
-      "z_arr": 1.0,
-      "missing_axes": "",
-      "score": 93.26,
-      "rank": 3
-    },
-    {
-      "name": "ServiceNow (Now Assist AI)",
-      "category": "Workflow AI (public)",
-      "hq": "Santa Clara, USA",
-      "founded": 2003,
-      "valuation_usd_b": 200.0,
-      "valuation_date": "2025 market cap (whole company)",
-      "valuation_source": "Public market",
-      "arr_usd_m": 12000,
-      "arr_date": "FY2026",
-      "arr_source": "Public filings",
-      "summary": "Workflow platform with Now Assist gen-AI. Listed; we use full-company ARR.",
-      "z_val": 0.8285,
-      "z_arr": 0.8602,
-      "missing_axes": "",
-      "score": 84.43,
-      "rank": 4
     },
     {
       "name": "Databricks",
@@ -265,28 +229,10 @@
       "arr_source": "Company announcement",
       "summary": "Unified data + AI lakehouse. Mosaic AI for model training/serving; serves >10k enterprise customers.",
       "z_val": 0.8229,
-      "z_arr": 0.7948,
+      "z_arr": 0.8182,
       "missing_axes": "",
-      "score": 80.88,
-      "rank": 5
-    },
-    {
-      "name": "Palantir Technologies",
-      "category": "Enterprise AI Platform",
-      "hq": "Denver, USA",
-      "founded": 2003,
-      "valuation_usd_b": 350.0,
-      "valuation_date": "2025 market cap",
-      "valuation_source": "Public market",
-      "arr_usd_m": 3700,
-      "arr_date": "FY2026",
-      "arr_source": "Public filings",
-      "summary": "Foundry + AIP platforms; enterprise + government AI. Pure software.",
-      "z_val": 0.8895,
-      "z_arr": 0.7174,
-      "missing_axes": "",
-      "score": 80.34,
-      "rank": 6
+      "score": 82.06,
+      "rank": 3
     },
     {
       "name": "xAI",
@@ -301,10 +247,28 @@
       "arr_source": "Press reports",
       "summary": "Grok models; integrated with X (formerly Twitter). Spun with SpaceX in 2026; large Memphis data-center build-out.",
       "z_val": 0.8437,
-      "z_arr": 0.6079,
+      "z_arr": 0.6258,
       "missing_axes": "",
-      "score": 72.58,
-      "rank": 7
+      "score": 73.48,
+      "rank": 4
+    },
+    {
+      "name": "ServiceNow (Now Assist AI)",
+      "category": "Workflow AI (public)",
+      "hq": "Santa Clara, USA",
+      "founded": 2003,
+      "valuation_usd_b": 200.0,
+      "valuation_date": "2025 market cap (whole company)",
+      "valuation_source": "Public market",
+      "arr_usd_m": 1500,
+      "arr_date": "FY2026 forecast (Q2 2026 actual: $1B ACV)",
+      "arr_source": "ServiceNow Q2 2026 financial results; management earnings call",
+      "summary": "Workflow platform with Now Assist gen-AI. Now Assist crossed $1B ACV in Q2 2026; tracked to $1.5B FY26.",
+      "z_val": 0.8285,
+      "z_arr": 0.6258,
+      "missing_axes": "",
+      "score": 72.71,
+      "rank": 5
     },
     {
       "name": "Anysphere (Cursor)",
@@ -319,10 +283,28 @@
       "arr_source": "Leaked internal docs",
       "summary": "Cursor AI code editor; >$4B ARR, fastest software company to scale. Acquired by SpaceX in 2026.",
       "z_val": 0.6972,
-      "z_arr": 0.7269,
+      "z_arr": 0.7483,
       "missing_axes": "",
-      "score": 71.21,
-      "rank": 8
+      "score": 72.28,
+      "rank": 6
+    },
+    {
+      "name": "Salesforce (Agentforce / AI)",
+      "category": "Enterprise CRM + AI Agents",
+      "hq": "San Francisco, USA",
+      "founded": 1999,
+      "valuation_usd_b": 280.0,
+      "valuation_date": "2025 market cap",
+      "valuation_source": "Public market",
+      "arr_usd_m": 800,
+      "arr_date": "Q4 FY2026 (Feb 2026 earnings)",
+      "arr_source": "Salesforce Q4 FY26 press release; SEC 8-K (Agentforce ARR $800M, +169% YoY)",
+      "summary": "CRM + Agentforce AI agents; listed. AI-attributed ARR is Agentforce only ($800M).",
+      "z_val": 0.8651,
+      "z_arr": 0.5473,
+      "missing_axes": "",
+      "score": 70.62,
+      "rank": 7
     },
     {
       "name": "VAST Data",
@@ -337,10 +319,10 @@
       "arr_source": "Press",
       "summary": "Unified AI data layer; software-defined storage tuned for GPU workloads.",
       "z_val": 0.6217,
-      "z_arr": 0.6428,
+      "z_arr": 0.6618,
       "missing_axes": "",
-      "score": 63.22,
-      "rank": 9
+      "score": 64.17,
+      "rank": 8
     },
     {
       "name": "Scale AI",
@@ -355,28 +337,10 @@
       "arr_source": "Press",
       "summary": "Data labeling and evaluation for foundation-model builders; Defense + enterprise growth.",
       "z_val": 0.618,
-      "z_arr": 0.6428,
+      "z_arr": 0.6618,
       "missing_axes": "",
-      "score": 63.04,
-      "rank": 10
-    },
-    {
-      "name": "Samsara",
-      "category": "Industrial AI (IoT data)",
-      "hq": "San Francisco, USA",
-      "founded": 2015,
-      "valuation_usd_b": 30.0,
-      "valuation_date": "2025 market cap",
-      "valuation_source": "Public market",
-      "arr_usd_m": 1500,
-      "arr_date": "FY2026",
-      "arr_source": "Public filings",
-      "summary": "Cameras + sensors with AI for fleet + industrial ops. Digital + light hardware; classified digital here.",
-      "z_val": 0.6217,
-      "z_arr": 0.6079,
-      "missing_axes": "",
-      "score": 61.48,
-      "rank": 11
+      "score": 63.99,
+      "rank": 9
     },
     {
       "name": "Mistral AI",
@@ -391,28 +355,10 @@
       "arr_source": "Leaked financials / estimates",
       "summary": "Open + commercial frontier models (Mistral Large, Mixtral, Codestral). Le Chat consumer + enterprise API.",
       "z_val": 0.5974,
-      "z_arr": 0.5587,
+      "z_arr": 0.5752,
       "missing_axes": "",
-      "score": 57.8,
-      "rank": 12
-    },
-    {
-      "name": "Cognition (Devin)",
-      "category": "AI Coding Agent",
-      "hq": "San Francisco, USA",
-      "founded": 2023,
-      "valuation_usd_b": 48.0,
-      "valuation_date": "2026 Series C",
-      "valuation_source": "Reuters / TechCrunch",
-      "arr_usd_m": 492,
-      "arr_date": "2026 (run-rate)",
-      "arr_source": "Company disclosures",
-      "summary": "Creator of Devin, autonomous software engineer agent. Acquired Windsurf in 2025.",
-      "z_val": 0.6729,
-      "z_arr": 0.4726,
-      "missing_axes": "",
-      "score": 57.28,
-      "rank": 13
+      "score": 58.63,
+      "rank": 10
     },
     {
       "name": "Mercor",
@@ -427,10 +373,28 @@
       "arr_source": "Internal financials",
       "summary": "AI-powered job-matching and contractor sourcing; rapid growth out of YC.",
       "z_val": 0.5019,
-      "z_arr": 0.6428,
+      "z_arr": 0.6618,
       "missing_axes": "",
-      "score": 57.24,
-      "rank": 14
+      "score": 58.19,
+      "rank": 11
+    },
+    {
+      "name": "Cognition (Devin)",
+      "category": "AI Coding Agent",
+      "hq": "San Francisco, USA",
+      "founded": 2023,
+      "valuation_usd_b": 48.0,
+      "valuation_date": "2026 Series C",
+      "valuation_source": "Reuters / TechCrunch",
+      "arr_usd_m": 492,
+      "arr_date": "2026 (run-rate)",
+      "arr_source": "Company disclosures",
+      "summary": "Creator of Devin, autonomous software engineer agent. Acquired Windsurf in 2025.",
+      "z_val": 0.6729,
+      "z_arr": 0.4866,
+      "missing_axes": "",
+      "score": 57.98,
+      "rank": 12
     },
     {
       "name": "Perplexity AI",
@@ -445,10 +409,10 @@
       "arr_source": "Press; internal estimates",
       "summary": "Conversational answer engine with citations. Comet browser launched 2025.",
       "z_val": 0.5908,
-      "z_arr": 0.5238,
+      "z_arr": 0.5393,
       "missing_axes": "",
-      "score": 55.73,
-      "rank": 15
+      "score": 56.5,
+      "rank": 13
     },
     {
       "name": "Tempus AI",
@@ -463,28 +427,10 @@
       "arr_source": "Public filings",
       "summary": "AI on multi-modal medical data; precision medicine.",
       "z_val": 0.5218,
-      "z_arr": 0.5905,
+      "z_arr": 0.608,
       "missing_axes": "",
-      "score": 55.62,
-      "rank": 16
-    },
-    {
-      "name": "Zhipu AI (Z.ai)",
-      "category": "Foundation Models (China)",
-      "hq": "Beijing, China",
-      "founded": 2019,
-      "valuation_usd_b": 55.0,
-      "valuation_date": "2026 (HK IPO / tender)",
-      "valuation_source": "SCMP / Reuters",
-      "arr_usd_m": 170,
-      "arr_date": "2025",
-      "arr_source": "IPO prospectus",
-      "summary": "GLM family; first major Chinese AI lab to go public in 2026.",
-      "z_val": 0.6878,
-      "z_arr": 0.3437,
-      "missing_axes": "",
-      "score": 51.57,
-      "rank": 17
+      "score": 56.49,
+      "rank": 14
     },
     {
       "name": "Cohesity",
@@ -499,10 +445,28 @@
       "arr_source": "Press",
       "summary": "Enterprise data security + management with AI search.",
       "z_val": 0.4194,
-      "z_arr": 0.6079,
+      "z_arr": 0.6258,
       "missing_axes": "",
-      "score": 51.36,
-      "rank": 18
+      "score": 52.26,
+      "rank": 15
+    },
+    {
+      "name": "Zhipu AI (Z.ai)",
+      "category": "Foundation Models (China)",
+      "hq": "Beijing, China",
+      "founded": 2019,
+      "valuation_usd_b": 55.0,
+      "valuation_date": "2026 (HK IPO / tender)",
+      "valuation_source": "SCMP / Reuters",
+      "arr_usd_m": 170,
+      "arr_date": "2025",
+      "arr_source": "IPO prospectus",
+      "summary": "GLM family; first major Chinese AI lab to go public in 2026.",
+      "z_val": 0.6878,
+      "z_arr": 0.3539,
+      "missing_axes": "",
+      "score": 52.08,
+      "rank": 16
     },
     {
       "name": "Harvey",
@@ -517,10 +481,10 @@
       "arr_source": "Press; internal docs",
       "summary": "Domain-specific legal AI for law firms and in-house counsel; >1k enterprise customers.",
       "z_val": 0.5497,
-      "z_arr": 0.4475,
+      "z_arr": 0.4607,
       "missing_axes": "",
-      "score": 49.86,
-      "rank": 19
+      "score": 50.52,
+      "rank": 17
     },
     {
       "name": "ElevenLabs",
@@ -535,10 +499,10 @@
       "arr_source": "Company statement",
       "summary": "Top-tier neural voice synthesis; dubbing, conversational agents, licensed voice library.",
       "z_val": 0.5123,
-      "z_arr": 0.4746,
+      "z_arr": 0.4886,
       "missing_axes": "",
-      "score": 49.35,
-      "rank": 20
+      "score": 50.05,
+      "rank": 18
     },
     {
       "name": "Cohere",
@@ -553,10 +517,10 @@
       "arr_source": "Press; company statements",
       "summary": "Enterprise LLMs (Command, Rerank, Embed). Strong enterprise + government traction.",
       "z_val": 0.5461,
-      "z_arr": 0.3856,
+      "z_arr": 0.3969,
       "missing_axes": "",
-      "score": 46.58,
-      "rank": 21
+      "score": 47.15,
+      "rank": 19
     },
     {
       "name": "Sierra",
@@ -571,10 +535,10 @@
       "arr_source": "Press estimates",
       "summary": "Agent platform for enterprise customer service (ex-Salesforce + Google founders).",
       "z_val": 0.5518,
-      "z_arr": 0.3634,
+      "z_arr": 0.3742,
       "missing_axes": "",
-      "score": 45.76,
-      "rank": 22
+      "score": 46.3,
+      "rank": 20
     },
     {
       "name": "Lovable",
@@ -589,10 +553,10 @@
       "arr_source": "Leaked financials",
       "summary": "Prompt-to-app builder; viral product for non-engineers.",
       "z_val": 0.533,
-      "z_arr": 0.3634,
+      "z_arr": 0.3742,
       "missing_axes": "",
-      "score": 44.82,
-      "rank": 23
+      "score": 45.36,
+      "rank": 21
     },
     {
       "name": "Talkdesk",
@@ -607,10 +571,10 @@
       "arr_source": "Press estimates",
       "summary": "AI-augmented CCaaS platform; large enterprise customer base.",
       "z_val": 0.5019,
-      "z_arr": 0.3905,
+      "z_arr": 0.402,
       "missing_axes": "",
-      "score": 44.62,
-      "rank": 24
+      "score": 45.2,
+      "rank": 22
     },
     {
       "name": "Gong",
@@ -625,10 +589,10 @@
       "arr_source": "Press",
       "summary": "Conversation intelligence for B2B sales; large enterprise customer base.",
       "z_val": 0.4149,
-      "z_arr": 0.4746,
+      "z_arr": 0.4886,
       "missing_axes": "",
-      "score": 44.48,
-      "rank": 25
+      "score": 45.18,
+      "rank": 23
     },
     {
       "name": "Glean",
@@ -643,10 +607,28 @@
       "arr_source": "Press estimates",
       "summary": "Enterprise knowledge search; agents for HR, sales, support workflows.",
       "z_val": 0.4661,
-      "z_arr": 0.4126,
+      "z_arr": 0.4248,
       "missing_axes": "",
-      "score": 43.94,
-      "rank": 26
+      "score": 44.55,
+      "rank": 24
+    },
+    {
+      "name": "Palantir Technologies",
+      "category": "Enterprise AI Platform",
+      "hq": "Denver, USA",
+      "founded": 2003,
+      "valuation_usd_b": 350.0,
+      "valuation_date": "2025 market cap",
+      "valuation_source": "Public market",
+      "arr_usd_m": null,
+      "arr_date": null,
+      "arr_source": "Not cleanly disclosed \u2014 AIP revenue not broken out separately; FY26 total revenue guide is ~$8.15B but AIP-attributed slice is not published",
+      "summary": "Foundry + AIP platforms. AIP drives most growth but is not separately disclosed; AI-attributed ARR is null per company.",
+      "z_val": 0.8895,
+      "z_arr": null,
+      "missing_axes": "arr",
+      "score": 44.47,
+      "rank": 25
     },
     {
       "name": "Recursion Pharmaceuticals",
@@ -661,10 +643,10 @@
       "arr_source": "Public filings",
       "summary": "Foundation models for biology; wet-lab + in-silico loop. Software-heavy; classified digital.",
       "z_val": 0.4776,
-      "z_arr": 0.3905,
+      "z_arr": 0.402,
       "missing_axes": "",
-      "score": 43.41,
-      "rank": 27
+      "score": 43.98,
+      "rank": 26
     },
     {
       "name": "Notion AI",
@@ -679,10 +661,10 @@
       "arr_source": "Press estimates",
       "summary": "Notion AI revenue slice. Treated as digital AI segment.",
       "z_val": 0.4463,
-      "z_arr": 0.4126,
+      "z_arr": 0.4248,
       "missing_axes": "",
-      "score": 42.94,
-      "rank": 28
+      "score": 43.55,
+      "rank": 27
     },
     {
       "name": "Hugging Face",
@@ -697,10 +679,10 @@
       "arr_source": "Press estimates",
       "summary": "Largest hub for open models/datasets; Inference endpoints, Spaces, Enterprise Hub.",
       "z_val": 0.5299,
-      "z_arr": 0.3285,
+      "z_arr": 0.3382,
       "missing_axes": "",
-      "score": 42.92,
-      "rank": 29
+      "score": 43.41,
+      "rank": 28
     },
     {
       "name": "C3.ai",
@@ -713,12 +695,12 @@
       "arr_usd_m": 380,
       "arr_date": "FY2026",
       "arr_source": "Public filings",
-      "summary": "Enterprise AI apps and platform; listed.",
+      "summary": "Enterprise AI apps and platform; listed. Pure-play AI.",
       "z_val": 0.4021,
-      "z_arr": 0.4413,
+      "z_arr": 0.4543,
       "missing_axes": "",
-      "score": 42.17,
-      "rank": 30
+      "score": 42.82,
+      "rank": 29
     },
     {
       "name": "Replit",
@@ -733,10 +715,10 @@
       "arr_source": "Press estimates",
       "summary": "Browser IDE with built-in AI Agent. Consumer + education + prosumer base.",
       "z_val": 0.4905,
-      "z_arr": 0.2909,
+      "z_arr": 0.2995,
       "missing_axes": "",
-      "score": 39.07,
-      "rank": 31
+      "score": 39.5,
+      "rank": 30
     },
     {
       "name": "Legora (formerly Spellbook)",
@@ -751,28 +733,10 @@
       "arr_source": "Press estimates",
       "summary": "Collaborative AI workspace for lawyers (review, drafting, drafting assistance).",
       "z_val": 0.4387,
-      "z_arr": 0.3285,
+      "z_arr": 0.3382,
       "missing_axes": "",
-      "score": 38.36,
-      "rank": 32
-    },
-    {
-      "name": "Schrodinger",
-      "category": "AI Drug Discovery (Software)",
-      "hq": "New York, USA",
-      "founded": 1990,
-      "valuation_usd_b": 3.0,
-      "valuation_date": "2025 market cap",
-      "valuation_source": "Public market",
-      "arr_usd_m": 250,
-      "arr_date": "FY2025",
-      "arr_source": "Public filings",
-      "summary": "Computational chemistry / molecular simulation SaaS + co-discovery.",
-      "z_val": 0.3707,
-      "z_arr": 0.3905,
-      "missing_axes": "",
-      "score": 38.06,
-      "rank": 33
+      "score": 38.85,
+      "rank": 31
     },
     {
       "name": "Abridge",
@@ -787,10 +751,10 @@
       "arr_source": "Press",
       "summary": "Ambient medical scribe; turns patient-clinician conversation into structured notes + codes.",
       "z_val": 0.4327,
-      "z_arr": 0.2984,
+      "z_arr": 0.3072,
       "missing_axes": "",
-      "score": 36.56,
-      "rank": 34
+      "score": 37.0,
+      "rank": 32
     },
     {
       "name": "Together AI",
@@ -805,10 +769,10 @@
       "arr_source": "Press estimates",
       "summary": "Open-model inference + training cloud; competitive with hyperscalers on price/perf.",
       "z_val": 0.3811,
-      "z_arr": 0.3285,
+      "z_arr": 0.3382,
       "missing_axes": "",
-      "score": 35.48,
-      "rank": 35
+      "score": 35.97,
+      "rank": 33
     },
     {
       "name": "EliseAI",
@@ -823,10 +787,10 @@
       "arr_source": "Press",
       "summary": "Conversational AI for property management & healthcare admin.",
       "z_val": 0.3369,
-      "z_arr": 0.3634,
+      "z_arr": 0.3742,
       "missing_axes": "",
-      "score": 35.02,
-      "rank": 36
+      "score": 35.55,
+      "rank": 34
     },
     {
       "name": "Decagon",
@@ -841,10 +805,10 @@
       "arr_source": "Press estimates",
       "summary": "Autonomous AI agents for enterprise support / CX.",
       "z_val": 0.4149,
-      "z_arr": 0.2793,
+      "z_arr": 0.2876,
       "missing_axes": "",
-      "score": 34.71,
-      "rank": 37
+      "score": 35.13,
+      "rank": 35
     },
     {
       "name": "Synthesia",
@@ -859,10 +823,10 @@
       "arr_source": "Press estimates",
       "summary": "AI avatar video platform for enterprise comms and L&D.",
       "z_val": 0.4021,
-      "z_arr": 0.2793,
+      "z_arr": 0.2876,
       "missing_axes": "",
-      "score": 34.07,
-      "rank": 38
+      "score": 34.48,
+      "rank": 36
     },
     {
       "name": "FAL",
@@ -877,10 +841,10 @@
       "arr_source": "Press estimates",
       "summary": "Developer cloud for image/video/audio generative inference (Flux, Kling, SDXL).",
       "z_val": 0.4021,
-      "z_arr": 0.2793,
+      "z_arr": 0.2876,
       "missing_axes": "",
-      "score": 34.07,
-      "rank": 39
+      "score": 34.48,
+      "rank": 37
     },
     {
       "name": "DeepSeek",
@@ -898,7 +862,7 @@
       "z_arr": null,
       "missing_axes": "arr",
       "score": 33.87,
-      "rank": 40
+      "rank": 38
     },
     {
       "name": "Thinking Machines Lab",
@@ -916,7 +880,7 @@
       "z_arr": null,
       "missing_axes": "arr",
       "score": 33.87,
-      "rank": 41
+      "rank": 39
     },
     {
       "name": "Runway",
@@ -931,10 +895,10 @@
       "arr_source": "Press estimates",
       "summary": "Gen-3 video model; creative tooling and Hollywood partnerships.",
       "z_val": 0.4021,
-      "z_arr": 0.2666,
+      "z_arr": 0.2744,
       "missing_axes": "",
-      "score": 33.43,
-      "rank": 42
+      "score": 33.83,
+      "rank": 40
     },
     {
       "name": "MiniMax",
@@ -949,10 +913,10 @@
       "arr_source": "Press estimates",
       "summary": "Chinese unicorn AI lab; Hailuo video + chat models.",
       "z_val": 0.4021,
-      "z_arr": 0.2523,
+      "z_arr": 0.2597,
       "missing_axes": "",
-      "score": 32.72,
-      "rank": 43
+      "score": 33.09,
+      "rank": 41
     },
     {
       "name": "Codeium (Windsurf)",
@@ -967,10 +931,10 @@
       "arr_source": "Press estimates",
       "summary": "Free + enterprise AI code completion; acquired into Cognition 2025.",
       "z_val": 0.3707,
-      "z_arr": 0.2793,
+      "z_arr": 0.2876,
       "missing_axes": "",
-      "score": 32.5,
-      "rank": 44
+      "score": 32.92,
+      "rank": 42
     },
     {
       "name": "Moveworks",
@@ -985,10 +949,10 @@
       "arr_source": "Press estimates",
       "summary": "Conversational AI for IT, HR, employee support.",
       "z_val": 0.3651,
-      "z_arr": 0.2793,
+      "z_arr": 0.2876,
       "missing_axes": "",
-      "score": 32.22,
-      "rank": 45
+      "score": 32.64,
+      "rank": 43
     },
     {
       "name": "DeepL",
@@ -1003,10 +967,10 @@
       "arr_source": "Press estimates",
       "summary": "Premium machine translation; enterprise contracts across Europe.",
       "z_val": 0.3265,
-      "z_arr": 0.3112,
+      "z_arr": 0.3204,
       "missing_axes": "",
-      "score": 31.88,
-      "rank": 46
+      "score": 32.34,
+      "rank": 44
     },
     {
       "name": "Invisible Technologies",
@@ -1021,10 +985,10 @@
       "arr_source": "Press estimates",
       "summary": "AI-augmented back-office ops and eval/data services.",
       "z_val": 0.3265,
-      "z_arr": 0.3112,
+      "z_arr": 0.3204,
       "missing_axes": "",
-      "score": 31.88,
-      "rank": 47
+      "score": 32.34,
+      "rank": 45
     },
     {
       "name": "Safe Superintelligence (SSI)",
@@ -1042,7 +1006,7 @@
       "z_arr": null,
       "missing_axes": "arr",
       "score": 31.44,
-      "rank": 48
+      "rank": 46
     },
     {
       "name": "EvenUp",
@@ -1057,10 +1021,28 @@
       "arr_source": "Press estimates",
       "summary": "Personal-injury lawyers: demand letters + case summarization from medical records.",
       "z_val": 0.3265,
-      "z_arr": 0.2909,
+      "z_arr": 0.2995,
       "missing_axes": "",
-      "score": 30.87,
-      "rank": 49
+      "score": 31.3,
+      "rank": 47
+    },
+    {
+      "name": "Samsara",
+      "category": "Industrial AI (IoT data)",
+      "hq": "San Francisco, USA",
+      "founded": 2015,
+      "valuation_usd_b": 30.0,
+      "valuation_date": "2025 market cap",
+      "valuation_source": "Public market",
+      "arr_usd_m": null,
+      "arr_date": null,
+      "arr_source": "Not disclosed \u2014 Samsara sells sensor hardware (cameras, GPS, telematics) with AI on top; the AI-only software layer ARR is not broken out",
+      "summary": "Cameras + sensors with AI features for fleet + industrial ops. AI layer ARR not separately disclosed. Borderline 'digital AI' \u2014 included on valuation strength only.",
+      "z_val": 0.6217,
+      "z_arr": null,
+      "missing_axes": "arr",
+      "score": 31.08,
+      "rank": 48
     },
     {
       "name": "Reflection AI",
@@ -1078,7 +1060,43 @@
       "z_arr": null,
       "missing_axes": "arr",
       "score": 30.09,
+      "rank": 49
+    },
+    {
+      "name": "Kore.ai",
+      "category": "Enterprise Conversational AI",
+      "hq": "Orlando, USA",
+      "founded": 2013,
+      "valuation_usd_b": 1.5,
+      "valuation_date": "2024 round",
+      "valuation_source": "Press",
+      "arr_usd_m": 100,
+      "arr_date": "2024",
+      "arr_source": "Press estimates",
+      "summary": "Enterprise conversational AI platform + agents for CX and EX.",
+      "z_val": 0.2952,
+      "z_arr": 0.2876,
+      "missing_axes": "",
+      "score": 29.14,
       "rank": 50
+    },
+    {
+      "name": "Lightricks",
+      "category": "AI Imaging + Video Apps",
+      "hq": "Jerusalem, Israel",
+      "founded": 2013,
+      "valuation_usd_b": 1.5,
+      "valuation_date": "2024 round",
+      "valuation_source": "Press; TechCrunch",
+      "arr_usd_m": 100,
+      "arr_date": "2025",
+      "arr_source": "Press estimates",
+      "summary": "Generative photo/video apps (Facetune, LTX Studio). Consumer + creator-tools.",
+      "z_val": 0.2952,
+      "z_arr": 0.2876,
+      "missing_axes": "",
+      "score": 29.14,
+      "rank": 51
     },
     {
       "name": "Moonshot AI",
@@ -1096,43 +1114,7 @@
       "z_arr": null,
       "missing_axes": "arr",
       "score": 28.87,
-      "rank": 51
-    },
-    {
-      "name": "Kore.ai",
-      "category": "Enterprise Conversational AI",
-      "hq": "Orlando, USA",
-      "founded": 2013,
-      "valuation_usd_b": 1.5,
-      "valuation_date": "2024 round",
-      "valuation_source": "Press",
-      "arr_usd_m": 100,
-      "arr_date": "2024",
-      "arr_source": "Press estimates",
-      "summary": "Enterprise conversational AI platform + agents for CX and EX.",
-      "z_val": 0.2952,
-      "z_arr": 0.2793,
-      "missing_axes": "",
-      "score": 28.73,
       "rank": 52
-    },
-    {
-      "name": "Lightricks",
-      "category": "AI Imaging + Video Apps",
-      "hq": "Jerusalem, Israel",
-      "founded": 2013,
-      "valuation_usd_b": 1.5,
-      "valuation_date": "2024 round",
-      "valuation_source": "Press; TechCrunch",
-      "arr_usd_m": 100,
-      "arr_date": "2025",
-      "arr_source": "Press estimates",
-      "summary": "Generative photo/video apps (Facetune, LTX Studio). Consumer + creator-tools.",
-      "z_val": 0.2952,
-      "z_arr": 0.2793,
-      "missing_axes": "",
-      "score": 28.73,
-      "rank": 53
     },
     {
       "name": "Decart",
@@ -1147,10 +1129,10 @@
       "arr_source": "Press estimates",
       "summary": "Oasis - real-time infinite world model. High-throughput inference research.",
       "z_val": 0.3743,
-      "z_arr": 0.1953,
+      "z_arr": 0.201,
       "missing_axes": "",
-      "score": 28.48,
-      "rank": 54
+      "score": 28.77,
+      "rank": 53
     },
     {
       "name": "You.com",
@@ -1165,10 +1147,10 @@
       "arr_source": "Press estimates",
       "summary": "AI search/agent platform; enterprise APIs.",
       "z_val": 0.2952,
-      "z_arr": 0.2666,
+      "z_arr": 0.2744,
       "missing_axes": "",
-      "score": 28.09,
-      "rank": 55
+      "score": 28.48,
+      "rank": 54
     },
     {
       "name": "Sourcegraph (Amp / Cody)",
@@ -1183,10 +1165,10 @@
       "arr_source": "Press estimates",
       "summary": "Cody AI + Amp coding agent; enterprise code intelligence.",
       "z_val": 0.3592,
-      "z_arr": 0.1953,
+      "z_arr": 0.201,
       "missing_axes": "",
-      "score": 27.72,
-      "rank": 56
+      "score": 28.01,
+      "rank": 55
     },
     {
       "name": "Jasper AI",
@@ -1201,10 +1183,10 @@
       "arr_source": "Press estimates",
       "summary": "Marketing copy + brand-content AI for enterprises.",
       "z_val": 0.2952,
-      "z_arr": 0.2523,
+      "z_arr": 0.2597,
       "missing_axes": "",
-      "score": 27.37,
-      "rank": 57
+      "score": 27.74,
+      "rank": 56
     },
     {
       "name": "Cresta",
@@ -1219,10 +1201,10 @@
       "arr_source": "Press estimates",
       "summary": "Real-time agent-assist for sales and customer service.",
       "z_val": 0.3022,
-      "z_arr": 0.2444,
+      "z_arr": 0.2517,
       "missing_axes": "",
-      "score": 27.33,
-      "rank": 58
+      "score": 27.69,
+      "rank": 57
     },
     {
       "name": "Writer",
@@ -1237,10 +1219,10 @@
       "arr_source": "Press estimates",
       "summary": "Enterprise Palmyra LLMs + agents for regulated industries.",
       "z_val": 0.3209,
-      "z_arr": 0.2174,
+      "z_arr": 0.2238,
       "missing_axes": "",
-      "score": 26.92,
-      "rank": 59
+      "score": 27.24,
+      "rank": 58
     },
     {
       "name": "Deepgram",
@@ -1255,10 +1237,10 @@
       "arr_source": "Press estimates",
       "summary": "Real-time ASR + TTS APIs with on-prem deployment.",
       "z_val": 0.2796,
-      "z_arr": 0.2523,
+      "z_arr": 0.2597,
       "missing_axes": "",
-      "score": 26.59,
-      "rank": 60
+      "score": 26.96,
+      "rank": 59
     },
     {
       "name": "Speak",
@@ -1273,10 +1255,10 @@
       "arr_source": "Press",
       "summary": "AI tutor for English; massive Korea + Japan growth.",
       "z_val": 0.251,
-      "z_arr": 0.2793,
+      "z_arr": 0.2876,
       "missing_axes": "",
-      "score": 26.52,
-      "rank": 61
+      "score": 26.93,
+      "rank": 60
     },
     {
       "name": "Weights & Biases",
@@ -1291,10 +1273,10 @@
       "arr_source": "Press estimates",
       "summary": "Experiment tracking + model lifecycle tooling; CoreWeave acquired.",
       "z_val": 0.2753,
-      "z_arr": 0.2523,
+      "z_arr": 0.2597,
       "missing_axes": "",
-      "score": 26.38,
-      "rank": 62
+      "score": 26.75,
+      "rank": 61
     },
     {
       "name": "ADA (Ada Support)",
@@ -1309,10 +1291,10 @@
       "arr_source": "Press estimates",
       "summary": "AI agent platform for enterprise support automation.",
       "z_val": 0.2708,
-      "z_arr": 0.2523,
+      "z_arr": 0.2597,
       "missing_axes": "",
-      "score": 26.16,
-      "rank": 63
+      "score": 26.53,
+      "rank": 62
     },
     {
       "name": "Hippocratic AI",
@@ -1327,10 +1309,10 @@
       "arr_source": "Press estimates",
       "summary": "Safety-focused LLM for nurses + care management; staffing-style pay-per-call.",
       "z_val": 0.3875,
-      "z_arr": 0.1333,
+      "z_arr": 0.1372,
       "missing_axes": "",
-      "score": 26.04,
-      "rank": 64
+      "score": 26.24,
+      "rank": 63
     },
     {
       "name": "Fireflies.ai",
@@ -1345,10 +1327,10 @@
       "arr_source": "Press estimates",
       "summary": "AI notetaker + conversation intelligence; enterprise.",
       "z_val": 0.251,
-      "z_arr": 0.2523,
+      "z_arr": 0.2597,
       "missing_axes": "",
-      "score": 25.16,
-      "rank": 65
+      "score": 25.53,
+      "rank": 64
     },
     {
       "name": "Observe.AI",
@@ -1363,10 +1345,10 @@
       "arr_source": "Press estimates",
       "summary": "Conversation intelligence + agent coaching for call centers.",
       "z_val": 0.251,
-      "z_arr": 0.2523,
+      "z_arr": 0.2597,
       "missing_axes": "",
-      "score": 25.16,
-      "rank": 66
+      "score": 25.53,
+      "rank": 65
     },
     {
       "name": "Ambience Healthcare",
@@ -1381,9 +1363,27 @@
       "arr_source": "Press estimates",
       "summary": "Ambient medical scribe + coding for hospitals; Epic/KLAREHR integrations.",
       "z_val": 0.2753,
-      "z_arr": 0.2174,
+      "z_arr": 0.2238,
       "missing_axes": "",
-      "score": 24.63,
+      "score": 24.95,
+      "rank": 66
+    },
+    {
+      "name": "Midjourney",
+      "category": "AI Image Generation",
+      "hq": "San Francisco, USA",
+      "founded": 2022,
+      "valuation_usd_b": null,
+      "valuation_date": null,
+      "valuation_source": "Private / not disclosed",
+      "arr_usd_m": 500,
+      "arr_date": "2025 (revenue est.)",
+      "arr_source": "Press estimates",
+      "summary": "Top consumer image model. Profitable without external VC.",
+      "z_val": null,
+      "z_arr": 0.4886,
+      "missing_axes": "valuation",
+      "score": 24.43,
       "rank": 67
     },
     {
@@ -1399,9 +1399,9 @@
       "arr_source": "Press estimates",
       "summary": "Jamba models; enterprise focus with NVIDIA investment.",
       "z_val": 0.2876,
-      "z_arr": 0.1953,
+      "z_arr": 0.201,
       "missing_axes": "",
-      "score": 24.14,
+      "score": 24.43,
       "rank": 68
     },
     {
@@ -1417,28 +1417,10 @@
       "arr_source": "Press estimates",
       "summary": "Programmatic data labeling + weak supervision.",
       "z_val": 0.2796,
-      "z_arr": 0.1953,
+      "z_arr": 0.201,
       "missing_axes": "",
-      "score": 23.74,
+      "score": 24.03,
       "rank": 69
-    },
-    {
-      "name": "Midjourney",
-      "category": "AI Image Generation",
-      "hq": "San Francisco, USA",
-      "founded": 2022,
-      "valuation_usd_b": null,
-      "valuation_date": null,
-      "valuation_source": "Private / not disclosed",
-      "arr_usd_m": 500,
-      "arr_date": "2025 (revenue est.)",
-      "arr_source": "Press estimates",
-      "summary": "Top consumer image model. Profitable without external VC.",
-      "z_val": null,
-      "z_arr": 0.4746,
-      "missing_axes": "valuation",
-      "score": 23.73,
-      "rank": 70
     },
     {
       "name": "Stability AI",
@@ -1453,10 +1435,10 @@
       "arr_source": "Press estimates",
       "summary": "Stable Diffusion, Stable Video. Open-weights media models; commercialization struggles.",
       "z_val": 0.251,
-      "z_arr": 0.2174,
+      "z_arr": 0.2238,
       "missing_axes": "",
-      "score": 23.42,
-      "rank": 71
+      "score": 23.74,
+      "rank": 70
     },
     {
       "name": "Otter.ai",
@@ -1471,10 +1453,10 @@
       "arr_source": "Press estimates",
       "summary": "Meeting transcription + notes; consumer + enterprise.",
       "z_val": 0.1754,
-      "z_arr": 0.2793,
+      "z_arr": 0.2876,
       "missing_axes": "",
-      "score": 22.74,
-      "rank": 72
+      "score": 23.15,
+      "rank": 71
     },
     {
       "name": "Baichuan Intelligence",
@@ -1489,10 +1471,10 @@
       "arr_source": "Press estimates",
       "summary": "Baichuan models; open-source + enterprise.",
       "z_val": 0.37,
-      "z_arr": 0.0841,
+      "z_arr": 0.0866,
       "missing_axes": "",
-      "score": 22.7,
-      "rank": 73
+      "score": 22.83,
+      "rank": 72
     },
     {
       "name": "HeyGen",
@@ -1507,10 +1489,10 @@
       "arr_source": "Press estimates",
       "summary": "Avatar video localization + translation.",
       "z_val": 0.1953,
-      "z_arr": 0.2523,
+      "z_arr": 0.2597,
       "missing_axes": "",
-      "score": 22.38,
-      "rank": 74
+      "score": 22.75,
+      "rank": 73
     },
     {
       "name": "Character.AI",
@@ -1525,10 +1507,10 @@
       "arr_source": "Press estimates",
       "summary": "Character chatbots; >200M MAUs; home-rolled LLM.",
       "z_val": 0.251,
-      "z_arr": 0.1953,
+      "z_arr": 0.201,
       "missing_axes": "",
-      "score": 22.31,
-      "rank": 75
+      "score": 22.6,
+      "rank": 74
     },
     {
       "name": "Labelbox",
@@ -1543,10 +1525,10 @@
       "arr_source": "Press estimates",
       "summary": "Data labeling + eval platform for AI teams.",
       "z_val": 0.251,
-      "z_arr": 0.1953,
+      "z_arr": 0.201,
       "missing_axes": "",
-      "score": 22.31,
-      "rank": 76
+      "score": 22.6,
+      "rank": 75
     },
     {
       "name": "Typeface",
@@ -1561,10 +1543,10 @@
       "arr_source": "Press estimates",
       "summary": "Brand-personalized content for enterprise marketing.",
       "z_val": 0.251,
-      "z_arr": 0.1953,
+      "z_arr": 0.201,
       "missing_axes": "",
-      "score": 22.31,
-      "rank": 77
+      "score": 22.6,
+      "rank": 76
     },
     {
       "name": "AssemblyAI",
@@ -1579,10 +1561,10 @@
       "arr_source": "Press estimates",
       "summary": "Speech-to-text + speech LLM APIs.",
       "z_val": 0.251,
-      "z_arr": 0.1953,
+      "z_arr": 0.201,
       "missing_axes": "",
-      "score": 22.31,
-      "rank": 78
+      "score": 22.6,
+      "rank": 77
     },
     {
       "name": "Forethought",
@@ -1597,10 +1579,10 @@
       "arr_source": "Press estimates",
       "summary": "Support agents + AI workflow tooling.",
       "z_val": 0.251,
-      "z_arr": 0.1953,
+      "z_arr": 0.201,
       "missing_axes": "",
-      "score": 22.31,
-      "rank": 79
+      "score": 22.6,
+      "rank": 78
     },
     {
       "name": "Vapi",
@@ -1615,10 +1597,10 @@
       "arr_source": "Press estimates",
       "summary": "Developer platform for building production voice agents.",
       "z_val": 0.2796,
-      "z_arr": 0.152,
+      "z_arr": 0.1565,
       "missing_axes": "",
-      "score": 21.58,
-      "rank": 80
+      "score": 21.8,
+      "rank": 79
     },
     {
       "name": "Factory",
@@ -1633,10 +1615,10 @@
       "arr_source": "Press estimates",
       "summary": "Software-development agents that touch the entire stack (code, infra, ops).",
       "z_val": 0.2952,
-      "z_arr": 0.1333,
+      "z_arr": 0.1372,
       "missing_axes": "",
-      "score": 21.42,
-      "rank": 81
+      "score": 21.62,
+      "rank": 80
     },
     {
       "name": "Suki AI",
@@ -1651,10 +1633,10 @@
       "arr_source": "Press estimates",
       "summary": "Ambient scribe and voice assistant for clinicians.",
       "z_val": 0.1953,
-      "z_arr": 0.2174,
+      "z_arr": 0.2238,
       "missing_axes": "",
-      "score": 20.63,
-      "rank": 82
+      "score": 20.95,
+      "rank": 81
     },
     {
       "name": "01.AI (Yi)",
@@ -1669,10 +1651,10 @@
       "arr_source": "Press estimates",
       "summary": "Yi model family; Kai-Fu Lee's lab.",
       "z_val": 0.251,
-      "z_arr": 0.1333,
+      "z_arr": 0.1372,
       "missing_axes": "",
-      "score": 19.21,
-      "rank": 83
+      "score": 19.41,
+      "rank": 82
     },
     {
       "name": "Arize AI",
@@ -1687,10 +1669,10 @@
       "arr_source": "Press estimates",
       "summary": "LLM evals + observability platform; enterprise.",
       "z_val": 0.2121,
-      "z_arr": 0.1682,
+      "z_arr": 0.1731,
       "missing_axes": "",
-      "score": 19.01,
-      "rank": 84
+      "score": 19.26,
+      "rank": 83
     },
     {
       "name": "PolyAI",
@@ -1705,10 +1687,10 @@
       "arr_source": "Press estimates",
       "summary": "Voice-first conversational agents for enterprise call centers.",
       "z_val": 0.1754,
-      "z_arr": 0.1953,
+      "z_arr": 0.201,
       "missing_axes": "",
-      "score": 18.53,
-      "rank": 85
+      "score": 18.82,
+      "rank": 84
     },
     {
       "name": "Suno",
@@ -1723,9 +1705,27 @@
       "arr_source": "Press estimates",
       "summary": "Text-to-music generator; viral consumer + licensed catalog deals.",
       "z_val": null,
-      "z_arr": 0.3634,
+      "z_arr": 0.3742,
       "missing_axes": "valuation",
-      "score": 18.17,
+      "score": 18.71,
+      "rank": 85
+    },
+    {
+      "name": "Schrodinger",
+      "category": "AI Drug Discovery (Software)",
+      "hq": "New York, USA",
+      "founded": 1990,
+      "valuation_usd_b": 3.0,
+      "valuation_date": "2025 market cap",
+      "valuation_source": "Public market",
+      "arr_usd_m": null,
+      "arr_date": null,
+      "arr_source": "Not applicable \u2014 Bunsen (agentic AI co-scientist) launched in mid-2026 in early access; pre-revenue. Core ACV ($218-228M FY26) is physics-based simulation, not pure AI",
+      "summary": "Computational chemistry. AI-attributed ARR is null \u2014 Bunsen agent is pre-revenue; core is physics simulation.",
+      "z_val": 0.3707,
+      "z_arr": null,
+      "missing_axes": "arr",
+      "score": 18.54,
       "rank": 86
     },
     {
@@ -1741,9 +1741,9 @@
       "arr_source": "Press estimates",
       "summary": "Step model family + Step-Video.",
       "z_val": 0.251,
-      "z_arr": 0.1112,
+      "z_arr": 0.1144,
       "missing_axes": "",
-      "score": 18.11,
+      "score": 18.27,
       "rank": 87
     },
     {
@@ -1759,9 +1759,9 @@
       "arr_source": "Press estimates",
       "summary": "LangChain + LangGraph framework for building LLM agents; LangSmith observability.",
       "z_val": 0.251,
-      "z_arr": 0.1112,
+      "z_arr": 0.1144,
       "missing_axes": "",
-      "score": 18.11,
+      "score": 18.27,
       "rank": 88
     },
     {
@@ -1777,9 +1777,9 @@
       "arr_source": "Press estimates",
       "summary": "AI coding agent with deep code-context engine.",
       "z_val": 0.2395,
-      "z_arr": 0.1112,
+      "z_arr": 0.1144,
       "missing_axes": "",
-      "score": 17.53,
+      "score": 17.7,
       "rank": 89
     },
     {
@@ -1795,9 +1795,9 @@
       "arr_source": "Press estimates",
       "summary": "End-to-end CV dev platform; dataset + training + deploy.",
       "z_val": 0.1953,
-      "z_arr": 0.1333,
+      "z_arr": 0.1372,
       "missing_axes": "",
-      "score": 16.43,
+      "score": 16.63,
       "rank": 90
     },
     {
@@ -1831,9 +1831,9 @@
       "arr_source": "Press estimates",
       "summary": "AI characters for games + interactive media.",
       "z_val": 0.1754,
-      "z_arr": 0.1333,
+      "z_arr": 0.1372,
       "missing_axes": "",
-      "score": 15.44,
+      "score": 15.63,
       "rank": 92
     },
     {
@@ -1849,9 +1849,9 @@
       "arr_source": "Press estimates",
       "summary": "Text/image-to-video model; competitive with Runway on short-form.",
       "z_val": 0.1687,
-      "z_arr": 0.1333,
+      "z_arr": 0.1372,
       "missing_axes": "",
-      "score": 15.1,
+      "score": 15.29,
       "rank": 93
     },
     {
@@ -1885,9 +1885,9 @@
       "arr_source": "Press estimates",
       "summary": "AI presentation/storytelling tool.",
       "z_val": 0.1197,
-      "z_arr": 0.152,
+      "z_arr": 0.1565,
       "missing_axes": "",
-      "score": 13.59,
+      "score": 13.81,
       "rank": 95
     },
     {
@@ -1903,9 +1903,9 @@
       "arr_source": "Press estimates",
       "summary": "Multimodal Reka models; API + on-prem for regulated workloads.",
       "z_val": 0.1953,
-      "z_arr": 0.0492,
+      "z_arr": 0.0506,
       "missing_axes": "",
-      "score": 12.22,
+      "score": 12.3,
       "rank": 96
     },
     {
@@ -1921,9 +1921,9 @@
       "arr_source": "Press estimates",
       "summary": "Replicas + personalized video generation API for sales/marketing.",
       "z_val": 0.0755,
-      "z_arr": 0.1112,
+      "z_arr": 0.1144,
       "missing_axes": "",
-      "score": 9.34,
+      "score": 9.5,
       "rank": 97
     },
     {
@@ -1939,9 +1939,9 @@
       "arr_source": "Press estimates",
       "summary": "Sovereign EU AI; Pharia models; government/public-sector deals.",
       "z_val": null,
-      "z_arr": 0.1333,
+      "z_arr": 0.1372,
       "missing_axes": "valuation",
-      "score": 6.66,
+      "score": 6.86,
       "rank": 98
     },
     {
@@ -1957,9 +1957,9 @@
       "arr_source": "Press estimates",
       "summary": "Open-source AI-on-data with MCP server fabric; OSS + paid tiers.",
       "z_val": 0.0755,
-      "z_arr": 0.0492,
+      "z_arr": 0.0506,
       "missing_axes": "",
-      "score": 6.24,
+      "score": 6.31,
       "rank": 99
     },
     {
@@ -1975,9 +1975,9 @@
       "arr_source": "Press estimates",
       "summary": "Browser automation agents for ops/sales.",
       "z_val": 0.0442,
-      "z_arr": 0.0492,
+      "z_arr": 0.0506,
       "missing_axes": "",
-      "score": 4.67,
+      "score": 4.74,
       "rank": 100
     }
   ]

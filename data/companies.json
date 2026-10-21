@@ -849,7 +849,9 @@
       "arr_usd_m": 380,
       "arr_date": "FY2026",
       "arr_source": "Public filings",
-      "summary": "Enterprise AI apps and platform; listed.",
+      "arr_total_usd_m": 380,
+      "arr_attribution_note": "Pure-play AI company — total ARR = AI ARR ($380M).",
+      "summary": "Enterprise AI apps and platform; listed. Pure-play AI.",
       "is_digital_only": true
     },
     {
@@ -861,10 +863,12 @@
       "valuation_usd_b": 350.0,
       "valuation_date": "2025 market cap",
       "valuation_source": "Public market",
-      "arr_usd_m": 3700,
-      "arr_date": "FY2026",
-      "arr_source": "Public filings",
-      "summary": "Foundry + AIP platforms; enterprise + government AI. Pure software.",
+      "arr_usd_m": null,
+      "arr_date": null,
+      "arr_source": "Not cleanly disclosed — AIP revenue not broken out separately; FY26 total revenue guide is ~$8.15B but AIP-attributed slice is not published",
+      "arr_total_usd_m": 8150,
+      "arr_attribution_note": "AIP (Artificial Intelligence Platform) drives the US commercial business (~$3.4B FY26 guide) but Palantir does not disclose AIP revenue as a separate line; treating as missing.",
+      "summary": "Foundry + AIP platforms. AIP drives most growth but is not separately disclosed; AI-attributed ARR is null per company.",
       "is_digital_only": true
     },
     {
@@ -879,6 +883,8 @@
       "arr_usd_m": 1300,
       "arr_date": "FY2026 (revenue)",
       "arr_source": "Public filings",
+      "arr_total_usd_m": 1300,
+      "arr_attribution_note": "Substantially AI/data business (~95%+ AI-attributed). Treated as total ARR.",
       "summary": "AI on multi-modal medical data; precision medicine.",
       "is_digital_only": true
     },
@@ -894,6 +900,8 @@
       "arr_usd_m": 250,
       "arr_date": "FY2025",
       "arr_source": "Public filings",
+      "arr_total_usd_m": 250,
+      "arr_attribution_note": "Substantially AI business (AI drug discovery). Treated as total ARR.",
       "summary": "Foundation models for biology; wet-lab + in-silico loop. Software-heavy; classified digital.",
       "is_digital_only": true
     },
@@ -906,10 +914,12 @@
       "valuation_usd_b": 3.0,
       "valuation_date": "2025 market cap",
       "valuation_source": "Public market",
-      "arr_usd_m": 250,
-      "arr_date": "FY2025",
-      "arr_source": "Public filings",
-      "summary": "Computational chemistry / molecular simulation SaaS + co-discovery.",
+      "arr_usd_m": null,
+      "arr_date": null,
+      "arr_source": "Not applicable — Bunsen (agentic AI co-scientist) launched in mid-2026 in early access; pre-revenue. Core ACV ($218-228M FY26) is physics-based simulation, not pure AI",
+      "arr_total_usd_m": 250,
+      "arr_attribution_note": "Schrodinger calls itself 'physics + AI' but the bulk of revenue ($200M+ ACV) is physics-based molecular simulation. AI agent product Bunsen launched mid-2026 and has no disclosed ARR.",
+      "summary": "Computational chemistry. AI-attributed ARR is null — Bunsen agent is pre-revenue; core is physics simulation.",
       "is_digital_only": true
     },
     {
@@ -921,10 +931,12 @@
       "valuation_usd_b": 30.0,
       "valuation_date": "2025 market cap",
       "valuation_source": "Public market",
-      "arr_usd_m": 1500,
-      "arr_date": "FY2026",
-      "arr_source": "Public filings",
-      "summary": "Cameras + sensors with AI for fleet + industrial ops. Digital + light hardware; classified digital here.",
+      "arr_usd_m": null,
+      "arr_date": null,
+      "arr_source": "Not disclosed — Samsara sells sensor hardware (cameras, GPS, telematics) with AI on top; the AI-only software layer ARR is not broken out",
+      "arr_total_usd_m": 1500,
+      "arr_attribution_note": "Total company revenue is $1.5B FY26; AI-attributed software-only ARR is not disclosed separately. AI is a feature, not the dominant business line.",
+      "summary": "Cameras + sensors with AI features for fleet + industrial ops. AI layer ARR not separately disclosed. Borderline 'digital AI' — included on valuation strength only.",
       "is_digital_only": true
     },
     {
@@ -936,10 +948,12 @@
       "valuation_usd_b": 200.0,
       "valuation_date": "2025 market cap (whole company)",
       "valuation_source": "Public market",
-      "arr_usd_m": 12000,
-      "arr_date": "FY2026",
-      "arr_source": "Public filings",
-      "summary": "Workflow platform with Now Assist gen-AI. Listed; we use full-company ARR.",
+      "arr_usd_m": 1500,
+      "arr_date": "FY2026 forecast (Q2 2026 actual: $1B ACV)",
+      "arr_source": "ServiceNow Q2 2026 financial results; management earnings call",
+      "arr_total_usd_m": 15755,
+      "arr_attribution_note": "AI-attributed ARR is Now Assist + AI portfolio = $1.5B FY26 forecast (vs. $15.8B total subscription revenue); only ~10% of subscription revenue is currently classified as AI.",
+      "summary": "Workflow platform with Now Assist gen-AI. Now Assist crossed $1B ACV in Q2 2026; tracked to $1.5B FY26.",
       "is_digital_only": true
     },
     {
@@ -951,10 +965,12 @@
       "valuation_usd_b": 280.0,
       "valuation_date": "2025 market cap",
       "valuation_source": "Public market",
-      "arr_usd_m": 38000,
-      "arr_date": "FY2026",
-      "arr_source": "Public filings",
-      "summary": "CRM + Agentforce AI agents; listed.",
+      "arr_usd_m": 800,
+      "arr_date": "Q4 FY2026 (Feb 2026 earnings)",
+      "arr_source": "Salesforce Q4 FY26 press release; SEC 8-K (Agentforce ARR $800M, +169% YoY)",
+      "arr_total_usd_m": 41500,
+      "arr_attribution_note": "Only Agentforce ($0.8B) is AI-attributed. Agentforce + Data 360 = $2.9B but $1.1B of that is the acquired Informatica cloud business.",
+      "summary": "CRM + Agentforce AI agents; listed. AI-attributed ARR is Agentforce only ($800M).",
       "is_digital_only": true
     },
     {
@@ -1134,6 +1150,8 @@
       "arr_usd_m": 300,
       "arr_date": "2025 (AI-attributed est.)",
       "arr_source": "Press estimates",
+      "arr_total_usd_m": 300,
+      "arr_attribution_note": "Already AI-attributed (Notion AI revenue slice est.).",
       "summary": "Notion AI revenue slice. Treated as digital AI segment.",
       "is_digital_only": true
     },

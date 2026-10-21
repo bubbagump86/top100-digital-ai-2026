@@ -81,18 +81,22 @@ W_ARR = 0.5
 
 ## Top 10 (2026 edition)
 
-| Rank | Company                          | Valuation | ARR      | Score |
-|------|----------------------------------|-----------|----------|-------|
-| 1    | Anthropic                        | $965B     | $30,000M | 98.57 |
-| 2    | OpenAI                           | $852B     | $25,000M | 96.78 |
-| 3    | Salesforce (Agentforce / AI)     | $280B     | $38,000M | 93.26 |
-| 4    | ServiceNow (Now Assist AI)        | $200B     | $12,000M | 84.43 |
-| 5    | Databricks                       | $190B     | $7,000M  | 80.88 |
-| 6    | Palantir Technologies            | $350B     | $3,700M  | 80.34 |
-| 7    | xAI                              | $230B     | $1,500M  | 72.58 |
-| 8    | Anysphere (Cursor)               | $60B      | $4,000M  | 71.21 |
-| 9    | VAST Data                        | $30B      | $2,000M  | 63.22 |
-| 10   | Scale AI                         | $29B      | $2,000M  | 63.04 |
+| Rank | Company                       | Valuation | ARR (AI-attributed)  | Score |
+|------|-------------------------------|-----------|----------------------|-------|
+| 1    | Anthropic                     | $965B     | $30,000M            | 100.00 |
+| 2    | OpenAI                        | $852B     | $25,000M            | 98.18 |
+| 3    | Databricks                    | $190B     | $7,000M             | 82.06 |
+| 4    | xAI                           | $230B     | $1,500M             | 73.48 |
+| 5    | ServiceNow (Now Assist AI)    | $200B     | $1,500M (Now Assist)| 72.71 |
+| 6    | Anysphere (Cursor)            | $60B      | $4,000M             | 72.28 |
+| 7    | Salesforce (Agentforce / AI)  | $280B     | $800M (Agentforce)  | 70.62 |
+| 8    | VAST Data                     | $30B      | $2,000M             | 64.17 |
+| 9    | Scale AI                      | $29B      | $2,000M             | 63.99 |
+| 10   | Mistral AI                    | $24B      | $1,000M             | 58.63 |
+
+The full ranking is in [`ranking.html`](ranking.html).
+
+> **ARR policy.** For companies that sell AI alongside non-AI software (Salesforce, ServiceNow, Palantir, Samsara, Schrodinger), we use the AI-attributed disclosure only &mdash; not total company revenue. See the [methodology page](methodology.html), section 3.
 
 The full ranking is in [`site/ranking.html`](site/ranking.html).
 
