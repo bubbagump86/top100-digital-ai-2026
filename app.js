@@ -79,6 +79,9 @@ function renderTable() {
           : r.valuation_basis === "proxy"
             ? `<div class="sub-note warn">${BASIS.proxy.short} · mkt cap ${fmtB(r.market_cap_usd_b)}</div>`
             : ""}
+        ${r.derived_pct_of_market_cap != null
+          ? `<div class="sub-note ${r.derived_pct_of_market_cap > 100 ? "bad" : ""}">${r.derived_pct_of_market_cap}% of mkt cap</div>`
+          : ""}
       </td>
       <td class="num">
         ${fmtM(r.arr_usd_m)}
@@ -264,6 +267,19 @@ implied AI valuation    = ${fmtM(c.arr_usd_m)} x ${pm.median_ev_revenue ?? "—"
         ${c.market_cap_date ? "(" + escapeHtml(c.market_cap_date) + ")" : ""}.
         The gap between the two is the part of the company that is <em>not</em> AI.
       </p>
+      ${c.market_implied_multiple != null ? (() => {
+        const above = c.market_implied_multiple >= (pm.median_ev_revenue || 0);
+        return `
+      <p class="sub-note ${above ? "" : "warn"}">
+        Cross-check: the market itself is paying
+        <strong>${c.market_implied_multiple}&times;</strong> per dollar of this
+        company's AI revenue (${fmtB(c.market_cap_usd_b)} &divide; ${fmtM(c.arr_usd_m)}).
+        ${above
+          ? `We use the pure-play median of ${pm.median_ev_revenue ?? "—"}&times;, so the market is pricing AI optionality well above peer multiples &mdash; which is what our derived valuation deliberately strips out.`
+          : `That is <em>below</em> the pure-play median of ${pm.median_ev_revenue ?? "—"}&times;: the market is applying a discount to this AI revenue rather than a tech premium. Our derivation does not carry that discount forward.`}
+      </p>`;
+      })() : ""}
+      ${c.coherence_flag ? `<p class="sub-note bad"><strong>Warning:</strong> ${escapeHtml(c.coherence_flag)}</p>` : ""}
     </div>
   ` : c.valuation_basis === "proxy" ? `
     <div class="basis-callout warn">
@@ -277,6 +293,7 @@ implied AI valuation    = ${fmtM(c.arr_usd_m)} x ${pm.median_ev_revenue ?? "—"
       </p>
       <p class="sub-note">Full-company market cap: <strong>${fmtB(c.market_cap_usd_b)}</strong>
         ${c.market_cap_date ? "(" + escapeHtml(c.market_cap_date) + ")" : ""}</p>
+      ${c.coherence_flag ? `<p class="sub-note bad">${escapeHtml(c.coherence_flag)}</p>` : ""}
     </div>
   ` : `
     <div class="basis-callout pure">

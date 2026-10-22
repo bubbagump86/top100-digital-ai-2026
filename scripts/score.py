@@ -147,6 +147,35 @@ def main() -> None:
             # Keep the market cap, but the ARR axis scores 0.
             pass
 
+        # --- coherence cross-check -------------------------------------
+        # For a derived row, what multiple is the market itself paying per
+        # dollar of the company's AI revenue? If our derivation exceeds the
+        # whole market cap, the model is internally incoherent for that row
+        # and we must flag it rather than hide it.
+        mcap = c.get("market_cap_usd_b")
+        market_implied_multiple = None
+        derived_pct_of_market_cap = None
+        coherence_flag = None
+        if basis == "derived" and arr_m and mcap:
+            market_implied_multiple = round((mcap * 1000.0) / arr_m, 1)
+            derived_pct_of_market_cap = round((derived_val / mcap) * 100, 1)
+            if derived_val > mcap:
+                coherence_flag = (
+                    "COHERENCE FAILURE: the implied AI valuation exceeds the "
+                    "company's entire market cap. Either the market discounts "
+                    "this AI revenue (country/governance risk, or it is a "
+                    "re-segmented legacy line rather than a new business), or "
+                    "the AI-revenue estimate is too generous. Treat this "
+                    "row's rank as indicative only."
+                )
+        elif basis == "proxy" and mcap:
+            market_implied_multiple = None
+            derived_pct_of_market_cap = None
+            coherence_flag = (
+                "Market-cap proxy: no AI revenue disclosed, so the valuation "
+                "axis includes the whole company and the ARR axis is 0."
+            )
+
         resolved.append({
             "name": c["name"],
             "category": c.get("category"),
@@ -163,8 +192,11 @@ def main() -> None:
             "arr_attribution_note": c.get("arr_attribution_note"),
             "valuation_basis": basis,
             "is_pure_play_ai": c.get("is_pure_play_ai", True),
-            "market_cap_usd_b": c.get("market_cap_usd_b"),
+            "market_cap_usd_b": mcap,
             "market_cap_date": c.get("market_cap_date"),
+            "market_implied_multiple": market_implied_multiple,
+            "derived_pct_of_market_cap": derived_pct_of_market_cap,
+            "coherence_flag": coherence_flag,
             "corporate_status": c.get("corporate_status"),
             "derived_valuation_usd_b": derived_val,
         })
@@ -230,6 +262,7 @@ def main() -> None:
             "p75": round(p75, 2),
             "min": round(multiples[0], 2),
             "max": round(multiples[-1], 2),
+            "mean": round(statistics.mean(multiples), 2),
             "pool_size": len(multiples),
             "pool": [{"name": n, "multiple": round(m, 2)} for n, m in peer_pool],
         },

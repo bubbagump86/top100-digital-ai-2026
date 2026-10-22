@@ -1,0 +1,734 @@
+{
+  "peer_multiple": {
+    "median_ev_revenue": 20.0,
+    "p25": 15.0,
+    "p75": 40.0,
+    "min": 5.0,
+    "max": 323.53,
+    "pool_size": 81,
+    "pool": [
+      {
+        "name": "OpenAI",
+        "multiple": 17.04
+      },
+      {
+        "name": "Anthropic",
+        "multiple": 9.65
+      },
+      {
+        "name": "Databricks",
+        "multiple": 27.14
+      },
+      {
+        "name": "SpaceXAI (xAI + Cursor + X)",
+        "multiple": 21.83
+      },
+      {
+        "name": "Cognition (Devin)",
+        "multiple": 97.56
+      },
+      {
+        "name": "Mistral AI",
+        "multiple": 24.0
+      },
+      {
+        "name": "Perplexity AI",
+        "multiple": 30.13
+      },
+      {
+        "name": "Hugging Face",
+        "multiple": 86.2
+      },
+      {
+        "name": "Zhipu AI (Z.ai)",
+        "multiple": 323.53
+      },
+      {
+        "name": "Cohere",
+        "multiple": 62.5
+      },
+      {
+        "name": "Harvey",
+        "multiple": 38.75
+      },
+      {
+        "name": "Sierra",
+        "multiple": 79.0
+      },
+      {
+        "name": "Lovable",
+        "multiple": 66.5
+      },
+      {
+        "name": "ElevenLabs",
+        "multiple": 22.0
+      },
+      {
+        "name": "Mercor",
+        "multiple": 5.0
+      },
+      {
+        "name": "Decagon",
+        "multiple": 45.0
+      },
+      {
+        "name": "Glean",
+        "multiple": 24.0
+      },
+      {
+        "name": "Abridge",
+        "multiple": 45.3
+      },
+      {
+        "name": "Replit",
+        "multiple": 81.82
+      },
+      {
+        "name": "Synthesia",
+        "multiple": 40.0
+      },
+      {
+        "name": "VAST Data",
+        "multiple": 15.0
+      },
+      {
+        "name": "Scale AI",
+        "multiple": 14.5
+      },
+      {
+        "name": "Together AI",
+        "multiple": 22.0
+      },
+      {
+        "name": "FAL",
+        "multiple": 40.0
+      },
+      {
+        "name": "Runway",
+        "multiple": 44.44
+      },
+      {
+        "name": "Pika",
+        "multiple": 15.67
+      },
+      {
+        "name": "Decart",
+        "multiple": 62.0
+      },
+      {
+        "name": "Character.AI",
+        "multiple": 20.0
+      },
+      {
+        "name": "You.com",
+        "multiple": 16.67
+      },
+      {
+        "name": "Legora (formerly Spellbook)",
+        "multiple": 37.33
+      },
+      {
+        "name": "EvenUp",
+        "multiple": 18.18
+      },
+      {
+        "name": "Speak",
+        "multiple": 10.0
+      },
+      {
+        "name": "EliseAI",
+        "multiple": 11.0
+      },
+      {
+        "name": "Gong",
+        "multiple": 9.0
+      },
+      {
+        "name": "DeepL",
+        "multiple": 15.38
+      },
+      {
+        "name": "Invisible Technologies",
+        "multiple": 15.38
+      },
+      {
+        "name": "Ambience Healthcare",
+        "multiple": 20.83
+      },
+      {
+        "name": "Suki AI",
+        "multiple": 10.0
+      },
+      {
+        "name": "Vapi",
+        "multiple": 37.14
+      },
+      {
+        "name": "Factory",
+        "multiple": 50.0
+      },
+      {
+        "name": "Hippocratic AI",
+        "multiple": 116.67
+      },
+      {
+        "name": "Stability AI",
+        "multiple": 16.67
+      },
+      {
+        "name": "Cresta",
+        "multiple": 21.33
+      },
+      {
+        "name": "Moveworks",
+        "multiple": 28.5
+      },
+      {
+        "name": "C3.ai",
+        "multiple": 10.53
+      },
+      {
+        "name": "Tempus AI",
+        "multiple": 9.23
+      },
+      {
+        "name": "Recursion Pharmaceuticals",
+        "multiple": 32.0
+      },
+      {
+        "name": "Writer",
+        "multiple": 31.67
+      },
+      {
+        "name": "AI21 Labs",
+        "multiple": 28.0
+      },
+      {
+        "name": "Reka AI",
+        "multiple": 40.0
+      },
+      {
+        "name": "01.AI (Yi)",
+        "multiple": 33.33
+      },
+      {
+        "name": "MiniMax",
+        "multiple": 50.0
+      },
+      {
+        "name": "Stepfun",
+        "multiple": 40.0
+      },
+      {
+        "name": "Baichuan Intelligence",
+        "multiple": 149.0
+      },
+      {
+        "name": "HeyGen",
+        "multiple": 7.5
+      },
+      {
+        "name": "Tavus",
+        "multiple": 8.0
+      },
+      {
+        "name": "Tome",
+        "multiple": 8.57
+      },
+      {
+        "name": "Sourcegraph (Amp / Cody)",
+        "multiple": 54.0
+      },
+      {
+        "name": "Augment Code",
+        "multiple": 36.0
+      },
+      {
+        "name": "Inworld AI",
+        "multiple": 16.67
+      },
+      {
+        "name": "Weights & Biases",
+        "multiple": 15.62
+      },
+      {
+        "name": "Labelbox",
+        "multiple": 20.0
+      },
+      {
+        "name": "Snorkel AI",
+        "multiple": 26.0
+      },
+      {
+        "name": "Roboflow",
+        "multiple": 20.0
+      },
+      {
+        "name": "Jasper AI",
+        "multiple": 18.75
+      },
+      {
+        "name": "Typeface",
+        "multiple": 20.0
+      },
+      {
+        "name": "MindsDB",
+        "multiple": 13.33
+      },
+      {
+        "name": "Bardeen AI",
+        "multiple": 10.0
+      },
+      {
+        "name": "Reworkd AI",
+        "multiple": 10.0
+      },
+      {
+        "name": "Arize AI",
+        "multiple": 17.5
+      },
+      {
+        "name": "Deepgram",
+        "multiple": 16.25
+      },
+      {
+        "name": "AssemblyAI",
+        "multiple": 20.0
+      },
+      {
+        "name": "Otter.ai",
+        "multiple": 5.0
+      },
+      {
+        "name": "Fireflies.ai",
+        "multiple": 12.5
+      },
+      {
+        "name": "Observe.AI",
+        "multiple": 12.5
+      },
+      {
+        "name": "Forethought",
+        "multiple": 20.0
+      },
+      {
+        "name": "ADA (Ada Support)",
+        "multiple": 15.0
+      },
+      {
+        "name": "PolyAI",
+        "multiple": 10.0
+      },
+      {
+        "name": "Kore.ai",
+        "multiple": 15.0
+      },
+      {
+        "name": "Lightricks",
+        "multiple": 15.0
+      },
+      {
+        "name": "LangChain",
+        "multiple": 40.0
+      }
+    ]
+  },
+  "distribution": {
+    "n": 81,
+    "min": 5.0,
+    "p10": 10.0,
+    "p25": 15.0,
+    "p50_median": 20.0,
+    "p75": 40.0,
+    "p90": 62.5,
+    "max": 323.53,
+    "mean": 33.6,
+    "trimmed_mean_10pct": 25.53,
+    "iqr_width_ratio": 2.67
+  },
+  "by_arr_band": [
+    {
+      "band": "ARR < $100M",
+      "n": 37,
+      "median_multiple": 20.0,
+      "min": 7.5,
+      "max": 149.0,
+      "members": [
+        "01.AI (Yi)",
+        "ADA (Ada Support)",
+        "AI21 Labs",
+        "Ambience Healthcare",
+        "Arize AI",
+        "AssemblyAI",
+        "Augment Code",
+        "Baichuan Intelligence",
+        "Character.AI",
+        "Cresta",
+        "Decart",
+        "Deepgram",
+        "Factory",
+        "Fireflies.ai",
+        "Forethought",
+        "HeyGen",
+        "Hippocratic AI",
+        "Inworld AI",
+        "Jasper AI",
+        "Labelbox",
+        "LangChain",
+        "MiniMax",
+        "Observe.AI",
+        "Pika",
+        "PolyAI",
+        "Roboflow",
+        "Runway",
+        "Snorkel AI",
+        "Sourcegraph (Amp / Cody)",
+        "Stability AI",
+        "Stepfun",
+        "Suki AI",
+        "Typeface",
+        "Vapi",
+        "Weights & Biases",
+        "Writer",
+        "You.com"
+      ]
+    },
+    {
+      "band": "$100M - $1B",
+      "n": 29,
+      "median_multiple": 30.13,
+      "min": 5.0,
+      "max": 323.53,
+      "members": [
+        "Abridge",
+        "C3.ai",
+        "Cognition (Devin)",
+        "Cohere",
+        "Decagon",
+        "DeepL",
+        "ElevenLabs",
+        "EliseAI",
+        "EvenUp",
+        "FAL",
+        "Glean",
+        "Gong",
+        "Harvey",
+        "Hugging Face",
+        "Invisible Technologies",
+        "Kore.ai",
+        "Legora (formerly Spellbook)",
+        "Lightricks",
+        "Lovable",
+        "Moveworks",
+        "Otter.ai",
+        "Perplexity AI",
+        "Recursion Pharmaceuticals",
+        "Replit",
+        "Sierra",
+        "Speak",
+        "Synthesia",
+        "Together AI",
+        "Zhipu AI (Z.ai)"
+      ]
+    },
+    {
+      "band": "$1B - $5B",
+      "n": 5,
+      "median_multiple": 14.5,
+      "min": 5.0,
+      "max": 24.0,
+      "members": [
+        "Mercor",
+        "Mistral AI",
+        "Scale AI",
+        "Tempus AI",
+        "VAST Data"
+      ]
+    },
+    {
+      "band": "$5B - $20B",
+      "n": 2,
+      "median_multiple": 24.48,
+      "min": 21.83,
+      "max": 27.14,
+      "members": [
+        "Databricks",
+        "SpaceXAI (xAI + Cursor + X)"
+      ]
+    },
+    {
+      "band": "ARR >= $20B",
+      "n": 2,
+      "median_multiple": 13.34,
+      "min": 9.65,
+      "max": 17.04,
+      "members": [
+        "Anthropic",
+        "OpenAI"
+      ]
+    }
+  ],
+  "by_geography": {
+    "west": {
+      "n": 76,
+      "median": 20.0,
+      "p25": 14.88,
+      "p75": 37.19
+    },
+    "china": {
+      "n": 5,
+      "median": 50.0,
+      "p25": 40.0,
+      "p75": 149.0
+    }
+  },
+  "market_cross_check": [
+    {
+      "name": "Google / Alphabet (AI: Gemini + Cloud AI)",
+      "market_cap_usd_b": 4160.0,
+      "ai_arr_usd_m": 30000,
+      "market_implied_multiple": 138.7,
+      "our_derived_valuation_usd_b": 600.0,
+      "derived_as_pct_of_market_cap": 14.4,
+      "flag": "ok"
+    },
+    {
+      "name": "Microsoft (AI business)",
+      "market_cap_usd_b": 3950.0,
+      "ai_arr_usd_m": 37000,
+      "market_implied_multiple": 106.8,
+      "our_derived_valuation_usd_b": 740.0,
+      "derived_as_pct_of_market_cap": 18.7,
+      "flag": "ok"
+    },
+    {
+      "name": "Amazon (AWS AI)",
+      "market_cap_usd_b": 2830.0,
+      "ai_arr_usd_m": 25000,
+      "market_implied_multiple": 113.2,
+      "our_derived_valuation_usd_b": 500.0,
+      "derived_as_pct_of_market_cap": 17.7,
+      "flag": "ok"
+    },
+    {
+      "name": "Meta (AI: Advantage+ + Meta AI + Llama)",
+      "market_cap_usd_b": 1770.0,
+      "ai_arr_usd_m": 20000,
+      "market_implied_multiple": 88.5,
+      "our_derived_valuation_usd_b": 400.0,
+      "derived_as_pct_of_market_cap": 22.6,
+      "flag": "ok"
+    },
+    {
+      "name": "Tencent (AI: Hunyuan + Tencent Cloud AI)",
+      "market_cap_usd_b": 470.9,
+      "ai_arr_usd_m": 7000,
+      "market_implied_multiple": 67.3,
+      "our_derived_valuation_usd_b": 140.0,
+      "derived_as_pct_of_market_cap": 29.7,
+      "flag": "ok"
+    },
+    {
+      "name": "Salesforce (Agentforce / AI)",
+      "market_cap_usd_b": 280.0,
+      "ai_arr_usd_m": 800,
+      "market_implied_multiple": 350.0,
+      "our_derived_valuation_usd_b": 16.0,
+      "derived_as_pct_of_market_cap": 5.7,
+      "flag": "ok"
+    },
+    {
+      "name": "Alibaba (AI: Qwen + Alibaba Cloud AI)",
+      "market_cap_usd_b": 270.1,
+      "ai_arr_usd_m": 9300,
+      "market_implied_multiple": 29.0,
+      "our_derived_valuation_usd_b": 186.0,
+      "derived_as_pct_of_market_cap": 68.9,
+      "flag": "ok"
+    },
+    {
+      "name": "ServiceNow (Now Assist AI)",
+      "market_cap_usd_b": 200.0,
+      "ai_arr_usd_m": 1500,
+      "market_implied_multiple": 133.3,
+      "our_derived_valuation_usd_b": 30.0,
+      "derived_as_pct_of_market_cap": 15.0,
+      "flag": "ok"
+    },
+    {
+      "name": "Baidu (AI: ERNIE + Baidu AI Cloud)",
+      "market_cap_usd_b": 27.4,
+      "ai_arr_usd_m": 7440,
+      "market_implied_multiple": 3.7,
+      "our_derived_valuation_usd_b": 148.8,
+      "derived_as_pct_of_market_cap": 543.1,
+      "flag": "DERIVED > MARKET CAP"
+    },
+    {
+      "name": "Notion AI",
+      "market_cap_usd_b": 6.0,
+      "ai_arr_usd_m": 300,
+      "market_implied_multiple": 20.0,
+      "our_derived_valuation_usd_b": 6.0,
+      "derived_as_pct_of_market_cap": 100.0,
+      "flag": "ok"
+    }
+  ],
+  "rank_sensitivity": {
+    "10": [
+      "Anthropic",
+      "OpenAI",
+      "Microsoft (AI business)",
+      "Google / Alphabet (AI: Gemini + Cloud AI)",
+      "Amazon (AWS AI)",
+      "SpaceXAI (xAI + Cursor + X)",
+      "Meta (AI: Advantage+ + Meta AI + Llama)",
+      "Databricks",
+      "Alibaba (AI: Qwen + Alibaba Cloud AI)",
+      "Baidu (AI: ERNIE + Baidu AI Cloud)",
+      "Tencent (AI: Hunyuan + Tencent Cloud AI)",
+      "VAST Data",
+      "Scale AI",
+      "Cognition (Devin)",
+      "Mistral AI"
+    ],
+    "12": [
+      "Anthropic",
+      "OpenAI",
+      "Microsoft (AI business)",
+      "Google / Alphabet (AI: Gemini + Cloud AI)",
+      "Amazon (AWS AI)",
+      "Meta (AI: Advantage+ + Meta AI + Llama)",
+      "SpaceXAI (xAI + Cursor + X)",
+      "Databricks",
+      "Alibaba (AI: Qwen + Alibaba Cloud AI)",
+      "Baidu (AI: ERNIE + Baidu AI Cloud)",
+      "Tencent (AI: Hunyuan + Tencent Cloud AI)",
+      "VAST Data",
+      "Scale AI",
+      "ServiceNow (Now Assist AI)",
+      "Cognition (Devin)"
+    ],
+    "15": [
+      "Anthropic",
+      "OpenAI",
+      "Microsoft (AI business)",
+      "Google / Alphabet (AI: Gemini + Cloud AI)",
+      "Amazon (AWS AI)",
+      "Meta (AI: Advantage+ + Meta AI + Llama)",
+      "SpaceXAI (xAI + Cursor + X)",
+      "Databricks",
+      "Alibaba (AI: Qwen + Alibaba Cloud AI)",
+      "Baidu (AI: ERNIE + Baidu AI Cloud)",
+      "Tencent (AI: Hunyuan + Tencent Cloud AI)",
+      "VAST Data",
+      "Scale AI",
+      "ServiceNow (Now Assist AI)",
+      "Cognition (Devin)"
+    ],
+    "20": [
+      "Anthropic",
+      "OpenAI",
+      "Microsoft (AI business)",
+      "Google / Alphabet (AI: Gemini + Cloud AI)",
+      "Amazon (AWS AI)",
+      "Meta (AI: Advantage+ + Meta AI + Llama)",
+      "SpaceXAI (xAI + Cursor + X)",
+      "Alibaba (AI: Qwen + Alibaba Cloud AI)",
+      "Databricks",
+      "Baidu (AI: ERNIE + Baidu AI Cloud)",
+      "Tencent (AI: Hunyuan + Tencent Cloud AI)",
+      "VAST Data",
+      "Scale AI",
+      "ServiceNow (Now Assist AI)",
+      "Cognition (Devin)"
+    ],
+    "25": [
+      "Anthropic",
+      "OpenAI",
+      "Microsoft (AI business)",
+      "Google / Alphabet (AI: Gemini + Cloud AI)",
+      "Amazon (AWS AI)",
+      "Meta (AI: Advantage+ + Meta AI + Llama)",
+      "SpaceXAI (xAI + Cursor + X)",
+      "Alibaba (AI: Qwen + Alibaba Cloud AI)",
+      "Baidu (AI: ERNIE + Baidu AI Cloud)",
+      "Databricks",
+      "Tencent (AI: Hunyuan + Tencent Cloud AI)",
+      "VAST Data",
+      "Scale AI",
+      "ServiceNow (Now Assist AI)",
+      "Cognition (Devin)"
+    ],
+    "30": [
+      "Anthropic",
+      "OpenAI",
+      "Microsoft (AI business)",
+      "Google / Alphabet (AI: Gemini + Cloud AI)",
+      "Amazon (AWS AI)",
+      "Meta (AI: Advantage+ + Meta AI + Llama)",
+      "SpaceXAI (xAI + Cursor + X)",
+      "Alibaba (AI: Qwen + Alibaba Cloud AI)",
+      "Baidu (AI: ERNIE + Baidu AI Cloud)",
+      "Tencent (AI: Hunyuan + Tencent Cloud AI)",
+      "Databricks",
+      "ServiceNow (Now Assist AI)",
+      "VAST Data",
+      "Scale AI",
+      "Cognition (Devin)"
+    ],
+    "40": [
+      "Anthropic",
+      "Microsoft (AI business)",
+      "OpenAI",
+      "Google / Alphabet (AI: Gemini + Cloud AI)",
+      "Amazon (AWS AI)",
+      "Meta (AI: Advantage+ + Meta AI + Llama)",
+      "SpaceXAI (xAI + Cursor + X)",
+      "Alibaba (AI: Qwen + Alibaba Cloud AI)",
+      "Baidu (AI: ERNIE + Baidu AI Cloud)",
+      "Tencent (AI: Hunyuan + Tencent Cloud AI)",
+      "Databricks",
+      "ServiceNow (Now Assist AI)",
+      "VAST Data",
+      "Scale AI",
+      "Salesforce (Agentforce / AI)"
+    ]
+  },
+  "top11_stability": {
+    "always_present": [
+      "Alibaba (AI: Qwen + Alibaba Cloud AI)",
+      "Amazon (AWS AI)",
+      "Anthropic",
+      "Baidu (AI: ERNIE + Baidu AI Cloud)",
+      "Databricks",
+      "Google / Alphabet (AI: Gemini + Cloud AI)",
+      "Meta (AI: Advantage+ + Meta AI + Llama)",
+      "Microsoft (AI business)",
+      "OpenAI",
+      "SpaceXAI (xAI + Cursor + X)",
+      "Tencent (AI: Hunyuan + Tencent Cloud AI)"
+    ],
+    "ever_present": [
+      "Alibaba (AI: Qwen + Alibaba Cloud AI)",
+      "Amazon (AWS AI)",
+      "Anthropic",
+      "Baidu (AI: ERNIE + Baidu AI Cloud)",
+      "Databricks",
+      "Google / Alphabet (AI: Gemini + Cloud AI)",
+      "Meta (AI: Advantage+ + Meta AI + Llama)",
+      "Microsoft (AI business)",
+      "OpenAI",
+      "SpaceXAI (xAI + Cursor + X)",
+      "Tencent (AI: Hunyuan + Tencent Cloud AI)"
+    ],
+    "min_always_count": 11
+  },
+  "option_d_mechanics": {
+    "median_arr_usd_m": 100,
+    "log_minmax_z_arr_at_median": 0.25,
+    "percentile_z_arr_at_median": 0.5,
+    "companies_under_1b_arr": 71,
+    "companies_with_arr": 89
+  }
+}

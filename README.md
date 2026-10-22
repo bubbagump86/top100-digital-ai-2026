@@ -77,6 +77,65 @@ one company is than another, which percentile deliberately flattens.
 Full write-up: [`methodology.html`](methodology.html) section 5b.
 Machine-readable: [`data/sensitivity.json`](data/sensitivity.json).
 
+## Stress-testing the 20× peer multiple
+
+The second-most-consequential number in the model. `scripts/multiple_check.py`
+runs five checks.
+
+**1. Is the median the right statistic?** The pool is a power law:
+min 5×, p25 15×, **median 20×**, mean 33.6×, trimmed mean 25.5×, p75 40×,
+max 324×. The median is the *most conservative* of the central statistics.
+
+**2. Is the pool comparable?** No — the multiple is not scale-invariant:
+
+| Peer ARR band | n | Median multiple |
+|---|---:|---:|
+| < $100M | 37 | 20.0× |
+| $100M – $1B | 29 | 30.1× |
+| $1B – $5B | 5 | 14.5× |
+| $5B – $20B | 2 | 24.5× |
+| ≥ $20B | 2 | **13.3×** |
+
+Anthropic and OpenAI — the only pure-plays actually comparable in scale to
+Microsoft's $37B AI business — trade at **9.7× and 17.0×**. A size-matched
+multiple would be ~13×, making our 20× *generous* for the big-tech rows. We
+keep 20× because it's the most defensible summary of a heterogeneous pool and
+because the ranking doesn't move.
+
+**3. Does geography hide a split?** Yes. Western pure-plays: median 20× (n=76).
+Chinese pure-plays: median **50×** (n=5). Applying a blended 20× to
+Alibaba/Baidu/Tencent is conservative relative to their own peers — but with
+n=5 that's a weak base, and we say so.
+
+**4. What is the market actually paying?** (market cap ÷ AI ARR)
+
+| Company | Market implies | We derive | % of market cap |
+|---|---:|---:|---:|
+| Salesforce | 350× | $16B | 5.7% |
+| Google | 139× | $600B | 14.4% |
+| ServiceNow | 133× | $30B | 15.0% |
+| Amazon | 113× | $500B | 17.7% |
+| Microsoft | 107× | $740B | 18.7% |
+| Meta | 89× | $400B | 22.6% |
+| Tencent | 67× | $140B | 29.7% |
+| Alibaba | 29× | $186B | 68.9% |
+| **Baidu** | **3.7×** | $149B | **543%** ⚠️ |
+
+Two findings. The market pays 67–139× for megacap AI revenue because it prices
+AI *optionality*, not just revenue — our derivation deliberately strips that
+out. And **Baidu fails the coherence check**: the implied AI valuation is 5.4×
+its entire market cap. Most likely its "Core AI-Powered Business" line is
+largely re-segmented legacy search/ads — the same relabelling problem we fixed
+for Salesforce. We **flag** it rather than cap it, because capping would import
+the market's view of the whole company.
+
+**5. Does the ranking survive the multiple?** We re-ranked at 10×, 12×, 15×,
+20×, 25×, 30× and 40×. **The top 11 is identical at every one.** The number
+moves the derived dollar values, not the ordering.
+
+Full write-up: [`methodology.html`](methodology.html) section 6c.
+Machine-readable: [`data/multiple_check.json`](data/multiple_check.json).
+
 ## What's in the box
 
 ```
@@ -94,10 +153,12 @@ top100-ai-2026/                # repo root - served as the static site
 │   ├── companies.json         # raw input data (107 entries)
 │   ├── ranked.json            # top 100 with scores (mirror)
 │   ├── ranked.csv             # flat CSV
-│   └── sensitivity.json       # log-vs-raw robustness results
+│   ├── sensitivity.json       # log-vs-raw robustness results
+│   └── multiple_check.json    # peer-multiple stress-test results
 ├── scripts/
 │   ├── score.py               # scoring engine (Python, stdlib only)
 │   ├── sensitivity.py         # log-vs-raw robustness analysis
+│   ├── multiple_check.py      # peer-multiple stress test
 │   ├── migrate_v2.py          # Oct-2026 dataset migration (M&A, big tech)
 │   └── migrate_v3.py          # market-cap annotations, extra exclusions
 ├── README.md

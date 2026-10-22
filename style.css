@@ -391,6 +391,14 @@ table.rank tbody td {
 .sub-note.warn {
   color: var(--warn);
 }
+.sub-note.bad {
+  color: var(--bad);
+}
+.basis-chip.basis-fail {
+  background: rgba(248, 113, 113, 0.16);
+  border: 1px solid rgba(248, 113, 113, 0.5);
+  color: var(--bad);
+}
 .basis-chip {
   display: inline-block;
   font-size: 11px;

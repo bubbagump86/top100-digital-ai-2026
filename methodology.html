@@ -450,6 +450,176 @@ Salesforce     $800M AI ARR x 20x =  $16B implied AI valuation</pre>
       </div>
 
       <div class="card">
+        <h2>6c. Stress-testing the 20&times; peer multiple</h2>
+        <p>
+          The 20&times; multiple is the second-most-consequential assumption in
+          the model (after the log transform), and unlike the log transform it
+          has no natural alternative that agrees with it. So we tested it
+          five ways. Code: <code>scripts/multiple_check.py</code>.
+        </p>
+
+        <h3>Test 1 &mdash; is the median the right statistic?</h3>
+        <p>The pool is a power law, so the central statistics diverge sharply:</p>
+        <table class="rank" style="margin:14px 0;">
+          <thead><tr><th>Statistic</th><th class="num">Multiple</th><th>Comment</th></tr></thead>
+          <tbody>
+            <tr><td>min</td><td class="num">5.0&times;</td><td>Mercor, Otter.ai</td></tr>
+            <tr><td>p10</td><td class="num">10.0&times;</td><td></td></tr>
+            <tr><td>p25</td><td class="num">15.0&times;</td><td>lower quartile</td></tr>
+            <tr><td><strong>median (used)</strong></td><td class="num"><strong>20.0&times;</strong></td><td></td></tr>
+            <tr><td>mean</td><td class="num">33.6&times;</td><td>dragged up by Zhipu 324&times;, Baichuan 149&times;</td></tr>
+            <tr><td>10% trimmed mean</td><td class="num">25.5&times;</td><td></td></tr>
+            <tr><td>p75</td><td class="num">40.0&times;</td><td></td></tr>
+            <tr><td>p90</td><td class="num">62.5&times;</td><td></td></tr>
+            <tr><td>max</td><td class="num">323.5&times;</td><td>Zhipu AI</td></tr>
+          </tbody>
+        </table>
+        <p>
+          The median at 20&times; is the <em>most conservative</em> of the central
+          statistics &mdash; the mean is 68% higher and the trimmed mean 28%
+          higher. So the choice of median is a conservative one, not a
+          convenient one. But note the IQR alone spans <strong>15&times; to
+          40&times;</strong>, a 2.67&times; range. Any single number here is a
+          summary of a wide distribution, and we treat it as such.
+        </p>
+
+        <h3>Test 2 &mdash; is the pool comparable?</h3>
+        <p>
+          The single biggest weakness: the pool mixes $25M-ARR startups with
+          $100B-ARR giants, and the multiple is <strong>not scale-invariant</strong>.
+        </p>
+        <table class="rank" style="margin:14px 0;">
+          <thead><tr><th>Peer ARR band</th><th class="num">n</th><th class="num">Median multiple</th><th class="num">Range</th></tr></thead>
+          <tbody>
+            <tr><td>ARR &lt; $100M</td><td class="num">37</td><td class="num">20.0&times;</td><td class="num">7.5&ndash;149&times;</td></tr>
+            <tr><td>$100M &ndash; $1B</td><td class="num">29</td><td class="num">30.1&times;</td><td class="num">5.0&ndash;324&times;</td></tr>
+            <tr><td>$1B &ndash; $5B</td><td class="num">5</td><td class="num">14.5&times;</td><td class="num">5.0&ndash;24&times;</td></tr>
+            <tr><td>$5B &ndash; $20B</td><td class="num">2</td><td class="num">24.5&times;</td><td class="num">21.8&ndash;27.1&times;</td></tr>
+            <tr><td>ARR &ge; $20B</td><td class="num">2</td><td class="num">13.3&times;</td><td class="num">9.7&ndash;17.0&times;</td></tr>
+          </tbody>
+        </table>
+        <p>
+          The two pure-plays actually comparable in scale to Microsoft's $37B
+          AI business &mdash; Anthropic ($100B ARR) and OpenAI ($50B ARR) &mdash;
+          trade at <strong>9.7&times; and 17.0&times;</strong>. A
+          size-matched multiple would be closer to 13&times;, not 20&times;.
+        </p>
+        <p>
+          This is a real limitation and we won't hide it: applying 20&times; to
+          a $37B ARR business is <em>generous</em> relative to the
+          scale-matched cohort. A size-matched 13&times; would put Microsoft at
+          ~$481B rather than $740B, and Google at ~$390B rather than $600B.
+          We keep 20&times; because the blended median is the most defensible
+          single summary of a heterogeneous pool, and because &mdash; as Test 5
+          shows &mdash; the choice does not change who ranks where.
+        </p>
+
+        <h3>Test 3 &mdash; does geography hide a split?</h3>
+        <table class="rank" style="margin:14px 0;">
+          <thead><tr><th>Cohort</th><th class="num">n</th><th class="num">Median</th><th class="num">IQR</th></tr></thead>
+          <tbody>
+            <tr><td>Western pure-plays</td><td class="num">76</td><td class="num">20.0&times;</td><td class="num">14.9&ndash;37.2&times;</td></tr>
+            <tr><td>Chinese pure-plays</td><td class="num">5</td><td class="num">50.0&times;</td><td class="num">40.0&ndash;149.0&times;</td></tr>
+          </tbody>
+        </table>
+        <p>
+          The Chinese cohort carries a materially higher median (50&times;) than
+          the Western one (20&times;). So applying a blended 20&times; to
+          Alibaba, Baidu and Tencent is <em>conservative</em> relative to their
+          own pure-play peers &mdash; though with n=5, and with the cohort
+          skewed by Zhipu at 324&times; and Baichuan at 149&times;, it is a weak
+          base to draw any conclusion from. The honest statement is that we
+          do not have enough Chinese comparables to price Chinese AI
+          businesses properly, and we flag this rather than pretend otherwise.
+        </p>
+
+        <h3>Test 4 &mdash; what is the market actually paying?</h3>
+        <p>
+          The sharpest cross-check: divide each diversified company's market
+          cap by its AI-attributed ARR. That yields the multiple the public
+          market is <em>implicitly</em> paying for that company's AI business,
+          before we normalise anything.
+        </p>
+        <table class="rank" style="margin:14px 0;">
+          <thead>
+            <tr>
+              <th>Company</th>
+              <th class="num">Market cap</th>
+              <th class="num">AI ARR</th>
+              <th class="num">Market implies</th>
+              <th class="num">We derive</th>
+              <th class="num">% of cap</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>Salesforce</td><td class="num">$280B</td><td class="num">$800M</td><td class="num">350&times;</td><td class="num">$16B</td><td class="num">5.7%</td></tr>
+            <tr><td>Google</td><td class="num">$4,160B</td><td class="num">$30,000M</td><td class="num">139&times;</td><td class="num">$600B</td><td class="num">14.4%</td></tr>
+            <tr><td>ServiceNow</td><td class="num">$200B</td><td class="num">$1,500M</td><td class="num">133&times;</td><td class="num">$30B</td><td class="num">15.0%</td></tr>
+            <tr><td>Amazon</td><td class="num">$2,830B</td><td class="num">$25,000M</td><td class="num">113&times;</td><td class="num">$500B</td><td class="num">17.7%</td></tr>
+            <tr><td>Microsoft</td><td class="num">$3,950B</td><td class="num">$37,000M</td><td class="num">107&times;</td><td class="num">$740B</td><td class="num">18.7%</td></tr>
+            <tr><td>Meta</td><td class="num">$1,770B</td><td class="num">$20,000M</td><td class="num">89&times;</td><td class="num">$400B</td><td class="num">22.6%</td></tr>
+            <tr><td>Tencent</td><td class="num">$471B</td><td class="num">$7,000M</td><td class="num">67&times;</td><td class="num">$140B</td><td class="num">29.7%</td></tr>
+            <tr><td>Alibaba</td><td class="num">$270B</td><td class="num">$9,300M</td><td class="num">29&times;</td><td class="num">$186B</td><td class="num">68.9%</td></tr>
+            <tr><td>Notion AI</td><td class="num">$6B</td><td class="num">$300M</td><td class="num">20&times;</td><td class="num">$6B</td><td class="num">100%</td></tr>
+            <tr style="background:rgba(248,113,113,0.07);"><td><strong>Baidu</strong></td><td class="num">$27.4B</td><td class="num">$7,440M</td><td class="num" style="color:var(--bad);"><strong>3.7&times;</strong></td><td class="num">$149B</td><td class="num" style="color:var(--bad);"><strong>543%</strong></td></tr>
+          </tbody>
+        </table>
+        <p>
+          Two findings here.
+        </p>
+        <p>
+          <strong>First: the market pays 67&ndash;139&times; for AI revenue at the
+          megacaps.</strong> That is far above the 20&times; pure-play median
+          &mdash; because the market is pricing AI <em>optionality</em>
+          (the option to reshape search, advertising, cloud and office), not
+          just the revenue itself. Our derived valuation deliberately strips
+          that optionality out, which is exactly what makes the ranking a
+          statement about AI businesses rather than about megacap option
+          value. Salesforce at 350&times; is the extreme case: the market is
+          paying enormously for Agentforce optionality on a $280B cap, while
+          we value the $800M of actual Agentforce ARR at $16B.
+        </p>
+        <p>
+          <strong>Second: Baidu fails the coherence check.</strong> Our
+          derivation implies $149B for Baidu's AI business &mdash; <strong>5.4&times;
+          Baidu's entire market cap</strong>. A component cannot be worth more
+          than the whole. The most likely explanation is that Baidu's
+          "Core AI-Powered Business" line (RMB 12.5B/quarter, &gt;52% of core
+          revenue) is substantially <em>re-segmented legacy search and
+          advertising</em> rather than a new AI business &mdash; the same
+          relabelling problem we corrected for Salesforce. The market's 3.7&times;
+          implied multiple is telling us it refuses to pay a tech multiple for
+          that. We therefore flag Baidu's row as indicative only rather than
+          silently capping the derived valuation, because capping would import
+          the market's view of the whole company &mdash; the exact error this
+          model exists to avoid. The flag is visible in the ranking table and on
+          Baidu's own page.
+        </p>
+
+        <h3>Test 5 &mdash; does the ranking survive the multiple?</h3>
+        <p>
+          We re-ran the entire ranking at multiples of 10&times;, 12&times;,
+          15&times;, 20&times;, 25&times;, 30&times; and 40&times;.
+        </p>
+        <p>
+          <strong>The top 11 is identical at every multiple from 10&times; to
+          40&times;.</strong> The same eleven names, in nearly the same order:
+          Anthropic, OpenAI, Microsoft, Google, Amazon, Meta, SpaceXAI,
+          Alibaba, Databricks, Baidu, Tencent. Only the internal ordering
+          inside that block shifts &mdash; at 40&times; OpenAI drops below
+          Microsoft, at 10&times; Alibaba drops out of the top 8 in favour of
+          Databricks.
+        </p>
+        <p>
+          So the conclusion "these are the top AI companies on a
+          valuation-and-revenue basis" is <strong>robust to the multiple</strong>,
+          which is the strongest thing we can say about a single-number
+          assumption in a composite score. The number affects the derived
+          dollar values, not the ordering.
+        </p>
+      </div>
+
+      <div class="card">
         <h2>7. Missing data rules</h2>
         <p>
           Two kinds of missing data are common in 2026:

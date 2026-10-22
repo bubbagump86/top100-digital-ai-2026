@@ -134,6 +134,27 @@
     </div>
 
     <div class="card">
+      <h2>Is the 20&times; peer multiple load-bearing?</h2>
+      <p>
+        The multiple used to value the AI businesses of the megacaps is the
+        second-most-consequential number in the model. We stress-tested it
+        five ways: distribution, comparability by scale, geography, a
+        cross-check against what the market actually pays, and a full re-rank
+        from 10&times; to 40&times;.
+      </p>
+      <div id="multiple-check" class="chart-wrap" style="margin:16px 0 0;"></div>
+      <p style="margin-top:14px;">
+        <strong>Result: the top 11 is identical at every multiple from 10&times;
+        to 40&times;.</strong> The number moves the derived dollar values, not
+        the ordering. We also found and flag the one row where the derivation
+        is internally incoherent &mdash; Baidu, where the implied AI valuation
+        exceeds the company's entire market cap by 5.4&times;.
+        Full write-up in the <a href="methodology.html">methodology</a> page,
+        section 6c.
+      </p>
+    </div>
+
+    <div class="card">
       <h2>Is the ranking robust?</h2>
       <p>
         The log transform is the most consequential choice in the model, so we
@@ -293,6 +314,47 @@
       } catch (e) {
         document.getElementById("sensitivity").innerHTML =
           '<p class="sub-note">Sensitivity data unavailable.</p>';
+      }
+
+      // Multiple stress-test
+      try {
+        const mres = await fetch("data/multiple_check.json", { cache: "no-store" });
+        const mc = await mres.json();
+        const d = mc.distribution;
+        const ccs = mc.market_cross_check || [];
+        const worst = ccs.find((x) => x.flag === "DERIVED > MARKET CAP");
+        const geo = mc.by_geography;
+        document.getElementById("multiple-check").innerHTML = `
+          <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:14px;margin-bottom:18px;">
+            <div>
+              <div style="font-size:22px;font-weight:800;">${d.p50_median}&times;</div>
+              <div class="sub-note">median used (mean ${d.mean}&times;, trimmed ${d.trimmed_mean_10pct}&times;)</div>
+            </div>
+            <div>
+              <div style="font-size:22px;font-weight:800;">${d.p25}&ndash;${d.p75}&times;</div>
+              <div class="sub-note">IQR of the peer pool</div>
+            </div>
+            <div>
+              <div style="font-size:22px;font-weight:800;">${geo.west.median}&times; / ${geo.china.median}&times;</div>
+              <div class="sub-note">Western vs Chinese pure-play median</div>
+            </div>
+            <div>
+              <div style="font-size:22px;font-weight:800;color:var(--good);">11 / 11</div>
+              <div class="sub-note">top-11 unchanged from 10&times; to 40&times;</div>
+            </div>
+          </div>
+          ${worst ? `
+          <p class="sub-note bad" style="margin-bottom:0;">
+            <strong>Coherence failure flagged:</strong> ${worst.name} &mdash; derived AI
+            valuation $${worst.our_derived_valuation_usd_b}B against a
+            $${worst.market_cap_usd_b}B market cap
+            (${worst.derived_as_pct_of_market_cap}% of cap; market implies
+            ${worst.market_implied_multiple}&times;). Row marked indicative only.
+          </p>` : ""}
+        `;
+      } catch (e) {
+        document.getElementById("multiple-check").innerHTML =
+          '<p class="sub-note">Multiple-check data unavailable.</p>';
       }
     });
   </script>
