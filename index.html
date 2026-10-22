@@ -134,6 +134,26 @@
     </div>
 
     <div class="card">
+      <h2>Is the ranking robust?</h2>
+      <p>
+        The log transform is the most consequential choice in the model, so we
+        tested the alternative rather than assuming it. Re-running the full
+        ranking four ways:
+      </p>
+      <div id="sensitivity" class="chart-wrap" style="margin:16px 0 0;"></div>
+      <p style="margin-top:14px;">
+        The <strong>top 7 are identical under every variant</strong> &mdash; the
+        headline doesn't depend on the scale choice. But raw min-max looks
+        superficially similar (Spearman +0.967) while quietly pushing
+        <strong>87 of 100 rows below 5/100</strong>: Anthropic's $100B ARR owns
+        the entire raw axis range, so every company under ~$1B ARR is crushed
+        to zero and &ldquo;no disclosed revenue&rdquo; starts winning by default.
+        Full write-up in the
+        <a href="methodology.html">methodology</a> page, section 5b.
+      </p>
+    </div>
+
+    <div class="card">
       <h2>Score distribution</h2>
       <p style="color:var(--text-dim);margin-bottom:16px;">
         Score is the composite of log-min-max normalised valuation and ARR axes;
@@ -216,8 +236,7 @@
       `).join("");
 
       // Valuation-basis breakdown
-      const basisMeta = {
-        actual:  { label: "Pure-play AI (market-set AI valuation)", color: "var(--accent)" },
+      const basisMeta = {        actual:  { label: "Pure-play AI (market-set AI valuation)", color: "var(--accent)" },
         derived: { label: "AI-attributed (valuation derived at peer multiple)", color: "var(--accent-2)" },
         proxy:   { label: "Market-cap proxy (no AI revenue disclosure)", color: "var(--warn)" },
       };
@@ -245,6 +264,36 @@
           (median across ${data.peer_multiple.pool_size} pure-play companies;
           IQR ${data.peer_multiple.p25}&times;&ndash;${data.peer_multiple.p75}&times;).
         </p>`;
+
+      // Sensitivity: log vs raw
+      try {
+        const sres = await fetch("data/sensitivity.json", { cache: "no-store" });
+        const sens = await sres.json();
+        const order = [
+          ["log_minmax_shipped", "A — log + min-max (shipped)", "var(--accent)"],
+          ["raw_percentile", "D — raw + percentile", "var(--accent-2)"],
+          ["raw_minmax", "B — raw + min-max", "var(--warn)"],
+          ["raw_zscore", "C — raw + z-score", "var(--bad)"],
+        ];
+        const rowsHtml = order.map(([key, label, color]) => {
+          const v = sens.variants[key];
+          if (!v) return "";
+          const collapse = v.rows_below_5_points;
+          const bad = collapse > 50;
+          return `
+          <div style="margin-bottom:14px;">
+            <div style="display:flex;justify-content:space-between;font-size:13px;color:var(--text-dim);margin-bottom:4px;gap:12px;flex-wrap:wrap;">
+              <span><span style="display:inline-block;width:8px;height:8px;border-radius:2px;background:${color};margin-right:6px;"></span>${label}</span>
+              <span>ρ ${v.spearman_vs_shipped > 0 ? "+" : ""}${v.spearman_vs_shipped} · τ ${v.kendall_tau_vs_shipped > 0 ? "+" : ""}${v.kendall_tau_vs_shipped}
+              ${collapse != null ? ` · <span style="color:${bad ? "var(--bad)" : "var(--good)"}">${collapse}/100 rows &lt; 5 pts</span>` : ""}</span>
+            </div>
+          </div>`;
+        }).join("");
+        document.getElementById("sensitivity").innerHTML = rowsHtml;
+      } catch (e) {
+        document.getElementById("sensitivity").innerHTML =
+          '<p class="sub-note">Sensitivity data unavailable.</p>';
+      }
     });
   </script>
 </body>

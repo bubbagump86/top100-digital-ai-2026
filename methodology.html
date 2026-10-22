@@ -202,6 +202,127 @@ log_arr = log10(arr_USD_m)</pre>
       </div>
 
       <div class="card">
+        <h2>5b. What if we didn't log? (robustness check)</h2>
+        <p>
+          The log transform is the single most consequential choice in this
+          model, so we tested the alternative. We re-ran the full ranking four
+          ways and compared the results. The code is in
+          <code>scripts/sensitivity.py</code>.
+        </p>
+        <ul>
+          <li><strong>A</strong> &mdash; log + min-max <em>(the shipped model)</em></li>
+          <li><strong>B</strong> &mdash; raw + min-max <em>(the naive alternative)</em></li>
+          <li><strong>C</strong> &mdash; raw + z-score</li>
+          <li><strong>D</strong> &mdash; raw + percentile rank <em>(scale-free alternative)</em></li>
+        </ul>
+
+        <h3>Rank correlation vs. the shipped model</h3>
+        <table class="rank" style="margin:14px 0;">
+          <thead>
+            <tr>
+              <th>Variant</th>
+              <th class="num">Spearman &rho;</th>
+              <th class="num">Kendall &tau;</th>
+              <th class="num">Rows scoring &lt; 5/100</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td><strong>A &mdash; log + min-max (shipped)</strong></td><td class="num">+1.000</td><td class="num">+1.000</td><td class="num">3 of 100</td></tr>
+            <tr><td>B &mdash; raw + min-max</td><td class="num">+0.967</td><td class="num">+0.876</td><td class="num" style="color:var(--warn);"><strong>87 of 100</strong></td></tr>
+            <tr><td>C &mdash; raw + z-score</td><td class="num">+0.799</td><td class="num">+0.744</td><td class="num" style="color:var(--bad);"><strong>89 of 100</strong></td></tr>
+            <tr><td>D &mdash; raw + percentile</td><td class="num">+0.980</td><td class="num">+0.916</td><td class="num" style="color:var(--good);">2 of 100</td></tr>
+          </tbody>
+        </table>
+
+        <h3>Finding 1: the headline is robust</h3>
+        <p>
+          The top seven are <strong>identical under all four variants</strong>:
+          Anthropic, OpenAI, Microsoft, Google, Amazon, Meta, SpaceXAI. Under
+          the scale-free percentile variant (D) the top <em>twelve</em> are
+          identical to the shipped list. If you only care about who's at the
+          top, the scale choice barely matters &mdash; and a reasonable reader
+          who dislikes our log transform can check D and find the same answer.
+        </p>
+
+        <h3>Finding 2: raw min-max silently destroys the bottom 87% of the list</h3>
+        <p>
+          Here's the trap. Raw min-max has a Spearman correlation of
+          <strong>+0.967</strong> with the shipped model &mdash; it looks fine
+          at a glance. But look at the last column: under raw min-max,
+          <strong>87 of 100 companies score below 5 points out of 100</strong>,
+          versus 3 under the shipped model. The list becomes 7 real rows and
+          93 noise rows.
+        </p>
+        <pre>Raw min-max, ARR axis (min $10M, max $100,000M):
+  Anthropic   $100,000M -> z = 1.0000
+  OpenAI       $50,000M -> z = 0.4999
+  Microsoft     $37,000M -> z = 0.3699
+  a $900M ARR company -> z = 0.0089
+  a $12M  ARR company -> z = 0.0002
+
+  A company with $900M ARR and one with $12M ARR are ~75x apart in
+  reality, but 0.0089 vs 0.0002 after linear min-max - they are
+  indistinguishable on a 0-100 scale.</pre>
+        <p>
+          One company (Anthropic) owns 100% of the ARR axis range, and the
+          second (OpenAI) owns half of what's left. Every ARR below ~$1B is
+          numerically crushed to ~0. That doesn't change who is #1 &mdash; it
+          makes the other 93 rows meaningless.
+        </p>
+
+        <h3>Finding 3: the "improvements" in the raw ranking are artifacts</h3>
+        <p>
+          Raw min-max moves a striking set of companies <em>up</em>:
+          DeepSeek #37&rarr;#16, Thinking Machines Lab #38&rarr;#17, SSI #41&rarr;#22,
+          Reflection AI #44&rarr;#26, Moonshot AI #46&rarr;#29. These are all
+          pre-revenue labs with no ARR at all. Under raw min-max their score
+          collapses to <code>0.5 &times; (valuation / $1T)</code> &mdash; a
+          number so small it's basically zero. But because the other 87
+          companies collapsed to <em>even smaller</em> residuals, the
+          zero-revenue labs end up ranked above real revenue businesses.
+        </p>
+        <p>
+          That's not a better ranking. It's a list where "has no revenue" wins
+          by default. The shipped model has the same effect, but at a scale
+          where the ARR axis still discriminates.
+        </p>
+
+        <h3>Finding 4: z-score is the worst option</h3>
+        <p>
+          Raw + z-score has the lowest correlation (+0.799) and reorders the
+          top 12. An unbounded standardisation lets a single $965B outlier
+          drag the entire distribution &mdash; the mean and standard deviation
+          are set by the giants, and everyone else gets compressed toward
+          zero. It's the worst of the four: <strong>89 of 100 rows</strong>
+          score below 5/100. Z-score is the right tool for a symmetric
+          distribution; ARR is a power law.
+        </p>
+
+        <h3>Finding 5: if you want scale-free, use percentile</h3>
+        <p>
+          Variant D (percentile rank) is the strongest alternative &mdash; it
+          correlates <em>more</em> closely with the shipped model (+0.980
+          Spearman, +0.916 Kendall) than raw min-max does, matches the top 12
+          exactly, and is invariant to any monotone change of units. It's also
+          the most discriminative of the four: only <strong>2 of 100</strong>
+          rows fall below 5/100 (vs 3 for the shipped log model and 87-89 for
+          the raw variants). Its difference is in the middle: it penalises the
+          proxy rows (Palantir #22&rarr;#43, ByteDance #23&rarr;#47) because a
+          company with no disclosed ARR genuinely has no ARR, rather than
+          having its market-cap proxy inflate it.
+        </p>
+        <p>
+          We ship log + min-max rather than percentile because the log model
+          preserves <em>how much bigger</em> one company is than another
+          &mdash; a $100B ARR company outranks a $1B ARR company by more than a
+          $1.1B ARR company outranks a $1.0B one, which percentile deliberately
+          flattens. But the two agree closely, and the full comparison is
+          machine-readable at
+          <a href="https://github.com/bubbagump86/top100-digital-ai-2026/blob/main/data/sensitivity.json">data/sensitivity.json</a>.
+        </p>
+      </div>
+
+      <div class="card">
         <h2>6. The composite</h2>
         <p>
           Composite score is the equal-weighted average of the two rescaled
@@ -444,6 +565,13 @@ Top 15:
             valuation instead of $740B, and would not change the identity of
             the top 3. A 40&times; multiple (the p75) would lift the big-tech
             rows further.
+          </li>
+          <li>
+            <strong>The log transform is load-bearing.</strong> Section 5b
+            tests the alternative. The top 7 are identical under every variant
+            tested, but raw min-max would push 87 of 100 rows below 5/100 and
+            make "no disclosed revenue" rank above real revenue businesses by
+            default. The choice is documented rather than assumed.
           </li>
           <li>
             <strong>Derived valuations are not market prices.</strong> A

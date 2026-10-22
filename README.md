@@ -44,7 +44,38 @@ Missing data: if one axis is undisclosed it scores 0 (worst observed). If
 both are missing the company is dropped.
 
 Full treatment, worked examples, and sensitivity analysis — see
-[`methodology.html`](methodology.html), section 6b.
+[`methodology.html`](methodology.html), sections 6b and 5b.
+
+## Robustness: what if we didn't log-transform?
+
+The log transform is the most consequential choice in the model, so it's
+tested rather than assumed. `scripts/sensitivity.py` re-runs the full
+ranking four ways:
+
+| Variant | Spearman ρ vs shipped | Kendall τ | Rows scoring < 5/100 |
+|---|---:|---:|---:|
+| **A — log + min-max (shipped)** | +1.000 | +1.000 | **3 of 100** |
+| B — raw + min-max | +0.967 | +0.876 | **87 of 100** |
+| C — raw + z-score | +0.799 | +0.744 | **89 of 100** |
+| D — raw + percentile | +0.980 | +0.916 | **2 of 100** |
+
+**The headline is robust**: the top 7 are identical under all four variants,
+and the top 12 are identical under the scale-free percentile variant (D).
+
+**But raw min-max would quietly wreck the list.** It correlates +0.967 with
+the shipped model, so it looks fine at a glance — yet 87 of 100 rows collapse
+below 5/100 (vs 3 under A). Anthropic's $100B ARR owns 100% of the raw axis
+range, so every company under ~$1B ARR is crushed to ~0 and becomes
+indistinguishable. It also promotes pre-revenue labs (DeepSeek #37→#16,
+Thinking Machines #38→#17, SSI #41→#22) purely because "no revenue" wins by
+default once everything else is zero.
+
+Percentile (D) is the strongest alternative and agrees even more closely with
+the shipped model. We ship log+min-max because it preserves *how much bigger*
+one company is than another, which percentile deliberately flattens.
+
+Full write-up: [`methodology.html`](methodology.html) section 5b.
+Machine-readable: [`data/sensitivity.json`](data/sensitivity.json).
 
 ## What's in the box
 
@@ -62,9 +93,11 @@ top100-ai-2026/                # repo root - served as the static site
 ├── data/
 │   ├── companies.json         # raw input data (107 entries)
 │   ├── ranked.json            # top 100 with scores (mirror)
-│   └── ranked.csv             # flat CSV
+│   ├── ranked.csv             # flat CSV
+│   └── sensitivity.json       # log-vs-raw robustness results
 ├── scripts/
 │   ├── score.py               # scoring engine (Python, stdlib only)
+│   ├── sensitivity.py         # log-vs-raw robustness analysis
 │   ├── migrate_v2.py          # Oct-2026 dataset migration (M&A, big tech)
 │   └── migrate_v3.py          # market-cap annotations, extra exclusions
 ├── README.md

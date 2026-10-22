@@ -1,0 +1,73 @@
+{
+  "shipped": "A: log + min-max",
+  "variants": {
+    "raw_minmax": {
+      "spearman_vs_shipped": 0.967,
+      "kendall_tau_vs_shipped": 0.876,
+      "rows_below_5_points": 87,
+      "top10": [
+        "Anthropic",
+        "OpenAI",
+        "Microsoft (AI business)",
+        "Google / Alphabet (AI: Gemini + Cloud AI)",
+        "Amazon (AWS AI)",
+        "Meta (AI: Advantage+ + Meta AI + Llama)",
+        "SpaceXAI (xAI + Cursor + X)",
+        "Palantir Technologies",
+        "ByteDance (AI: Doubao + Seed + Volcano Engine)",
+        "Alibaba (AI: Qwen + Alibaba Cloud AI)"
+      ]
+    },
+    "raw_zscore": {
+      "spearman_vs_shipped": 0.799,
+      "kendall_tau_vs_shipped": 0.744,
+      "rows_below_5_points": 89,
+      "top10": [
+        "Anthropic",
+        "OpenAI",
+        "Microsoft (AI business)",
+        "Google / Alphabet (AI: Gemini + Cloud AI)",
+        "Amazon (AWS AI)",
+        "Meta (AI: Advantage+ + Meta AI + Llama)",
+        "SpaceXAI (xAI + Cursor + X)",
+        "Alibaba (AI: Qwen + Alibaba Cloud AI)",
+        "Databricks",
+        "Baidu (AI: ERNIE + Baidu AI Cloud)"
+      ]
+    },
+    "raw_percentile": {
+      "spearman_vs_shipped": 0.98,
+      "kendall_tau_vs_shipped": 0.916,
+      "rows_below_5_points": 2,
+      "top10": [
+        "Anthropic",
+        "OpenAI",
+        "Microsoft (AI business)",
+        "Google / Alphabet (AI: Gemini + Cloud AI)",
+        "Amazon (AWS AI)",
+        "Meta (AI: Advantage+ + Meta AI + Llama)",
+        "SpaceXAI (xAI + Cursor + X)",
+        "Alibaba (AI: Qwen + Alibaba Cloud AI)",
+        "Databricks",
+        "Baidu (AI: ERNIE + Baidu AI Cloud)"
+      ]
+    },
+    "log_minmax_shipped": {
+      "spearman_vs_shipped": 1.0,
+      "kendall_tau_vs_shipped": 1.0,
+      "rows_below_5_points": 3,
+      "top10": [
+        "Anthropic",
+        "OpenAI",
+        "Microsoft (AI business)",
+        "Google / Alphabet (AI: Gemini + Cloud AI)",
+        "Amazon (AWS AI)",
+        "Meta (AI: Advantage+ + Meta AI + Llama)",
+        "SpaceXAI (xAI + Cursor + X)",
+        "Alibaba (AI: Qwen + Alibaba Cloud AI)",
+        "Databricks",
+        "Baidu (AI: ERNIE + Baidu AI Cloud)"
+      ]
+    }
+  }
+}
