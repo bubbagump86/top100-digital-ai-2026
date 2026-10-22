@@ -68,7 +68,15 @@
         <pre>$ python scripts/score.py</pre>
         <p>
           The script regenerates <code>data/ranked.json</code>,
-          <code>data/ranked.csv</code>, and <code>site/ranked.json</code>.
+          <code>data/ranked.csv</code>, and the site-level
+          <code>ranked.json</code> that the browser fetches.
+        </p>
+        <p>
+          Two analysis scripts back the robustness sections:
+          <code>scripts/sensitivity.py</code> (log vs raw normalisation)
+          and <code>scripts/multiple_check.py</code> (stress-tests the 20&times;
+          peer multiple). Both write JSON into <code>data/</code>, which the
+          overview page reads directly.
         </p>
       </div>
 

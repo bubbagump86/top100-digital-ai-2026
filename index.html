@@ -106,9 +106,9 @@
         </li>
       </ul>
       <p style="margin-top:12px;">
-        Result: Microsoft <strong>#3</strong>, Google <strong>#4</strong>, Amazon
+        Result: Microsoft <strong>#3</strong>, Alphabet <strong>#4</strong>, Amazon
         <strong>#5</strong>, Meta <strong>#6</strong>, Alibaba <strong>#8</strong>,
-        Baidu <strong>#10</strong>, Tencent <strong>#11</strong> &mdash; on a
+        Tencent <strong>#10</strong>, Baidu <strong>#11</strong> &mdash; on a
         like-for-like AI basis. Full working, including the sensitivity of the
         20&times; multiple, is on the
         <a href="methodology.html">methodology</a> page (section 6b).
@@ -146,10 +146,12 @@
       <p style="margin-top:14px;">
         <strong>Result: the top 11 is identical at every multiple from 10&times;
         to 40&times;.</strong> The number moves the derived dollar values, not
-        the ordering. We also found and flag the one row where the derivation
-        is internally incoherent &mdash; Baidu, where the implied AI valuation
-        exceeds the company's entire market cap by 5.4&times;.
-        Full write-up in the <a href="methodology.html">methodology</a> page,
+        the ordering. We also found the one row where the peer multiple
+        overruns the company it is applied to &mdash; Baidu, where the uncapped
+        derivation would be 5.4&times; its entire market cap. A derived
+        valuation can never exceed the company's actual valuation, so Baidu's
+        valuation axis is capped at its $27.4B market cap and the row is
+        badged as indicative. Full write-up in the <a href="methodology.html">methodology</a> page,
         section 6c.
       </p>
     </div>
@@ -322,7 +324,8 @@
         const mc = await mres.json();
         const d = mc.distribution;
         const ccs = mc.market_cross_check || [];
-        const worst = ccs.find((x) => x.flag === "DERIVED > MARKET CAP");
+        const cappedRow = ccs.find((x) => x.flag === "CAPPED AT MARKET CAP");
+        const atCapRow = ccs.find((x) => x.flag === "AT MARKET CAP");
         const geo = mc.by_geography;
         document.getElementById("multiple-check").innerHTML = `
           <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:14px;margin-bottom:18px;">
@@ -343,13 +346,23 @@
               <div class="sub-note">top-11 unchanged from 10&times; to 40&times;</div>
             </div>
           </div>
-          ${worst ? `
-          <p class="sub-note bad" style="margin-bottom:0;">
-            <strong>Coherence failure flagged:</strong> ${worst.name} &mdash; derived AI
-            valuation $${worst.our_derived_valuation_usd_b}B against a
-            $${worst.market_cap_usd_b}B market cap
-            (${worst.derived_as_pct_of_market_cap}% of cap; market implies
-            ${worst.market_implied_multiple}&times;). Row marked indicative only.
+          ${cappedRow ? `
+          <p class="sub-note warn" style="margin-bottom:0;">
+            <strong>Valuation cap applied:</strong> ${cappedRow.name} &mdash; the
+            uncapped derivation would be $${cappedRow.uncapped_derived_valuation_usd_b}B
+            against a $${cappedRow.market_cap_usd_b}B market cap
+            (${cappedRow.uncapped_as_pct_of_market_cap}% of cap). A derived
+            valuation can never exceed the company's actual valuation, so the
+            axis is capped at $${cappedRow.our_derived_valuation_usd_b}B.
+            Row badged as indicative only.
+          </p>` : ""}
+          ${atCapRow ? `
+          <p class="sub-note" style="margin-top:10px;margin-bottom:0;">
+            <strong>At the cap:</strong> ${atCapRow.name} &mdash; derived
+            $${atCapRow.our_derived_valuation_usd_b}B against a
+            $${atCapRow.market_cap_usd_b}B market cap
+            (${atCapRow.derived_as_pct_of_market_cap}% of cap). No headroom left
+            under the constraint.
           </p>` : ""}
         `;
       } catch (e) {

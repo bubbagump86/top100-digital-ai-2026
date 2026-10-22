@@ -5,6 +5,7 @@
     "p75": 40.0,
     "min": 5.0,
     "max": 323.53,
+    "mean": 33.6,
     "pool_size": 81,
     "pool": [
       {
@@ -489,7 +490,9 @@
       "ai_arr_usd_m": 30000,
       "market_implied_multiple": 138.7,
       "our_derived_valuation_usd_b": 600.0,
+      "uncapped_derived_valuation_usd_b": 600.0,
       "derived_as_pct_of_market_cap": 14.4,
+      "uncapped_as_pct_of_market_cap": 14.4,
       "flag": "ok"
     },
     {
@@ -498,7 +501,9 @@
       "ai_arr_usd_m": 37000,
       "market_implied_multiple": 106.8,
       "our_derived_valuation_usd_b": 740.0,
+      "uncapped_derived_valuation_usd_b": 740.0,
       "derived_as_pct_of_market_cap": 18.7,
+      "uncapped_as_pct_of_market_cap": 18.7,
       "flag": "ok"
     },
     {
@@ -507,7 +512,9 @@
       "ai_arr_usd_m": 25000,
       "market_implied_multiple": 113.2,
       "our_derived_valuation_usd_b": 500.0,
+      "uncapped_derived_valuation_usd_b": 500.0,
       "derived_as_pct_of_market_cap": 17.7,
+      "uncapped_as_pct_of_market_cap": 17.7,
       "flag": "ok"
     },
     {
@@ -516,7 +523,9 @@
       "ai_arr_usd_m": 20000,
       "market_implied_multiple": 88.5,
       "our_derived_valuation_usd_b": 400.0,
+      "uncapped_derived_valuation_usd_b": 400.0,
       "derived_as_pct_of_market_cap": 22.6,
+      "uncapped_as_pct_of_market_cap": 22.6,
       "flag": "ok"
     },
     {
@@ -525,7 +534,9 @@
       "ai_arr_usd_m": 7000,
       "market_implied_multiple": 67.3,
       "our_derived_valuation_usd_b": 140.0,
+      "uncapped_derived_valuation_usd_b": 140.0,
       "derived_as_pct_of_market_cap": 29.7,
+      "uncapped_as_pct_of_market_cap": 29.7,
       "flag": "ok"
     },
     {
@@ -534,7 +545,9 @@
       "ai_arr_usd_m": 800,
       "market_implied_multiple": 350.0,
       "our_derived_valuation_usd_b": 16.0,
+      "uncapped_derived_valuation_usd_b": 16.0,
       "derived_as_pct_of_market_cap": 5.7,
+      "uncapped_as_pct_of_market_cap": 5.7,
       "flag": "ok"
     },
     {
@@ -543,7 +556,9 @@
       "ai_arr_usd_m": 9300,
       "market_implied_multiple": 29.0,
       "our_derived_valuation_usd_b": 186.0,
+      "uncapped_derived_valuation_usd_b": 186.0,
       "derived_as_pct_of_market_cap": 68.9,
+      "uncapped_as_pct_of_market_cap": 68.9,
       "flag": "ok"
     },
     {
@@ -552,7 +567,9 @@
       "ai_arr_usd_m": 1500,
       "market_implied_multiple": 133.3,
       "our_derived_valuation_usd_b": 30.0,
+      "uncapped_derived_valuation_usd_b": 30.0,
       "derived_as_pct_of_market_cap": 15.0,
+      "uncapped_as_pct_of_market_cap": 15.0,
       "flag": "ok"
     },
     {
@@ -560,9 +577,11 @@
       "market_cap_usd_b": 27.4,
       "ai_arr_usd_m": 7440,
       "market_implied_multiple": 3.7,
-      "our_derived_valuation_usd_b": 148.8,
-      "derived_as_pct_of_market_cap": 543.1,
-      "flag": "DERIVED > MARKET CAP"
+      "our_derived_valuation_usd_b": 27.4,
+      "uncapped_derived_valuation_usd_b": 148.8,
+      "derived_as_pct_of_market_cap": 100.0,
+      "uncapped_as_pct_of_market_cap": 543.1,
+      "flag": "CAPPED AT MARKET CAP"
     },
     {
       "name": "Notion AI",
@@ -570,8 +589,10 @@
       "ai_arr_usd_m": 300,
       "market_implied_multiple": 20.0,
       "our_derived_valuation_usd_b": 6.0,
+      "uncapped_derived_valuation_usd_b": 6.0,
       "derived_as_pct_of_market_cap": 100.0,
-      "flag": "ok"
+      "uncapped_as_pct_of_market_cap": 100.0,
+      "flag": "AT MARKET CAP"
     }
   ],
   "rank_sensitivity": {
@@ -585,8 +606,8 @@
       "Meta (AI: Advantage+ + Meta AI + Llama)",
       "Databricks",
       "Alibaba (AI: Qwen + Alibaba Cloud AI)",
-      "Baidu (AI: ERNIE + Baidu AI Cloud)",
       "Tencent (AI: Hunyuan + Tencent Cloud AI)",
+      "Baidu (AI: ERNIE + Baidu AI Cloud)",
       "VAST Data",
       "Scale AI",
       "Cognition (Devin)",
@@ -602,8 +623,8 @@
       "SpaceXAI (xAI + Cursor + X)",
       "Databricks",
       "Alibaba (AI: Qwen + Alibaba Cloud AI)",
-      "Baidu (AI: ERNIE + Baidu AI Cloud)",
       "Tencent (AI: Hunyuan + Tencent Cloud AI)",
+      "Baidu (AI: ERNIE + Baidu AI Cloud)",
       "VAST Data",
       "Scale AI",
       "ServiceNow (Now Assist AI)",
@@ -619,8 +640,8 @@
       "SpaceXAI (xAI + Cursor + X)",
       "Databricks",
       "Alibaba (AI: Qwen + Alibaba Cloud AI)",
-      "Baidu (AI: ERNIE + Baidu AI Cloud)",
       "Tencent (AI: Hunyuan + Tencent Cloud AI)",
+      "Baidu (AI: ERNIE + Baidu AI Cloud)",
       "VAST Data",
       "Scale AI",
       "ServiceNow (Now Assist AI)",
@@ -636,8 +657,8 @@
       "SpaceXAI (xAI + Cursor + X)",
       "Alibaba (AI: Qwen + Alibaba Cloud AI)",
       "Databricks",
-      "Baidu (AI: ERNIE + Baidu AI Cloud)",
       "Tencent (AI: Hunyuan + Tencent Cloud AI)",
+      "Baidu (AI: ERNIE + Baidu AI Cloud)",
       "VAST Data",
       "Scale AI",
       "ServiceNow (Now Assist AI)",
@@ -652,9 +673,9 @@
       "Meta (AI: Advantage+ + Meta AI + Llama)",
       "SpaceXAI (xAI + Cursor + X)",
       "Alibaba (AI: Qwen + Alibaba Cloud AI)",
-      "Baidu (AI: ERNIE + Baidu AI Cloud)",
       "Databricks",
       "Tencent (AI: Hunyuan + Tencent Cloud AI)",
+      "Baidu (AI: ERNIE + Baidu AI Cloud)",
       "VAST Data",
       "Scale AI",
       "ServiceNow (Now Assist AI)",
@@ -669,9 +690,9 @@
       "Meta (AI: Advantage+ + Meta AI + Llama)",
       "SpaceXAI (xAI + Cursor + X)",
       "Alibaba (AI: Qwen + Alibaba Cloud AI)",
-      "Baidu (AI: ERNIE + Baidu AI Cloud)",
       "Tencent (AI: Hunyuan + Tencent Cloud AI)",
       "Databricks",
+      "Baidu (AI: ERNIE + Baidu AI Cloud)",
       "ServiceNow (Now Assist AI)",
       "VAST Data",
       "Scale AI",
@@ -686,9 +707,9 @@
       "Meta (AI: Advantage+ + Meta AI + Llama)",
       "SpaceXAI (xAI + Cursor + X)",
       "Alibaba (AI: Qwen + Alibaba Cloud AI)",
-      "Baidu (AI: ERNIE + Baidu AI Cloud)",
       "Tencent (AI: Hunyuan + Tencent Cloud AI)",
       "Databricks",
+      "Baidu (AI: ERNIE + Baidu AI Cloud)",
       "ServiceNow (Now Assist AI)",
       "VAST Data",
       "Scale AI",

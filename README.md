@@ -34,11 +34,26 @@ where `z_log(x) = (log10(x) - log_min) / (log_max - log_min)`.
 | Basis | Who | How the valuation is set |
 |---|---|---|
 | **Pure-play** | Anthropic, OpenAI, Databricks, SpaceXAI, Mistral, Cursor-era AI labs… | The company's own market/transaction valuation. It already *is* an AI valuation. |
-| **AI-attributed** | Microsoft, Google, Amazon, Meta, Alibaba, Baidu, Tencent, Salesforce, ServiceNow, Notion AI | `AI-attributed ARR × 20×` — the pure-play median EV/Revenue multiple (n=81, IQR 15–40×). Answers *"what would this AI business be worth standalone?"* |
+| **AI-attributed** | Microsoft, Alphabet, Amazon, Meta, Alibaba, Baidu, Tencent, Salesforce, ServiceNow, Notion AI | `AI ARR × 20×` — the pure-play median EV/Revenue multiple (n=81, IQR 15–40×), **capped at the company's market cap**. Answers *"what would this AI business be worth standalone?"* |
 | **Market-cap proxy** | Palantir, Samsara, Schrodinger, ByteDance, Cohesity, Talkdesk | No AI-revenue disclosure, so no AI valuation can be derived. Full market cap used as a flagged proxy; ARR axis scored 0. |
 
 The peer multiple is derived from the pure-play pool only, so the imputation
 never feeds back into its own input.
+
+**The valuation cap.** A derived AI valuation is a claim about a *part* of a
+company, and a part cannot be worth more than the whole. So the valuation axis
+is hard-capped:
+
+```
+derived AI valuation = MIN( AI ARR × peer multiple , company market cap )
+```
+
+Exactly one row binds in the 2026 set — **Baidu**, where the uncapped
+derivation ($148.8B) is 543% of its $27.4B market cap. Baidu's valuation axis
+is set to $27.4B, the uncapped figure is published alongside it, and the row
+is badged as indicative. Notion AI sits exactly at its $6.0B cap (100.0%)
+without the cap binding; every other derived row lands between 5.7% and 68.9%
+of its market cap. The cap costs Baidu one place (#10 → #11).
 
 Missing data: if one axis is undisclosed it scores 0 (worst observed). If
 both are missing the company is dropped.
@@ -56,7 +71,7 @@ ranking four ways:
 |---|---:|---:|---:|
 | **A — log + min-max (shipped)** | +1.000 | +1.000 | **3 of 100** |
 | B — raw + min-max | +0.967 | +0.876 | **87 of 100** |
-| C — raw + z-score | +0.799 | +0.744 | **89 of 100** |
+| C — raw + z-score | +0.799 | +0.744 | **90 of 100** |
 | D — raw + percentile | +0.980 | +0.916 | **2 of 100** |
 
 **The headline is robust**: the top 7 are identical under all four variants,
@@ -109,29 +124,32 @@ n=5 that's a weak base, and we say so.
 
 **4. What is the market actually paying?** (market cap ÷ AI ARR)
 
-| Company | Market implies | We derive | % of market cap |
-|---|---:|---:|---:|
-| Salesforce | 350× | $16B | 5.7% |
-| Google | 139× | $600B | 14.4% |
-| ServiceNow | 133× | $30B | 15.0% |
-| Amazon | 113× | $500B | 17.7% |
-| Microsoft | 107× | $740B | 18.7% |
-| Meta | 89× | $400B | 22.6% |
-| Tencent | 67× | $140B | 29.7% |
-| Alibaba | 29× | $186B | 68.9% |
-| **Baidu** | **3.7×** | $149B | **543%** ⚠️ |
+| Company | Market implies | Uncapped | We use | % of cap |
+|---|---:|---:|---:|---:|
+| Salesforce | 350× | $16B | $16B | 5.7% |
+| Alphabet | 139× | $600B | $600B | 14.4% |
+| ServiceNow | 133× | $30B | $30B | 15.0% |
+| Amazon | 113× | $500B | $500B | 17.7% |
+| Microsoft | 107× | $740B | $740B | 18.7% |
+| Meta | 89× | $400B | $400B | 22.6% |
+| Tencent | 67× | $140B | $140B | 29.7% |
+| Alibaba | 29× | $186B | $186B | 68.9% |
+| Notion AI | 20× | $6B | $6B | 100.0% |
+| **Baidu** | **3.7×** | $149B | **$27.4B (capped)** | **100.0%** ⚠️ |
 
 Two findings. The market pays 67–139× for megacap AI revenue because it prices
 AI *optionality*, not just revenue — our derivation deliberately strips that
-out. And **Baidu fails the coherence check**: the implied AI valuation is 5.4×
-its entire market cap. Most likely its "Core AI-Powered Business" line is
-largely re-segmented legacy search/ads — the same relabelling problem we fixed
-for Salesforce. We **flag** it rather than cap it, because capping would import
-the market's view of the whole company.
+out. And **Baidu is the one row where the derivation overruns the company**:
+uncapped, it implies 5.4× Baidu's entire market cap. Most likely its "Core
+AI-Powered Business" line is largely re-segmented legacy search/ads — the same
+relabelling problem we fixed for Salesforce. So the valuation cap binds: Baidu's
+axis is set to its $27.4B market cap, the uncapped figure is published
+alongside it, and the row is badged as indicative only.
 
 **5. Does the ranking survive the multiple?** We re-ranked at 10×, 12×, 15×,
-20×, 25×, 30× and 40×. **The top 11 is identical at every one.** The number
-moves the derived dollar values, not the ordering.
+20×, 25×, 30× and 40×, applying the same cap in every run. **The top 11 is
+identical at every one.** The number moves the derived dollar values, not the
+ordering.
 
 Full write-up: [`methodology.html`](methodology.html) section 6c.
 Machine-readable: [`data/multiple_check.json`](data/multiple_check.json).
@@ -139,7 +157,7 @@ Machine-readable: [`data/multiple_check.json`](data/multiple_check.json).
 ## What's in the box
 
 ```
-top100-ai-2026/                # repo root - served as the static site
+top100-digital-ai-2026/           # repo root - served as the static site
 ├── index.html                 # landing page
 ├── ranking.html               # sortable, filterable top-100 table
 ├── methodology.html           # full scoring explanation
@@ -164,32 +182,6 @@ top100-ai-2026/                # repo root - served as the static site
 ├── README.md
 └── LICENSE
 ```
-
-## Methodology in 60 seconds
-
-For each pure-play digital AI company we collect:
-
-- `valuation_usd_b`: most recent primary/tender round, public-market cap, or
-  transaction valuation (USD billions).
-- `arr_usd_m`: disclosed ARR or annualised run-rate (USD millions).
-
-Both axes span 5+ orders of magnitude, so we **log-transform** each value and
-**min-max rescale** to `[0, 1]` across the surviving set. The composite score
-is the equal-weighted average:
-
-```
-S = 100 * (0.5 * z_log(val) + 0.5 * z_log(arr))
-```
-
-Where `z_log(x) = (log10(x) - log_min) / (log_max - log_min)`.
-
-If one of the two axes is undisclosed, the missing axis is scored at 0
-(worst observed). If both are missing, the company is dropped from the
-ranking.
-
-For the worked example with Anthropic, the reasoning, the missing-data
-policy, and the sensitivity analysis — see
-[`site/methodology.html`](site/methodology.html).
 
 ## Reproducing the ranking
 
@@ -238,20 +230,21 @@ section 10, has the same commentary.
 | 1    | Anthropic                          | $965B             | $100,000M            | 100.00 |
 | 2    | OpenAI                             | $852B             | $50,000M             | 95.56 |
 | 3    | Microsoft (AI business)            | $740B *derived*   | $37,000M             | 93.16 |
-| 4    | Google / Alphabet (AI)             | $600B *derived*   | $30,000M             | 90.87 |
+| 4    | Alphabet (AI: Gemini + Cloud AI)   | $600B *derived*   | $30,000M             | 90.87 |
 | 5    | Amazon (AWS AI)                    | $500B *derived*   | $25,000M             | 88.89 |
 | 6    | Meta (AI)                          | $400B *derived*   | $20,000M             | 86.46 |
 | 7    | SpaceXAI (xAI + Cursor + X)        | $310B             | $14,200M             | 83.22 |
 | 8    | Alibaba (AI)                       | $186B *derived*   | $9,300M              | 78.13 |
 | 9    | Databricks                         | $190B             | $7,000M              | 76.71 |
-| 10   | Baidu (AI)                         | $149B *derived*   | $7,440M              | 75.71 |
+| 10   | Tencent (AI)                       | $140B *derived*   | $7,000M              | 75.04 |
+| 11   | Baidu (AI)                         | $27.4B *derived, capped* | $7,440M      | 66.48 |
 
-\* derived = AI-attributed ARR × the 20× pure-play median EV/Revenue multiple.
+\* derived = AI-attributed ARR × the 20× pure-play median EV/Revenue multiple,
+capped at the company's market cap (Baidu's uncapped derivation was $148.8B =
+543% of its market cap, so the cap binds).
 
 The full ranking is in [`ranking.html`](ranking.html), and you can filter it
 by valuation basis there.
-
-The full ranking is in [`site/ranking.html`](site/ranking.html).
 
 ## Features
 

@@ -229,7 +229,7 @@ log_arr = log10(arr_USD_m)</pre>
           <tbody>
             <tr><td><strong>A &mdash; log + min-max (shipped)</strong></td><td class="num">+1.000</td><td class="num">+1.000</td><td class="num">3 of 100</td></tr>
             <tr><td>B &mdash; raw + min-max</td><td class="num">+0.967</td><td class="num">+0.876</td><td class="num" style="color:var(--warn);"><strong>87 of 100</strong></td></tr>
-            <tr><td>C &mdash; raw + z-score</td><td class="num">+0.799</td><td class="num">+0.744</td><td class="num" style="color:var(--bad);"><strong>89 of 100</strong></td></tr>
+            <tr><td>C &mdash; raw + z-score</td><td class="num">+0.799</td><td class="num">+0.744</td><td class="num" style="color:var(--bad);"><strong>90 of 100</strong></td></tr>
             <tr><td>D &mdash; raw + percentile</td><td class="num">+0.980</td><td class="num">+0.916</td><td class="num" style="color:var(--good);">2 of 100</td></tr>
           </tbody>
         </table>
@@ -293,7 +293,7 @@ log_arr = log10(arr_USD_m)</pre>
           top 12. An unbounded standardisation lets a single $965B outlier
           drag the entire distribution &mdash; the mean and standard deviation
           are set by the giants, and everyone else gets compressed toward
-          zero. It's the worst of the four: <strong>89 of 100 rows</strong>
+          zero. It's the worst of the four: <strong>90 of 100 rows</strong>
           score below 5/100. Z-score is the right tool for a symmetric
           distribution; ARR is a power law.
         </p>
@@ -412,7 +412,7 @@ Google      $30,000M AI ARR x 20x = $600B implied AI valuation
 Amazon      $25,000M AI ARR x 20x = $500B implied AI valuation
 Meta        $20,000M AI ARR x 20x = $400B implied AI valuation
 Alibaba      $9,300M AI ARR x 20x = $186B implied AI valuation
-Baidu        $7,440M AI ARR x 20x = $149B implied AI valuation
+Baidu        $7,440M AI ARR x 20x = $149B uncapped -> CAPPED to $27.4B (market cap)
 Tencent      $7,000M AI ARR x 20x = $140B implied AI valuation
 ServiceNow   $1,500M AI ARR x 20x =  $30B implied AI valuation
 Salesforce     $800M AI ARR x 20x =  $16B implied AI valuation</pre>
@@ -425,6 +425,40 @@ Salesforce     $800M AI ARR x 20x =  $16B implied AI valuation</pre>
           market cap. Salesforce's implied AI valuation of $16B against a
           $280B market cap is the starkest example: Agentforce is real, and it
           is also ~6% of what the market pays for Salesforce.
+        </p>
+
+        <h3>The cap &mdash; a derived valuation can never exceed the company</h3>
+        <p>
+          A derived AI valuation is a claim about a <em>part</em> of a company.
+          A part cannot be worth more than the whole. So the valuation axis
+          carries a hard constraint:
+        </p>
+        <pre>derived AI valuation = MIN( AI ARR x peer multiple , company market cap )</pre>
+        <p>
+          If the peer multiple implies more than the market values the entire
+          company, the market cap binds and the valuation axis is set there.
+          The uncapped figure is kept and published alongside, so the cap is
+          visible on the site rather than silent, and every capped row is
+          badged in the ranking table.
+        </p>
+        <p>
+          In the 2026 set <strong>exactly one row binds</strong>: Baidu. Its
+          $7,440M of AI ARR at 20&times; implies $148.8B &mdash; 543% of
+          Baidu's $27.4B market cap &mdash; so Baidu's valuation axis is capped
+          at $27.4B. Notion AI sits exactly at its $6.0B cap (100.0%) without
+          the cap binding. Every other derived row lands between 5.7% and
+          68.9% of its market cap. The cap costs Baidu exactly one place
+          (#10 &rarr; #11) and changes nothing else in the list.
+        </p>
+        <p>
+          We considered the alternative of only <em>flagging</em> the
+          over-cap rows and publishing an incoherent number, on the grounds
+          that capping imports the market's view of the whole company. We
+          rejected it: a valuation that exceeds the value of the company
+          owning it is not a valuation of anything, and publishing one would
+          quietly let a row rank on a number that cannot exist. Capping keeps
+          the row, keeps the ARR axis intact, and puts the constraint on the
+          axis where it belongs.
         </p>
 
         <h3>Basis 3 &mdash; Market-cap proxy</h3>
@@ -547,21 +581,22 @@ Salesforce     $800M AI ARR x 20x =  $16B implied AI valuation</pre>
               <th class="num">Market cap</th>
               <th class="num">AI ARR</th>
               <th class="num">Market implies</th>
-              <th class="num">We derive</th>
+              <th class="num">Uncapped</th>
+              <th class="num">We use</th>
               <th class="num">% of cap</th>
             </tr>
           </thead>
           <tbody>
-            <tr><td>Salesforce</td><td class="num">$280B</td><td class="num">$800M</td><td class="num">350&times;</td><td class="num">$16B</td><td class="num">5.7%</td></tr>
-            <tr><td>Google</td><td class="num">$4,160B</td><td class="num">$30,000M</td><td class="num">139&times;</td><td class="num">$600B</td><td class="num">14.4%</td></tr>
-            <tr><td>ServiceNow</td><td class="num">$200B</td><td class="num">$1,500M</td><td class="num">133&times;</td><td class="num">$30B</td><td class="num">15.0%</td></tr>
-            <tr><td>Amazon</td><td class="num">$2,830B</td><td class="num">$25,000M</td><td class="num">113&times;</td><td class="num">$500B</td><td class="num">17.7%</td></tr>
-            <tr><td>Microsoft</td><td class="num">$3,950B</td><td class="num">$37,000M</td><td class="num">107&times;</td><td class="num">$740B</td><td class="num">18.7%</td></tr>
-            <tr><td>Meta</td><td class="num">$1,770B</td><td class="num">$20,000M</td><td class="num">89&times;</td><td class="num">$400B</td><td class="num">22.6%</td></tr>
-            <tr><td>Tencent</td><td class="num">$471B</td><td class="num">$7,000M</td><td class="num">67&times;</td><td class="num">$140B</td><td class="num">29.7%</td></tr>
-            <tr><td>Alibaba</td><td class="num">$270B</td><td class="num">$9,300M</td><td class="num">29&times;</td><td class="num">$186B</td><td class="num">68.9%</td></tr>
-            <tr><td>Notion AI</td><td class="num">$6B</td><td class="num">$300M</td><td class="num">20&times;</td><td class="num">$6B</td><td class="num">100%</td></tr>
-            <tr style="background:rgba(248,113,113,0.07);"><td><strong>Baidu</strong></td><td class="num">$27.4B</td><td class="num">$7,440M</td><td class="num" style="color:var(--bad);"><strong>3.7&times;</strong></td><td class="num">$149B</td><td class="num" style="color:var(--bad);"><strong>543%</strong></td></tr>
+            <tr><td>Salesforce</td><td class="num">$280B</td><td class="num">$800M</td><td class="num">350&times;</td><td class="num">$16B</td><td class="num">$16B</td><td class="num">5.7%</td></tr>
+            <tr><td>Google</td><td class="num">$4,160B</td><td class="num">$30,000M</td><td class="num">139&times;</td><td class="num">$600B</td><td class="num">$600B</td><td class="num">14.4%</td></tr>
+            <tr><td>ServiceNow</td><td class="num">$200B</td><td class="num">$1,500M</td><td class="num">133&times;</td><td class="num">$30B</td><td class="num">$30B</td><td class="num">15.0%</td></tr>
+            <tr><td>Amazon</td><td class="num">$2,830B</td><td class="num">$25,000M</td><td class="num">113&times;</td><td class="num">$500B</td><td class="num">$500B</td><td class="num">17.7%</td></tr>
+            <tr><td>Microsoft</td><td class="num">$3,950B</td><td class="num">$37,000M</td><td class="num">107&times;</td><td class="num">$740B</td><td class="num">$740B</td><td class="num">18.7%</td></tr>
+            <tr><td>Meta</td><td class="num">$1,770B</td><td class="num">$20,000M</td><td class="num">89&times;</td><td class="num">$400B</td><td class="num">$400B</td><td class="num">22.6%</td></tr>
+            <tr><td>Tencent</td><td class="num">$471B</td><td class="num">$7,000M</td><td class="num">67&times;</td><td class="num">$140B</td><td class="num">$140B</td><td class="num">29.7%</td></tr>
+            <tr><td>Alibaba</td><td class="num">$270B</td><td class="num">$9,300M</td><td class="num">29&times;</td><td class="num">$186B</td><td class="num">$186B</td><td class="num">68.9%</td></tr>
+            <tr><td>Notion AI</td><td class="num">$6B</td><td class="num">$300M</td><td class="num">20&times;</td><td class="num">$6B</td><td class="num">$6B</td><td class="num">100%</td></tr>
+            <tr style="background:rgba(250,204,21,0.07);"><td><strong>Baidu</strong></td><td class="num">$27.4B</td><td class="num">$7,440M</td><td class="num" style="color:var(--bad);"><strong>3.7&times;</strong></td><td class="num" style="color:var(--bad);">$149B</td><td class="num"><strong>$27.4B</strong></td><td class="num"><strong>100%</strong> (capped)</td></tr>
           </tbody>
         </table>
         <p>
@@ -580,20 +615,19 @@ Salesforce     $800M AI ARR x 20x =  $16B implied AI valuation</pre>
           we value the $800M of actual Agentforce ARR at $16B.
         </p>
         <p>
-          <strong>Second: Baidu fails the coherence check.</strong> Our
-          derivation implies $149B for Baidu's AI business &mdash; <strong>5.4&times;
-          Baidu's entire market cap</strong>. A component cannot be worth more
-          than the whole. The most likely explanation is that Baidu's
-          "Core AI-Powered Business" line (RMB 12.5B/quarter, &gt;52% of core
-          revenue) is substantially <em>re-segmented legacy search and
-          advertising</em> rather than a new AI business &mdash; the same
-          relabelling problem we corrected for Salesforce. The market's 3.7&times;
-          implied multiple is telling us it refuses to pay a tech multiple for
-          that. We therefore flag Baidu's row as indicative only rather than
-          silently capping the derived valuation, because capping would import
-          the market's view of the whole company &mdash; the exact error this
-          model exists to avoid. The flag is visible in the ranking table and on
-          Baidu's own page.
+          <strong>Second: Baidu is the one row where the derivation overruns
+          the company.</strong> Uncapped, our derivation implies $149B for
+          Baidu's AI business &mdash; <strong>5.4&times; Baidu's entire market
+          cap</strong>. A component cannot be worth more than the whole. The
+          most likely explanation is that Baidu's "Core AI-Powered Business"
+          line (RMB 12.5B/quarter, &gt;52% of core revenue) is substantially
+          <em>re-segmented legacy search and advertising</em> rather than a new
+          AI business &mdash; the same relabelling problem we corrected for
+          Salesforce. The market's 3.7&times; implied multiple is telling us it
+          refuses to pay a tech multiple for that. The valuation cap therefore
+          binds: Baidu's valuation axis is set to its $27.4B market cap, its
+          uncapped $148.8B is published alongside it, and the row is badged
+          as indicative only.
         </p>
 
         <h3>Test 5 &mdash; does the ranking survive the multiple?</h3>
@@ -605,10 +639,17 @@ Salesforce     $800M AI ARR x 20x =  $16B implied AI valuation</pre>
           <strong>The top 11 is identical at every multiple from 10&times; to
           40&times;.</strong> The same eleven names, in nearly the same order:
           Anthropic, OpenAI, Microsoft, Google, Amazon, Meta, SpaceXAI,
-          Alibaba, Databricks, Baidu, Tencent. Only the internal ordering
+          Alibaba, Databricks, Tencent, Baidu. Only the internal ordering
           inside that block shifts &mdash; at 40&times; OpenAI drops below
           Microsoft, at 10&times; Alibaba drops out of the top 8 in favour of
           Databricks.
+        </p>
+        <p>
+          The cap applies at every multiple too, so Baidu sits at its $27.4B
+          market cap in all seven runs and cannot be inflated by a higher
+          multiple. That makes the top-11 result stronger, not weaker: the
+          ranking survives the multiple <em>and</em> the coherence constraint
+          at the same time.
         </p>
         <p>
           So the conclusion "these are the top AI companies on a

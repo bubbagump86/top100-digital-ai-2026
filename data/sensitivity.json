@@ -21,7 +21,7 @@
     "raw_zscore": {
       "spearman_vs_shipped": 0.799,
       "kendall_tau_vs_shipped": 0.744,
-      "rows_below_5_points": 89,
+      "rows_below_5_points": 90,
       "top10": [
         "Anthropic",
         "OpenAI",
@@ -32,7 +32,7 @@
         "SpaceXAI (xAI + Cursor + X)",
         "Alibaba (AI: Qwen + Alibaba Cloud AI)",
         "Databricks",
-        "Baidu (AI: ERNIE + Baidu AI Cloud)"
+        "Tencent (AI: Hunyuan + Tencent Cloud AI)"
       ]
     },
     "raw_percentile": {
@@ -49,7 +49,7 @@
         "SpaceXAI (xAI + Cursor + X)",
         "Alibaba (AI: Qwen + Alibaba Cloud AI)",
         "Databricks",
-        "Baidu (AI: ERNIE + Baidu AI Cloud)"
+        "Tencent (AI: Hunyuan + Tencent Cloud AI)"
       ]
     },
     "log_minmax_shipped": {
@@ -66,7 +66,7 @@
         "SpaceXAI (xAI + Cursor + X)",
         "Alibaba (AI: Qwen + Alibaba Cloud AI)",
         "Databricks",
-        "Baidu (AI: ERNIE + Baidu AI Cloud)"
+        "Tencent (AI: Hunyuan + Tencent Cloud AI)"
       ]
     }
   }

@@ -1,4 +1,4 @@
-/* style.css - Top 100 Pure-Play Digital AI Companies 2026 */
+/* style.css - Top 100 Digital AI Companies 2026 */
 :root {
   --bg: #0a0e1a;
   --panel: #111726;
@@ -17,6 +17,9 @@
   --r-sm: 8px;
   --r-md: 12px;
   --r-lg: 18px;
+  /* Fixed topbar height - the sticky table header offsets by exactly this,
+     so the two never disagree. See .topbar below. */
+  --topbar-h: 58px;
 }
 
 * {
@@ -47,6 +50,7 @@ a:hover {
   position: sticky;
   top: 0;
   z-index: 50;
+  height: var(--topbar-h);
   background: rgba(10, 14, 26, 0.85);
   backdrop-filter: blur(12px);
   border-bottom: 1px solid var(--border);
@@ -54,7 +58,8 @@ a:hover {
 .topbar-inner {
   max-width: 1280px;
   margin: 0 auto;
-  padding: 14px 24px;
+  height: 100%;
+  padding: 0 24px;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -81,7 +86,11 @@ a:hover {
 .nav {
   display: flex;
   gap: 4px;
+  flex-wrap: nowrap;
+  overflow-x: auto;
+  scrollbar-width: none;
 }
+.nav::-webkit-scrollbar { display: none; }
 .nav a {
   padding: 6px 12px;
   border-radius: 7px;
@@ -282,12 +291,23 @@ h3 { font-size: 18px; font-weight: 600; margin-bottom: 8px; }
   background: var(--panel);
   border: 1px solid var(--border);
   border-radius: var(--r-md);
-  overflow: hidden;
+  /* NOT `overflow: hidden`. An overflow container is a scroll container, and
+     a `position: sticky` header inside one is positioned against THAT
+     container instead of the page - so `top: 58px` pushed the header 58px down
+     and it covered row #1 (and any single-row search result) instead of
+     sticking under the topbar. Overflow stays visible so the sticky header
+     resolves against the viewport. The rounded corners are re-created on the
+     header cells below. */
+  overflow: visible;
   margin-bottom: 24px;
 }
 table.rank {
   width: 100%;
-  border-collapse: collapse;
+  /* `separate` rather than `collapse`: collapsed borders are not painted on
+     sticky cells in Chromium, so the header's bottom rule flickers/disappears
+     while scrolling. */
+  border-collapse: separate;
+  border-spacing: 0;
   font-size: 14px;
 }
 table.rank thead th {
@@ -302,25 +322,36 @@ table.rank thead th {
   border-bottom: 1px solid var(--border);
   cursor: pointer;
   user-select: none;
+}
+/* Only the main ranking table sticks its header. Methodology tables use the
+   same .rank class for styling but stay static. */
+.table-wrap table.rank thead th {
   position: sticky;
-  top: 60px;
+  top: var(--topbar-h);
   z-index: 2;
 }
+/* Round the header's outer corners to match .table-wrap now that it no
+   longer clips its children. */
+table.rank thead th:first-child { border-top-left-radius: var(--r-md); }
+table.rank thead th:last-child { border-top-right-radius: var(--r-md); }
 table.rank thead th:hover {
   color: var(--text);
 }
 table.rank thead th.sorted-asc::after { content: ' ▲'; opacity: 0.6; }
 table.rank thead th.sorted-desc::after { content: ' ▼'; opacity: 0.6; }
 table.rank tbody tr {
-  border-bottom: 1px solid var(--border);
   transition: background 0.1s ease;
 }
-table.rank tbody tr:hover {
+table.rank tbody tr:hover td {
   background: var(--panel-2);
 }
 table.rank tbody td {
   padding: 12px 14px;
   vertical-align: middle;
+  border-bottom: 1px solid var(--border);
+}
+table.rank tbody tr:last-child td {
+  border-bottom: none;
 }
 .rank-cell {
   font-weight: 700;
@@ -379,6 +410,19 @@ table.rank tbody td {
   color: var(--text-dim);
   font-weight: 500;
   white-space: nowrap;
+}
+
+/* Narrow screens: the 6-column table cannot fit, so the wrapper becomes a
+   horizontal scroll container again. A scroll container breaks the sticky
+   header (see .table-wrap), so the header goes static here and the Category
+   column is dropped to keep the rest on screen. */
+@media (max-width: 900px) {
+  .table-wrap { overflow-x: auto; }
+  .table-wrap table.rank thead th { position: static; }
+}
+@media (max-width: 720px) {
+  table.rank th:nth-child(3),
+  table.rank td:nth-child(3) { display: none; }
 }
 
 /* --- Basis badges & sub-notes ------------------------------------- */

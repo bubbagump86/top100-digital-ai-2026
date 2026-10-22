@@ -1,4 +1,4 @@
-// app.js - Frontend for Top 100 Pure-Play Digital AI Companies 2026
+// app.js - Frontend for Top 100 Digital AI Companies 2026
 
 const fmtB = (x) => x == null ? "—" : "$" + Number(x).toLocaleString() + "B";
 const fmtM = (x) => x == null ? "—" : "$" + Number(x).toLocaleString() + "M";
@@ -79,9 +79,11 @@ function renderTable() {
           : r.valuation_basis === "proxy"
             ? `<div class="sub-note warn">${BASIS.proxy.short} · mkt cap ${fmtB(r.market_cap_usd_b)}</div>`
             : ""}
-        ${r.derived_pct_of_market_cap != null
-          ? `<div class="sub-note ${r.derived_pct_of_market_cap > 100 ? "bad" : ""}">${r.derived_pct_of_market_cap}% of mkt cap</div>`
-          : ""}
+        ${r.valuation_capped
+          ? `<div class="sub-note warn">capped at mkt cap · uncapped ${fmtB(r.uncapped_derived_usd_b)}</div>`
+          : r.derived_pct_of_market_cap != null
+            ? `<div class="sub-note ${r.derived_pct_of_market_cap >= 99 ? "warn" : ""}">${r.derived_pct_of_market_cap}% of mkt cap</div>`
+            : ""}
       </td>
       <td class="num">
         ${fmtM(r.arr_usd_m)}
@@ -262,6 +264,21 @@ async function initDetail() {
 peer median multiple    = ${pm.median_ev_revenue ?? "—"}x   (n=${pm.pool_size ?? "—"} pure-play companies)
 implied AI valuation    = ${fmtM(c.arr_usd_m)} x ${pm.median_ev_revenue ?? "—"}x
                         = $${((c.arr_usd_m * (pm.median_ev_revenue || 0)) / 1000).toLocaleString(undefined, { maximumFractionDigits: 1 })}B</pre>
+      ${c.valuation_capped ? `
+      <pre style="border-color:rgba(250,204,21,0.5);">VALUATION CAP APPLIED
+uncapped derivation    = $${fmtB(c.uncapped_derived_usd_b)}
+company market cap     = ${fmtB(c.market_cap_usd_b)}   <- the cap binds
+published valuation    = ${fmtB(c.valuation_usd_b)}</pre>
+      <p class="sub-note warn">
+        A derived AI valuation can never exceed the actual valuation of the
+        company it belongs to &mdash; a part cannot be worth more than the
+        whole. The peer multiple implied
+        $${fmtB(c.uncapped_derived_usd_b)} for this AI business, which is
+        ${c.derived_pct_of_market_cap}% of the company's entire market cap, so
+        the valuation axis is capped at ${fmtB(c.market_cap_usd_b)}. The
+        uncapped figure is published alongside so the constraint is visible
+        rather than silent.
+      </p>` : ""}
       <p class="sub-note">
         Full-company market cap for reference: <strong>${fmtB(c.market_cap_usd_b)}</strong>
         ${c.market_cap_date ? "(" + escapeHtml(c.market_cap_date) + ")" : ""}.
@@ -315,6 +332,7 @@ implied AI valuation    = ${fmtM(c.arr_usd_m)} x ${pm.median_ev_revenue ?? "—"
             <h1>${escapeHtml(c.name)}</h1>
             <p class="subtitle">${escapeHtml(c.summary || "")}</p>
             <span class="cat-chip basis-chip basis-${c.valuation_basis}">${escapeHtml(basis.short)}</span>
+            ${c.valuation_capped ? `<span class="cat-chip basis-chip basis-proxy">Capped at market cap</span>` : ""}
             <span class="sub-note" style="display:inline;margin-left:8px;">${escapeHtml(basis.full)}</span>
           </div>
           <div class="score-cell" style="font-size:32px;color:var(--accent);">${c.score.toFixed(1)}</div>
@@ -344,7 +362,7 @@ implied AI valuation    = ${fmtM(c.arr_usd_m)} x ${pm.median_ev_revenue ?? "—"
         <h2>Scoring detail</h2>
         <p>
           ${escapeHtml(c.name)} scored <strong>${c.score.toFixed(2)} / 100</strong> on the
-          Top 100 Pure-Play Digital AI Companies 2026 composite.
+          Top 100 Digital AI Companies 2026 composite.
         </p>
         <p>
           The composite is built from a 50/50 weighted sum of the valuation axis and the
@@ -371,7 +389,7 @@ implied AI valuation    = ${fmtM(c.arr_usd_m)} x ${pm.median_ev_revenue ?? "—"
       <h3>Valuation</h3>
       <div class="v">${fmtB(c.valuation_usd_b)}</div>
       <div class="src">${c.valuation_basis === "actual" ? "Market-set AI valuation" : c.valuation_basis === "derived" ? "Derived from AI ARR x peer multiple" : "Market-cap proxy (flagged)"}</div>
-      <div class="src">${escapeHtml(c.valuation_date || "—")}</div>
+      ${/^Derived/.test(c.valuation_date || "") ? "" : `<div class="src">${escapeHtml(c.valuation_date || "—")}</div>`}
       ${c.market_cap_usd_b ? `<div class="src" style="margin-top:6px;">Full-company market cap: ${fmtB(c.market_cap_usd_b)}</div>` : ""}
 
       <h3>ARR / Revenue</h3>

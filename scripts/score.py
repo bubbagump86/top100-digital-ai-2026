@@ -33,6 +33,13 @@ We solve it with a THREE-BASIS model, applied consistently:
                   This answers: "what would this AI business be worth if
                   it were a standalone AI company at peer multiples?"
 
+                  HARD CONSTRAINT: a derived valuation can never exceed the
+                  company's own actual valuation (market cap). A part cannot
+                  be worth more than the whole. If the peer multiple implies
+                  more than the market values the entire company, the market
+                  cap binds and the valuation axis is capped there. The
+                  uncapped figure is kept and published alongside.
+
   3. proxy      - no AI-revenue disclosure at all. No AI valuation can be
                   derived. Full market cap is used as a flagged proxy and
                   the ARR axis is scored at 0. Weakest evidence in the list.
@@ -136,9 +143,26 @@ def main() -> None:
         arr_m = c.get("arr_usd_m")
 
         derived_val = None
+        uncapped_val = None
+        cap_applied = False
+        mcap = c.get("market_cap_usd_b")
+
         if basis == "derived":
             if arr_m:
-                derived_val = round((arr_m * peer_multiple) / 1000.0, 2)
+                uncapped_val = (arr_m * peer_multiple) / 1000.0
+                derived_val = round(uncapped_val, 2)
+                # HARD CONSTRAINT
+                # -----------------
+                # A derived AI valuation can never be worth more than the
+                # company it belongs to. If AI ARR x peer multiple implies
+                # more than the whole company is actually valued at, the
+                # market cap binds and the valuation axis is capped there.
+                # Without this, a diversified row could claim an implied AI
+                # valuation larger than its entire market cap - which is not
+                # a valuation of anything.
+                if mcap is not None and derived_val > mcap:
+                    derived_val = round(mcap, 2)
+                    cap_applied = True
                 val_b = derived_val
             else:
                 # Nothing to derive from -> cannot score, treat as proxy.
@@ -149,24 +173,35 @@ def main() -> None:
 
         # --- coherence cross-check -------------------------------------
         # For a derived row, what multiple is the market itself paying per
-        # dollar of the company's AI revenue? If our derivation exceeds the
-        # whole market cap, the model is internally incoherent for that row
-        # and we must flag it rather than hide it.
-        mcap = c.get("market_cap_usd_b")
+        # dollar of the company's AI revenue? If the derivation overran the
+        # whole market cap it was already capped above, so the check here is
+        # to publish what the market thinks and to flag the row as
+        # indicative - never to publish a valuation that cannot exist.
         market_implied_multiple = None
         derived_pct_of_market_cap = None
         coherence_flag = None
+        coherence_ok = None
         if basis == "derived" and arr_m and mcap:
             market_implied_multiple = round((mcap * 1000.0) / arr_m, 1)
             derived_pct_of_market_cap = round((derived_val / mcap) * 100, 1)
-            if derived_val > mcap:
+            coherence_ok = derived_val <= mcap
+            if cap_applied:
                 coherence_flag = (
-                    "COHERENCE FAILURE: the implied AI valuation exceeds the "
-                    "company's entire market cap. Either the market discounts "
-                    "this AI revenue (country/governance risk, or it is a "
-                    "re-segmented legacy line rather than a new business), or "
-                    "the AI-revenue estimate is too generous. Treat this "
-                    "row's rank as indicative only."
+                    "CAPPED AT MARKET CAP: the uncapped derivation "
+                    f"(${uncapped_val:,.1f}B) exceeded the company's entire "
+                    f"market cap (${mcap:,.1f}B), so the valuation axis is "
+                    "capped at the market cap. The market prices this AI "
+                    f"revenue at only {market_implied_multiple}x, against a "
+                    f"peer median of {peer_multiple:.0f}x - it treats the "
+                    "segment as re-segmented legacy revenue rather than a new "
+                    "business. Treat this row's rank as indicative only."
+                )
+            elif derived_pct_of_market_cap >= 99.0:
+                coherence_flag = (
+                    "AT MARKET CAP: the derived AI valuation equals the "
+                    "company's entire market cap. There is no headroom left "
+                    "under the constraint that a derived valuation cannot "
+                    "exceed the company's actual valuation."
                 )
         elif basis == "proxy" and mcap:
             market_implied_multiple = None
@@ -197,6 +232,9 @@ def main() -> None:
             "market_implied_multiple": market_implied_multiple,
             "derived_pct_of_market_cap": derived_pct_of_market_cap,
             "coherence_flag": coherence_flag,
+            "coherence_ok": coherence_ok,
+            "valuation_capped": cap_applied,
+            "uncapped_derived_usd_b": round(uncapped_val, 2) if uncapped_val else None,
             "corporate_status": c.get("corporate_status"),
             "derived_valuation_usd_b": derived_val,
         })
@@ -256,6 +294,35 @@ def main() -> None:
             "arr_usd_m": {"log_min": arr_min, "log_max": arr_max},
         },
         "weights": {"valuation": W_VAL, "arr": W_ARR},
+        "valuation_cap": {
+            "rule": ("A derived AI valuation may never exceed the company's own "
+                     "actual valuation (market cap). If AI ARR x peer multiple "
+                     "implies more than the whole company is worth, the market "
+                     "cap binds and the valuation axis is capped there."),
+            "peer_multiple_used": round(peer_multiple, 2),
+            "rows_capped": [
+                {
+                    "name": r["name"],
+                    "uncapped_usd_b": r["uncapped_derived_usd_b"],
+                    "capped_to_usd_b": r["valuation_usd_b"],
+                    "market_cap_usd_b": r["market_cap_usd_b"],
+                    "market_implied_multiple": r["market_implied_multiple"],
+                }
+                for r in top if r.get("valuation_capped")
+            ],
+            "rows_at_cap": [
+                {
+                    "name": r["name"],
+                    "valuation_usd_b": r["valuation_usd_b"],
+                    "market_cap_usd_b": r["market_cap_usd_b"],
+                    "pct": r["derived_pct_of_market_cap"],
+                }
+                for r in top
+                if r.get("derived_pct_of_market_cap") is not None
+                and r["derived_pct_of_market_cap"] >= 99.0
+                and not r.get("valuation_capped")
+            ],
+        },
         "peer_multiple": {
             "median_ev_revenue": round(peer_multiple, 2),
             "p25": round(p25, 2),
@@ -306,6 +373,23 @@ def main() -> None:
     print()
     print(f"Valuation axis log10: min={val_min:.2f}  max={val_max:.2f}")
     print(f"ARR       axis log10: min={arr_min:.2f}  max={arr_max:.2f}")
+    print()
+    print("Valuation cap (derived <= market cap):")
+    capped = [r for r in top if r.get("valuation_capped")]
+    if capped:
+        for r in capped:
+            print(f"  CAPPED  {r['name'][:36]:<36} ${r['uncapped_derived_usd_b']}B "
+                  f"-> ${r['valuation_usd_b']}B (mkt cap ${r['market_cap_usd_b']}B, "
+                  f"market implies {r['market_implied_multiple']}x)")
+    else:
+        print("  no derived row exceeded its market cap")
+    at_cap = [r for r in top
+              if r.get("derived_pct_of_market_cap") is not None
+              and r["derived_pct_of_market_cap"] >= 99.0
+              and not r.get("valuation_capped")]
+    for r in at_cap:
+        print(f"  AT CAP  {r['name'][:36]:<36} ${r['valuation_usd_b']}B == mkt cap "
+              f"${r['market_cap_usd_b']}B ({r['derived_pct_of_market_cap']}%)")
     print()
     print("Top 15:")
     for r in top[:15]:

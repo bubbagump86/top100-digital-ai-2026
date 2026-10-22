@@ -89,12 +89,20 @@
         is <code>100 &times; (0.5 &times; z_val + 0.5 &times; z_arr)</code>.
       </p>
       <p style="color:var(--text-dim);">
-        For diversified companies (Microsoft, Google, Amazon, Meta, Alibaba, Baidu,
-        Tencent, Salesforce, ServiceNow) the valuation is
+        For diversified companies (Microsoft, Alphabet, Amazon, Meta, Alibaba,
+        Baidu, Tencent, Salesforce, ServiceNow) the valuation is
         <strong>derived</strong>: AI-attributed ARR &times; the pure-play median
         EV/Revenue multiple. For companies with no AI-revenue disclosure, the full
         market cap is used as a flagged proxy.
         See the <a href="methodology.html">methodology</a> page, sections 3 and 6b.
+      </p>
+      <p style="color:var(--text-dim);">
+        <strong>Valuation cap.</strong> A derived AI valuation can never exceed
+        the actual valuation of the company it belongs to &mdash; a part cannot
+        be worth more than the whole &mdash; so the axis is
+        <code>MIN(AI ARR &times; multiple, market cap)</code>. Where the cap
+        binds, the uncapped figure is shown next to it and the row is badged.
+        One row binds in the 2026 set: <strong>Baidu</strong>.
       </p>
     </div>
   </main>

@@ -15,7 +15,10 @@ Five checks:
   4. Market cross-check - for each derived row, what is the market
      ACTUALLY paying per dollar of AI revenue (market cap / AI ARR)?
      That is the empirical multiple the market assigns, and our 20x
-     should be sanity-checked against it.
+     should be sanity-checked against it. This is also where the hard
+     constraint bites: a derived valuation can never exceed the
+     company's own market cap, so any row where 20x overruns is CAPPED
+     rather than published as an incoherent value.
   5. Rank sensitivity - does the top of the ranking survive the plausible
      range of multiples?
 
@@ -167,19 +170,30 @@ def main():
         if not mcap:
             continue
         implied = (mcap * 1000.0) / arr
-        derived_val = arr * pm["median_ev_revenue"] / 1000.0
-        over = derived_val / mcap
+        uncapped = arr * pm["median_ev_revenue"] / 1000.0
+        # The model caps a derived valuation at the company's market cap.
+        used = min(uncapped, mcap)
+        over = used / mcap
+        capped = uncapped > mcap
         cross.append({
             "name": r["name"], "market_cap_usd_b": mcap, "ai_arr_usd_m": arr,
             "market_implied_multiple": round(implied, 1),
-            "our_derived_valuation_usd_b": round(derived_val, 1),
+            "our_derived_valuation_usd_b": round(used, 1),
+            "uncapped_derived_valuation_usd_b": round(uncapped, 1),
             "derived_as_pct_of_market_cap": round(over * 100, 1),
-            "flag": "DERIVED > MARKET CAP" if over > 1 else "ok",
+            "uncapped_as_pct_of_market_cap": round((uncapped / mcap) * 100, 1),
+            "flag": ("CAPPED AT MARKET CAP" if capped
+                     else "AT MARKET CAP" if over >= 0.99 else "ok"),
         })
-        flag = "  <-- derived exceeds market cap" if over > 1 else ""
+        flag = ("  <-- uncapped derivation exceeds market cap; CAPPED at $"
+                f"{mcap:,.1f}B" if capped else
+                "  <-- derived equals the entire market cap" if over >= 0.99 else "")
         print(f"  {r['name'][:36]:<36} mkt cap ${mcap:>7.1f}B  AI ARR ${arr:>6,}M")
-        print(f"  {'':<36} market implies {implied:>6.1f}x  |  we derive ${derived_val:>6.1f}B "
+        print(f"  {'':<36} market implies {implied:>6.1f}x  |  we derive ${used:>6.1f}B "
               f"({over*100:>5.1f}% of cap){flag}")
+        if capped:
+            print(f"  {'':<36} uncapped derivation would have been ${uncapped:>6.1f}B "
+                  f"({(uncapped/mcap)*100:>5.1f}% of cap)")
     out["market_cross_check"] = cross
     print()
 
@@ -197,6 +211,10 @@ def main():
             a = r["arr_usd_m"]
             if r["valuation_basis"] == "derived" and a:
                 v = a * m / 1000.0
+                # same hard constraint as the scoring engine
+                mcap = r.get("market_cap_usd_b")
+                if mcap is not None and v > mcap:
+                    v = mcap
             vals.append((r["name"], v, a))
         import math
         vl = [math.log10(v) for _, v, _ in vals if v]
