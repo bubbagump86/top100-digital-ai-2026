@@ -135,11 +135,57 @@ valuation axis from inverting, and it separates "no valuation disclosed"
 - **Methodology §8** quoted OpenAI's z-scores as 0.882 / 0.912. Those are
   from an older edition; the current values are 0.983 / 0.925.
 
-## 6. Files
+## 6. How much room is left — and the one tripwire that is close
+
+`scripts/anchor_headroom.py`.
+
+All four bounds trace to two companies at the time of the pin: **Reworkd AI
+set the two floors** ($0.1B valuation, $10M ARR) and **Anthropic set the two
+ceilings** ($1,000B valuation, $100,000M ARR). Reworkd has since fallen out
+of the Top 100, so the headroom is asymmetric: dead space at the bottom,
+almost none at the top of ARR.
+
+| Bound | Bound | Nearest row | Value | Re-anchor trigger | Margin |
+|---|---|---|---|---|---|
+| Valuation ceiling | $1,000B | Anthropic | $965B | $21,544B | 22.3× |
+| ARR ceiling | $100,000M | Anthropic | $100,000M | $2,154,435M | 21.5× |
+| Valuation floor | $0.1B | Otter.ai | $0.5B | $0.0046B | 107.7× |
+| ARR floor | $10M | SandboxAQ | $17.8M | $0.46M | 38.3× |
+
+Every re-anchor margin is enormous. **But the policy has a second, tighter
+tripwire**: scores are not clipped, so a score above 100 is the signal that
+an anchor is tight. On the ARR ceiling that flag is the **binding** one:
+
+> With Anthropic's valuation at $965B, the #1 score crosses 100 when
+> Anthropic's ARR passes **$103.7B** — **1.037×** its current run-rate —
+> whereas the re-anchor trigger on the same bound would not fire until
+> $2.15T.
+
+So on a live list, a ~4% move in Anthropic's ARR makes the top score exceed
+100 and the two tripwires point in different directions. Both numbers are now
+in `data/model_config.json` under `review_policy`, and the methodology
+publishes the margin table.
+
+Widening the ARR ceiling is **not** free: it compresses the ARR axis (at
+$200B the ARR axis loses ~7% of its dispersion and the 5.5% tilt toward ARR
+in section 2 flips), and it changes every score, breaking comparability with
+previous editions. That is the argument for leaving the bounds alone and
+letting the quarterly review decide — with the tripwire now written down
+rather than remembered.
+
+## 7. Verdict
+
+**Leave the bounds as they are.** The sign is inert, the negative valuation
+floor is load-bearing (raising it inverts the axis), the floor clamp now
+covers sub-floor values, and every re-anchor margin is 20×–108×. The one
+thing worth doing was writing the binding tripwire down, which is now done.
+
+## 8. Files
 
 | File | Role |
 |---|---|
 | `scripts/log_min_probe.py` | the four measurements above |
-| `data/model_config.json` | `axis_floor_clamp` as policy |
+| `scripts/anchor_headroom.py` | the margin on each bound, and the score-flag threshold |
+| `data/model_config.json` | `axis_floor_clamp` as policy; the score-flag and bounds-provenance tripwires |
 | `scripts/score.py` | implements the clamp; `--no-axis-floor-clamp` for review |
 | `docs/log-min-and-axis-floors.md` | this record |

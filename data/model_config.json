@@ -2,34 +2,36 @@
   "policy_version": "live-v2",
   "reviewed": "2026-10-24",
   "note": "Model policy for a live list. The axis bounds and the peer multiple are FIXED here rather than derived from the sample, so that a data update cannot re-base every other company's score. Review quarterly - see review_policy below.",
-
   "axis": {
     "bounds_source": "anchored",
-    "valuation_usd_b": [0.1, 1000.0],
-    "arr_usd_m": [10.0, 100000.0],
+    "valuation_usd_b": [
+      0.1,
+      1000.0
+    ],
+    "arr_usd_m": [
+      10.0,
+      100000.0
+    ],
     "note": "Valuation $0.1B-$1,000B, ARR $10M-$100,000M. Scores are NOT clipped: a company beyond a bound scores above 100, which is the signal that the anchor is stale."
   },
-
   "peer_multiple": 20.0,
   "peer_multiple_basis": "Median EV/Revenue of the pure-play peer pool as at the 2026-10 edition (n=81, IQR 15-40x, mean 33.6x, trimmed mean 25.5x). The published stress test re-ranks at 10x-40x and the top 11 is identical at every one.",
   "recompute_peer_multiple": false,
-
   "weights": {
     "valuation": 0.5,
     "arr": 0.5,
     "note": "The two axes of the composite. Held here, with the axis bounds and the peer multiple, so the most contestable number in the model is version-controlled policy rather than a constant buried in three scripts. Equal weights are the shipped default; they are the most conservative split because neither axis is privileged. Override for review work with --weight-val / --weight-arr (they must sum to 1)."
   },
-
   "missing_arr_rule": "zero",
-
   "axis_floor_clamp": true,
   "axis_floor_clamp_note": "A value BELOW an axis floor reads 0, exactly like a missing value. The top end is not clamped - a score above 100 is the signal that an anchor is stale. Without the clamp, a company with a little ARR (say $5M, below the $10M ARR floor) scores BELOW a company with no ARR at all, because 'no ARR' is scored 0 and a sub-floor figure scores negative. That is a monotonicity break in a live list. With it, 'no signal' and 'signal below the usable range' score the same, and the valuation axis keeps its protective band so that a real company with a sub-$1B valuation cannot rank below one with no valuation at all. See docs/log-min-and-axis-floors.md.",
   "missing_arr_rule_note": "A row with no ARR gets the ARR axis at 0 and keeps its 50% weight, so its composite is 0.5 x z_val. 'alone' would drop the axis entirely; 'hybrid' would drop it only where the valuation is an AI valuation. Both are available via --missing-rule but neither is adopted: 'alone' promotes market-cap proxies with no disclosed AI revenue into the top 10, and 'hybrid' makes the ranking materially more dependent on the log transform (raw min-max Spearman falls from +0.884 to +0.811).",
-
   "review_policy": {
     "cadence": "quarterly",
     "axis_reanchor_trigger": "a company has breached a bound by more than one third of the axis span - i.e. an anchor that is about to be crossed rather than one that has been crossed",
     "peer_multiple_retune_trigger": "the pure-play pool median has moved more than one third of the IQR (about 8x) from the pinned value - not merely because one company joined the pool",
-    "changelog": "every revision is logged with the date, the old value, the new value and the reason; scores are otherwise comparable across editions"
+    "changelog": "every revision is logged with the date, the old value, the new value and the reason; scores are otherwise comparable across editions",
+    "score_flag_trigger": "A score above 100 is the signal that an anchor is tight, and on the ARR ceiling it is the BINDING tripwire, firing long before the re-anchor trigger. With the current bounds and Anthropic's valuation at $965B, the #1 score crosses 100 when Anthropic's ARR passes about $103.7B - 1.037x its current run-rate. The re-anchor trigger on the same bound would not fire until $2.15T. If the score flag fires, review the bounds; do not wait for the re-anchor trigger. Note that widening the ARR ceiling is not free: it compresses the ARR axis and shifts the balance back towards valuation.",
+    "bounds_provenance": "All four bounds trace to two companies at the time of the pin: Reworkd AI set the two floors ($0.1B valuation, $10M ARR) and Anthropic set the two ceilings ($1,000B valuation, $100,000M ARR). Reworkd has since fallen out of the Top 100, so the floors now sit above the bottom of the list - dead space at the bottom, almost no headroom at the top of ARR. That is the fixed-bounds design working as intended: the axis does not move when the composition does. scripts/anchor_headroom.py reports the margins."
   }
 }

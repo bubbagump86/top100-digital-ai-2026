@@ -293,6 +293,49 @@ log_arr = log10(arr_USD_m)</pre>
           to $1B and Otter.ai &mdash; a real company with a $0.5B valuation &mdash;
           would drop below companies with no valuation mark at all.
         </p>
+        <h3>How much room is left on each bound?</h3>
+        <p>
+          All four bounds trace to two companies at the time of the pin:
+          Reworkd AI set the two floors ($0.1B valuation, $10M ARR) and
+          Anthropic set the two ceilings ($1,000B valuation, $100,000M ARR).
+          Reworkd has since fallen out of the Top 100, so the floors now sit
+          above the bottom of the list. That is the fixed-bounds design
+          working as intended &mdash; the axis did not move when the composition
+          did &mdash; but it leaves the headroom asymmetric: dead space at the
+          bottom, almost none at the top of ARR.
+        </p>
+        <table class="rank" style="margin:14px 0;">
+          <thead>
+            <tr>
+              <th>Bound</th>
+              <th class="num">Bound</th>
+              <th>Nearest row</th>
+              <th class="num">Value</th>
+              <th class="num">Re-anchor trigger</th>
+              <th class="num">Margin</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>Valuation ceiling</td><td class="num">$1,000B</td><td>Anthropic</td><td class="num">$965B</td><td class="num">$21,544B</td><td class="num">22.3&times;</td></tr>
+            <tr><td>ARR ceiling</td><td class="num">$100,000M</td><td>Anthropic</td><td class="num">$100,000M</td><td class="num">$2,154,435M</td><td class="num">21.5&times;</td></tr>
+            <tr><td>Valuation floor</td><td class="num">$0.1B</td><td>Otter.ai</td><td class="num">$0.5B</td><td class="num">$0.0046B</td><td class="num">107.7&times;</td></tr>
+            <tr><td>ARR floor</td><td class="num">$10M</td><td>SandboxAQ</td><td class="num">$17.8M</td><td class="num">$0.46M</td><td class="num">38.3&times;</td></tr>
+          </tbody>
+        </table>
+        <p>
+          Every re-anchor margin is enormous. But the policy has a second,
+          tighter tripwire: scores are not clipped, so a score above 100 is
+          the signal that an anchor is tight. On the ARR ceiling that flag
+          is the <em>binding</em> one &mdash; with Anthropic's valuation at
+          $965B, the #1 score crosses 100 when Anthropic's ARR passes about
+          <strong>$103.7B</strong>, 1.037&times; its current run-rate, whereas the
+          re-anchor trigger on the same bound would not fire until $2.15T.
+          Both numbers are in <code>data/model_config.json</code> under
+          <code>review_policy</code>. If the score flag fires, review the bounds;
+          do not wait for the re-anchor trigger. Widening the ARR ceiling is not
+          free &mdash; it compresses the ARR axis and shifts the balance back
+          towards valuation.
+        </p>
 
         <h3>Why the bounds are fixed</h3>
         <p>
