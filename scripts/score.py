@@ -193,6 +193,13 @@ def parse_args(argv=None):
     p.add_argument("--weight-arr", type=float, default=pol_w_arr,
                    help="weight on the ARR axis (default: from "
                         "data/model_config.json)")
+    p.add_argument("--axis-floor-clamp", dest="axis_floor_clamp",
+                   action="store_true", default=bool(pol.get("axis_floor_clamp", True)),
+                   help="a value below the axis floor reads 0, like a missing "
+                        "value (default: from data/model_config.json)")
+    p.add_argument("--no-axis-floor-clamp", dest="axis_floor_clamp",
+                   action="store_false",
+                   help="disable the axis floor clamp (review use only)")
     p.add_argument("--variant", default=None, metavar="NAME",
                    help="write to data/variants/NAME/ and leave live outputs "
                         "untouched")
@@ -417,6 +424,18 @@ def main(argv=None) -> None:
             z_v = (math.log10(r["valuation_usd_b"]) - val_min) / val_span
         if r["arr_usd_m"]:
             z_a = (math.log10(r["arr_usd_m"]) - arr_min) / arr_span
+
+        # --- axis floor ---------------------------------------------------
+        # A value BELOW the axis floor reads 0, exactly like a missing value.
+        # Without this, a company with a little revenue scores BELOW a
+        # company with none, because "no revenue" is scored 0 and a
+        # sub-floor revenue figure scores negative. The top end is NOT
+        # clamped: a score above 100 is the signal that an anchor is stale.
+        if args.axis_floor_clamp:
+            if z_v is not None and z_v < 0:
+                z_v = 0.0
+            if z_a is not None and z_a < 0:
+                z_a = 0.0
 
         # --- how a missing axis is scored -------------------------------
         # 'zero'   the axis reads 0 and KEEPS its weight  -> w_other * z_other

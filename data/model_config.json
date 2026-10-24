@@ -21,6 +21,9 @@
   },
 
   "missing_arr_rule": "zero",
+
+  "axis_floor_clamp": true,
+  "axis_floor_clamp_note": "A value BELOW an axis floor reads 0, exactly like a missing value. The top end is not clamped - a score above 100 is the signal that an anchor is stale. Without the clamp, a company with a little ARR (say $5M, below the $10M ARR floor) scores BELOW a company with no ARR at all, because 'no ARR' is scored 0 and a sub-floor figure scores negative. That is a monotonicity break in a live list. With it, 'no signal' and 'signal below the usable range' score the same, and the valuation axis keeps its protective band so that a real company with a sub-$1B valuation cannot rank below one with no valuation at all. See docs/log-min-and-axis-floors.md.",
   "missing_arr_rule_note": "A row with no ARR gets the ARR axis at 0 and keeps its 50% weight, so its composite is 0.5 x z_val. 'alone' would drop the axis entirely; 'hybrid' would drop it only where the valuation is an AI valuation. Both are available via --missing-rule but neither is adopted: 'alone' promotes market-cap proxies with no disclosed AI revenue into the top 10, and 'hybrid' makes the ranking materially more dependent on the log transform (raw min-max Spearman falls from +0.884 to +0.811).",
 
   "review_policy": {

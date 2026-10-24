@@ -247,17 +247,18 @@
         <h2>4. Why log-scale?</h2>
         <p>
           Valuation and ARR each span 5+ orders of magnitude across the
-          eligible set. In a linear scale, Anthropic's $100B ARR is
-          <strong>10,000&times;</strong> Reworkd AI's $10M ARR &mdash; and because
-          Anthropic is also the most valuable company in the set, it sits at
-          the top of both axes and owns <strong>100% of each axis's range</strong>.
-          The histogram becomes unrecoverable below the giants.
+          eligible set. In a linear scale, Anthropic's $100B ARR is over
+          <strong>5,600&times;</strong> SandboxAQ's $17.8M ARR &mdash; the smallest
+          AI-attributed revenue figure in the list &mdash; and because Anthropic is
+          also the most valuable company in the set, it sits at the top of both
+          axes and owns <strong>100% of each axis's range</strong>. The histogram
+          becomes unrecoverable below the giants.
         </p>
         <p>
           Taking <code>log10</code> compresses extremes into a much more
-          information-dense scale. After log, Anthropic is at 5.00,
-          Reworkd is at 1.00 &mdash; a 5&times; ratio, not 10,000&times;.
-          This is the standard treatment for financial
+          information-dense scale. After log, Anthropic is at 5.00 and
+          SandboxAQ at 1.25 &mdash; a span of 3.75 of the axis's 4 log decades,
+          not 5,600&times;. This is the standard treatment for financial
           power-law distributions.
         </p>
         <pre>log_val = log10(valuation_USD_b)
@@ -280,6 +281,18 @@ log_arr = log10(arr_USD_m)</pre>
           <li>Valuation: log<sub>10</sub> anchored from -1.00 (~$0.1B) to 3.00 (~$1,000B)</li>
           <li>ARR: log<sub>10</sub> anchored from 1.00 (~$10M) to 5.00 (~$100B)</li>
         </ul>
+        <p>
+          A value <strong>below</strong> a floor reads 0 &mdash; the same as a
+          missing value. The top end is <em>not</em> clamped: a score above 100
+          is the signal that an anchor has gone stale. Without the floor rule,
+          a company with $5M of ARR would score <em>below</em> a company with no
+          ARR at all, because &ldquo;no ARR&rdquo; is scored 0 while a sub-floor
+          figure scores negative. That is a monotonicity break, and on a live
+          list it would surface the first time a very small company joined.
+          The valuation floor earns its keep the same way: raise it from $0.1B
+          to $1B and Otter.ai &mdash; a real company with a $0.5B valuation &mdash;
+          would drop below companies with no valuation mark at all.
+        </p>
 
         <h3>Why the bounds are fixed</h3>
         <p>
@@ -945,6 +958,12 @@ Snowflake      $100M AI ARR x 20x =   $2B implied AI valuation</pre>
           <li>
             <strong>Both missing</strong>. We drop them entirely.
           </li>
+          <li>
+            <strong>Below the axis floor</strong> (e.g. $5M of ARR against a
+            $10M floor). These read 0 on that axis, exactly like a missing
+            value &mdash; &ldquo;no usable signal&rdquo; rather than
+            &ldquo;worse than no signal&rdquo;. See section 5.
+          </li>
         </ol>
         <p>
           This is a permissive rule. A strict alternative would be to lower
@@ -974,7 +993,7 @@ z_arr = (5.000 &minus; 1.00) / (5.000 &minus; 1.00) = 1.0000</pre>
           anchor is $1,000B and Anthropic is at $965B &mdash; which is the
           intended behaviour. A score of 100 means "at the top of the anchored
           scale"; a score above 100 means "past the anchor, and the anchor is
-          stale". OpenAI is #2 (z_val 0.882, z_arr 0.912 &rarr; 95.37).
+          stale". OpenAI is #2 (z_val 0.983, z_arr 0.925 &rarr; 95.37).
         </p>
         <h3>And a derived example: Microsoft</h3>
         <pre>AI ARR                  = $37,000M  (disclosed, Q3 FY26)
