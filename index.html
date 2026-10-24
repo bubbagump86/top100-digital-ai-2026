@@ -44,9 +44,9 @@
       <div class="hero-stats">
         <div class="stat"><span class="v" id="hero-companies">100</span><span class="l">companies ranked</span></div>
         <div class="stat"><span class="v">2</span><span class="l">input axes</span></div>
-        <div class="stat"><span class="v">log+min-max</span><span class="l">normalisation</span></div>
+        <div class="stat"><span class="v">log+min-max</span><span class="l">anchored scale</span></div>
         <div class="stat"><span class="v">50 / 50</span><span class="l">weights</span></div>
-        <div class="stat"><span class="v">20&times;</span><span class="l">peer multiple</span></div>
+        <div class="stat"><span class="v">20&times;</span><span class="l">peer multiple (pinned)</span></div>
       </div>
     </section>
 
@@ -54,17 +54,17 @@
       <div class="kpi">
         <span class="cat-chip">#1 ranked</span>
         <div class="v">Anthropic</div>
-        <div class="l">$965B valuation · $100B AI ARR · score 100.0</div>
+        <div class="l">$965B valuation · $100B AI ARR · score 99.8</div>
       </div>
       <div class="kpi">
         <span class="cat-chip">#2 ranked</span>
         <div class="v">OpenAI</div>
-        <div class="l">$852B valuation · $50B AI ARR · score 95.6</div>
+        <div class="l">$852B valuation · $50B AI ARR · score 95.4</div>
       </div>
       <div class="kpi">
         <span class="cat-chip">Big tech enters at #3</span>
         <div class="v">Microsoft</div>
-        <div class="l">$37B AI ARR → $740B implied AI valuation · score 93.2</div>
+        <div class="l">$37B AI ARR → $740B implied AI valuation · score 93.0</div>
       </div>
       <div class="kpi">
         <span class="cat-chip">Merged entity</span>
@@ -167,7 +167,7 @@
       <p style="margin-top:14px;">
         The <strong>top 7 are identical under every variant</strong> &mdash; the
         headline doesn't depend on the scale choice. But raw min-max looks
-        superficially similar (Spearman +0.967) while quietly pushing
+        superficially similar (Spearman +0.937) while quietly pushing
         <strong>87 of 100 rows below 5/100</strong>: Anthropic's $100B ARR owns
         the entire raw axis range, so every company under ~$1B ARR is crushed
         to zero and &ldquo;no disclosed revenue&rdquo; starts winning by default.
@@ -179,8 +179,10 @@
     <div class="card">
       <h2>Score distribution</h2>
       <p style="color:var(--text-dim);margin-bottom:16px;">
-        Score is the composite of log-min-max normalised valuation and ARR axes;
-        see <a href="methodology.html">methodology</a> for the exact formula.
+        Score is the composite of log-min-max normalised valuation and ARR axes,
+        rescaled against fixed bounds so a data update cannot re-base the
+        whole list. See <a href="methodology.html">methodology</a> for the
+        exact formula and the re-anchor policy.
       </p>
       <div id="score-buckets" class="chart-wrap" style="margin:0;"></div>
     </div>
@@ -331,7 +333,7 @@
           <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:14px;margin-bottom:18px;">
             <div>
               <div style="font-size:22px;font-weight:800;">${d.p50_median}&times;</div>
-              <div class="sub-note">median used (mean ${d.mean}&times;, trimmed ${d.trimmed_mean_10pct}&times;)</div>
+              <div class="sub-note">pinned (pool median ${d.p50_median}&times;, mean ${d.mean}&times;)</div>
             </div>
             <div>
               <div style="font-size:22px;font-weight:800;">${d.p25}&ndash;${d.p75}&times;</div>

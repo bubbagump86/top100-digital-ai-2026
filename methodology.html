@@ -186,19 +186,56 @@ log_arr = log10(arr_USD_m)</pre>
       </div>
 
       <div class="card">
-        <h2>5. Min-max rescaling</h2>
+        <h2>5. Min-max rescaling, with fixed bounds</h2>
         <p>
           We linearly rescale each axis to [0, 1] using the minimum and maximum
-          observed log values. The top observation is 1.0, the bottom 0.0. This
-          is the simplest approach and is enough for this kind of heterogeneous
+          log values. The top observation is 1.0, the bottom 0.0. This is the
+          simplest approach and is enough for this kind of heterogeneous
           cross-sectional ranking.
         </p>
         <pre>z_log(x) = (log10(x) - log_min) / (log_max - log_min)</pre>
-        <p>For the 2026 ranked set:</p>
+        <p>
+          The bounds are <strong>fixed policy, not the sample's own extremes</strong>:
+        </p>
         <ul>
-          <li>Valuation: log<sub>10</sub> ranges from -1.00 (~$0.1B) to 2.98 (~$965B)</li>
-          <li>ARR: log<sub>10</sub> ranges from 1.00 (~$10M) to 5.00 (~$100B)</li>
+          <li>Valuation: log<sub>10</sub> anchored from -1.00 (~$0.1B) to 3.00 (~$1,000B)</li>
+          <li>ARR: log<sub>10</sub> anchored from 1.00 (~$10M) to 5.00 (~$100B)</li>
         </ul>
+
+        <h3>Why the bounds are fixed</h3>
+        <p>
+          This list is live: it is re-scored as valuations and ARR move. If the
+          bounds were the minimum and maximum <em>observed in the current list</em>,
+          every data update would re-base every other company's score, and the
+          result would be rank churn that has nothing to do with any company
+          having changed. We measured it &mdash; a company joining with $5M of ARR
+          shifts the median score by 2.53 points, which nobody would report, and
+          still reorders 13 companies by three or more places. A $1M entrant
+          reorders 39.
+        </p>
+        <p>
+          With fixed bounds, none of that happens: the score of a company only
+          moves when that company's own inputs move. And this does <em>not</em>
+          freeze the list &mdash; OpenAI overtaking Anthropic still happens
+          correctly. Anchoring removes spurious movement while preserving real
+          movement, which is exactly what a live ranking needs.
+        </p>
+        <p>
+          Scores are <strong>not clipped</strong>. A company beyond a bound gets a
+          z-score above 1 and a composite above 100. That is deliberate: it is
+          the signal that the anchor has become stale and needs review, rather
+          than a number that silently pegs.
+        </p>
+        <p>
+          <strong>Re-anchor policy.</strong> Bounds are reviewed quarterly and
+          revised only when a company has breached a bound by more than one
+          third of the axis span &mdash; an anchor that is about to be crossed
+          rather than one that has been crossed. Every revision is logged with
+          the date, the old bounds, the new bounds and the reason; scores are
+          otherwise comparable across editions. The policy lives in
+          <code>data/model_config.json</code> and is version-controlled with
+          the data.
+        </p>
       </div>
 
       <div class="card">
@@ -227,10 +264,10 @@ log_arr = log10(arr_USD_m)</pre>
             </tr>
           </thead>
           <tbody>
-            <tr><td><strong>A &mdash; log + min-max (shipped)</strong></td><td class="num">+1.000</td><td class="num">+1.000</td><td class="num">3 of 100</td></tr>
-            <tr><td>B &mdash; raw + min-max</td><td class="num">+0.967</td><td class="num">+0.876</td><td class="num" style="color:var(--warn);"><strong>87 of 100</strong></td></tr>
-            <tr><td>C &mdash; raw + z-score</td><td class="num">+0.799</td><td class="num">+0.744</td><td class="num" style="color:var(--bad);"><strong>90 of 100</strong></td></tr>
-            <tr><td>D &mdash; raw + percentile</td><td class="num">+0.980</td><td class="num">+0.916</td><td class="num" style="color:var(--good);">2 of 100</td></tr>
+            <tr><td><strong>A &mdash; log + min-max (shipped)</strong></td><td class="num">+1.000</td><td class="num">+1.000</td><td class="num">0 of 100</td></tr>
+            <tr><td>B &mdash; raw + min-max</td><td class="num">+0.937</td><td class="num">+0.831</td><td class="num" style="color:var(--warn);"><strong>87 of 100</strong></td></tr>
+            <tr><td>C &mdash; raw + z-score</td><td class="num">+0.854</td><td class="num">+0.789</td><td class="num" style="color:var(--bad);"><strong>90 of 100</strong></td></tr>
+            <tr><td>D &mdash; raw + percentile</td><td class="num">+0.979</td><td class="num">+0.912</td><td class="num" style="color:var(--good);">2 of 100</td></tr>
           </tbody>
         </table>
 
@@ -247,10 +284,10 @@ log_arr = log10(arr_USD_m)</pre>
         <h3>Finding 2: raw min-max silently destroys the bottom 87% of the list</h3>
         <p>
           Here's the trap. Raw min-max has a Spearman correlation of
-          <strong>+0.967</strong> with the shipped model &mdash; it looks fine
+          <strong>+0.937</strong> with the shipped model &mdash; it looks fine
           at a glance. But look at the last column: under raw min-max,
           <strong>87 of 100 companies score below 5 points out of 100</strong>,
-          versus 3 under the shipped model. The list becomes 7 real rows and
+          versus 0 under the shipped model. The list becomes 7 real rows and
           93 noise rows.
         </p>
         <pre>Raw min-max, ARR axis (min $10M, max $100,000M):
@@ -273,8 +310,8 @@ log_arr = log10(arr_USD_m)</pre>
         <h3>Finding 3: the "improvements" in the raw ranking are artifacts</h3>
         <p>
           Raw min-max moves a striking set of companies <em>up</em>:
-          DeepSeek #37&rarr;#16, Thinking Machines Lab #38&rarr;#17, SSI #41&rarr;#22,
-          Reflection AI #44&rarr;#26, Moonshot AI #46&rarr;#29. These are all
+          DeepSeek #40&rarr;#16, Thinking Machines Lab #41&rarr;#17, SSI #48&rarr;#22,
+          Reflection AI #54&rarr;#26, Moonshot AI #56&rarr;#29. These are all
           pre-revenue labs with no ARR at all. Under raw min-max their score
           collapses to <code>0.5 &times; (valuation / $1T)</code> &mdash; a
           number so small it's basically zero. But because the other 87
@@ -289,7 +326,7 @@ log_arr = log10(arr_USD_m)</pre>
 
         <h3>Finding 4: z-score is the worst option</h3>
         <p>
-          Raw + z-score has the lowest correlation (+0.799) and reorders the
+          Raw + z-score has the lowest correlation (+0.854) and reorders the
           top 12. An unbounded standardisation lets a single $965B outlier
           drag the entire distribution &mdash; the mean and standard deviation
           are set by the giants, and everyone else gets compressed toward
@@ -301,13 +338,13 @@ log_arr = log10(arr_USD_m)</pre>
         <h3>Finding 5: if you want scale-free, use percentile</h3>
         <p>
           Variant D (percentile rank) is the strongest alternative &mdash; it
-          correlates <em>more</em> closely with the shipped model (+0.980
-          Spearman, +0.916 Kendall) than raw min-max does, matches the top 12
+          correlates <em>more</em> closely with the shipped model (+0.979
+          Spearman, +0.912 Kendall) than raw min-max does, matches the top 12
           exactly, and is invariant to any monotone change of units. It's also
           the most discriminative of the four: only <strong>2 of 100</strong>
-          rows fall below 5/100 (vs 3 for the shipped log model and 87-89 for
+          rows fall below 5/100 (vs 0 for the shipped log model and 87-90 for
           the raw variants). Its difference is in the middle: it penalises the
-          proxy rows (Palantir #22&rarr;#43, ByteDance #23&rarr;#47) because a
+          proxy rows (Palantir #26&rarr;#43, ByteDance #28&rarr;#47) because a
           company with no disclosed ARR genuinely has no ARR, rather than
           having its market-cap proxy inflate it.
         </p>
@@ -490,6 +527,29 @@ Salesforce     $800M AI ARR x 20x =  $16B implied AI valuation</pre>
           the model (after the log transform), and unlike the log transform it
           has no natural alternative that agrees with it. So we tested it
           five ways. Code: <code>scripts/multiple_check.py</code>.
+        </p>
+
+        <h3>The multiple is pinned, not recomputed</h3>
+        <p>
+          The 20&times; is the pure-play median <em>as measured on the 2026-10
+          edition</em> (n=81, IQR 15&ndash;40&times;, mean 33.6&times;, trimmed
+          mean 25.5&times;). It is held fixed in
+          <code>data/model_config.json</code> rather than recomputed on every
+          run, for the same reason the axis bounds are fixed: a live list cannot
+          have its derived valuations move because the composition of the peer
+          pool changed. The median is itself a sample-dependent number &mdash;
+          adding one company at 90.9&times; moves it from 20.00&times; to
+          20.42&times; and shifts every derived megacap row.
+        </p>
+        <p>
+          <strong>Review policy.</strong> The pinned value is re-reviewed
+          quarterly against the current pool, and revised only when the pool
+          median has moved more than one third of the IQR (about 8&times;) from
+          the pinned value &mdash; not merely because one company joined. The
+          published distribution above always shows the
+          <em>current</em> pool next to the pinned value, so the pin can never
+          drift away from the data unnoticed. The stress test below is re-run
+          on every review.
         </p>
 
         <h3>Test 1 &mdash; is the median the right statistic?</h3>
@@ -696,27 +756,31 @@ Salesforce     $800M AI ARR x 20x =  $16B implied AI valuation</pre>
         <pre>valuation_USD_b = 965
 arr_USD_m       = 100000   (> $100B annualised run-rate, mid-Sep 2026)</pre>
         <p>After <code>log10</code>:</p>
-        <pre>log_val = 2.985   (observed max = 2.985)
-log_arr = 5.000   (observed max = 5.000)</pre>
-        <p>Rescaled:</p>
-        <pre>z_val = (2.985 − (−1.00)) / (2.985 − (−1.00)) = 1.000
-z_arr = (5.000 − 1.00) / (5.000 − 1.00) = 1.000</pre>
+        <pre>log_val = 2.985
+log_arr = 5.000</pre>
+        <p>Rescaled against the fixed bounds (valuation $0.1B&ndash;$1,000B, ARR $10M&ndash;$100B):</p>
+        <pre>z_val = (2.985 &minus; (&minus;1.00)) / (3.00 &minus; (&minus;1.00)) = 0.9961
+z_arr = (5.000 &minus; 1.00) / (5.000 &minus; 1.00) = 1.0000</pre>
         <p>Composite:</p>
-        <pre>S = 100 * (0.5 * 1.000 + 0.5 * 1.000) = 100.00 / 100</pre>
+        <pre>S = 100 * (0.5 * 0.9961 + 0.5 * 1.0000) = 99.81 / 100</pre>
         <p>
-          Anthropic sits at the top because it maxes <em>both</em> axes: the
-          highest valuation in the set and the highest AI-attributed ARR in the
-          set. OpenAI is #2 (z_val 0.987, z_arr 0.912 &rarr; 95.56).
+          Anthropic sits at the top because it is at the very top of <em>both</em>
+          axes: the highest valuation in the set and the highest AI-attributed ARR
+          in the set. Its score is 99.81 rather than 100 because the valuation
+          anchor is $1,000B and Anthropic is at $965B &mdash; which is the
+          intended behaviour. A score of 100 means "at the top of the anchored
+          scale"; a score above 100 means "past the anchor, and the anchor is
+          stale". OpenAI is #2 (z_val 0.882, z_arr 0.912 &rarr; 95.37).
         </p>
         <h3>And a derived example: Microsoft</h3>
         <pre>AI ARR                  = $37,000M  (disclosed, Q3 FY26)
-peer median multiple     = 20.0x     (n=81 pure-play companies)
+peer multiple (pinned)    = 20.0x     (pure-play median, 2026-10 edition, n=81)
 implied AI valuation     = $37,000M x 20.0x = $740B
 log_val = log10(740) = 2.869
-z_val   = (2.869 − (−1.00)) / 3.985 = 0.971
+z_val   = (2.869 &minus; (&minus;1.00)) / 4.00 = 0.967
 log_arr = log10(37000) = 4.568
-z_arr   = (4.568 − 1.00) / 4.00 = 0.892
-S       = 100 * (0.5 * 0.971 + 0.5 * 0.892) = 93.16  → rank #3</pre>
+z_arr   = (4.568 &minus; 1.00) / 4.00 = 0.892
+S       = 100 * (0.5 * 0.967 + 0.5 * 0.892) = 92.97  &rarr; rank #3</pre>
       </div>
 
       <div class="card">
@@ -725,18 +789,23 @@ S       = 100 * (0.5 * 0.971 + 0.5 * 0.892) = 93.16  → rank #3</pre>
           The data file is in <code>data/companies.json</code>. Run:
         </p>
         <pre>$ python scripts/score.py
+Model config:
+  axis bounds     : anchored  (val 0.1..1000.0B, arr 10.0..100000.0M)
+  peer multiple   : 20.00x  (pinned; computed median 20.00x)
+  missing ARR rule: zero
+
 Peer EV/Revenue multiple (pure-play pool, n=81):
   median=20.00x  p25=15.00x  p75=40.00x
 
 Top 15:
-    1. [P] Anthropic          val=$965.0B  arr=$100000M  score=100.0
-    2. [P] OpenAI             val=$852.0B  arr=$50000M   score=95.56
-    3. [D] Microsoft (AI)      val=$740.0B  arr=$37000M   score=93.16
-    4. [D] Google (AI)         val=$600.0B  arr=$30000M   score=90.87
-    5. [D] Amazon (AWS AI)     val=$500.0B  arr=$25000M   score=88.89
-    6. [D] Meta (AI)           val=$400.0B  arr=$20000M   score=86.46
-    7. [P] SpaceXAI            val=$310.0B  arr=$14200M   score=83.22
-    8. [D] Alibaba (AI)        val=$186.0B  arr=$9300M    score=78.13
+    1. [P] Anthropic          val=$965.0B  arr=$100000M  score=99.81
+    2. [P] OpenAI             val=$852.0B  arr=$50000M   score=95.37
+    3. [D] Microsoft (AI)      val=$740.0B  arr=$37000M   score=92.97
+    4. [D] Google (AI)         val=$600.0B  arr=$30000M   score=90.69
+    5. [D] Amazon (AWS AI)     val=$500.0B  arr=$25000M   score=88.71
+    6. [D] Meta (AI)           val=$400.0B  arr=$20000M   score=86.29
+    7. [P] SpaceXAI            val=$310.0B  arr=$14200M   score=83.05
+    8. [D] Alibaba (AI)        val=$186.0B  arr=$9300M    score=77.97
     ...</pre>
         <p>
           This regenerates <code>data/ranked.json</code>, <code>data/ranked.csv</code>

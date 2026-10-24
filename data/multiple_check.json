@@ -610,8 +610,8 @@
       "Baidu (AI: ERNIE + Baidu AI Cloud)",
       "VAST Data",
       "Scale AI",
-      "Cognition (Devin)",
-      "Mistral AI"
+      "Mistral AI",
+      "Cognition (Devin)"
     ],
     "12": [
       "Anthropic",
@@ -628,7 +628,7 @@
       "VAST Data",
       "Scale AI",
       "ServiceNow (Now Assist AI)",
-      "Cognition (Devin)"
+      "Mistral AI"
     ],
     "15": [
       "Anthropic",
@@ -645,7 +645,7 @@
       "VAST Data",
       "Scale AI",
       "ServiceNow (Now Assist AI)",
-      "Cognition (Devin)"
+      "Mistral AI"
     ],
     "20": [
       "Anthropic",
@@ -662,7 +662,7 @@
       "VAST Data",
       "Scale AI",
       "ServiceNow (Now Assist AI)",
-      "Cognition (Devin)"
+      "Mistral AI"
     ],
     "25": [
       "Anthropic",
@@ -679,7 +679,7 @@
       "VAST Data",
       "Scale AI",
       "ServiceNow (Now Assist AI)",
-      "Cognition (Devin)"
+      "Mistral AI"
     ],
     "30": [
       "Anthropic",
@@ -696,7 +696,7 @@
       "ServiceNow (Now Assist AI)",
       "VAST Data",
       "Scale AI",
-      "Cognition (Devin)"
+      "Mistral AI"
     ],
     "40": [
       "Anthropic",

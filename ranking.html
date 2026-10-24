@@ -85,8 +85,10 @@
       <h3>How is the score built?</h3>
       <p style="color:var(--text-dim);">
         Each company's valuation and AI-attributed ARR are first log-transformed, then
-        min-max rescaled to [0,1] across the surviving set. The composite score
-        is <code>100 &times; (0.5 &times; z_val + 0.5 &times; z_arr)</code>.
+        min-max rescaled to [0,1] against <strong>fixed bounds</strong> (valuation
+        $0.1B&ndash;$1,000B, ARR $10M&ndash;$100B), so a data update cannot
+        re-base the whole list. The composite score is
+        <code>100 &times; (0.5 &times; z_val + 0.5 &times; z_arr)</code>.
       </p>
       <p style="color:var(--text-dim);">
         For diversified companies (Microsoft, Alphabet, Amazon, Meta, Alibaba,

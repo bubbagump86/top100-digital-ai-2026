@@ -51,13 +51,68 @@ COMPOSITE
 ----------
     S = 100 * (0.5 * z_log(valuation) + 0.5 * z_log(ARR))
 
+MODEL OPTIONS (added for the live-list revision; defaults = current behaviour)
+---------------------------------------------------------------------------
+  --anchored            Use FIXED axis bounds instead of the sample's own
+                        min/max. A live list that recomputes its bounds on
+                        every update re-bases everyone's score when a new
+                        record-holder appears, which shows up as rank churn
+                        rather than as any visible score change.
+                        Bounds: --anchor-val / --anchor-arr.
+
+MODEL POLICY
+-------------
+The default model is read from data/model_config.json - a version-controlled
+policy file, not code. It pins:
+
+  axis bounds      fixed, not derived from the sample. A live list that
+                   recomputes its bounds on every update re-bases everyone's
+                   score when a new record-holder appears, which shows up as
+                   rank churn rather than as any visible score change.
+
+  peer multiple    pinned at the pure-play median as measured on the
+                   2026-10 edition. The median is itself a sample-dependent
+                   number: adding one company at 90.9x moves it from 20.00x
+                   to 20.42x and shifts every derived megacap row.
+
+  missing-ARR rule a row with no ARR scores 0 on the ARR axis and KEEPS its
+                   50% weight (composite = 0.5 * z_val). 'missing' is not
+                   'zero revenue', but the alternative rules were tested and
+                   rejected for now - see data/model_config.json.
+
+Overrides for review work (defaults come from the policy file):
+
+  --axis {anchored,sample}
+  --anchor-val MIN MAX       fixed valuation bounds in $B
+  --anchor-arr MIN MAX       fixed ARR bounds in $M
+  --peer-multiple N          pin the peer multiple; 0 = recompute the median
+  --missing-rule {zero,alone,hybrid}
+                          zero   - ARR axis reads 0 and KEEPS its 50% weight
+                                   (composite = 0.5 * z_val)   [ADOPTED]
+                          alone  - the ARR axis is dropped and the remaining
+                                   axis carries full weight (composite = z_val)
+                          hybrid - 'alone' when the valuation IS an AI
+                                   valuation (pure-play), 'zero' when the
+                                   valuation is a whole-company market cap
+                                   (proxy), because a proxy's number already
+                                   contains all of its non-AI businesses.
+
+  --variant NAME        Write outputs to data/variants/NAME/ and leave the
+                        live data/ranked.json, data/ranked.csv and the site
+                        ranked.json untouched. Use for dry runs.
+  --companies PATH      Score a different companies.json (default:
+                        data/companies.json)
+
 Output:
-  - data/ranked.json, data/ranked.csv, site/ranked.json
+  - data/ranked.json, data/ranked.csv, ranked.json  (default run)
+  - data/variants/NAME/ranked.json, .../ranked.csv  (--variant)
 
 Run:
   python scripts/score.py
+  python scripts/score.py --variant review --axis sample --peer-multiple 0
 """
 
+import argparse
 import csv
 import json
 import math
@@ -66,12 +121,59 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 DATA = ROOT / "data" / "companies.json"
+POLICY = ROOT / "data" / "model_config.json"
 OUT_JSON = ROOT / "data" / "ranked.json"
 OUT_CSV = ROOT / "data" / "ranked.csv"
 OUT_PUBLIC_RANKED = ROOT / "ranked.json"
 
 W_VAL = 0.5
 W_ARR = 0.5
+
+
+def load_policy():
+    """Model policy: version-controlled, reviewed quarterly."""
+    try:
+        return json.loads(POLICY.read_text(encoding="utf-8"))
+    except FileNotFoundError:
+        raise SystemExit(f"Model policy not found: {POLICY}")
+
+
+def rel(p):
+    """Path relative to the repo root when possible, else absolute."""
+    p = Path(p).resolve()
+    try:
+        return str(p.relative_to(ROOT))
+    except ValueError:
+        return str(p)
+
+
+def parse_args(argv=None):
+    pol = load_policy()
+    axis_pol = pol.get("axis", {})
+    p = argparse.ArgumentParser(
+        description="Score the Top 100 Digital AI Companies.")
+    p.add_argument("--axis", choices=["anchored", "sample"],
+                   default=axis_pol.get("bounds_source", "anchored"),
+                   help="axis bounds source (default: from model_config.json)")
+    p.add_argument("--anchor-val", type=float, nargs=2, metavar=("MIN", "MAX"),
+                   default=axis_pol.get("valuation_usd_b", [0.1, 1000.0]),
+                   help="fixed valuation bounds in $B")
+    p.add_argument("--anchor-arr", type=float, nargs=2, metavar=("MIN", "MAX"),
+                   default=axis_pol.get("arr_usd_m", [10.0, 100000.0]),
+                   help="fixed ARR bounds in $M")
+    p.add_argument("--peer-multiple", type=float,
+                   default=pol.get("peer_multiple", 20.0),
+                   help="pin the peer EV/Revenue multiple; 0 = recompute the "
+                        "pure-play median each run")
+    p.add_argument("--missing-rule", choices=["zero", "alone", "hybrid"],
+                   default=pol.get("missing_arr_rule", "zero"),
+                   help="how a row with no ARR is scored")
+    p.add_argument("--variant", default=None, metavar="NAME",
+                   help="write to data/variants/NAME/ and leave live outputs "
+                        "untouched")
+    p.add_argument("--companies", default=None, metavar="PATH",
+                   help="input companies.json (default: data/companies.json)")
+    return p.parse_args(argv)
 
 
 def is_skipped(company: dict) -> bool:
@@ -105,8 +207,12 @@ def ev_revenue(val_usd_b, arr_usd_m):
     return (val_usd_b * 1000.0) / arr_usd_m
 
 
-def main() -> None:
-    with DATA.open(encoding="utf-8") as fh:
+def main(argv=None) -> None:
+    args = parse_args(argv)
+    policy = load_policy()
+
+    data_path = Path(args.companies) if args.companies else DATA
+    with data_path.open(encoding="utf-8") as fh:
         raw = json.load(fh)
 
     companies = [c for c in raw["companies"] if not is_skipped(c)]
@@ -129,7 +235,11 @@ def main() -> None:
         raise SystemExit("No pure-play peers with both valuation and ARR - "
                          "cannot derive the peer multiple.")
 
-    peer_multiple = statistics.median(multiples)
+    computed_median = statistics.median(multiples)
+    if args.peer_multiple:
+        peer_multiple = args.peer_multiple
+    else:
+        peer_multiple = computed_median
     p25 = multiples[max(0, int(len(multiples) * 0.25) - 1)]
     p75 = multiples[min(len(multiples) - 1, int(len(multiples) * 0.75))]
 
@@ -167,9 +277,12 @@ def main() -> None:
             else:
                 # Nothing to derive from -> cannot score, treat as proxy.
                 basis = "proxy"
+                if val_b is None:
+                    val_b = mcap
         elif basis == "proxy":
             # Keep the market cap, but the ARR axis scores 0.
-            pass
+            if val_b is None:
+                val_b = mcap
 
         # --- coherence cross-check -------------------------------------
         # For a derived row, what multiple is the market itself paying per
@@ -248,8 +361,18 @@ def main() -> None:
     val_logs = [v for v in val_logs if v is not None]
     arr_logs = [a for a in arr_logs if a is not None]
 
-    val_min, val_max = min(val_logs), max(val_logs)
-    arr_min, arr_max = min(arr_logs), max(arr_logs)
+    if args.axis == "anchored":
+        # FIXED bounds: published policy, not the sample's own extremes.
+        # Keeps a data update from re-basing every other company's score.
+        val_min = math.log10(args.anchor_val[0])
+        val_max = math.log10(args.anchor_val[1])
+        arr_min = math.log10(args.anchor_arr[0])
+        arr_max = math.log10(args.anchor_arr[1])
+        bounds_source = "anchored"
+    else:
+        val_min, val_max = min(val_logs), max(val_logs)
+        arr_min, arr_max = min(arr_logs), max(arr_logs)
+        bounds_source = "sample"
     val_span = (val_max - val_min) or 1
     arr_span = (arr_max - arr_min) or 1
 
@@ -260,12 +383,25 @@ def main() -> None:
         if r["arr_usd_m"]:
             z_a = (math.log10(r["arr_usd_m"]) - arr_min) / arr_span
 
+        # --- how a missing axis is scored -------------------------------
+        # 'zero'   the axis reads 0 and KEEPS its 50% weight  -> 0.5 * z_other
+        # 'alone'  the axis is dropped, the other carries full weight -> z_other
+        # 'hybrid' 'alone' when the valuation IS an AI valuation (pure-play),
+        #          'zero' when it is a whole-company market cap (proxy)
         if z_v is None and z_a is None:
             score, missing = 0.0, "both"
         elif z_v is None:
             score, missing = 100.0 * (W_ARR * z_a), "valuation"
         elif z_a is None:
-            score, missing = 100.0 * (W_VAL * z_v), "arr"
+            if args.missing_rule == "alone":
+                score, missing = 100.0 * z_v, "arr"
+            elif args.missing_rule == "hybrid":
+                if r["valuation_basis"] == "actual":
+                    score, missing = 100.0 * z_v, "arr"
+                else:
+                    score, missing = 100.0 * (W_VAL * z_v), "arr"
+            else:
+                score, missing = 100.0 * (W_VAL * z_v), "arr"
         else:
             score, missing = 100.0 * (W_VAL * z_v + W_ARR * z_a), ""
 
@@ -273,6 +409,12 @@ def main() -> None:
         r["z_arr"] = round(z_a, 4) if z_a is not None else None
         r["missing_axes"] = missing
         r["score"] = round(score, 2)
+        r["missing_rule_applied"] = (
+            "alone" if (z_a is None and r["valuation_basis"] == "actual"
+                        and args.missing_rule in ("alone", "hybrid"))
+            else "zero" if z_a is None
+            else ""
+        )
 
     resolved.sort(key=lambda r: r["score"], reverse=True)
     top = resolved[:100]
@@ -292,8 +434,21 @@ def main() -> None:
         "axes": {
             "valuation_usd_b": {"log_min": val_min, "log_max": val_max},
             "arr_usd_m": {"log_min": arr_min, "log_max": arr_max},
+            "bounds_source": bounds_source,
         },
         "weights": {"valuation": W_VAL, "arr": W_ARR},
+        "model_config": {
+            "policy_version": policy.get("policy_version"),
+            "reviewed": policy.get("reviewed"),
+            "axis": args.axis,
+            "anchor_val_usd_b": list(args.anchor_val),
+            "anchor_arr_usd_m": list(args.anchor_arr),
+            "peer_multiple": peer_multiple,
+            "peer_multiple_pinned": bool(args.peer_multiple),
+            "computed_peer_median": round(computed_median, 2),
+            "missing_rule": args.missing_rule,
+            "variant": args.variant,
+        },
         "valuation_cap": {
             "rule": ("A derived AI valuation may never exceed the company's own "
                      "actual valuation (market cap). If AI ARR x peer multiple "
@@ -337,10 +492,25 @@ def main() -> None:
         "companies": top,
     }
 
-    OUT_JSON.write_text(json.dumps(payload, indent=2, ensure_ascii=False), encoding="utf-8")
-    OUT_PUBLIC_RANKED.write_text(json.dumps(payload, indent=2, ensure_ascii=False), encoding="utf-8")
+    # ------------------------------------------------------------------
+    # Output routing. A --variant run writes to data/variants/<name>/ and
+    # never touches the live outputs, so a dry run cannot publish itself.
+    # ------------------------------------------------------------------
+    if args.variant:
+        out_dir = ROOT / "data" / "variants" / args.variant
+        out_dir.mkdir(parents=True, exist_ok=True)
+        out_json = out_dir / "ranked.json"
+        out_csv = out_dir / "ranked.csv"
+        out_public = out_dir / "ranked.site.json"
+        print(f"Variant output  : {rel(out_dir)}/  "
+              f"(live outputs untouched)")
+    else:
+        out_json, out_csv, out_public = OUT_JSON, OUT_CSV, OUT_PUBLIC_RANKED
 
-    with OUT_CSV.open("w", newline="", encoding="utf-8") as fh:
+    out_json.write_text(json.dumps(payload, indent=2, ensure_ascii=False), encoding="utf-8")
+    out_public.write_text(json.dumps(payload, indent=2, ensure_ascii=False), encoding="utf-8")
+
+    with out_csv.open("w", newline="", encoding="utf-8") as fh:
         w = csv.writer(fh)
         w.writerow([
             "rank", "name", "category", "hq", "founded",
@@ -366,6 +536,16 @@ def main() -> None:
     print(f"  basis  actual  : {payload['counts']['pure_play']}")
     print(f"  basis  derived : {payload['counts']['derived']}")
     print(f"  basis  proxy   : {payload['counts']['proxy']}")
+    print()
+    print("Model config:")
+    print(f"  axis bounds     : {bounds_source}"
+          + (f"  (val {args.anchor_val[0]}..{args.anchor_val[1]}B, "
+             f"arr {args.anchor_arr[0]}..{args.anchor_arr[1]}M)"
+             if args.axis == "anchored" else ""))
+    print(f"  peer multiple   : {peer_multiple:.2f}x"
+          + (f"  (pinned; computed median {computed_median:.2f}x)"
+             if args.peer_multiple else "  (computed median)"))
+    print(f"  missing ARR rule: {args.missing_rule}")
     print()
     print(f"Peer EV/Revenue multiple (pure-play pool, n={len(multiples)}):")
     print(f"  median={peer_multiple:.2f}x  p25={p25:.2f}x  p75={p75:.2f}x  "

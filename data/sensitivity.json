@@ -2,8 +2,8 @@
   "shipped": "A: log + min-max",
   "variants": {
     "raw_minmax": {
-      "spearman_vs_shipped": 0.967,
-      "kendall_tau_vs_shipped": 0.876,
+      "spearman_vs_shipped": 0.937,
+      "kendall_tau_vs_shipped": 0.831,
       "rows_below_5_points": 87,
       "top10": [
         "Anthropic",
@@ -19,8 +19,8 @@
       ]
     },
     "raw_zscore": {
-      "spearman_vs_shipped": 0.799,
-      "kendall_tau_vs_shipped": 0.744,
+      "spearman_vs_shipped": 0.854,
+      "kendall_tau_vs_shipped": 0.789,
       "rows_below_5_points": 90,
       "top10": [
         "Anthropic",
@@ -36,8 +36,8 @@
       ]
     },
     "raw_percentile": {
-      "spearman_vs_shipped": 0.98,
-      "kendall_tau_vs_shipped": 0.916,
+      "spearman_vs_shipped": 0.979,
+      "kendall_tau_vs_shipped": 0.912,
       "rows_below_5_points": 2,
       "top10": [
         "Anthropic",
@@ -55,7 +55,7 @@
     "log_minmax_shipped": {
       "spearman_vs_shipped": 1.0,
       "kendall_tau_vs_shipped": 1.0,
-      "rows_below_5_points": 3,
+      "rows_below_5_points": 0,
       "top10": [
         "Anthropic",
         "OpenAI",
