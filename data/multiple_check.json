@@ -5,8 +5,8 @@
     "p75": 40.0,
     "min": 5.0,
     "max": 323.53,
-    "mean": 33.6,
-    "pool_size": 81,
+    "mean": 37.72,
+    "pool_size": 85,
     "pool": [
       {
         "name": "OpenAI",
@@ -331,29 +331,45 @@
       {
         "name": "LangChain",
         "multiple": 40.0
+      },
+      {
+        "name": "Manus AI",
+        "multiple": 8.89
+      },
+      {
+        "name": "Wonderful AI",
+        "multiple": 71.43
+      },
+      {
+        "name": "SandboxAQ",
+        "multiple": 314.61
+      },
+      {
+        "name": "Sakana AI",
+        "multiple": 90.0
       }
     ]
   },
   "distribution": {
-    "n": 81,
+    "n": 85,
     "min": 5.0,
-    "p10": 10.0,
+    "p10": 9.79,
     "p25": 15.0,
-    "p50_median": 20.0,
+    "p50_median": 20.83,
     "p75": 40.0,
-    "p90": 62.5,
+    "p90": 75.97,
     "max": 323.53,
-    "mean": 33.6,
-    "trimmed_mean_10pct": 25.53,
+    "mean": 37.72,
+    "trimmed_mean_10pct": 27.33,
     "iqr_width_ratio": 2.67
   },
   "by_arr_band": [
     {
       "band": "ARR < $100M",
-      "n": 37,
-      "median_multiple": 20.0,
+      "n": 36,
+      "median_multiple": 21.08,
       "min": 7.5,
-      "max": 149.0,
+      "max": 314.61,
       "members": [
         "01.AI (Yi)",
         "ADA (Ada Support)",
@@ -361,7 +377,6 @@
         "Ambience Healthcare",
         "Arize AI",
         "AssemblyAI",
-        "Augment Code",
         "Baichuan Intelligence",
         "Character.AI",
         "Cresta",
@@ -372,16 +387,15 @@
         "Forethought",
         "HeyGen",
         "Hippocratic AI",
-        "Inworld AI",
         "Jasper AI",
         "Labelbox",
         "LangChain",
         "MiniMax",
         "Observe.AI",
-        "Pika",
         "PolyAI",
-        "Roboflow",
         "Runway",
+        "Sakana AI",
+        "SandboxAQ",
         "Snorkel AI",
         "Sourcegraph (Amp / Cody)",
         "Stability AI",
@@ -390,14 +404,15 @@
         "Typeface",
         "Vapi",
         "Weights & Biases",
+        "Wonderful AI",
         "Writer",
         "You.com"
       ]
     },
     {
       "band": "$100M - $1B",
-      "n": 29,
-      "median_multiple": 30.13,
+      "n": 30,
+      "median_multiple": 29.31,
       "min": 5.0,
       "max": 323.53,
       "members": [
@@ -420,6 +435,7 @@
         "Legora (formerly Spellbook)",
         "Lightricks",
         "Lovable",
+        "Manus AI",
         "Moveworks",
         "Otter.ai",
         "Perplexity AI",
@@ -471,10 +487,10 @@
   ],
   "by_geography": {
     "west": {
-      "n": 76,
+      "n": 80,
       "median": 20.0,
       "p25": 14.88,
-      "p75": 37.19
+      "p75": 39.06
     },
     "china": {
       "n": 5,
@@ -570,6 +586,17 @@
       "uncapped_derived_valuation_usd_b": 30.0,
       "derived_as_pct_of_market_cap": 15.0,
       "uncapped_as_pct_of_market_cap": 15.0,
+      "flag": "ok"
+    },
+    {
+      "name": "Snowflake (Cortex AI / Snowflake Intelligence)",
+      "market_cap_usd_b": 114.7,
+      "ai_arr_usd_m": 100,
+      "market_implied_multiple": 1147.0,
+      "our_derived_valuation_usd_b": 2.0,
+      "uncapped_derived_valuation_usd_b": 2.0,
+      "derived_as_pct_of_market_cap": 1.7,
+      "uncapped_as_pct_of_market_cap": 1.7,
       "flag": "ok"
     },
     {

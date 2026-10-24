@@ -78,6 +78,14 @@
           peer multiple). Both write JSON into <code>data/</code>, which the
           overview page reads directly.
         </p>
+        <p>
+          A third script, <code>scripts/coverage.py</code>, audits coverage.
+          Every name on a watchlist (<code>data/coverage_watchlist.json</code>)
+          must resolve to exactly one disposition &mdash; ranked, folded into a
+          roll-up row, or excluded with a published reason. A name with no
+          disposition is a coverage gap and blocks publication. The audit
+          currently reports 39 of 39 names resolved and zero gaps.
+        </p>
       </div>
 
       <div class="card">

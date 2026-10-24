@@ -96,7 +96,7 @@
           <span class="basis-chip basis-derived">AI-attributed</span>
           &mdash; diversified, but discloses AI revenue. We value that revenue at
           the pure-play median EV/Revenue multiple (<strong>20&times;</strong>,
-          derived from 81 pure-play companies) to get an implied standalone AI
+          derived from 85 pure-play companies) to get an implied standalone AI
           valuation.
         </li>
         <li>
@@ -134,6 +134,27 @@
     </div>
 
     <div class="card">
+      <h2>Is the coverage complete?</h2>
+      <p>
+        A ranking that only publishes what it included has an invisible hole: a
+        company can be missing simply because nobody checked. This edition was
+        audited against a 39-name third-party AI company list, and every name
+        must resolve to exactly one disposition &mdash; ranked, folded into a
+        roll-up row, or excluded with a published reason.
+      </p>
+      <div id="coverage" class="chart-wrap" style="margin:16px 0 0;"></div>
+      <p style="margin-top:14px;">
+        <strong>Result: 39 of 39 names resolved, zero gaps.</strong> 25 are
+        ranked, 2 are folded into roll-up rows (Google DeepMind inside Alphabet,
+        Microsoft Research Asia inside Microsoft), and 12 are excluded with a
+        stated reason &mdash; hardware-first, physical AI, no disclosed AI
+        revenue line, or too small to evidence. The audit that enforces this is
+        a repeatable step in the pipeline:
+        <code>python scripts/coverage.py</code>.
+      </p>
+    </div>
+
+    <div class="card">
       <h2>Is the 20&times; peer multiple load-bearing?</h2>
       <p>
         The multiple used to value the AI businesses of the megacaps is the
@@ -167,7 +188,7 @@
       <p style="margin-top:14px;">
         The <strong>top 7 are identical under every variant</strong> &mdash; the
         headline doesn't depend on the scale choice. But raw min-max looks
-        superficially similar (Spearman +0.937) while quietly pushing
+        superficially similar (Spearman +0.919) while quietly pushing
         <strong>87 of 100 rows below 5/100</strong>: Anthropic's $100B ARR owns
         the entire raw axis range, so every company under ~$1B ARR is crushed
         to zero and &ldquo;no disclosed revenue&rdquo; starts winning by default.
@@ -332,7 +353,7 @@
         document.getElementById("multiple-check").innerHTML = `
           <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:14px;margin-bottom:18px;">
             <div>
-              <div style="font-size:22px;font-weight:800;">${d.p50_median}&times;</div>
+              <div style="font-size:22px;font-weight:800;">${mc.peer_multiple.median_ev_revenue}&times;</div>
               <div class="sub-note">pinned (pool median ${d.p50_median}&times;, mean ${d.mean}&times;)</div>
             </div>
             <div>
@@ -344,8 +365,8 @@
               <div class="sub-note">Western vs Chinese pure-play median</div>
             </div>
             <div>
-              <div style="font-size:22px;font-weight:800;color:var(--good);">11 / 11</div>
-              <div class="sub-note">top-11 unchanged from 10&times; to 40&times;</div>
+              <div style="font-size:22px;font-weight:800;color:var(--good);">${mc.top11_stability.always_present.length} / ${mc.top11_stability.ever_present.length}</div>
+              <div class="sub-note">top-${mc.top11_stability.always_present.length} unchanged from 10&times; to 40&times;</div>
             </div>
           </div>
           ${cappedRow ? `
@@ -370,6 +391,45 @@
       } catch (e) {
         document.getElementById("multiple-check").innerHTML =
           '<p class="sub-note">Multiple-check data unavailable.</p>';
+      }
+
+      // Coverage audit - read from data/coverage.json so the published
+      // numbers can never drift from the audit that produced them.
+      try {
+        const cres = await fetch("data/coverage.json", { cache: "no-store" });
+        const cov = await cres.json();
+        const cc = cov.counts || {};
+        const box = document.getElementById("coverage");
+        if (!box) throw new Error("no #coverage element");
+        const gapColor = cov.coverage_complete ? "var(--good)" : "var(--bad)";
+        box.innerHTML = `
+          <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:14px;">
+            <div>
+              <div style="font-size:22px;font-weight:800;">${cov.watchlist_size}</div>
+              <div style="font-size:13px;color:var(--text-dim);">names audited</div>
+            </div>
+            <div>
+              <div style="font-size:22px;font-weight:800;color:var(--accent);">${cc.RANKED || 0}</div>
+              <div style="font-size:13px;color:var(--text-dim);">ranked</div>
+            </div>
+            <div>
+              <div style="font-size:22px;font-weight:800;color:var(--accent-2);">${cc.FOLDED || 0}</div>
+              <div style="font-size:13px;color:var(--text-dim);">folded into a roll-up</div>
+            </div>
+            <div>
+              <div style="font-size:22px;font-weight:800;color:var(--warn);">${cc.EXCLUDED || 0}</div>
+              <div style="font-size:13px;color:var(--text-dim);">excluded with a reason</div>
+            </div>
+            <div>
+              <div style="font-size:22px;font-weight:800;color:${gapColor};">${(cov.gaps || []).length}</div>
+              <div style="font-size:13px;color:var(--text-dim);">coverage gaps</div>
+            </div>
+          </div>`;
+      } catch (e) {
+        const box = document.getElementById("coverage");
+        if (box) {
+          box.innerHTML = '<p class="sub-note">Coverage data unavailable.</p>';
+        }
       }
     });
   </script>

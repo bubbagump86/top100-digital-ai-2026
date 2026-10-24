@@ -79,6 +79,77 @@
       </div>
 
       <div class="card">
+        <h2>2b. The admission rule, and the coverage audit</h2>
+        <p>
+          Eligibility is not a matter of taste. A company is admitted if it is:
+        </p>
+        <ul>
+          <li>
+            <strong>Pure-play digital AI</strong> &mdash; the AI business <em>is</em>
+            the company, so its market or transaction valuation is already an AI
+            valuation. Its multiple also joins the peer pool.
+          </li>
+          <li>
+            <strong>AI-attributed</strong> &mdash; a diversified company that
+            <em>discloses</em> AI-attributed revenue. That revenue is valued at
+            the peer multiple (section 6b).
+          </li>
+          <li>
+            <strong>Market-cap proxy</strong> &mdash; a company with a material
+            AI business that discloses no AI revenue line, where a market-cap
+            proxy is defensible. Flagged as the weakest evidence in the list.
+          </li>
+        </ul>
+        <p>
+          A software company is <strong>excluded</strong> when AI is neither
+          disclosed nor material &mdash; the Apple test in section 2. Scoring
+          <em>Datadog</em>, <em>AvePoint</em> or <em>Workato</em> on their full
+          market caps would make the valuation axis a measure of observability
+          and backup franchises rather than AI: Datadog's management explicitly
+          declines to size AI revenue at all, and AvePoint's Q2 2026 release
+          discloses SaaS revenue, total revenue and total ARR but no AI line.
+          All three are excluded with reasons on the
+          <a href="exclusions.html">exclusions page</a>.
+        </p>
+        <h3>The coverage audit &mdash; no name may be silently absent</h3>
+        <p>
+          A ranking that only publishes what it included has an invisible hole:
+          a company can be missing simply because nobody checked. The 2026-10
+          edition was audited against a 39-name third-party AI company list,
+          and the audit is now a repeatable step in the pipeline
+          (<code>scripts/coverage.py</code>, against
+          <code>data/coverage_watchlist.json</code>).
+        </p>
+        <p>
+          The rule the audit enforces: <strong>every watchlist name must resolve
+          to exactly one disposition</strong> &mdash; ranked, folded into a
+          roll-up row, or excluded with a published reason. A name that resolves
+          to nothing is a <strong>coverage gap</strong>, and a gap blocks
+          publication.
+        </p>
+        <p>
+          The audit found <strong>19 names with no disposition at all</strong>,
+          plus two roll-ups that had never been written down (Google DeepMind
+          inside Alphabet, Microsoft Research Asia inside Microsoft). All 21 now
+          resolve: 7 were added to the ranking with sourced valuation and
+          AI-attributed ARR, 2 are folded into roll-up rows, and 12 are excluded
+          with a stated reason. The audit now reports
+          <strong>39 of 39 names resolved, zero gaps</strong>.
+        </p>
+        <h3>How we treat third-party estimates</h3>
+        <p>
+          A third-party revenue estimate is used as an input only when it is
+          (a) above this list's $10M ARR anchor and (b) the best available
+          figure. It is then published with its source and an explicit
+          confidence flag. Below the anchor it is not used at all &mdash; Luma
+          AI's ~$8M Sacra estimate is 22 months old and under the anchor, so
+          that row's ARR axis reads 0 under the missing-ARR rule instead. Where
+          two sources conflict we publish the conservative figure and name the
+          conflict; where a figure is single-sourced we say so.
+        </p>
+      </div>
+
+      <div class="card">
         <h2>3. The two input axes</h2>
         <p>For each eligible company we collect:</p>
         <ol>
@@ -265,9 +336,9 @@ log_arr = log10(arr_USD_m)</pre>
           </thead>
           <tbody>
             <tr><td><strong>A &mdash; log + min-max (shipped)</strong></td><td class="num">+1.000</td><td class="num">+1.000</td><td class="num">0 of 100</td></tr>
-            <tr><td>B &mdash; raw + min-max</td><td class="num">+0.937</td><td class="num">+0.831</td><td class="num" style="color:var(--warn);"><strong>87 of 100</strong></td></tr>
-            <tr><td>C &mdash; raw + z-score</td><td class="num">+0.854</td><td class="num">+0.789</td><td class="num" style="color:var(--bad);"><strong>90 of 100</strong></td></tr>
-            <tr><td>D &mdash; raw + percentile</td><td class="num">+0.979</td><td class="num">+0.912</td><td class="num" style="color:var(--good);">2 of 100</td></tr>
+            <tr><td>B &mdash; raw + min-max</td><td class="num">+0.919</td><td class="num">+0.806</td><td class="num" style="color:var(--warn);"><strong>87 of 100</strong></td></tr>
+            <tr><td>C &mdash; raw + z-score</td><td class="num">+0.850</td><td class="num">+0.774</td><td class="num" style="color:var(--bad);"><strong>90 of 100</strong></td></tr>
+            <tr><td>D &mdash; raw + percentile</td><td class="num">+0.981</td><td class="num">+0.910</td><td class="num" style="color:var(--good);">0 of 100</td></tr>
           </tbody>
         </table>
 
@@ -284,7 +355,7 @@ log_arr = log10(arr_USD_m)</pre>
         <h3>Finding 2: raw min-max silently destroys the bottom 87% of the list</h3>
         <p>
           Here's the trap. Raw min-max has a Spearman correlation of
-          <strong>+0.937</strong> with the shipped model &mdash; it looks fine
+          <strong>+0.919</strong> with the shipped model &mdash; it looks fine
           at a glance. But look at the last column: under raw min-max,
           <strong>87 of 100 companies score below 5 points out of 100</strong>,
           versus 0 under the shipped model. The list becomes 7 real rows and
@@ -310,8 +381,8 @@ log_arr = log10(arr_USD_m)</pre>
         <h3>Finding 3: the "improvements" in the raw ranking are artifacts</h3>
         <p>
           Raw min-max moves a striking set of companies <em>up</em>:
-          DeepSeek #40&rarr;#16, Thinking Machines Lab #41&rarr;#17, SSI #48&rarr;#22,
-          Reflection AI #54&rarr;#26, Moonshot AI #56&rarr;#29. These are all
+          DeepSeek #41&rarr;#16, Thinking Machines Lab #42&rarr;#17, SSI #50&rarr;#22,
+          Reflection AI #56&rarr;#26, Moonshot AI #58&rarr;#29, Luma AI #93&rarr;#58. These are all
           pre-revenue labs with no ARR at all. Under raw min-max their score
           collapses to <code>0.5 &times; (valuation / $1T)</code> &mdash; a
           number so small it's basically zero. But because the other 87
@@ -326,7 +397,7 @@ log_arr = log10(arr_USD_m)</pre>
 
         <h3>Finding 4: z-score is the worst option</h3>
         <p>
-          Raw + z-score has the lowest correlation (+0.854) and reorders the
+          Raw + z-score has the lowest correlation (+0.850) and reorders the
           top 12. An unbounded standardisation lets a single $965B outlier
           drag the entire distribution &mdash; the mean and standard deviation
           are set by the giants, and everyone else gets compressed toward
@@ -338,13 +409,13 @@ log_arr = log10(arr_USD_m)</pre>
         <h3>Finding 5: if you want scale-free, use percentile</h3>
         <p>
           Variant D (percentile rank) is the strongest alternative &mdash; it
-          correlates <em>more</em> closely with the shipped model (+0.979
-          Spearman, +0.912 Kendall) than raw min-max does, matches the top 12
+          correlates <em>more</em> closely with the shipped model (+0.981
+          Spearman, +0.910 Kendall) than raw min-max does, matches the top 12
           exactly, and is invariant to any monotone change of units. It's also
-          the most discriminative of the four: only <strong>2 of 100</strong>
-          rows fall below 5/100 (vs 0 for the shipped log model and 87-90 for
+          the only variant besides the shipped one that keeps every row above 5/100:
+          <strong>0 of 100</strong> rows fall below 5/100 (against 87-90 for
           the raw variants). Its difference is in the middle: it penalises the
-          proxy rows (Palantir #26&rarr;#43, ByteDance #28&rarr;#47) because a
+          proxy rows (Palantir #26&rarr;#42, ByteDance #28&rarr;#45) because a
           company with no disclosed ARR genuinely has no ARR, rather than
           having its market-cap proxy inflate it.
         </p>
@@ -438,7 +509,7 @@ with W_VAL = W_ARR = 0.5</pre>
           applied once. For the 2026 set:
         </p>
         <ul>
-          <li>Pool: <strong>81 pure-play companies</strong> with both a valuation and an ARR figure</li>
+          <li>Pool: <strong>85 pure-play companies</strong> with both a valuation and an ARR figure</li>
           <li>Median multiple: <strong>20.0&times;</strong></li>
           <li>Interquartile range: <strong>15&times; &ndash; 40&times;</strong></li>
           <li>Range: 5&times; (Mercor, Otter.ai) to 324&times; (Zhipu AI)</li>
@@ -531,15 +602,21 @@ Salesforce     $800M AI ARR x 20x =  $16B implied AI valuation</pre>
 
         <h3>The multiple is pinned, not recomputed</h3>
         <p>
-          The 20&times; is the pure-play median <em>as measured on the 2026-10
-          edition</em> (n=81, IQR 15&ndash;40&times;, mean 33.6&times;, trimmed
-          mean 25.5&times;). It is held fixed in
-          <code>data/model_config.json</code> rather than recomputed on every
-          run, for the same reason the axis bounds are fixed: a live list cannot
-          have its derived valuations move because the composition of the peer
-          pool changed. The median is itself a sample-dependent number &mdash;
-          adding one company at 90.9&times; moves it from 20.00&times; to
-          20.42&times; and shifts every derived megacap row.
+          The 20&times; is the pure-play median <em>as measured when the pin was
+          set</em>, and it is held fixed in <code>data/model_config.json</code>
+          rather than recomputed on every run, for the same reason the axis
+          bounds are fixed: a live list cannot have its derived valuations move
+          because the composition of the peer pool changed. The median is
+          itself a sample-dependent number &mdash; adding one company at
+          90.9&times; moves the current pool from 20.83&times; to 21.08&times; and
+          shifts every derived megacap row.
+        </p>
+        <p>
+          The <em>current</em> pool (n=85, IQR 15&ndash;40&times;, mean 37.7&times;,
+          trimmed mean 27.3&times;) computes to a median of 20.83&times; &mdash; a
+          move of 0.83&times; from the pinned 20.0&times;, and far inside the
+          one-third-of-an-IQR retune trigger of about 8&times;. The pin therefore
+          stands, and no derived row moved as a result of this update.
         </p>
         <p>
           <strong>Review policy.</strong> The pinned value is re-reviewed
@@ -561,16 +638,16 @@ Salesforce     $800M AI ARR x 20x =  $16B implied AI valuation</pre>
             <tr><td>p10</td><td class="num">10.0&times;</td><td></td></tr>
             <tr><td>p25</td><td class="num">15.0&times;</td><td>lower quartile</td></tr>
             <tr><td><strong>median (used)</strong></td><td class="num"><strong>20.0&times;</strong></td><td></td></tr>
-            <tr><td>mean</td><td class="num">33.6&times;</td><td>dragged up by Zhipu 324&times;, Baichuan 149&times;</td></tr>
-            <tr><td>10% trimmed mean</td><td class="num">25.5&times;</td><td></td></tr>
+            <tr><td>mean</td><td class="num">37.7&times;</td><td>dragged up by Zhipu 324&times;, SandboxAQ 315&times;, Baichuan 149&times;</td></tr>
+            <tr><td>10% trimmed mean</td><td class="num">27.3&times;</td><td></td></tr>
             <tr><td>p75</td><td class="num">40.0&times;</td><td></td></tr>
-            <tr><td>p90</td><td class="num">62.5&times;</td><td></td></tr>
+            <tr><td>p90</td><td class="num">76.0&times;</td><td></td></tr>
             <tr><td>max</td><td class="num">323.5&times;</td><td>Zhipu AI</td></tr>
           </tbody>
         </table>
         <p>
           The median at 20&times; is the <em>most conservative</em> of the central
-          statistics &mdash; the mean is 68% higher and the trimmed mean 28%
+          statistics &mdash; the mean is 89% higher and the trimmed mean 37%
           higher. So the choice of median is a conservative one, not a
           convenient one. But note the IQR alone spans <strong>15&times; to
           40&times;</strong>, a 2.67&times; range. Any single number here is a
@@ -585,8 +662,8 @@ Salesforce     $800M AI ARR x 20x =  $16B implied AI valuation</pre>
         <table class="rank" style="margin:14px 0;">
           <thead><tr><th>Peer ARR band</th><th class="num">n</th><th class="num">Median multiple</th><th class="num">Range</th></tr></thead>
           <tbody>
-            <tr><td>ARR &lt; $100M</td><td class="num">37</td><td class="num">20.0&times;</td><td class="num">7.5&ndash;149&times;</td></tr>
-            <tr><td>$100M &ndash; $1B</td><td class="num">29</td><td class="num">30.1&times;</td><td class="num">5.0&ndash;324&times;</td></tr>
+            <tr><td>ARR &lt; $100M</td><td class="num">36</td><td class="num">21.1&times;</td><td class="num">7.5&ndash;314.6&times;</td></tr>
+            <tr><td>$100M &ndash; $1B</td><td class="num">30</td><td class="num">29.3&times;</td><td class="num">5.0&ndash;323.5&times;</td></tr>
             <tr><td>$1B &ndash; $5B</td><td class="num">5</td><td class="num">14.5&times;</td><td class="num">5.0&ndash;24&times;</td></tr>
             <tr><td>$5B &ndash; $20B</td><td class="num">2</td><td class="num">24.5&times;</td><td class="num">21.8&ndash;27.1&times;</td></tr>
             <tr><td>ARR &ge; $20B</td><td class="num">2</td><td class="num">13.3&times;</td><td class="num">9.7&ndash;17.0&times;</td></tr>
@@ -612,7 +689,7 @@ Salesforce     $800M AI ARR x 20x =  $16B implied AI valuation</pre>
         <table class="rank" style="margin:14px 0;">
           <thead><tr><th>Cohort</th><th class="num">n</th><th class="num">Median</th><th class="num">IQR</th></tr></thead>
           <tbody>
-            <tr><td>Western pure-plays</td><td class="num">76</td><td class="num">20.0&times;</td><td class="num">14.9&ndash;37.2&times;</td></tr>
+            <tr><td>Western pure-plays</td><td class="num">80</td><td class="num">20.0&times;</td><td class="num">14.9&ndash;39.1&times;</td></tr>
             <tr><td>Chinese pure-plays</td><td class="num">5</td><td class="num">50.0&times;</td><td class="num">40.0&ndash;149.0&times;</td></tr>
           </tbody>
         </table>
@@ -774,7 +851,7 @@ z_arr = (5.000 &minus; 1.00) / (5.000 &minus; 1.00) = 1.0000</pre>
         </p>
         <h3>And a derived example: Microsoft</h3>
         <pre>AI ARR                  = $37,000M  (disclosed, Q3 FY26)
-peer multiple (pinned)    = 20.0x     (pure-play median, 2026-10 edition, n=81)
+peer multiple (pinned)    = 20.0x     (pure-play median, 2026-10 edition, n=85)
 implied AI valuation     = $37,000M x 20.0x = $740B
 log_val = log10(740) = 2.869
 z_val   = (2.869 &minus; (&minus;1.00)) / 4.00 = 0.967
@@ -791,11 +868,11 @@ S       = 100 * (0.5 * 0.967 + 0.5 * 0.892) = 92.97  &rarr; rank #3</pre>
         <pre>$ python scripts/score.py
 Model config:
   axis bounds     : anchored  (val 0.1..1000.0B, arr 10.0..100000.0M)
-  peer multiple   : 20.00x  (pinned; computed median 20.00x)
+  peer multiple   : 20.00x  (pinned; computed median 20.83x)
   missing ARR rule: zero
 
-Peer EV/Revenue multiple (pure-play pool, n=81):
-  median=20.00x  p25=15.00x  p75=40.00x
+Peer EV/Revenue multiple (pure-play pool, n=85):
+  median=20.83x  p25=15.00x  p75=40.00x
 
 Top 15:
     1. [P] Anthropic          val=$965.0B  arr=$100000M  score=99.81
@@ -840,7 +917,7 @@ Top 15:
           </li>
           <li>
             <strong>The peer multiple is a single number.</strong> 20&times; is a
-            median across 81 companies spanning $10M to $100B ARR. A
+            median across 85 companies spanning $10M to $100B ARR. A
             15&times; multiple would put Microsoft at #3 with a $555B implied
             valuation instead of $740B, and would not change the identity of
             the top 3. A 40&times; multiple (the p75) would lift the big-tech

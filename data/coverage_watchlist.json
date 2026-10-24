@@ -1,0 +1,220 @@
+{
+  "policy_version": "live-v2",
+  "reviewed": "2026-10-24",
+  "note": "Third-party AI company lists, transcribed with the rank each source gave. The purpose is COVERAGE AUDIT: every name below must resolve to exactly one disposition - ranked in the Top 100, folded into a roll-up row, or explicitly excluded with a reason. A name that resolves to nothing is a coverage gap and must be closed before an edition is published. Re-check with: python scripts/coverage.py An entry may carry an explicit 'match' field naming the row in data/companies.json when the external list's name differs from ours. An entry may carry an explicit 'match' field naming the row in data/companies.json when the external list's name differs from ours.",
+  "sources": [
+    {
+      "id": "external-list-2026-10",
+      "label": "External AI company list (39 names), transcribed 2026-10-24",
+      "note": "Claimed ranks are the position each source gave the company. They are NOT this project's ranks."
+    }
+  ],
+  "entries": [
+    {
+      "name": "Google DeepMind",
+      "source": "external-list-2026-10",
+      "claimed_rank": 1,
+      "match": "Google DeepMind"
+    },
+    {
+      "name": "Anthropic",
+      "source": "external-list-2026-10",
+      "claimed_rank": 2
+    },
+    {
+      "name": "SpaceX (xAI + Cursor)",
+      "source": "external-list-2026-10",
+      "claimed_rank": 4,
+      "match": "SpaceXAI (xAI + Cursor + X)"
+    },
+    {
+      "name": "OpenAI",
+      "source": "external-list-2026-10",
+      "claimed_rank": 6
+    },
+    {
+      "name": "Databricks",
+      "source": "external-list-2026-10",
+      "claimed_rank": 8
+    },
+    {
+      "name": "ServiceNow",
+      "source": "external-list-2026-10",
+      "claimed_rank": 14,
+      "match": "ServiceNow (Now Assist AI)"
+    },
+    {
+      "name": "Snowflake",
+      "source": "external-list-2026-10",
+      "claimed_rank": 15,
+      "match": "Snowflake (Cortex AI / Snowflake Intelligence)"
+    },
+    {
+      "name": "Cognition AI",
+      "source": "external-list-2026-10",
+      "claimed_rank": 17,
+      "match": "Cognition (Devin)"
+    },
+    {
+      "name": "Datadog",
+      "source": "external-list-2026-10",
+      "claimed_rank": 19
+    },
+    {
+      "name": "Prometheus",
+      "source": "external-list-2026-10",
+      "claimed_rank": 21,
+      "match": "Prometheus (prometheus.ai)"
+    },
+    {
+      "name": "Zhipu AI",
+      "source": "external-list-2026-10",
+      "claimed_rank": 25,
+      "match": "Zhipu AI (Z.ai)"
+    },
+    {
+      "name": "Safe Superintelligence",
+      "source": "external-list-2026-10",
+      "claimed_rank": 26,
+      "match": "Safe Superintelligence (SSI)"
+    },
+    {
+      "name": "Moonshot AI",
+      "source": "external-list-2026-10",
+      "claimed_rank": 31
+    },
+    {
+      "name": "Mistral AI",
+      "source": "external-list-2026-10",
+      "claimed_rank": 34
+    },
+    {
+      "name": "ElevenLabs",
+      "source": "external-list-2026-10",
+      "claimed_rank": 36
+    },
+    {
+      "name": "MiniMax",
+      "source": "external-list-2026-10",
+      "claimed_rank": 38
+    },
+    {
+      "name": "Thinking Machines Lab",
+      "source": "external-list-2026-10",
+      "claimed_rank": 46
+    },
+    {
+      "name": "Cohere",
+      "source": "external-list-2026-10",
+      "claimed_rank": 48
+    },
+    {
+      "name": "SandboxAQ",
+      "source": "external-list-2026-10",
+      "claimed_rank": 50
+    },
+    {
+      "name": "StepFun",
+      "source": "external-list-2026-10",
+      "claimed_rank": 55
+    },
+    {
+      "name": "Workato",
+      "source": "external-list-2026-10",
+      "claimed_rank": 61
+    },
+    {
+      "name": "Wonderful AI",
+      "source": "external-list-2026-10",
+      "claimed_rank": 62
+    },
+    {
+      "name": "Advanced Machine Intelligence (AMI)",
+      "source": "external-list-2026-10",
+      "claimed_rank": 70,
+      "match": "Advanced Machine Intelligence (AMI)"
+    },
+    {
+      "name": "Decart",
+      "source": "external-list-2026-10",
+      "claimed_rank": 75
+    },
+    {
+      "name": "Luma AI",
+      "source": "external-list-2026-10",
+      "claimed_rank": 78
+    },
+    {
+      "name": "Manus AI",
+      "source": "external-list-2026-10",
+      "claimed_rank": 79
+    },
+    {
+      "name": "AvePoint",
+      "source": "external-list-2026-10",
+      "claimed_rank": 81
+    },
+    {
+      "name": "Sakana AI",
+      "source": "external-list-2026-10",
+      "claimed_rank": 91
+    },
+    {
+      "name": "AI21 Labs",
+      "source": "external-list-2026-10",
+      "claimed_rank": 94
+    },
+    {
+      "name": "Periodic Labs",
+      "source": "external-list-2026-10",
+      "claimed_rank": 139
+    },
+    {
+      "name": "Deepgram",
+      "source": "external-list-2026-10",
+      "claimed_rank": 141
+    },
+    {
+      "name": "Preferred Networks",
+      "source": "external-list-2026-10",
+      "claimed_rank": 142,
+      "match": "Preferred Networks (PFN)"
+    },
+    {
+      "name": "Microsoft Research Asia (MSRA)",
+      "source": "external-list-2026-10",
+      "claimed_rank": 154,
+      "match": "Microsoft Research Asia (MSRA)"
+    },
+    {
+      "name": "Enigma",
+      "source": "external-list-2026-10",
+      "claimed_rank": 156
+    },
+    {
+      "name": "BeyondMath",
+      "source": "external-list-2026-10",
+      "claimed_rank": 550
+    },
+    {
+      "name": "Cantina Labs",
+      "source": "external-list-2026-10",
+      "claimed_rank": 1700
+    },
+    {
+      "name": "Openmind Research Institute",
+      "source": "external-list-2026-10",
+      "claimed_rank": 1700
+    },
+    {
+      "name": "BottleCap AI",
+      "source": "external-list-2026-10",
+      "claimed_rank": 1700
+    },
+    {
+      "name": "Causal Labs",
+      "source": "external-list-2026-10",
+      "claimed_rank": 4100
+    }
+  ]
+}

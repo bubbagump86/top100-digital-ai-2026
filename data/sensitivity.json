@@ -2,8 +2,8 @@
   "shipped": "A: log + min-max",
   "variants": {
     "raw_minmax": {
-      "spearman_vs_shipped": 0.937,
-      "kendall_tau_vs_shipped": 0.831,
+      "spearman_vs_shipped": 0.919,
+      "kendall_tau_vs_shipped": 0.806,
       "rows_below_5_points": 87,
       "top10": [
         "Anthropic",
@@ -19,8 +19,8 @@
       ]
     },
     "raw_zscore": {
-      "spearman_vs_shipped": 0.854,
-      "kendall_tau_vs_shipped": 0.789,
+      "spearman_vs_shipped": 0.85,
+      "kendall_tau_vs_shipped": 0.774,
       "rows_below_5_points": 90,
       "top10": [
         "Anthropic",
@@ -36,9 +36,9 @@
       ]
     },
     "raw_percentile": {
-      "spearman_vs_shipped": 0.979,
-      "kendall_tau_vs_shipped": 0.912,
-      "rows_below_5_points": 2,
+      "spearman_vs_shipped": 0.981,
+      "kendall_tau_vs_shipped": 0.91,
+      "rows_below_5_points": 0,
       "top10": [
         "Anthropic",
         "OpenAI",

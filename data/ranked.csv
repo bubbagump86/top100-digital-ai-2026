@@ -34,68 +34,68 @@ rank,name,category,hq,founded,valuation_usd_b,valuation_basis,valuation_date,arr
 33,Recursion Pharmaceuticals,AI Drug Discovery,"Salt Lake City, USA",2013,8.0,actual,2025 market cap,250,FY2025,41.26,0.4758,0.3495,,Foundation models for biology; wet-lab + in-silico loop. Software-heavy; classified digital.
 34,Hugging Face,AI Model + Data Hub,Paris & New York,2016,12.93,actual,2025 (acquired by NVIDIA),150,2025,41.1,0.5279,0.294,,"Largest hub for open models/datasets; Inference endpoints, Spaces, Enterprise Hub."
 35,Notion AI,Productivity AI (private segment),"San Francisco, USA",2013,6.0,derived,2024,300,2025 (AI-attributed est.),40.69,0.4445,0.3693,,Notion AI revenue slice. Treated as digital AI segment.
-36,C3.ai,Enterprise AI Platform,"Redwood City, USA",2009,4.0,actual,2025 market cap,380,FY2026,39.77,0.4005,0.3949,,Enterprise AI apps and platform; listed. Pure-play AI.
-37,Replit,AI Coding / Dev Platform,"San Francisco, USA",2016,9.0,actual,2025 round,110,2025,37.45,0.4886,0.2603,,Browser IDE with built-in AI Agent. Consumer + education + prosumer base.
-38,Legora (formerly Spellbook),Vertical AI (Legal),"Stockholm, Sweden",2018,5.6,actual,2026 Series C,150,2026 (run-rate),36.55,0.437,0.294,,"Collaborative AI workspace for lawyers (review, drafting, drafting assistance)."
-39,Abridge,Vertical AI (Healthcare),"San Francisco, USA",2018,5.3,actual,2025 Series E,117,2026 (run-rate),34.91,0.4311,0.267,,Ambient medical scribe; turns patient-clinician conversation into structured notes + codes.
-40,DeepSeek,Open-Source Foundation Models,"Hangzhou, China",2023,50.0,actual,2026 funding round,,,33.74,0.6747,,arr,"Open-weight frontier model lab (R1, V3). Cost-efficient training; minimal disclosed revenue."
-41,Thinking Machines Lab,Foundation Models / Research Lab,"San Francisco, USA",2025,50.0,actual,2026 (in discussions),,,33.74,0.6747,,arr,Mira Murati's post-OpenAI lab. Pre-product; raised on talent and roadmap.
-42,Together AI,AI Cloud Platform,"San Francisco, USA",2022,3.3,actual,2025 Series B,150,2025,33.68,0.3796,0.294,,Open-model inference + training cloud; competitive with hyperscalers on price/perf.
-43,Decagon,AI Customer Experience,"San Francisco, USA",2023,4.5,actual,2026 Series C,100,2026 (run-rate),33.17,0.4133,0.25,,Autonomous AI agents for enterprise support / CX.
-44,EliseAI,Vertical AI (Real Estate / Healthcare),"New York, USA",2017,2.2,actual,2025 Series E,200,2025,33.04,0.3356,0.3253,,Conversational AI for property management & healthcare admin.
-45,Synthesia,AI Video Generation,"London, UK",2017,4.0,actual,2025 round,100,2025,32.53,0.4005,0.25,,AI avatar video platform for enterprise comms and L&D.
-46,FAL,AI Media Inference Cloud,"San Francisco, USA",2021,4.0,actual,2026 Series C,100,2026,32.53,0.4005,0.25,,"Developer cloud for image/video/audio generative inference (Flux, Kling, SDXL)."
-47,Runway,AI Video Generation,"New York, USA",2018,4.0,actual,2025 round,90,2025,31.95,0.4005,0.2386,,Gen-3 video model; creative tooling and Hollywood partnerships.
-48,Safe Superintelligence (SSI),Foundation Models / Research Lab,"Palo Alto, USA",2024,32.0,actual,2025 round,,,31.31,0.6263,,arr,"Ilya Sutskever's pure research lab; explicit no-product, no-revenue model."
-49,MiniMax,Foundation Models (China),"Shanghai, China",2021,4.0,actual,2024-25 Series C,80,2025,31.31,0.4005,0.2258,,Chinese unicorn AI lab; Hailuo video + chat models.
-50,Samsara,Industrial AI (IoT data),"San Francisco, USA",2015,30.0,proxy,2025 market cap,,,30.96,0.6193,,arr,Cameras + sensors with AI features for fleet + industrial ops. AI layer ARR not separately disclosed. Borderline 'digital AI' — included on valuation strength only.
-51,Moveworks,Enterprise AI / IT Support,"Mountain View, USA",2016,2.85,actual,2024 secondary,100,2024,30.69,0.3637,0.25,,"Conversational AI for IT, HR, employee support."
-52,DeepL,AI Translation,"Cologne, Germany",2017,2.0,actual,2025 round,130,2025,30.19,0.3253,0.2785,,Premium machine translation; enterprise contracts across Europe.
-53,Invisible Technologies,AI Operations / Data,"San Francisco, USA",2015,2.0,actual,2025 round,130,2025,30.19,0.3253,0.2785,,AI-augmented back-office ops and eval/data services.
-54,Reflection AI,Foundation Models,"Brooklyn, USA",2024,25.0,actual,2025 Series A,,,29.97,0.5995,,arr,Open-weights frontier model lab; ex-DeepMind founders. Asha models with proprietary training infra.
-55,EvenUp,Vertical AI (Legal / Insurance),"San Francisco, USA",2019,2.0,actual,2025 round,110,2025,29.28,0.3253,0.2603,,Personal-injury lawyers: demand letters + case summarization from medical records.
-56,Moonshot AI,Foundation Models (China),"Beijing, China",2023,20.0,actual,2025 Series C,,,28.76,0.5753,,arr,Chinese AGI lab; Kimi models and chat product.
-57,Decart,Real-time Generative Video,"Tel Aviv, Israel",2023,3.1,actual,2025 round,50,2025,27.38,0.3728,0.1747,,Oasis - real-time infinite world model. High-throughput inference research.
-58,Kore.ai,Enterprise Conversational AI,"Orlando, USA",2013,1.5,actual,2024 round,100,2024,27.2,0.294,0.25,,Enterprise conversational AI platform + agents for CX and EX.
-59,Lightricks,AI Imaging + Video Apps,"Jerusalem, Israel",2013,1.5,actual,2024 round,100,2025,27.2,0.294,0.25,,"Generative photo/video apps (Facetune, LTX Studio). Consumer + creator-tools."
-60,You.com,AI Search / Enterprise,"San Francisco, USA",2020,1.5,actual,2024,90,2025,26.63,0.294,0.2386,,AI search/agent platform; enterprise APIs.
-61,Sourcegraph (Amp / Cody),AI Coding (Enterprise),"San Francisco, USA",2013,2.7,actual,2024 Series F,50,2024,26.63,0.3578,0.1747,,Cody AI + Amp coding agent; enterprise code intelligence.
-62,Cresta,AI Contact Center,"San Francisco, USA",2017,1.6,actual,2024 Series D,75,2025,25.99,0.301,0.2188,,Real-time agent-assist for sales and customer service.
-63,Jasper AI,Enterprise Marketing AI,"Austin, USA",2021,1.5,actual,2024 down round,80,2024,25.99,0.294,0.2258,,Marketing copy + brand-content AI for enterprises.
-64,Writer,Enterprise LLM Platform,"San Francisco, USA",2020,1.9,actual,2024 Series C,60,2024,25.71,0.3197,0.1945,,Enterprise Palmyra LLMs + agents for regulated industries.
-65,Hippocratic AI,Vertical AI (Healthcare),"Palo Alto, USA",2023,3.5,actual,2024 Series B,30,2025,25.26,0.386,0.1193,,Safety-focused LLM for nurses + care management; staffing-style pay-per-call.
-66,Deepgram,Speech AI,"San Francisco, USA",2015,1.3,actual,2024 round,80,2025,25.21,0.2785,0.2258,,Real-time ASR + TTS APIs with on-prem deployment.
-67,Speak,AI Language Learning,"San Francisco, USA",2016,1.0,actual,2024 round,100,2025,25.0,0.25,0.25,,AI tutor for English; massive Korea + Japan growth.
-68,Weights & Biases,MLOps / AI Dev Platform,"San Francisco, USA",2017,1.25,actual,2024 round,80,2024,25.0,0.2742,0.2258,,Experiment tracking + model lifecycle tooling; CoreWeave acquired.
-69,ADA (Ada Support),AI Customer Support,"Toronto, Canada",2016,1.2,actual,2024,80,2024,24.78,0.2698,0.2258,,AI agent platform for enterprise support automation.
-70,Fireflies.ai,Meeting AI,"San Francisco, USA",2016,1.0,actual,2024,80,2024,23.79,0.25,0.2258,,AI notetaker + conversation intelligence; enterprise.
-71,Observe.AI,Contact Center AI,"San Francisco, USA",2017,1.0,actual,2024 round,80,2024,23.79,0.25,0.2258,,Conversation intelligence + agent coaching for call centers.
-72,Ambience Healthcare,Vertical AI (Healthcare),"San Francisco, USA",2020,1.25,actual,2025 Series C,60,2025,23.44,0.2742,0.1945,,Ambient medical scribe + coding for hospitals; Epic/KLAREHR integrations.
-73,AI21 Labs,Foundation Models,"Tel Aviv, Israel",2017,1.4,actual,2024 round,50,2025,23.06,0.2865,0.1747,,Jamba models; enterprise focus with NVIDIA investment.
-74,Snorkel AI,AI Data Platform,"Palo Alto, USA",2019,1.3,actual,2024,50,2024,22.66,0.2785,0.1747,,Programmatic data labeling + weak supervision.
-75,Stability AI,Open Foundation Models (Media),"London, UK",2019,1.0,actual,2024 down round,60,2025,22.23,0.25,0.1945,,"Stable Diffusion, Stable Video. Open-weights media models; commercialization struggles."
-76,Baichuan Intelligence,Foundation Models (China),"Beijing, China",2023,2.98,actual,2025 round,20,2025,22.19,0.3686,0.0753,,Baichuan models; open-source + enterprise.
-77,Midjourney,AI Image Generation,"San Francisco, USA",2022,,actual,,500,2025 (revenue est.),21.24,,0.4247,valuation,Top consumer image model. Profitable without external VC.
-78,Character.AI,Consumer AI Companions,"Menlo Park, USA",2021,1.0,actual,2024 (down round),50,2025,21.24,0.25,0.1747,,Character chatbots; >200M MAUs; home-rolled LLM.
-79,Labelbox,AI Data Platform,"San Francisco, USA",2018,1.0,actual,2023,50,2024,21.24,0.25,0.1747,,Data labeling + eval platform for AI teams.
-80,Typeface,Enterprise Marketing AI,"San Francisco, USA",2022,1.0,actual,2024,50,2024,21.24,0.25,0.1747,,Brand-personalized content for enterprise marketing.
-81,AssemblyAI,Speech AI / APIs,"San Francisco, USA",2017,1.0,actual,2024 round,50,2024,21.24,0.25,0.1747,,Speech-to-text + speech LLM APIs.
-82,Otter.ai,Meeting AI,"Mountain View, USA",2016,0.5,actual,2024,100,2025,21.24,0.1747,0.25,,Meeting transcription + notes; consumer + enterprise.
-83,Forethought,AI Customer Support,"San Francisco, USA",2017,1.0,actual,2024,50,2024,21.24,0.25,0.1747,,Support agents + AI workflow tooling.
-84,HeyGen,AI Avatar Video,"Los Angeles, USA",2022,0.6,actual,2024 round,80,2025,21.02,0.1945,0.2258,,Avatar video localization + translation.
-85,Vapi,Voice Agent Platform,"San Francisco, USA",2023,1.3,actual,2025 Series A,35,2025,20.73,0.2785,0.136,,Developer platform for building production voice agents.
-86,Factory,AI Coding Agents,"San Francisco, USA",2023,1.5,actual,2025 Series A,30,2025,20.67,0.294,0.1193,,"Software-development agents that touch the entire stack (code, infra, ops)."
-87,Suki AI,Vertical AI (Healthcare),"Redwood City, USA",2017,0.6,actual,2024 round,60,2025,19.45,0.1945,0.1945,,Ambient scribe and voice assistant for clinicians.
-88,Schrodinger,AI Drug Discovery (Software),"New York, USA",1990,3.0,proxy,2025 market cap,,,18.46,0.3693,,arr,Computational chemistry. AI-attributed ARR is null — Bunsen agent is pre-revenue; core is physics simulation.
-89,01.AI (Yi),Foundation Models (China),"Beijing, China",2023,1.0,actual,2024 round,30,2025,18.46,0.25,0.1193,,Yi model family; Kai-Fu Lee's lab.
-90,Arize AI,ML Observability,"Berkeley, USA",2020,0.7,actual,2024,40,2024,18.09,0.2113,0.1505,,LLM evals + observability platform; enterprise.
-91,Stepfun,Foundation Models (China),"Shanghai, China",2023,1.0,actual,2024 round,25,2025,17.47,0.25,0.0995,,Step model family + Step-Video.
-92,PolyAI,Voice Agents,"London, UK",2017,0.5,actual,2024,50,2025,17.47,0.1747,0.1747,,Voice-first conversational agents for enterprise call centers.
-93,LangChain,Agent / LLM Dev Framework,"San Francisco, USA",2022,1.0,actual,2024 round,25,2024,17.47,0.25,0.0995,,LangChain + LangGraph framework for building LLM agents; LangSmith observability.
-94,Augment Code,AI Coding (Enterprise),"Seattle, USA",2022,0.9,actual,2025,25,2025,16.9,0.2386,0.0995,,AI coding agent with deep code-context engine.
-95,Suno,AI Music Generation,"Cambridge, USA",2023,,actual,,200,2026 (run-rate),16.26,,0.3253,valuation,Text-to-music generator; viral consumer + licensed catalog deals.
-96,Inflection AI,Foundation Models / Consumer AI,"Palo Alto, USA",2022,2.0,actual,2024 (post-Microsoft deal),,,16.26,0.3253,,arr,Pi assistant; pivoted to enterprise after Microsoft acqui-hire in 2024.
-97,Roboflow,Computer Vision Dev Platform,"Des Moines, USA",2018,0.6,actual,2024,30,2024,15.69,0.1945,0.1193,,End-to-end CV dev platform; dataset + training + deploy.
-98,Magic AI,AI Coding (Long-Context),"San Francisco, USA",2022,1.5,actual,2024 Series B,,,14.7,0.294,,arr,Long-context foundation model for coding; pre-revenue frontier lab.
-99,Inworld AI,AI Characters / NPCs,"Mountain View, USA",2019,0.5,actual,2024,30,2025,14.7,0.1747,0.1193,,AI characters for games + interactive media.
-100,Pika,AI Video Generation,"Palo Alto, USA",2023,0.47,actual,2024 round,30,2025,14.37,0.168,0.1193,,Text/image-to-video model; competitive with Runway on short-form.
+36,Manus AI,AI Agent / Consumer + Enterprise,Singapore,2022,4.0,actual,"Oct 8, 2026 round",450,Jun 2026 (run-rate),40.69,0.4005,0.4133,,"General-purpose AI agent that carries out multi-step tasks end to end. Independent again since Sep 1, 2026 after Beijing unwound the Meta acquisition agreed in Dec 2025."
+37,C3.ai,Enterprise AI Platform,"Redwood City, USA",2009,4.0,actual,2025 market cap,380,FY2026,39.77,0.4005,0.3949,,Enterprise AI apps and platform; listed. Pure-play AI.
+38,Replit,AI Coding / Dev Platform,"San Francisco, USA",2016,9.0,actual,2025 round,110,2025,37.45,0.4886,0.2603,,Browser IDE with built-in AI Agent. Consumer + education + prosumer base.
+39,Legora (formerly Spellbook),Vertical AI (Legal),"Stockholm, Sweden",2018,5.6,actual,2026 Series C,150,2026 (run-rate),36.55,0.437,0.294,,"Collaborative AI workspace for lawyers (review, drafting, drafting assistance)."
+40,Abridge,Vertical AI (Healthcare),"San Francisco, USA",2018,5.3,actual,2025 Series E,117,2026 (run-rate),34.91,0.4311,0.267,,Ambient medical scribe; turns patient-clinician conversation into structured notes + codes.
+41,DeepSeek,Open-Source Foundation Models,"Hangzhou, China",2023,50.0,actual,2026 funding round,,,33.74,0.6747,,arr,"Open-weight frontier model lab (R1, V3). Cost-efficient training; minimal disclosed revenue."
+42,Thinking Machines Lab,Foundation Models / Research Lab,"San Francisco, USA",2025,50.0,actual,2026 (in discussions),,,33.74,0.6747,,arr,Mira Murati's post-OpenAI lab. Pre-product; raised on talent and roadmap.
+43,Together AI,AI Cloud Platform,"San Francisco, USA",2022,3.3,actual,2025 Series B,150,2025,33.68,0.3796,0.294,,Open-model inference + training cloud; competitive with hyperscalers on price/perf.
+44,Decagon,AI Customer Experience,"San Francisco, USA",2023,4.5,actual,2026 Series C,100,2026 (run-rate),33.17,0.4133,0.25,,Autonomous AI agents for enterprise support / CX.
+45,EliseAI,Vertical AI (Real Estate / Healthcare),"New York, USA",2017,2.2,actual,2025 Series E,200,2025,33.04,0.3356,0.3253,,Conversational AI for property management & healthcare admin.
+46,Synthesia,AI Video Generation,"London, UK",2017,4.0,actual,2025 round,100,2025,32.53,0.4005,0.25,,AI avatar video platform for enterprise comms and L&D.
+47,FAL,AI Media Inference Cloud,"San Francisco, USA",2021,4.0,actual,2026 Series C,100,2026,32.53,0.4005,0.25,,"Developer cloud for image/video/audio generative inference (Flux, Kling, SDXL)."
+48,Runway,AI Video Generation,"New York, USA",2018,4.0,actual,2025 round,90,2025,31.95,0.4005,0.2386,,Gen-3 video model; creative tooling and Hollywood partnerships.
+49,Wonderful AI,AI Customer Support,"Tel Aviv, Israel",2023,5.0,actual,"Sep 2, 2026 Series C",70,"Sep 7, 2026 (revenue run-rate)",31.8,0.4247,0.2113,,"AI customer-service agents in Hebrew, Arabic and English for enterprise contact centres. The fastest-growing newly independent AI company in this list by revenue run-rate."
+50,Safe Superintelligence (SSI),Foundation Models / Research Lab,"Palo Alto, USA",2024,32.0,actual,2025 round,,,31.31,0.6263,,arr,"Ilya Sutskever's pure research lab; explicit no-product, no-revenue model."
+51,MiniMax,Foundation Models (China),"Shanghai, China",2021,4.0,actual,2024-25 Series C,80,2025,31.31,0.4005,0.2258,,Chinese unicorn AI lab; Hailuo video + chat models.
+52,Samsara,Industrial AI (IoT data),"San Francisco, USA",2015,30.0,proxy,2025 market cap,,,30.96,0.6193,,arr,Cameras + sensors with AI features for fleet + industrial ops. AI layer ARR not separately disclosed. Borderline 'digital AI' — included on valuation strength only.
+53,Moveworks,Enterprise AI / IT Support,"Mountain View, USA",2016,2.85,actual,2024 secondary,100,2024,30.69,0.3637,0.25,,"Conversational AI for IT, HR, employee support."
+54,DeepL,AI Translation,"Cologne, Germany",2017,2.0,actual,2025 round,130,2025,30.19,0.3253,0.2785,,Premium machine translation; enterprise contracts across Europe.
+55,Invisible Technologies,AI Operations / Data,"San Francisco, USA",2015,2.0,actual,2025 round,130,2025,30.19,0.3253,0.2785,,AI-augmented back-office ops and eval/data services.
+56,Reflection AI,Foundation Models,"Brooklyn, USA",2024,25.0,actual,2025 Series A,,,29.97,0.5995,,arr,Open-weights frontier model lab; ex-DeepMind founders. Asha models with proprietary training infra.
+57,EvenUp,Vertical AI (Legal / Insurance),"San Francisco, USA",2019,2.0,actual,2025 round,110,2025,29.28,0.3253,0.2603,,Personal-injury lawyers: demand letters + case summarization from medical records.
+58,Moonshot AI,Foundation Models (China),"Beijing, China",2023,20.0,actual,2025 Series C,,,28.76,0.5753,,arr,Chinese AGI lab; Kimi models and chat product.
+59,Snowflake (Cortex AI / Snowflake Intelligence),AI Data Platform (public),"Bozeman, Montana, USA",2012,2.0,derived,Derived: AI ARR x peer multiple,100,Dec 2025 (announced with Q3 FY2026 results),28.76,0.3253,0.25,,"Cloud data platform ('AI Data Cloud') with Cortex AI, Snowflake Intelligence and Cortex Code. One of very few large-cap software companies that publishes a dollar AI revenue figure - but it has not updated that figure since Dec 2025."
+60,Decart,Real-time Generative Video,"Tel Aviv, Israel",2023,3.1,actual,2025 round,50,2025,27.38,0.3728,0.1747,,Oasis - real-time infinite world model. High-throughput inference research.
+61,Kore.ai,Enterprise Conversational AI,"Orlando, USA",2013,1.5,actual,2024 round,100,2024,27.2,0.294,0.25,,Enterprise conversational AI platform + agents for CX and EX.
+62,Lightricks,AI Imaging + Video Apps,"Jerusalem, Israel",2013,1.5,actual,2024 round,100,2025,27.2,0.294,0.25,,"Generative photo/video apps (Facetune, LTX Studio). Consumer + creator-tools."
+63,You.com,AI Search / Enterprise,"San Francisco, USA",2020,1.5,actual,2024,90,2025,26.63,0.294,0.2386,,AI search/agent platform; enterprise APIs.
+64,Sourcegraph (Amp / Cody),AI Coding (Enterprise),"San Francisco, USA",2013,2.7,actual,2024 Series F,50,2024,26.63,0.3578,0.1747,,Cody AI + Amp coding agent; enterprise code intelligence.
+65,Cresta,AI Contact Center,"San Francisco, USA",2017,1.6,actual,2024 Series D,75,2025,25.99,0.301,0.2188,,Real-time agent-assist for sales and customer service.
+66,Jasper AI,Enterprise Marketing AI,"Austin, USA",2021,1.5,actual,2024 down round,80,2024,25.99,0.294,0.2258,,Marketing copy + brand-content AI for enterprises.
+67,Writer,Enterprise LLM Platform,"San Francisco, USA",2020,1.9,actual,2024 Series C,60,2024,25.71,0.3197,0.1945,,Enterprise Palmyra LLMs + agents for regulated industries.
+68,Hippocratic AI,Vertical AI (Healthcare),"Palo Alto, USA",2023,3.5,actual,2024 Series B,30,2025,25.26,0.386,0.1193,,Safety-focused LLM for nurses + care management; staffing-style pay-per-call.
+69,Deepgram,Speech AI,"San Francisco, USA",2015,1.3,actual,2024 round,80,2025,25.21,0.2785,0.2258,,Real-time ASR + TTS APIs with on-prem deployment.
+70,Speak,AI Language Learning,"San Francisco, USA",2016,1.0,actual,2024 round,100,2025,25.0,0.25,0.25,,AI tutor for English; massive Korea + Japan growth.
+71,Weights & Biases,MLOps / AI Dev Platform,"San Francisco, USA",2017,1.25,actual,2024 round,80,2024,25.0,0.2742,0.2258,,Experiment tracking + model lifecycle tooling; CoreWeave acquired.
+72,SandboxAQ,AI for Science + Quantum Security,"New York, USA",2022,5.6,actual,Dec 2024 round,17.8,2024 estimate (latest available),24.98,0.437,0.0626,,"Large language models for chemistry and materials science, post-quantum cryptography, and an AI-for-science platform. Also runs a quantum-sensing navigation programme (AQNav) - a hardware side-line, not the core business."
+73,ADA (Ada Support),AI Customer Support,"Toronto, Canada",2016,1.2,actual,2024,80,2024,24.78,0.2698,0.2258,,AI agent platform for enterprise support automation.
+74,Sakana AI,Foundation Models / Research Lab,"Tokyo, Japan",2024,2.7,actual,"Nov 17, 2025 Series B",30,2025-2026 estimate,23.86,0.3578,0.1193,,"Japan's model-merging and evolutionary-AI lab (David Ha, Llion Jones). Merges and fine-tunes open models rather than pretraining from scratch, and sells subscription access to the resulting models."
+75,Fireflies.ai,Meeting AI,"San Francisco, USA",2016,1.0,actual,2024,80,2024,23.79,0.25,0.2258,,AI notetaker + conversation intelligence; enterprise.
+76,Observe.AI,Contact Center AI,"San Francisco, USA",2017,1.0,actual,2024 round,80,2024,23.79,0.25,0.2258,,Conversation intelligence + agent coaching for call centers.
+77,Ambience Healthcare,Vertical AI (Healthcare),"San Francisco, USA",2020,1.25,actual,2025 Series C,60,2025,23.44,0.2742,0.1945,,Ambient medical scribe + coding for hospitals; Epic/KLAREHR integrations.
+78,AI21 Labs,Foundation Models,"Tel Aviv, Israel",2017,1.4,actual,2024 round,50,2025,23.06,0.2865,0.1747,,Jamba models; enterprise focus with NVIDIA investment.
+79,Snorkel AI,AI Data Platform,"Palo Alto, USA",2019,1.3,actual,2024,50,2024,22.66,0.2785,0.1747,,Programmatic data labeling + weak supervision.
+80,Stability AI,Open Foundation Models (Media),"London, UK",2019,1.0,actual,2024 down round,60,2025,22.23,0.25,0.1945,,"Stable Diffusion, Stable Video. Open-weights media models; commercialization struggles."
+81,Baichuan Intelligence,Foundation Models (China),"Beijing, China",2023,2.98,actual,2025 round,20,2025,22.19,0.3686,0.0753,,Baichuan models; open-source + enterprise.
+82,Midjourney,AI Image Generation,"San Francisco, USA",2022,,actual,,500,2025 (revenue est.),21.24,,0.4247,valuation,Top consumer image model. Profitable without external VC.
+83,Character.AI,Consumer AI Companions,"Menlo Park, USA",2021,1.0,actual,2024 (down round),50,2025,21.24,0.25,0.1747,,Character chatbots; >200M MAUs; home-rolled LLM.
+84,Labelbox,AI Data Platform,"San Francisco, USA",2018,1.0,actual,2023,50,2024,21.24,0.25,0.1747,,Data labeling + eval platform for AI teams.
+85,Typeface,Enterprise Marketing AI,"San Francisco, USA",2022,1.0,actual,2024,50,2024,21.24,0.25,0.1747,,Brand-personalized content for enterprise marketing.
+86,AssemblyAI,Speech AI / APIs,"San Francisco, USA",2017,1.0,actual,2024 round,50,2024,21.24,0.25,0.1747,,Speech-to-text + speech LLM APIs.
+87,Otter.ai,Meeting AI,"Mountain View, USA",2016,0.5,actual,2024,100,2025,21.24,0.1747,0.25,,Meeting transcription + notes; consumer + enterprise.
+88,Forethought,AI Customer Support,"San Francisco, USA",2017,1.0,actual,2024,50,2024,21.24,0.25,0.1747,,Support agents + AI workflow tooling.
+89,HeyGen,AI Avatar Video,"Los Angeles, USA",2022,0.6,actual,2024 round,80,2025,21.02,0.1945,0.2258,,Avatar video localization + translation.
+90,Vapi,Voice Agent Platform,"San Francisco, USA",2023,1.3,actual,2025 Series A,35,2025,20.73,0.2785,0.136,,Developer platform for building production voice agents.
+91,Advanced Machine Intelligence (AMI),Foundation Models / Research Lab,"New York, USA",2025,4.53,actual,"Mar 10, 2026 seed",,,20.7,0.414,,arr,"Frontier research lab founded by Yann LeCun, building general-purpose AI through JEPA world models. IDENTITY NOTE: this is the lab whose name is literally 'Advanced Machine Intelligence'; a separate manufacturing-AI company also trades on the AMI acronym."
+92,Factory,AI Coding Agents,"San Francisco, USA",2023,1.5,actual,2025 Series A,30,2025,20.67,0.294,0.1193,,"Software-development agents that touch the entire stack (code, infra, ops)."
+93,Luma AI,AI Video Generation / World Models,"Palo Alto, USA",2021,4.0,actual,"Nov 19, 2025 Series C",,,20.03,0.4005,,arr,"3D and world-generation models (Dream Machine), neural radiance fields and Gaussian-splatting research, plus a consumer video product. Pure-play digital AI."
+94,Suki AI,Vertical AI (Healthcare),"Redwood City, USA",2017,0.6,actual,2024 round,60,2025,19.45,0.1945,0.1945,,Ambient scribe and voice assistant for clinicians.
+95,Schrodinger,AI Drug Discovery (Software),"New York, USA",1990,3.0,proxy,2025 market cap,,,18.46,0.3693,,arr,Computational chemistry. AI-attributed ARR is null — Bunsen agent is pre-revenue; core is physics simulation.
+96,01.AI (Yi),Foundation Models (China),"Beijing, China",2023,1.0,actual,2024 round,30,2025,18.46,0.25,0.1193,,Yi model family; Kai-Fu Lee's lab.
+97,Arize AI,ML Observability,"Berkeley, USA",2020,0.7,actual,2024,40,2024,18.09,0.2113,0.1505,,LLM evals + observability platform; enterprise.
+98,Stepfun,Foundation Models (China),"Shanghai, China",2023,1.0,actual,2024 round,25,2025,17.47,0.25,0.0995,,Step model family + Step-Video.
+99,PolyAI,Voice Agents,"London, UK",2017,0.5,actual,2024,50,2025,17.47,0.1747,0.1747,,Voice-first conversational agents for enterprise call centers.
+100,LangChain,Agent / LLM Dev Framework,"San Francisco, USA",2022,1.0,actual,2024 round,25,2024,17.47,0.25,0.0995,,LangChain + LangGraph framework for building LLM agents; LangSmith observability.

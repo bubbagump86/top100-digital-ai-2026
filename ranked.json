@@ -2,7 +2,7 @@
   "metadata": {
     "title": "Top 100 Digital AI Companies 2026",
     "subtitle": "Ranked by a normalized composite of AI-attributed ARR and AI valuation",
-    "generated_at": "2026-10-21",
+    "generated_at": "2026-10-24",
     "scoring": {
       "formula": "score = 100 * (0.5 * z_log(valuation_USD) + 0.5 * z_log(ARR_USD))",
       "valuation_weight": 0.5,
@@ -14,14 +14,20 @@
         "derived": "Company is diversified. We take its AI-attributed ARR and multiply by the pure-play median EV/Revenue multiple to obtain an implied 'what would this AI business be worth standalone' valuation.",
         "proxy": "Company discloses no AI-attributed revenue, so no AI valuation can be derived. Full market cap is used as a flagged proxy and the ARR axis is scored at 0. These are the weakest-evidence rows in the list."
       }
+    },
+    "coverage_audit": {
+      "watchlist": "data/coverage_watchlist.json",
+      "script": "scripts/coverage.py",
+      "policy": "Every name on an external watchlist must resolve to exactly one disposition: ranked, folded into a roll-up row, or excluded with a published reason. A name with no disposition is a coverage gap and blocks publication.",
+      "closed_on": "2026-10-24"
     }
   },
   "counts": {
-    "input": 107,
-    "after_filter": 107,
+    "input": 116,
+    "after_filter": 114,
     "ranked": 100,
-    "pure_play": 84,
-    "derived": 10,
+    "pure_play": 83,
+    "derived": 11,
     "proxy": 6
   },
   "axes": {
@@ -53,7 +59,7 @@
     ],
     "peer_multiple": 20.0,
     "peer_multiple_pinned": true,
-    "computed_peer_median": 20.0,
+    "computed_peer_median": 20.83,
     "missing_rule": "zero",
     "variant": null
   },
@@ -84,8 +90,8 @@
     "p75": 40.0,
     "min": 5.0,
     "max": 323.53,
-    "mean": 33.6,
-    "pool_size": 81,
+    "mean": 37.72,
+    "pool_size": 85,
     "pool": [
       {
         "name": "OpenAI",
@@ -410,11 +416,27 @@
       {
         "name": "LangChain",
         "multiple": 40.0
+      },
+      {
+        "name": "Manus AI",
+        "multiple": 8.89
+      },
+      {
+        "name": "Wonderful AI",
+        "multiple": 71.43
+      },
+      {
+        "name": "SandboxAQ",
+        "multiple": 314.61
+      },
+      {
+        "name": "Sakana AI",
+        "multiple": 90.0
       }
     ]
   },
   "exclusions": {
-    "reason": "Excluded from the ranked top 100 because the company is hardware-first, robotics-first, semiconductor-first, physically-manufactured, or has no disclosed AI revenue line. They are not 'pure-play digital AI'.",
+    "reason": "Excluded from the ranked top 100 because the company is hardware-first, robotics-first, semiconductor-first, physically-manufactured, is not a company at all, has no disclosed AI revenue line, or is below the list's evidence threshold (no disclosed valuation and no revenue). They are not 'pure-play digital AI'.",
     "examples": [
       {
         "name": "NVIDIA",
@@ -583,6 +605,54 @@
       {
         "name": "Codeium / Windsurf",
         "why": "Acquired by Cognition Jul 14, 2025; ARR now rolled into Cognition's consolidated figure. Removed to avoid double counting."
+      },
+      {
+        "name": "Datadog",
+        "why": "Observability platform with an AI surface (Bits AI, Datadog for AI). Management explicitly declines to size AI revenue - Q2 2026 disclosed AI customer counts ('over 750 AI customers', all top-10 AI leaders) but no AI dollar figure - so there is no AI revenue line and AI is not the material driver. Same test as Apple. Market cap $96.8B (Oct 23, 2026)."
+      },
+      {
+        "name": "Workato",
+        "why": "Enterprise automation / iPaaS repositioned around agentic AI (Agent Studio, AIRO, Enterprise MCP, AI Gateway). No AI revenue is disclosed and absolute ARR is not disclosed either. The last confirmed valuation is $5.7B (Nov 2021) - too stale to publish in a 2026 edition - and estimated revenue of roughly $200M is far below list scale."
+      },
+      {
+        "name": "AvePoint",
+        "why": "Microsoft-365 data protection and governance, rebranded as a 'Trust Layer for AI'. Public (Nasdaq: AVPT since Jul 2021; SGX: AVP since Sep 2025). Q2 2026 discloses SaaS revenue, total revenue and total ARR ($465.1M) but no AI revenue line, and AI is a positioning layer on a SaaS-backup core. Same test as Apple. Market cap $3.49B."
+      },
+      {
+        "name": "Prometheus (prometheus.ai)",
+        "why": "Physical-AI company founded in Nov 2025 by Jeff Bezos and Vik Bajaj - an 'artificial general engineer for the physical world'. $12B Series B at a $41B post-money valuation (Jun 2026). Genuinely AI-native, but its output modality is hardware and industrial systems, which fails this list's digital-only test. NOT the open-source Prometheus monitoring project."
+      },
+      {
+        "name": "Preferred Networks (PFN)",
+        "why": "AI accelerator silicon (PES / MN-P) - semiconductor-first, with no AI-attributed ARR. Also note: PFN is NOT listed on the Tokyo Stock Exchange, contrary to some third-party lists - it is unlisted."
+      },
+      {
+        "name": "Periodic Labs",
+        "why": "AI-for-science lab whose delivery mechanism is autonomous robotic wet labs - physical AI, not digital. Pre-revenue since founding. Valuation $1.3B post (Sep 2025 seed); a reported ~$7B round is talks only and unclosed."
+      },
+      {
+        "name": "Enigma",
+        "why": "Robotics foundation models (embodied AI) - excluded as physical. The name is also ambiguous: it matches several entities, and no AI-attributed ARR or verifiable valuation is published for any of them."
+      },
+      {
+        "name": "BeyondMath",
+        "why": "Generative physics AI for engineering simulation (London). $18.5M seed (Feb 2026). No valuation disclosed and no revenue - below the list's evidence threshold."
+      },
+      {
+        "name": "Cantina Labs",
+        "why": "Agentic smart-contract security, incubated by Spearbit. $16.5M raised in total, including an $8M round led by Framework Ventures at a stealth exit (Jul 2026). No valuation disclosed and no revenue - below the list's evidence threshold."
+      },
+      {
+        "name": "Openmind Research Institute",
+        "why": "Research institute, not a company: a non-profit AI research institute in Edmonton (Richard Sutton, Michael Bowling and colleagues), funded by $4.8M from Huawei Canada. No equity, no revenue, no valuation."
+      },
+      {
+        "name": "BottleCap AI",
+        "why": "Efficient foundation models (CAP1), Prague, founded by Tomas Mikolov. $7.5M seed. No valuation disclosed and no revenue - below the list's evidence threshold."
+      },
+      {
+        "name": "Causal Labs",
+        "why": "Causal-inference / general causal intelligence research (Large Physics foundation model). $6M seed (Mar 2025). No valuation disclosed and no revenue - below the list's evidence threshold."
       }
     ]
   },
@@ -1743,6 +1813,39 @@
       "rank": 35
     },
     {
+      "name": "Manus AI",
+      "category": "AI Agent / Consumer + Enterprise",
+      "hq": "Singapore",
+      "founded": 2022,
+      "summary": "General-purpose AI agent that carries out multi-step tasks end to end. Independent again since Sep 1, 2026 after Beijing unwound the Meta acquisition agreed in Dec 2025.",
+      "valuation_usd_b": 4.0,
+      "valuation_date": "Oct 8, 2026 round",
+      "valuation_source": "Press figure, NOT company-disclosed: Bloomberg reported a ~$4B valuation on a >$500M round led by Boyu Capital and IDG (with Tencent, HSG and ZhenFund participating). Total funding ~$585M. Single-source valuation - flagged accordingly.",
+      "arr_usd_m": 450,
+      "arr_date": "Jun 2026 (run-rate)",
+      "arr_source": "Reported run-rate of $400M-$500M (Jun 2026), up from $100M ARR in Dec 2025. Midpoint used. Press-reported, not company-confirmed - flagged.",
+      "arr_total_usd_m": 450,
+      "arr_attribution_note": "The whole company is the AI product, so the run-rate is AI-attributed by construction.",
+      "valuation_basis": "actual",
+      "is_pure_play_ai": true,
+      "market_cap_usd_b": null,
+      "market_cap_date": null,
+      "market_implied_multiple": null,
+      "derived_pct_of_market_cap": null,
+      "coherence_flag": null,
+      "coherence_ok": null,
+      "valuation_capped": false,
+      "uncapped_derived_usd_b": null,
+      "corporate_status": null,
+      "derived_valuation_usd_b": null,
+      "z_val": 0.4005,
+      "z_arr": 0.4133,
+      "missing_axes": "",
+      "score": 40.69,
+      "missing_rule_applied": "",
+      "rank": 36
+    },
+    {
       "name": "C3.ai",
       "category": "Enterprise AI Platform",
       "hq": "Redwood City, USA",
@@ -1773,7 +1876,7 @@
       "missing_axes": "",
       "score": 39.77,
       "missing_rule_applied": "",
-      "rank": 36
+      "rank": 37
     },
     {
       "name": "Replit",
@@ -1806,7 +1909,7 @@
       "missing_axes": "",
       "score": 37.45,
       "missing_rule_applied": "",
-      "rank": 37
+      "rank": 38
     },
     {
       "name": "Legora (formerly Spellbook)",
@@ -1839,7 +1942,7 @@
       "missing_axes": "",
       "score": 36.55,
       "missing_rule_applied": "",
-      "rank": 38
+      "rank": 39
     },
     {
       "name": "Abridge",
@@ -1872,7 +1975,7 @@
       "missing_axes": "",
       "score": 34.91,
       "missing_rule_applied": "",
-      "rank": 39
+      "rank": 40
     },
     {
       "name": "DeepSeek",
@@ -1905,7 +2008,7 @@
       "missing_axes": "arr",
       "score": 33.74,
       "missing_rule_applied": "zero",
-      "rank": 40
+      "rank": 41
     },
     {
       "name": "Thinking Machines Lab",
@@ -1938,7 +2041,7 @@
       "missing_axes": "arr",
       "score": 33.74,
       "missing_rule_applied": "zero",
-      "rank": 41
+      "rank": 42
     },
     {
       "name": "Together AI",
@@ -1971,7 +2074,7 @@
       "missing_axes": "",
       "score": 33.68,
       "missing_rule_applied": "",
-      "rank": 42
+      "rank": 43
     },
     {
       "name": "Decagon",
@@ -2004,7 +2107,7 @@
       "missing_axes": "",
       "score": 33.17,
       "missing_rule_applied": "",
-      "rank": 43
+      "rank": 44
     },
     {
       "name": "EliseAI",
@@ -2037,7 +2140,7 @@
       "missing_axes": "",
       "score": 33.04,
       "missing_rule_applied": "",
-      "rank": 44
+      "rank": 45
     },
     {
       "name": "Synthesia",
@@ -2070,7 +2173,7 @@
       "missing_axes": "",
       "score": 32.53,
       "missing_rule_applied": "",
-      "rank": 45
+      "rank": 46
     },
     {
       "name": "FAL",
@@ -2103,7 +2206,7 @@
       "missing_axes": "",
       "score": 32.53,
       "missing_rule_applied": "",
-      "rank": 46
+      "rank": 47
     },
     {
       "name": "Runway",
@@ -2136,7 +2239,40 @@
       "missing_axes": "",
       "score": 31.95,
       "missing_rule_applied": "",
-      "rank": 47
+      "rank": 48
+    },
+    {
+      "name": "Wonderful AI",
+      "category": "AI Customer Support",
+      "hq": "Tel Aviv, Israel",
+      "founded": 2023,
+      "summary": "AI customer-service agents in Hebrew, Arabic and English for enterprise contact centres. The fastest-growing newly independent AI company in this list by revenue run-rate.",
+      "valuation_usd_b": 5.0,
+      "valuation_date": "Sep 2, 2026 Series C",
+      "valuation_source": "Company-confirmed and independently reported (Reuters, TechCrunch): $550M Series C led by Insight Partners at a $5.0B post-money valuation. Total funding raised >$800M.",
+      "arr_usd_m": 70,
+      "arr_date": "Sep 7, 2026 (revenue run-rate)",
+      "arr_source": "Company-stated revenue run-rate of ~$70M (Ynet, Sep 7, 2026). A revenue run-rate is used as the ARR proxy under this list's published rule.",
+      "arr_total_usd_m": 70,
+      "arr_attribution_note": "The whole company is the AI product, so the run-rate is AI-attributed by construction. Service-led model: gross margin ~52% because delivery mixes human agents with the AI.",
+      "valuation_basis": "actual",
+      "is_pure_play_ai": true,
+      "market_cap_usd_b": null,
+      "market_cap_date": null,
+      "market_implied_multiple": null,
+      "derived_pct_of_market_cap": null,
+      "coherence_flag": null,
+      "coherence_ok": null,
+      "valuation_capped": false,
+      "uncapped_derived_usd_b": null,
+      "corporate_status": null,
+      "derived_valuation_usd_b": null,
+      "z_val": 0.4247,
+      "z_arr": 0.2113,
+      "missing_axes": "",
+      "score": 31.8,
+      "missing_rule_applied": "",
+      "rank": 49
     },
     {
       "name": "Safe Superintelligence (SSI)",
@@ -2169,7 +2305,7 @@
       "missing_axes": "arr",
       "score": 31.31,
       "missing_rule_applied": "zero",
-      "rank": 48
+      "rank": 50
     },
     {
       "name": "MiniMax",
@@ -2202,7 +2338,7 @@
       "missing_axes": "",
       "score": 31.31,
       "missing_rule_applied": "",
-      "rank": 49
+      "rank": 51
     },
     {
       "name": "Samsara",
@@ -2235,7 +2371,7 @@
       "missing_axes": "arr",
       "score": 30.96,
       "missing_rule_applied": "zero",
-      "rank": 50
+      "rank": 52
     },
     {
       "name": "Moveworks",
@@ -2268,7 +2404,7 @@
       "missing_axes": "",
       "score": 30.69,
       "missing_rule_applied": "",
-      "rank": 51
+      "rank": 53
     },
     {
       "name": "DeepL",
@@ -2301,7 +2437,7 @@
       "missing_axes": "",
       "score": 30.19,
       "missing_rule_applied": "",
-      "rank": 52
+      "rank": 54
     },
     {
       "name": "Invisible Technologies",
@@ -2334,7 +2470,7 @@
       "missing_axes": "",
       "score": 30.19,
       "missing_rule_applied": "",
-      "rank": 53
+      "rank": 55
     },
     {
       "name": "Reflection AI",
@@ -2367,7 +2503,7 @@
       "missing_axes": "arr",
       "score": 29.97,
       "missing_rule_applied": "zero",
-      "rank": 54
+      "rank": 56
     },
     {
       "name": "EvenUp",
@@ -2400,7 +2536,7 @@
       "missing_axes": "",
       "score": 29.28,
       "missing_rule_applied": "",
-      "rank": 55
+      "rank": 57
     },
     {
       "name": "Moonshot AI",
@@ -2433,7 +2569,40 @@
       "missing_axes": "arr",
       "score": 28.76,
       "missing_rule_applied": "zero",
-      "rank": 56
+      "rank": 58
+    },
+    {
+      "name": "Snowflake (Cortex AI / Snowflake Intelligence)",
+      "category": "AI Data Platform (public)",
+      "hq": "Bozeman, Montana, USA",
+      "founded": 2012,
+      "summary": "Cloud data platform ('AI Data Cloud') with Cortex AI, Snowflake Intelligence and Cortex Code. One of very few large-cap software companies that publishes a dollar AI revenue figure - but it has not updated that figure since Dec 2025.",
+      "valuation_usd_b": 2.0,
+      "valuation_date": "Derived: AI ARR x peer multiple",
+      "valuation_source": "DERIVED. Snowflake publishes an AI revenue line, so its AI business is valued like a standalone AI segment: $100M AI run-rate x the pinned 20x peer multiple = $2.0B implied AI valuation. The full market cap of $114.70B (Oct 23, 2026 close) is used only as the cap ceiling - it binds nowhere here.",
+      "arr_usd_m": 100,
+      "arr_date": "Dec 2025 (announced with Q3 FY2026 results)",
+      "arr_source": "Company-stated $100M annualised AI revenue run-rate, announced a quarter ahead of schedule with Q3 FY2026 results (Dec 2025). STALE: Snowflake published NO updated AI dollar figure with Q2 FY2027 results (Sep 2, 2026) - the CFO gave only a qualitative 'meaningful step-up in AI revenue'. Figure confirmed via aggregators rather than from the primary release, so it carries medium confidence.",
+      "arr_total_usd_m": 5430,
+      "arr_attribution_note": "AI-attributed only: the $100M annualised AI revenue run-rate Snowflake itself published. Total TTM revenue $5.43B; Q2 FY2027 revenue $1.55B (+35% YoY), product revenue $1.49B (+37%), NRR 126%. The AI run-rate is roughly 2% of the product base - AI is the narrative and a growth driver, not the revenue engine. Because the disclosed figure is 10 months stale we under-credit Snowflake rather than guess upward.",
+      "valuation_basis": "derived",
+      "is_pure_play_ai": false,
+      "market_cap_usd_b": 114.7,
+      "market_cap_date": "Oct 23, 2026 close ($325.43/share), stockanalysis.com - single-source; a second tracker showed $101.65B for the same date, so treat as +/-12%",
+      "market_implied_multiple": 1147.0,
+      "derived_pct_of_market_cap": 1.7,
+      "coherence_flag": null,
+      "coherence_ok": true,
+      "valuation_capped": false,
+      "uncapped_derived_usd_b": 2.0,
+      "corporate_status": null,
+      "derived_valuation_usd_b": 2.0,
+      "z_val": 0.3253,
+      "z_arr": 0.25,
+      "missing_axes": "",
+      "score": 28.76,
+      "missing_rule_applied": "",
+      "rank": 59
     },
     {
       "name": "Decart",
@@ -2466,7 +2635,7 @@
       "missing_axes": "",
       "score": 27.38,
       "missing_rule_applied": "",
-      "rank": 57
+      "rank": 60
     },
     {
       "name": "Kore.ai",
@@ -2499,7 +2668,7 @@
       "missing_axes": "",
       "score": 27.2,
       "missing_rule_applied": "",
-      "rank": 58
+      "rank": 61
     },
     {
       "name": "Lightricks",
@@ -2532,7 +2701,7 @@
       "missing_axes": "",
       "score": 27.2,
       "missing_rule_applied": "",
-      "rank": 59
+      "rank": 62
     },
     {
       "name": "You.com",
@@ -2565,7 +2734,7 @@
       "missing_axes": "",
       "score": 26.63,
       "missing_rule_applied": "",
-      "rank": 60
+      "rank": 63
     },
     {
       "name": "Sourcegraph (Amp / Cody)",
@@ -2598,7 +2767,7 @@
       "missing_axes": "",
       "score": 26.63,
       "missing_rule_applied": "",
-      "rank": 61
+      "rank": 64
     },
     {
       "name": "Cresta",
@@ -2631,7 +2800,7 @@
       "missing_axes": "",
       "score": 25.99,
       "missing_rule_applied": "",
-      "rank": 62
+      "rank": 65
     },
     {
       "name": "Jasper AI",
@@ -2664,7 +2833,7 @@
       "missing_axes": "",
       "score": 25.99,
       "missing_rule_applied": "",
-      "rank": 63
+      "rank": 66
     },
     {
       "name": "Writer",
@@ -2697,7 +2866,7 @@
       "missing_axes": "",
       "score": 25.71,
       "missing_rule_applied": "",
-      "rank": 64
+      "rank": 67
     },
     {
       "name": "Hippocratic AI",
@@ -2730,7 +2899,7 @@
       "missing_axes": "",
       "score": 25.26,
       "missing_rule_applied": "",
-      "rank": 65
+      "rank": 68
     },
     {
       "name": "Deepgram",
@@ -2763,7 +2932,7 @@
       "missing_axes": "",
       "score": 25.21,
       "missing_rule_applied": "",
-      "rank": 66
+      "rank": 69
     },
     {
       "name": "Speak",
@@ -2796,7 +2965,7 @@
       "missing_axes": "",
       "score": 25.0,
       "missing_rule_applied": "",
-      "rank": 67
+      "rank": 70
     },
     {
       "name": "Weights & Biases",
@@ -2829,7 +2998,40 @@
       "missing_axes": "",
       "score": 25.0,
       "missing_rule_applied": "",
-      "rank": 68
+      "rank": 71
+    },
+    {
+      "name": "SandboxAQ",
+      "category": "AI for Science + Quantum Security",
+      "hq": "New York, USA",
+      "founded": 2022,
+      "summary": "Large language models for chemistry and materials science, post-quantum cryptography, and an AI-for-science platform. Also runs a quantum-sensing navigation programme (AQNav) - a hardware side-line, not the core business.",
+      "valuation_usd_b": 5.6,
+      "valuation_date": "Dec 2024 round",
+      "valuation_source": "Company-confirmed $5.6B mark. Later figures are higher but single-source (~$9.84B per DefiLlama, May 2026; $13.89B per Forge Global), so the last CONFIRMED mark is published.",
+      "arr_usd_m": 17.8,
+      "arr_date": "2024 estimate (latest available)",
+      "arr_source": "Third-party estimate ($17.8M). Revenue is not disclosed and published estimates span $8.4M-$128.2M - a 15x range - so this is a LOW-CONFIDENCE single-source input. The Information (Jul 2025) reported 'lavish spending, weak growth'.",
+      "arr_total_usd_m": 17.8,
+      "arr_attribution_note": "LOW CONFIDENCE. The published estimate range is 15x wide, so this row's score should be read as indicative. Its valuation figure is much better evidenced than its revenue figure.",
+      "valuation_basis": "actual",
+      "is_pure_play_ai": true,
+      "market_cap_usd_b": null,
+      "market_cap_date": null,
+      "market_implied_multiple": null,
+      "derived_pct_of_market_cap": null,
+      "coherence_flag": null,
+      "coherence_ok": null,
+      "valuation_capped": false,
+      "uncapped_derived_usd_b": null,
+      "corporate_status": null,
+      "derived_valuation_usd_b": null,
+      "z_val": 0.437,
+      "z_arr": 0.0626,
+      "missing_axes": "",
+      "score": 24.98,
+      "missing_rule_applied": "",
+      "rank": 72
     },
     {
       "name": "ADA (Ada Support)",
@@ -2862,7 +3064,40 @@
       "missing_axes": "",
       "score": 24.78,
       "missing_rule_applied": "",
-      "rank": 69
+      "rank": 73
+    },
+    {
+      "name": "Sakana AI",
+      "category": "Foundation Models / Research Lab",
+      "hq": "Tokyo, Japan",
+      "founded": 2024,
+      "summary": "Japan's model-merging and evolutionary-AI lab (David Ha, Llion Jones). Merges and fine-tunes open models rather than pretraining from scratch, and sells subscription access to the resulting models.",
+      "valuation_usd_b": 2.7,
+      "valuation_date": "Nov 17, 2025 Series B",
+      "valuation_source": "Company-confirmed: JPY 432B (~$2.7B) post-money, per Sakana AI's own investor page (updated Apr 9, 2026). Total funding ~JPY 66B (~$412M).",
+      "arr_usd_m": 30,
+      "arr_date": "2025-2026 estimate",
+      "arr_source": "Third-party estimate (~$30M). Not company-disclosed. LOW CONFIDENCE - single-source paid-database estimate.",
+      "arr_total_usd_m": 30,
+      "arr_attribution_note": "LOW CONFIDENCE. Sakana does not publish revenue; this is a single-source estimate.",
+      "valuation_basis": "actual",
+      "is_pure_play_ai": true,
+      "market_cap_usd_b": null,
+      "market_cap_date": null,
+      "market_implied_multiple": null,
+      "derived_pct_of_market_cap": null,
+      "coherence_flag": null,
+      "coherence_ok": null,
+      "valuation_capped": false,
+      "uncapped_derived_usd_b": null,
+      "corporate_status": null,
+      "derived_valuation_usd_b": null,
+      "z_val": 0.3578,
+      "z_arr": 0.1193,
+      "missing_axes": "",
+      "score": 23.86,
+      "missing_rule_applied": "",
+      "rank": 74
     },
     {
       "name": "Fireflies.ai",
@@ -2895,7 +3130,7 @@
       "missing_axes": "",
       "score": 23.79,
       "missing_rule_applied": "",
-      "rank": 70
+      "rank": 75
     },
     {
       "name": "Observe.AI",
@@ -2928,7 +3163,7 @@
       "missing_axes": "",
       "score": 23.79,
       "missing_rule_applied": "",
-      "rank": 71
+      "rank": 76
     },
     {
       "name": "Ambience Healthcare",
@@ -2961,7 +3196,7 @@
       "missing_axes": "",
       "score": 23.44,
       "missing_rule_applied": "",
-      "rank": 72
+      "rank": 77
     },
     {
       "name": "AI21 Labs",
@@ -2994,7 +3229,7 @@
       "missing_axes": "",
       "score": 23.06,
       "missing_rule_applied": "",
-      "rank": 73
+      "rank": 78
     },
     {
       "name": "Snorkel AI",
@@ -3027,7 +3262,7 @@
       "missing_axes": "",
       "score": 22.66,
       "missing_rule_applied": "",
-      "rank": 74
+      "rank": 79
     },
     {
       "name": "Stability AI",
@@ -3060,7 +3295,7 @@
       "missing_axes": "",
       "score": 22.23,
       "missing_rule_applied": "",
-      "rank": 75
+      "rank": 80
     },
     {
       "name": "Baichuan Intelligence",
@@ -3093,7 +3328,7 @@
       "missing_axes": "",
       "score": 22.19,
       "missing_rule_applied": "",
-      "rank": 76
+      "rank": 81
     },
     {
       "name": "Midjourney",
@@ -3126,7 +3361,7 @@
       "missing_axes": "valuation",
       "score": 21.24,
       "missing_rule_applied": "",
-      "rank": 77
+      "rank": 82
     },
     {
       "name": "Character.AI",
@@ -3159,7 +3394,7 @@
       "missing_axes": "",
       "score": 21.24,
       "missing_rule_applied": "",
-      "rank": 78
+      "rank": 83
     },
     {
       "name": "Labelbox",
@@ -3192,7 +3427,7 @@
       "missing_axes": "",
       "score": 21.24,
       "missing_rule_applied": "",
-      "rank": 79
+      "rank": 84
     },
     {
       "name": "Typeface",
@@ -3225,7 +3460,7 @@
       "missing_axes": "",
       "score": 21.24,
       "missing_rule_applied": "",
-      "rank": 80
+      "rank": 85
     },
     {
       "name": "AssemblyAI",
@@ -3258,7 +3493,7 @@
       "missing_axes": "",
       "score": 21.24,
       "missing_rule_applied": "",
-      "rank": 81
+      "rank": 86
     },
     {
       "name": "Otter.ai",
@@ -3291,7 +3526,7 @@
       "missing_axes": "",
       "score": 21.24,
       "missing_rule_applied": "",
-      "rank": 82
+      "rank": 87
     },
     {
       "name": "Forethought",
@@ -3324,7 +3559,7 @@
       "missing_axes": "",
       "score": 21.24,
       "missing_rule_applied": "",
-      "rank": 83
+      "rank": 88
     },
     {
       "name": "HeyGen",
@@ -3357,7 +3592,7 @@
       "missing_axes": "",
       "score": 21.02,
       "missing_rule_applied": "",
-      "rank": 84
+      "rank": 89
     },
     {
       "name": "Vapi",
@@ -3390,7 +3625,40 @@
       "missing_axes": "",
       "score": 20.73,
       "missing_rule_applied": "",
-      "rank": 85
+      "rank": 90
+    },
+    {
+      "name": "Advanced Machine Intelligence (AMI)",
+      "category": "Foundation Models / Research Lab",
+      "hq": "New York, USA",
+      "founded": 2025,
+      "summary": "Frontier research lab founded by Yann LeCun, building general-purpose AI through JEPA world models. IDENTITY NOTE: this is the lab whose name is literally 'Advanced Machine Intelligence'; a separate manufacturing-AI company also trades on the AMI acronym.",
+      "valuation_usd_b": 4.53,
+      "valuation_date": "Mar 10, 2026 seed",
+      "valuation_source": "Reuters: $1.03B seed at a $3.5B pre-money mark (~$4.53B post-money), led by Lux Capital - with only ~$150M committed at signing. Single-source round report.",
+      "arr_usd_m": null,
+      "arr_date": null,
+      "arr_source": "Pre-revenue. No revenue or ARR is disclosed, so the ARR axis scores 0 under the missing-ARR rule.",
+      "arr_total_usd_m": null,
+      "arr_attribution_note": "Pre-revenue frontier lab. Its research direction (JEPA world models) is oriented toward physical AI, but the company itself sells software and models, not hardware.",
+      "valuation_basis": "actual",
+      "is_pure_play_ai": true,
+      "market_cap_usd_b": null,
+      "market_cap_date": null,
+      "market_implied_multiple": null,
+      "derived_pct_of_market_cap": null,
+      "coherence_flag": null,
+      "coherence_ok": null,
+      "valuation_capped": false,
+      "uncapped_derived_usd_b": null,
+      "corporate_status": null,
+      "derived_valuation_usd_b": null,
+      "z_val": 0.414,
+      "z_arr": null,
+      "missing_axes": "arr",
+      "score": 20.7,
+      "missing_rule_applied": "zero",
+      "rank": 91
     },
     {
       "name": "Factory",
@@ -3423,7 +3691,40 @@
       "missing_axes": "",
       "score": 20.67,
       "missing_rule_applied": "",
-      "rank": 86
+      "rank": 92
+    },
+    {
+      "name": "Luma AI",
+      "category": "AI Video Generation / World Models",
+      "hq": "Palo Alto, USA",
+      "founded": 2021,
+      "summary": "3D and world-generation models (Dream Machine), neural radiance fields and Gaussian-splatting research, plus a consumer video product. Pure-play digital AI.",
+      "valuation_usd_b": 4.0,
+      "valuation_date": "Nov 19, 2025 Series C",
+      "valuation_source": "CNBC-confirmed: $900M Series C led by HUMAIN at a $4.0B+ post-money valuation. A Mar 2026 round at $9B was reported by Forbes but never confirmed, so the Nov 2025 mark is published. Total raised ~$1.06B.",
+      "arr_usd_m": null,
+      "arr_date": null,
+      "arr_source": "Not disclosed. Sacra estimated ~$8M annualised revenue as of Dec 2024 - below this list's $10M ARR anchor and now 22 months stale, so it is not used as an input. The ARR axis therefore scores 0 under the missing-ARR rule.",
+      "arr_total_usd_m": null,
+      "arr_attribution_note": "No AI-attributed ARR at or above the $10M anchor could be evidenced, so this row is scored on valuation alone.",
+      "valuation_basis": "actual",
+      "is_pure_play_ai": true,
+      "market_cap_usd_b": null,
+      "market_cap_date": null,
+      "market_implied_multiple": null,
+      "derived_pct_of_market_cap": null,
+      "coherence_flag": null,
+      "coherence_ok": null,
+      "valuation_capped": false,
+      "uncapped_derived_usd_b": null,
+      "corporate_status": null,
+      "derived_valuation_usd_b": null,
+      "z_val": 0.4005,
+      "z_arr": null,
+      "missing_axes": "arr",
+      "score": 20.03,
+      "missing_rule_applied": "zero",
+      "rank": 93
     },
     {
       "name": "Suki AI",
@@ -3456,7 +3757,7 @@
       "missing_axes": "",
       "score": 19.45,
       "missing_rule_applied": "",
-      "rank": 87
+      "rank": 94
     },
     {
       "name": "Schrodinger",
@@ -3489,7 +3790,7 @@
       "missing_axes": "arr",
       "score": 18.46,
       "missing_rule_applied": "zero",
-      "rank": 88
+      "rank": 95
     },
     {
       "name": "01.AI (Yi)",
@@ -3522,7 +3823,7 @@
       "missing_axes": "",
       "score": 18.46,
       "missing_rule_applied": "",
-      "rank": 89
+      "rank": 96
     },
     {
       "name": "Arize AI",
@@ -3555,7 +3856,7 @@
       "missing_axes": "",
       "score": 18.09,
       "missing_rule_applied": "",
-      "rank": 90
+      "rank": 97
     },
     {
       "name": "Stepfun",
@@ -3588,7 +3889,7 @@
       "missing_axes": "",
       "score": 17.47,
       "missing_rule_applied": "",
-      "rank": 91
+      "rank": 98
     },
     {
       "name": "PolyAI",
@@ -3621,7 +3922,7 @@
       "missing_axes": "",
       "score": 17.47,
       "missing_rule_applied": "",
-      "rank": 92
+      "rank": 99
     },
     {
       "name": "LangChain",
@@ -3653,237 +3954,6 @@
       "z_arr": 0.0995,
       "missing_axes": "",
       "score": 17.47,
-      "missing_rule_applied": "",
-      "rank": 93
-    },
-    {
-      "name": "Augment Code",
-      "category": "AI Coding (Enterprise)",
-      "hq": "Seattle, USA",
-      "founded": 2022,
-      "summary": "AI coding agent with deep code-context engine.",
-      "valuation_usd_b": 0.9,
-      "valuation_date": "2025",
-      "valuation_source": "Press",
-      "arr_usd_m": 25,
-      "arr_date": "2025",
-      "arr_source": "Press estimates",
-      "arr_total_usd_m": null,
-      "arr_attribution_note": null,
-      "valuation_basis": "actual",
-      "is_pure_play_ai": true,
-      "market_cap_usd_b": null,
-      "market_cap_date": null,
-      "market_implied_multiple": null,
-      "derived_pct_of_market_cap": null,
-      "coherence_flag": null,
-      "coherence_ok": null,
-      "valuation_capped": false,
-      "uncapped_derived_usd_b": null,
-      "corporate_status": null,
-      "derived_valuation_usd_b": null,
-      "z_val": 0.2386,
-      "z_arr": 0.0995,
-      "missing_axes": "",
-      "score": 16.9,
-      "missing_rule_applied": "",
-      "rank": 94
-    },
-    {
-      "name": "Suno",
-      "category": "AI Music Generation",
-      "hq": "Cambridge, USA",
-      "founded": 2023,
-      "summary": "Text-to-music generator; viral consumer + licensed catalog deals.",
-      "valuation_usd_b": null,
-      "valuation_date": null,
-      "valuation_source": "Private / not disclosed",
-      "arr_usd_m": 200,
-      "arr_date": "2026 (run-rate)",
-      "arr_source": "Press estimates",
-      "arr_total_usd_m": null,
-      "arr_attribution_note": null,
-      "valuation_basis": "actual",
-      "is_pure_play_ai": true,
-      "market_cap_usd_b": null,
-      "market_cap_date": null,
-      "market_implied_multiple": null,
-      "derived_pct_of_market_cap": null,
-      "coherence_flag": null,
-      "coherence_ok": null,
-      "valuation_capped": false,
-      "uncapped_derived_usd_b": null,
-      "corporate_status": null,
-      "derived_valuation_usd_b": null,
-      "z_val": null,
-      "z_arr": 0.3253,
-      "missing_axes": "valuation",
-      "score": 16.26,
-      "missing_rule_applied": "",
-      "rank": 95
-    },
-    {
-      "name": "Inflection AI",
-      "category": "Foundation Models / Consumer AI",
-      "hq": "Palo Alto, USA",
-      "founded": 2022,
-      "summary": "Pi assistant; pivoted to enterprise after Microsoft acqui-hire in 2024.",
-      "valuation_usd_b": 2.0,
-      "valuation_date": "2024 (post-Microsoft deal)",
-      "valuation_source": "Press",
-      "arr_usd_m": null,
-      "arr_date": null,
-      "arr_source": null,
-      "arr_total_usd_m": null,
-      "arr_attribution_note": null,
-      "valuation_basis": "actual",
-      "is_pure_play_ai": true,
-      "market_cap_usd_b": null,
-      "market_cap_date": null,
-      "market_implied_multiple": null,
-      "derived_pct_of_market_cap": null,
-      "coherence_flag": null,
-      "coherence_ok": null,
-      "valuation_capped": false,
-      "uncapped_derived_usd_b": null,
-      "corporate_status": null,
-      "derived_valuation_usd_b": null,
-      "z_val": 0.3253,
-      "z_arr": null,
-      "missing_axes": "arr",
-      "score": 16.26,
-      "missing_rule_applied": "zero",
-      "rank": 96
-    },
-    {
-      "name": "Roboflow",
-      "category": "Computer Vision Dev Platform",
-      "hq": "Des Moines, USA",
-      "founded": 2018,
-      "summary": "End-to-end CV dev platform; dataset + training + deploy.",
-      "valuation_usd_b": 0.6,
-      "valuation_date": "2024",
-      "valuation_source": "Press",
-      "arr_usd_m": 30,
-      "arr_date": "2024",
-      "arr_source": "Press estimates",
-      "arr_total_usd_m": null,
-      "arr_attribution_note": null,
-      "valuation_basis": "actual",
-      "is_pure_play_ai": true,
-      "market_cap_usd_b": null,
-      "market_cap_date": null,
-      "market_implied_multiple": null,
-      "derived_pct_of_market_cap": null,
-      "coherence_flag": null,
-      "coherence_ok": null,
-      "valuation_capped": false,
-      "uncapped_derived_usd_b": null,
-      "corporate_status": null,
-      "derived_valuation_usd_b": null,
-      "z_val": 0.1945,
-      "z_arr": 0.1193,
-      "missing_axes": "",
-      "score": 15.69,
-      "missing_rule_applied": "",
-      "rank": 97
-    },
-    {
-      "name": "Magic AI",
-      "category": "AI Coding (Long-Context)",
-      "hq": "San Francisco, USA",
-      "founded": 2022,
-      "summary": "Long-context foundation model for coding; pre-revenue frontier lab.",
-      "valuation_usd_b": 1.5,
-      "valuation_date": "2024 Series B",
-      "valuation_source": "Press",
-      "arr_usd_m": null,
-      "arr_date": null,
-      "arr_source": null,
-      "arr_total_usd_m": null,
-      "arr_attribution_note": null,
-      "valuation_basis": "actual",
-      "is_pure_play_ai": true,
-      "market_cap_usd_b": null,
-      "market_cap_date": null,
-      "market_implied_multiple": null,
-      "derived_pct_of_market_cap": null,
-      "coherence_flag": null,
-      "coherence_ok": null,
-      "valuation_capped": false,
-      "uncapped_derived_usd_b": null,
-      "corporate_status": null,
-      "derived_valuation_usd_b": null,
-      "z_val": 0.294,
-      "z_arr": null,
-      "missing_axes": "arr",
-      "score": 14.7,
-      "missing_rule_applied": "zero",
-      "rank": 98
-    },
-    {
-      "name": "Inworld AI",
-      "category": "AI Characters / NPCs",
-      "hq": "Mountain View, USA",
-      "founded": 2019,
-      "summary": "AI characters for games + interactive media.",
-      "valuation_usd_b": 0.5,
-      "valuation_date": "2024",
-      "valuation_source": "Press",
-      "arr_usd_m": 30,
-      "arr_date": "2025",
-      "arr_source": "Press estimates",
-      "arr_total_usd_m": null,
-      "arr_attribution_note": null,
-      "valuation_basis": "actual",
-      "is_pure_play_ai": true,
-      "market_cap_usd_b": null,
-      "market_cap_date": null,
-      "market_implied_multiple": null,
-      "derived_pct_of_market_cap": null,
-      "coherence_flag": null,
-      "coherence_ok": null,
-      "valuation_capped": false,
-      "uncapped_derived_usd_b": null,
-      "corporate_status": null,
-      "derived_valuation_usd_b": null,
-      "z_val": 0.1747,
-      "z_arr": 0.1193,
-      "missing_axes": "",
-      "score": 14.7,
-      "missing_rule_applied": "",
-      "rank": 99
-    },
-    {
-      "name": "Pika",
-      "category": "AI Video Generation",
-      "hq": "Palo Alto, USA",
-      "founded": 2023,
-      "summary": "Text/image-to-video model; competitive with Runway on short-form.",
-      "valuation_usd_b": 0.47,
-      "valuation_date": "2024 round",
-      "valuation_source": "Press",
-      "arr_usd_m": 30,
-      "arr_date": "2025",
-      "arr_source": "Press estimates",
-      "arr_total_usd_m": null,
-      "arr_attribution_note": null,
-      "valuation_basis": "actual",
-      "is_pure_play_ai": true,
-      "market_cap_usd_b": null,
-      "market_cap_date": null,
-      "market_implied_multiple": null,
-      "derived_pct_of_market_cap": null,
-      "coherence_flag": null,
-      "coherence_ok": null,
-      "valuation_capped": false,
-      "uncapped_derived_usd_b": null,
-      "corporate_status": null,
-      "derived_valuation_usd_b": null,
-      "z_val": 0.168,
-      "z_arr": 0.1193,
-      "missing_axes": "",
-      "score": 14.37,
       "missing_rule_applied": "",
       "rank": 100
     }

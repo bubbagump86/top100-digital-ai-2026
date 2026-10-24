@@ -1,0 +1,339 @@
+{
+  "policy_version": "live-v2",
+  "reviewed": "2026-10-24",
+  "watchlist_size": 39,
+  "counts": {
+    "FOLDED": 2,
+    "RANKED": 25,
+    "EXCLUDED": 12
+  },
+  "coverage_complete": true,
+  "gaps": [],
+  "results": [
+    {
+      "status": "FOLDED",
+      "as": "Google DeepMind",
+      "into": "Google / Alphabet (AI: Gemini + Cloud AI)",
+      "rank": 4,
+      "watchlist_name": "Google DeepMind",
+      "claimed_rank": 1
+    },
+    {
+      "status": "RANKED",
+      "as": "Anthropic",
+      "rank": 1,
+      "score": 99.81,
+      "basis": "actual",
+      "watchlist_name": "Anthropic",
+      "claimed_rank": 2
+    },
+    {
+      "status": "RANKED",
+      "as": "SpaceXAI (xAI + Cursor + X)",
+      "rank": 7,
+      "score": 83.05,
+      "basis": "actual",
+      "watchlist_name": "SpaceX (xAI + Cursor)",
+      "claimed_rank": 4
+    },
+    {
+      "status": "RANKED",
+      "as": "OpenAI",
+      "rank": 2,
+      "score": 95.37,
+      "basis": "actual",
+      "watchlist_name": "OpenAI",
+      "claimed_rank": 6
+    },
+    {
+      "status": "RANKED",
+      "as": "Databricks",
+      "rank": 9,
+      "score": 76.55,
+      "basis": "actual",
+      "watchlist_name": "Databricks",
+      "claimed_rank": 8
+    },
+    {
+      "status": "RANKED",
+      "as": "ServiceNow (Now Assist AI)",
+      "rank": 14,
+      "score": 58.17,
+      "basis": "derived",
+      "watchlist_name": "ServiceNow",
+      "claimed_rank": 14
+    },
+    {
+      "status": "RANKED",
+      "as": "Snowflake (Cortex AI / Snowflake Intelligence)",
+      "rank": 59,
+      "score": 28.76,
+      "basis": "derived",
+      "watchlist_name": "Snowflake",
+      "claimed_rank": 15
+    },
+    {
+      "status": "RANKED",
+      "as": "Cognition (Devin)",
+      "rank": 16,
+      "score": 54.67,
+      "basis": "actual",
+      "watchlist_name": "Cognition AI",
+      "claimed_rank": 17
+    },
+    {
+      "status": "EXCLUDED",
+      "as": "Datadog",
+      "why": "Observability platform with an AI surface (Bits AI, Datadog for AI). Management explicitly declines to size AI revenue - Q2 2026 disclosed AI customer counts ('over 750 AI customers', all top-10 AI leaders) but no AI dollar figure - so there is no AI revenue line and AI is not the material driver. Same test as Apple. Market cap $96.8B (Oct 23, 2026).",
+      "watchlist_name": "Datadog",
+      "claimed_rank": 19
+    },
+    {
+      "status": "EXCLUDED",
+      "as": "Prometheus (prometheus.ai)",
+      "why": "Physical-AI company founded in Nov 2025 by Jeff Bezos and Vik Bajaj - an 'artificial general engineer for the physical world'. $12B Series B at a $41B post-money valuation (Jun 2026). Genuinely AI-native, but its output modality is hardware and industrial systems, which fails this list's digital-only test. NOT the open-source Prometheus monitoring project.",
+      "watchlist_name": "Prometheus",
+      "claimed_rank": 21
+    },
+    {
+      "status": "RANKED",
+      "as": "Zhipu AI (Z.ai)",
+      "rank": 21,
+      "score": 49.64,
+      "basis": "actual",
+      "watchlist_name": "Zhipu AI",
+      "claimed_rank": 25
+    },
+    {
+      "status": "RANKED",
+      "as": "Safe Superintelligence (SSI)",
+      "rank": 50,
+      "score": 31.31,
+      "basis": "actual",
+      "watchlist_name": "Safe Superintelligence",
+      "claimed_rank": 26
+    },
+    {
+      "status": "RANKED",
+      "as": "Moonshot AI",
+      "rank": 58,
+      "score": 28.76,
+      "basis": "actual",
+      "watchlist_name": "Moonshot AI",
+      "claimed_rank": 31
+    },
+    {
+      "status": "RANKED",
+      "as": "Mistral AI",
+      "rank": 15,
+      "score": 54.75,
+      "basis": "actual",
+      "watchlist_name": "Mistral AI",
+      "claimed_rank": 34
+    },
+    {
+      "status": "RANKED",
+      "as": "ElevenLabs",
+      "rank": 24,
+      "score": 46.75,
+      "basis": "actual",
+      "watchlist_name": "ElevenLabs",
+      "claimed_rank": 36
+    },
+    {
+      "status": "RANKED",
+      "as": "MiniMax",
+      "rank": 51,
+      "score": 31.31,
+      "basis": "actual",
+      "watchlist_name": "MiniMax",
+      "claimed_rank": 38
+    },
+    {
+      "status": "RANKED",
+      "as": "Thinking Machines Lab",
+      "rank": 42,
+      "score": 33.74,
+      "basis": "actual",
+      "watchlist_name": "Thinking Machines Lab",
+      "claimed_rank": 46
+    },
+    {
+      "status": "RANKED",
+      "as": "Cohere",
+      "rank": 25,
+      "score": 44.45,
+      "basis": "actual",
+      "watchlist_name": "Cohere",
+      "claimed_rank": 48
+    },
+    {
+      "status": "RANKED",
+      "as": "SandboxAQ",
+      "rank": 72,
+      "score": 24.98,
+      "basis": "actual",
+      "watchlist_name": "SandboxAQ",
+      "claimed_rank": 50
+    },
+    {
+      "status": "RANKED",
+      "as": "Stepfun",
+      "rank": 98,
+      "score": 17.47,
+      "basis": "actual",
+      "watchlist_name": "StepFun",
+      "claimed_rank": 55
+    },
+    {
+      "status": "EXCLUDED",
+      "as": "Workato",
+      "why": "Enterprise automation / iPaaS repositioned around agentic AI (Agent Studio, AIRO, Enterprise MCP, AI Gateway). No AI revenue is disclosed and absolute ARR is not disclosed either. The last confirmed valuation is $5.7B (Nov 2021) - too stale to publish in a 2026 edition - and estimated revenue of roughly $200M is far below list scale.",
+      "watchlist_name": "Workato",
+      "claimed_rank": 61
+    },
+    {
+      "status": "RANKED",
+      "as": "Wonderful AI",
+      "rank": 49,
+      "score": 31.8,
+      "basis": "actual",
+      "watchlist_name": "Wonderful AI",
+      "claimed_rank": 62
+    },
+    {
+      "status": "RANKED",
+      "as": "Advanced Machine Intelligence (AMI)",
+      "rank": 91,
+      "score": 20.7,
+      "basis": "actual",
+      "watchlist_name": "Advanced Machine Intelligence (AMI)",
+      "claimed_rank": 70
+    },
+    {
+      "status": "RANKED",
+      "as": "Decart",
+      "rank": 60,
+      "score": 27.38,
+      "basis": "actual",
+      "watchlist_name": "Decart",
+      "claimed_rank": 75
+    },
+    {
+      "status": "RANKED",
+      "as": "Luma AI",
+      "rank": 93,
+      "score": 20.03,
+      "basis": "actual",
+      "watchlist_name": "Luma AI",
+      "claimed_rank": 78
+    },
+    {
+      "status": "RANKED",
+      "as": "Manus AI",
+      "rank": 36,
+      "score": 40.69,
+      "basis": "actual",
+      "watchlist_name": "Manus AI",
+      "claimed_rank": 79
+    },
+    {
+      "status": "EXCLUDED",
+      "as": "AvePoint",
+      "why": "Microsoft-365 data protection and governance, rebranded as a 'Trust Layer for AI'. Public (Nasdaq: AVPT since Jul 2021; SGX: AVP since Sep 2025). Q2 2026 discloses SaaS revenue, total revenue and total ARR ($465.1M) but no AI revenue line, and AI is a positioning layer on a SaaS-backup core. Same test as Apple. Market cap $3.49B.",
+      "watchlist_name": "AvePoint",
+      "claimed_rank": 81
+    },
+    {
+      "status": "RANKED",
+      "as": "Sakana AI",
+      "rank": 74,
+      "score": 23.86,
+      "basis": "actual",
+      "watchlist_name": "Sakana AI",
+      "claimed_rank": 91
+    },
+    {
+      "status": "RANKED",
+      "as": "AI21 Labs",
+      "rank": 78,
+      "score": 23.06,
+      "basis": "actual",
+      "watchlist_name": "AI21 Labs",
+      "claimed_rank": 94
+    },
+    {
+      "status": "EXCLUDED",
+      "as": "Periodic Labs",
+      "why": "AI-for-science lab whose delivery mechanism is autonomous robotic wet labs - physical AI, not digital. Pre-revenue since founding. Valuation $1.3B post (Sep 2025 seed); a reported ~$7B round is talks only and unclosed.",
+      "watchlist_name": "Periodic Labs",
+      "claimed_rank": 139
+    },
+    {
+      "status": "RANKED",
+      "as": "Deepgram",
+      "rank": 69,
+      "score": 25.21,
+      "basis": "actual",
+      "watchlist_name": "Deepgram",
+      "claimed_rank": 141
+    },
+    {
+      "status": "EXCLUDED",
+      "as": "Preferred Networks (PFN)",
+      "why": "AI accelerator silicon (PES / MN-P) - semiconductor-first, with no AI-attributed ARR. Also note: PFN is NOT listed on the Tokyo Stock Exchange, contrary to some third-party lists - it is unlisted.",
+      "watchlist_name": "Preferred Networks",
+      "claimed_rank": 142
+    },
+    {
+      "status": "FOLDED",
+      "as": "Microsoft Research Asia (MSRA)",
+      "into": "Microsoft (AI business)",
+      "rank": 3,
+      "watchlist_name": "Microsoft Research Asia (MSRA)",
+      "claimed_rank": 154
+    },
+    {
+      "status": "EXCLUDED",
+      "as": "Enigma",
+      "why": "Robotics foundation models (embodied AI) - excluded as physical. The name is also ambiguous: it matches several entities, and no AI-attributed ARR or verifiable valuation is published for any of them.",
+      "watchlist_name": "Enigma",
+      "claimed_rank": 156
+    },
+    {
+      "status": "EXCLUDED",
+      "as": "BeyondMath",
+      "why": "Generative physics AI for engineering simulation (London). $18.5M seed (Feb 2026). No valuation disclosed and no revenue - below the list's evidence threshold.",
+      "watchlist_name": "BeyondMath",
+      "claimed_rank": 550
+    },
+    {
+      "status": "EXCLUDED",
+      "as": "Cantina Labs",
+      "why": "Agentic smart-contract security, incubated by Spearbit. $16.5M raised in total, including an $8M round led by Framework Ventures at a stealth exit (Jul 2026). No valuation disclosed and no revenue - below the list's evidence threshold.",
+      "watchlist_name": "Cantina Labs",
+      "claimed_rank": 1700
+    },
+    {
+      "status": "EXCLUDED",
+      "as": "Openmind Research Institute",
+      "why": "Research institute, not a company: a non-profit AI research institute in Edmonton (Richard Sutton, Michael Bowling and colleagues), funded by $4.8M from Huawei Canada. No equity, no revenue, no valuation.",
+      "watchlist_name": "Openmind Research Institute",
+      "claimed_rank": 1700
+    },
+    {
+      "status": "EXCLUDED",
+      "as": "BottleCap AI",
+      "why": "Efficient foundation models (CAP1), Prague, founded by Tomas Mikolov. $7.5M seed. No valuation disclosed and no revenue - below the list's evidence threshold.",
+      "watchlist_name": "BottleCap AI",
+      "claimed_rank": 1700
+    },
+    {
+      "status": "EXCLUDED",
+      "as": "Causal Labs",
+      "why": "Causal-inference / general causal intelligence research (Large Physics foundation model). $6M seed (Mar 2025). No valuation disclosed and no revenue - below the list's evidence threshold.",
+      "watchlist_name": "Causal Labs",
+      "claimed_rank": 4100
+    }
+  ]
+}
