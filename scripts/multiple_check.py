@@ -228,6 +228,11 @@ def main(argv=None):
     import math
     cfg = data.get("model_config", {})
     rule = cfg.get("missing_rule", "zero")
+    # The axis weights travel with the payload (written there by score.py from
+    # data/model_config.json). Fall back to the equal split if absent.
+    wcfg = data.get("weights") or {}
+    w_val = float(wcfg.get("valuation", 0.5))
+    w_arr = float(wcfg.get("arr", 0.5))
     anchored = data.get("axes", {}).get("bounds_source") == "anchored"
     if anchored:
         VB = (data["axes"]["valuation_usd_b"]["log_min"],
@@ -273,16 +278,16 @@ def main(argv=None):
             if zv is None and za is None:
                 s = 0.0
             elif zv is None:
-                s = 100.0 * (0.5 * za)
+                s = 100.0 * (w_arr * za)
             elif za is None:
                 if rule == "alone":
                     s = 100.0 * zv
                 elif rule == "hybrid":
-                    s = 100.0 * zv if ai_val else 100.0 * (0.5 * zv)
+                    s = 100.0 * zv if ai_val else 100.0 * (w_val * zv)
                 else:
-                    s = 100.0 * (0.5 * zv)
+                    s = 100.0 * (w_val * zv)
             else:
-                s = 100.0 * (0.5 * zv + 0.5 * za)
+                s = 100.0 * (w_val * zv + w_arr * za)
             scored.append((r["name"], s))
         scored.sort(key=lambda x: -x[1])
         sens[m] = [n for n, _ in scored[:15]]

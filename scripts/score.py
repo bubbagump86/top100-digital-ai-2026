@@ -80,11 +80,19 @@ policy file, not code. It pins:
                    'zero revenue', but the alternative rules were tested and
                    rejected for now - see data/model_config.json.
 
+  axis weights    the composite's split between the two axes. Held in
+                   data/model_config.json as policy, not as a constant here,
+                   so the most contestable number in the model is version
+                   controlled in one place rather than duplicated across
+                   scripts.
+
 Overrides for review work (defaults come from the policy file):
 
   --axis {anchored,sample}
   --anchor-val MIN MAX       fixed valuation bounds in $B
   --anchor-arr MIN MAX       fixed ARR bounds in $M
+  --weight-val W             weight on the valuation axis (must sum to 1
+  --weight-arr W             with the ARR axis)
   --peer-multiple N          pin the peer multiple; 0 = recompute the median
   --missing-rule {zero,alone,hybrid}
                           zero   - ARR axis reads 0 and KEEPS its 50% weight
@@ -126,8 +134,11 @@ OUT_JSON = ROOT / "data" / "ranked.json"
 OUT_CSV = ROOT / "data" / "ranked.csv"
 OUT_PUBLIC_RANKED = ROOT / "ranked.json"
 
-W_VAL = 0.5
-W_ARR = 0.5
+# The composite's axis weights live in data/model_config.json (policy), not
+# here, so that the most contestable number in the model is version-controlled
+# in one place instead of being a constant duplicated across three scripts.
+DEFAULT_W_VAL = 0.5
+DEFAULT_W_ARR = 0.5
 
 
 def load_policy():
@@ -136,6 +147,13 @@ def load_policy():
         return json.loads(POLICY.read_text(encoding="utf-8"))
     except FileNotFoundError:
         raise SystemExit(f"Model policy not found: {POLICY}")
+
+
+def policy_weights(policy):
+    """Read the axis weights out of the policy file."""
+    w = (policy or {}).get("weights") or {}
+    return (float(w.get("valuation", DEFAULT_W_VAL)),
+            float(w.get("arr", DEFAULT_W_ARR)))
 
 
 def rel(p):
@@ -168,6 +186,13 @@ def parse_args(argv=None):
     p.add_argument("--missing-rule", choices=["zero", "alone", "hybrid"],
                    default=pol.get("missing_arr_rule", "zero"),
                    help="how a row with no ARR is scored")
+    pol_w_val, pol_w_arr = policy_weights(pol)
+    p.add_argument("--weight-val", type=float, default=pol_w_val,
+                   help="weight on the valuation axis (default: from "
+                        "data/model_config.json)")
+    p.add_argument("--weight-arr", type=float, default=pol_w_arr,
+                   help="weight on the ARR axis (default: from "
+                        "data/model_config.json)")
     p.add_argument("--variant", default=None, metavar="NAME",
                    help="write to data/variants/NAME/ and leave live outputs "
                         "untouched")
@@ -210,6 +235,16 @@ def ev_revenue(val_usd_b, arr_usd_m):
 def main(argv=None) -> None:
     args = parse_args(argv)
     policy = load_policy()
+
+    # The two axis weights must sum to 1 - the composite is a weighted mean of
+    # two [0,1] axes, so anything else is not a score on the same scale.
+    w_val, w_arr = float(args.weight_val), float(args.weight_arr)
+    if abs((w_val + w_arr) - 1.0) > 1e-9:
+        raise SystemExit(
+            f"Axis weights must sum to 1.0 (got {w_val} + {w_arr} = "
+            f"{w_val + w_arr}).")
+    if w_val < 0 or w_arr < 0:
+        raise SystemExit("Axis weights must not be negative.")
 
     data_path = Path(args.companies) if args.companies else DATA
     with data_path.open(encoding="utf-8") as fh:
@@ -384,14 +419,14 @@ def main(argv=None) -> None:
             z_a = (math.log10(r["arr_usd_m"]) - arr_min) / arr_span
 
         # --- how a missing axis is scored -------------------------------
-        # 'zero'   the axis reads 0 and KEEPS its 50% weight  -> 0.5 * z_other
+        # 'zero'   the axis reads 0 and KEEPS its weight  -> w_other * z_other
         # 'alone'  the axis is dropped, the other carries full weight -> z_other
         # 'hybrid' 'alone' when the valuation IS an AI valuation (pure-play),
         #          'zero' when it is a whole-company market cap (proxy)
         if z_v is None and z_a is None:
             score, missing = 0.0, "both"
         elif z_v is None:
-            score, missing = 100.0 * (W_ARR * z_a), "valuation"
+            score, missing = 100.0 * (w_arr * z_a), "valuation"
         elif z_a is None:
             if args.missing_rule == "alone":
                 score, missing = 100.0 * z_v, "arr"
@@ -399,11 +434,11 @@ def main(argv=None) -> None:
                 if r["valuation_basis"] == "actual":
                     score, missing = 100.0 * z_v, "arr"
                 else:
-                    score, missing = 100.0 * (W_VAL * z_v), "arr"
+                    score, missing = 100.0 * (w_val * z_v), "arr"
             else:
-                score, missing = 100.0 * (W_VAL * z_v), "arr"
+                score, missing = 100.0 * (w_val * z_v), "arr"
         else:
-            score, missing = 100.0 * (W_VAL * z_v + W_ARR * z_a), ""
+            score, missing = 100.0 * (w_val * z_v + w_arr * z_a), ""
 
         r["z_val"] = round(z_v, 4) if z_v is not None else None
         r["z_arr"] = round(z_a, 4) if z_a is not None else None
@@ -436,7 +471,7 @@ def main(argv=None) -> None:
             "arr_usd_m": {"log_min": arr_min, "log_max": arr_max},
             "bounds_source": bounds_source,
         },
-        "weights": {"valuation": W_VAL, "arr": W_ARR},
+        "weights": {"valuation": w_val, "arr": w_arr},
         "model_config": {
             "policy_version": policy.get("policy_version"),
             "reviewed": policy.get("reviewed"),
@@ -546,6 +581,7 @@ def main(argv=None) -> None:
           + (f"  (pinned; computed median {computed_median:.2f}x)"
              if args.peer_multiple else "  (computed median)"))
     print(f"  missing ARR rule: {args.missing_rule}")
+    print(f"  axis weights    : {w_val:.2f} valuation / {w_arr:.2f} ARR")
     print()
     print(f"Peer EV/Revenue multiple (pure-play pool, n={len(multiples)}):")
     print(f"  median={peer_multiple:.2f}x  p25={p25:.2f}x  p75={p75:.2f}x  "

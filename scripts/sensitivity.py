@@ -72,22 +72,28 @@ def pctrank(vals):
     return out
 
 
-def missing_score(zv, za, rule, is_ai_valuation):
-    """How a row with a missing axis is scored, per the model's rule."""
+def missing_score(zv, za, rule, is_ai_valuation, w_val=0.5, w_arr=0.5):
+    """How a row with a missing axis is scored, per the model's rule.
+
+    The axis weights come from the ranked payload (written there by
+    score.py from data/model_config.json), so this script never carries its
+    own copy of the policy.
+    """
     if zv is None and za is None:
         return 0.0
     if zv is None:
-        return 100.0 * (0.5 * za)
+        return 100.0 * (w_arr * za)
     if za is None:
         if rule == "alone":
             return 100.0 * zv
         if rule == "hybrid":
-            return 100.0 * zv if is_ai_valuation else 100.0 * (0.5 * zv)
-        return 100.0 * (0.5 * zv)
-    return 100.0 * (0.5 * zv + 0.5 * za)
+            return 100.0 * zv if is_ai_valuation else 100.0 * (w_val * zv)
+        return 100.0 * (w_val * zv)
+    return 100.0 * (w_val * zv + w_arr * za)
 
 
-def score(rows, val_fn, arr_fn, vbounds=None, abounds=None, rule="zero"):
+def score(rows, val_fn, arr_fn, vbounds=None, abounds=None, rule="zero",
+          w_val=0.5, w_arr=0.5):
     """val_fn / arr_fn map a row -> the transformed axis value (or None)."""
     vvals = [val_fn(r) for r in rows if val_fn(r) is not None]
     avals = [arr_fn(r) for r in rows if arr_fn(r) is not None]
@@ -101,7 +107,8 @@ def score(rows, val_fn, arr_fn, vbounds=None, abounds=None, rule="zero"):
         zv = vscale.get(v, 0.0) if v is not None else None
         za = ascale.get(a, 0.0) if a is not None else None
         ai_val = r.get("valuation_basis", "actual") == "actual"
-        out.append((r["name"], missing_score(zv, za, rule, ai_val)))
+        out.append((r["name"],
+                    missing_score(zv, za, rule, ai_val, w_val, w_arr)))
     out.sort(key=lambda x: -x[1])
     return out
 
@@ -116,6 +123,12 @@ def main(argv=None):
     # missing-axis rule come from the payload's own model_config.
     cfg = ranked.get("model_config", {})
     rule = cfg.get("missing_rule", "zero")
+    # The axis weights travel with the payload (written there by score.py from
+    # data/model_config.json). If the payload does not carry them, fall back
+    # to the equal split.
+    wcfg = ranked.get("weights") or {}
+    w_val = float(wcfg.get("valuation", 0.5))
+    w_arr = float(wcfg.get("arr", 0.5))
     # Anchored bounds exist in two unit systems: variant A works in log10
     # space, variant B works in raw dollars. Passing log bounds to a raw
     # variant would put every z-score above 1.
@@ -134,6 +147,7 @@ def main(argv=None):
             log_ab = (ranked["axes"]["arr_usd_m"]["log_min"],
                       ranked["axes"]["arr_usd_m"]["log_max"])
     print(f"  input {rel(src)}  rule={rule}  "
+          f"weights={w_val:.2f}val/{w_arr:.2f}arr  "
           f"bounds={'anchored' if log_vb else 'sample'}")
 
     # --- variant A: the shipped model (log + min-max) -------------------
@@ -143,11 +157,12 @@ def main(argv=None):
     def A_arr(r):
         return math.log10(r["arr_usd_m"]) if r["arr_usd_m"] else None
 
-    A = score(rows, A_val, A_arr, log_vb, log_ab, rule)
+    A = score(rows, A_val, A_arr, log_vb, log_ab, rule, w_val, w_arr)
 
     # --- variant B: raw + min-max ---------------------------------------
     B = score(rows, lambda r: r["valuation_usd_b"], lambda r: r["arr_usd_m"],
-              vbounds=raw_vb, abounds=raw_ab, rule=rule)
+              vbounds=raw_vb, abounds=raw_ab, rule=rule,
+              w_val=w_val, w_arr=w_arr)
 
     # --- variant C: raw + z-score ---------------------------------------
     def C_score():
@@ -165,7 +180,8 @@ def main(argv=None):
             if za is None:
                 za = -3.0
             ai_val = r.get("valuation_basis", "actual") == "actual"
-            out.append((r["name"], missing_score(zv, za, rule, ai_val)))
+            out.append((r["name"],
+                        missing_score(zv, za, rule, ai_val, w_val, w_arr)))
         out.sort(key=lambda x: -x[1])
         return out
 
@@ -183,7 +199,8 @@ def main(argv=None):
             zv = vs.get(v) if v is not None else None
             za = as_.get(a) if a is not None else None
             ai_val = r.get("valuation_basis", "actual") == "actual"
-            out.append((r["name"], missing_score(zv, za, rule, ai_val)))
+            out.append((r["name"],
+                        missing_score(zv, za, rule, ai_val, w_val, w_arr)))
         out.sort(key=lambda x: -x[1])
         return out
 
