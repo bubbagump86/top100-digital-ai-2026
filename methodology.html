@@ -229,6 +229,13 @@
             (estimate).
           </li>
           <li>
+            <strong>Snowflake</strong> &mdash; <strong>$100M</strong> annualised
+            AI revenue run-rate (company-stated, Dec 2025, not updated at Q2
+            FY2027). A published AI line, so it is derived rather than proxied
+            &mdash; but stale and small against a $114.7B market cap, so we
+            under-credit it rather than guess upward.
+          </li>
+          <li>
             <strong>Palantir, Samsara, Schrodinger, ByteDance, Cohesity, Talkdesk</strong>
             &mdash; no AI-attributed revenue disclosed. Handled as
             <em>market-cap proxies</em> (section 6b).
@@ -241,8 +248,9 @@
         <p>
           Valuation and ARR each span 5+ orders of magnitude across the
           eligible set. In a linear scale, Anthropic's $100B ARR is
-          <strong>10,000&times;</strong> Reworkd AI's $10M ARR &mdash; a single company
-          becomes ~40% of the entire axis range just from being the largest.
+          <strong>10,000&times;</strong> Reworkd AI's $10M ARR &mdash; and because
+          Anthropic is also the most valuable company in the set, it sits at
+          the top of both axes and owns <strong>100% of each axis's range</strong>.
           The histogram becomes unrecoverable below the giants.
         </p>
         <p>
@@ -279,10 +287,41 @@ log_arr = log10(arr_USD_m)</pre>
           bounds were the minimum and maximum <em>observed in the current list</em>,
           every data update would re-base every other company's score, and the
           result would be rank churn that has nothing to do with any company
-          having changed. We measured it &mdash; a company joining with $5M of ARR
-          shifts the median score by 2.53 points, which nobody would report, and
-          still reorders 13 companies by three or more places. A $1M entrant
-          reorders 39.
+          having changed.
+        </p>
+        <p>
+          We measured it, and the measurement is re-runnable rather than a
+          number someone typed once: <code>scripts/measure_bound_churn.py</code>
+          scores the list twice with the real engine &mdash; once with
+          sample-derived bounds and once with the shipped anchored bounds
+          &mdash; each time with and without a hypothetical entrant. Output:
+          <code>data/bound_churn.json</code>.
+        </p>
+        <table class="rank" style="margin:14px 0;">
+          <thead>
+            <tr>
+              <th>Entrant</th>
+              <th class="num">Median score shift</th>
+              <th class="num">Rows re-scored</th>
+              <th class="num">Largest score move</th>
+              <th class="num">Rows moving 3+ places</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>$1.0B valuation, $5M ARR</td><td class="num">+2.43</td><td class="num">85 of 100</td><td class="num">3.28 pts</td><td class="num">17</td></tr>
+            <tr><td>$1.0B valuation, $1M ARR</td><td class="num">+6.38</td><td class="num">88 of 100</td><td class="num">9.37 pts</td><td class="num">43</td></tr>
+            <tr style="background:rgba(74,222,128,0.07);"><td><strong>Same entrants, anchored bounds (shipped)</strong></td><td class="num"><strong>0.00</strong></td><td class="num"><strong>0 of 100</strong></td><td class="num"><strong>0.00 pts</strong></td><td class="num"><strong>0</strong></td></tr>
+          </tbody>
+        </table>
+        <p>
+          Under sample-derived bounds, one company joining at $5M of ARR moves
+          the median score by 2.43 points, re-scores 85 of the other 100 rows,
+          and reorders 17 of them by three or more places &mdash; churn that has
+          nothing to do with any company having changed. A $1M-ARR entrant is
+          worse: +6.38 points on the median, a 9.37-point swing on the worst-hit
+          row, and 43 rows reordered. Under the shipped anchored bounds the
+          same two entrants change nothing at all: 0 rows re-scored, 0 rows
+          reordered.
         </p>
         <p>
           With fixed bounds, none of that happens: the score of a company only
@@ -523,16 +562,19 @@ Alibaba      $9,300M AI ARR x 20x = $186B implied AI valuation
 Baidu        $7,440M AI ARR x 20x = $149B uncapped -> CAPPED to $27.4B (market cap)
 Tencent      $7,000M AI ARR x 20x = $140B implied AI valuation
 ServiceNow   $1,500M AI ARR x 20x =  $30B implied AI valuation
-Salesforce     $800M AI ARR x 20x =  $16B implied AI valuation</pre>
+Salesforce     $800M AI ARR x 20x =  $16B implied AI valuation
+Snowflake      $100M AI ARR x 20x =   $2B implied AI valuation</pre>
         <p>
           Compare those to the full-company market caps: Microsoft $3.95T,
           Alphabet $4.16T, Amazon $2.83T, Meta $1.77T, Tencent $471B,
-          Alibaba $270B, Baidu $27.4B, Salesforce $280B, ServiceNow $200B.
+          Alibaba $270B, Baidu $27.4B, Salesforce $280B, ServiceNow $200B, Snowflake $114.7B.
           The gap between each pair is the part of the company that is
           <strong>not</strong> AI &mdash; and it is usually 95%+ of the
           market cap. Salesforce's implied AI valuation of $16B against a
-          $280B market cap is the starkest example: Agentforce is real, and it
-          is also ~6% of what the market pays for Salesforce.
+          $280B market cap is a stark case: Agentforce is real, and it is also
+          only ~6% of what the market pays for Salesforce. Snowflake is starker
+          still &mdash; $2B of implied AI valuation against a $114.7B market cap
+          is 1.7%.
         </p>
 
         <h3>The cap &mdash; a derived valuation can never exceed the company</h3>
@@ -554,7 +596,7 @@ Salesforce     $800M AI ARR x 20x =  $16B implied AI valuation</pre>
           $7,440M of AI ARR at 20&times; implies $148.8B &mdash; 543% of
           Baidu's $27.4B market cap &mdash; so Baidu's valuation axis is capped
           at $27.4B. Notion AI sits exactly at its $6.0B cap (100.0%) without
-          the cap binding. Every other derived row lands between 5.7% and
+          the cap binding. Every other derived row lands between 1.7% and
           68.9% of its market cap. The cap costs Baidu exactly one place
           (#10 &rarr; #11) and changes nothing else in the list.
         </p>
@@ -724,6 +766,7 @@ Salesforce     $800M AI ARR x 20x =  $16B implied AI valuation</pre>
             </tr>
           </thead>
           <tbody>
+            <tr><td>Snowflake</td><td class="num">$114.7B</td><td class="num">$100M</td><td class="num">1,147&times;</td><td class="num">$2B</td><td class="num">$2B</td><td class="num">1.7%</td></tr>
             <tr><td>Salesforce</td><td class="num">$280B</td><td class="num">$800M</td><td class="num">350&times;</td><td class="num">$16B</td><td class="num">$16B</td><td class="num">5.7%</td></tr>
             <tr><td>Google</td><td class="num">$4,160B</td><td class="num">$30,000M</td><td class="num">139&times;</td><td class="num">$600B</td><td class="num">$600B</td><td class="num">14.4%</td></tr>
             <tr><td>ServiceNow</td><td class="num">$200B</td><td class="num">$1,500M</td><td class="num">133&times;</td><td class="num">$30B</td><td class="num">$30B</td><td class="num">15.0%</td></tr>
@@ -737,7 +780,7 @@ Salesforce     $800M AI ARR x 20x =  $16B implied AI valuation</pre>
           </tbody>
         </table>
         <p>
-          Two findings here.
+          Three findings here.
         </p>
         <p>
           <strong>First: the market pays 67&ndash;139&times; for AI revenue at the
@@ -747,12 +790,20 @@ Salesforce     $800M AI ARR x 20x =  $16B implied AI valuation</pre>
           just the revenue itself. Our derived valuation deliberately strips
           that optionality out, which is exactly what makes the ranking a
           statement about AI businesses rather than about megacap option
-          value. Salesforce at 350&times; is the extreme case: the market is
+          value. Salesforce at 350&times; is the most extreme megacap case: the market is
           paying enormously for Agentforce optionality on a $280B cap, while
           we value the $800M of actual Agentforce ARR at $16B.
         </p>
         <p>
-          <strong>Second: Baidu is the one row where the derivation overruns
+          <strong>Second: Snowflake is the extreme case at 1,147&times;.</strong>
+          Its $100M of disclosed AI revenue is 1.7% of a $114.7B market cap,
+          so the market is paying for the data platform and the AI story, not
+          for the AI revenue. That is the clearest illustration of why a
+          disclosed AI line and a full market cap are not interchangeable
+          &mdash; and why we publish the AI figure on its own.
+        </p>
+        <p>
+          <strong>Third: Baidu is the one row where the derivation overruns
           the company.</strong> Uncapped, our derivation implies $149B for
           Baidu's AI business &mdash; <strong>5.4&times; Baidu's entire market
           cap</strong>. A component cannot be worth more than the whole. The

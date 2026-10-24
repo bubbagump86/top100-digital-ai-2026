@@ -1,0 +1,51 @@
+{
+  "method": "scripts/score.py --axis sample vs --axis anchored",
+  "entrants": [
+    {
+      "label": "$5M ARR entrant",
+      "entrant_valuation_usd_b": 1.0,
+      "entrant_arr_usd_m": 5.0,
+      "sample_derived_bounds": {
+        "median_score_before": 31.44,
+        "median_score_after": 33.87,
+        "median_shift": 2.43,
+        "rows_score_moved_over_0_5": 85,
+        "max_score_change": 3.28,
+        "rows_moved_3plus_places": 17,
+        "n_compared": 99
+      },
+      "anchored_bounds_shipped": {
+        "median_score_before": 31.31,
+        "median_score_after": 31.31,
+        "median_shift": 0.0,
+        "rows_score_moved_over_0_5": 0,
+        "max_score_change": 0.0,
+        "rows_moved_3plus_places": 0,
+        "n_compared": 100
+      }
+    },
+    {
+      "label": "$1M ARR entrant",
+      "entrant_valuation_usd_b": 1.0,
+      "entrant_arr_usd_m": 1.0,
+      "sample_derived_bounds": {
+        "median_score_before": 31.88,
+        "median_score_after": 38.26,
+        "median_shift": 6.38,
+        "rows_score_moved_over_0_5": 88,
+        "max_score_change": 9.37,
+        "rows_moved_3plus_places": 43,
+        "n_compared": 97
+      },
+      "anchored_bounds_shipped": {
+        "median_score_before": 31.31,
+        "median_score_after": 31.31,
+        "median_shift": 0.0,
+        "rows_score_moved_over_0_5": 0,
+        "max_score_change": 0.0,
+        "rows_moved_3plus_places": 0,
+        "n_compared": 100
+      }
+    }
+  ]
+}

@@ -175,8 +175,46 @@ names are unchanged at every multiple from 10× to 40×.
 | `scripts/polish_pin_2026_10.py` | fixes the pinned-vs-computed median distinction in the overview panel |
 | `scripts/diff_ranking.py` | compares two `ranked.json` files — membership and rank moves |
 | `scripts/scan_numbers.py` | finds hardcoded figures in the site HTML that a data change may have invalidated |
+| `scripts/measure_bound_churn.py` | reproduces the fixed-bounds measurement with the real engine → `data/bound_churn.json` |
 
-## 8. Open item, not changed here
+## 8. Collateral fixes found while auditing
+
+Adding rows forced a re-read of every hardcoded figure on the site. Four
+defects surfaced that had nothing to do with the missing names, but would have
+made the published page wrong:
+
+1. **The overview panel showed the computed pool median under the label
+   "pinned".** The two were both 20.0× by coincidence; once the pool grew the
+   computed median became 20.83× and the panel would have claimed 20.83× was
+   the pinned multiple. It now reads `peer_multiple.median_ev_revenue` for the
+   pinned value and shows the computed median as context.
+
+2. **"Every other derived row lands between 5.7% and 68.9% of its market cap"**
+   was no longer true — Snowflake lands at 1.7%. Snowflake was also missing
+   from the section 6b worked examples, the section 3 AI-attribution list and
+   the section 6c Test 4 cross-check table, which now has three findings
+   instead of two.
+
+3. **The "why the bounds are fixed" measurement could not be re-run.** It
+   published "shifts the median score by 2.53 points... reorders 13 companies
+   ... A $1M entrant reorders 39" — numbers typed once, with no way for a
+   reader to check them and no way for them to stay true as the pool moved.
+   `scripts/measure_bound_churn.py` now reproduces it with the real engine
+   (score the list twice, with and without a hypothetical entrant, under
+   `--axis sample` and `--axis anchored`), and the page publishes the current
+   measurement:
+
+   | Entrant | Median score shift | Rows re-scored | Largest score move | Rows moving 3+ places |
+   |---|---|---|---|---|
+   | $1.0B valuation, $5M ARR | +2.43 | 85 of 100 | 3.28 pts | 17 |
+   | $1.0B valuation, $1M ARR | +6.38 | 88 of 100 | 9.37 pts | 43 |
+   | **same entrants, anchored bounds (shipped)** | **0.00** | **0 of 100** | **0.00 pts** | **0** |
+
+4. **Section 4 said a single company "becomes ~40% of the entire axis range".**
+   Anthropic is the maximum on *both* axes, so it owns 100% of each range —
+   which is what section 5b already said. Corrected so the two agree.
+
+## 9. Open item, not changed here
 
 Two existing rows score their **total** company ARR on the AI-ARR axis despite
 being `proxy` basis, which the published model says should read 0:
