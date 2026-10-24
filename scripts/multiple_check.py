@@ -27,10 +27,31 @@ Output: data/multiple_check.json
 
 import json
 import statistics
+import argparse
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 RANKED = ROOT / "data" / "ranked.json"
+
+
+def rel(p):
+    """Path relative to the repo root when possible, else absolute."""
+    p = Path(p).resolve()
+    try:
+        return str(p.relative_to(ROOT))
+    except ValueError:
+        return str(p)
+
+
+def parse_args(argv=None):
+    p = argparse.ArgumentParser(
+        description="Stress-test the peer EV/Revenue multiple.")
+    p.add_argument("--input", default=None, metavar="PATH",
+                   help="ranked.json to analyse (default: data/ranked.json)")
+    p.add_argument("--out", default=None, metavar="PATH",
+                   help="where to write the analysis JSON "
+                        "(default: data/multiple_check.json)")
+    return p.parse_args(argv)
 
 CHINA = {
     "Alibaba (AI: Qwen + Alibaba Cloud AI)",
@@ -60,10 +81,13 @@ def trimmed_mean(vals, trim=0.1):
     return statistics.mean(core)
 
 
-def main():
-    data = json.load(RANKED.open(encoding="utf-8"))
+def main(argv=None):
+    args = parse_args(argv)
+    src = Path(args.input) if args.input else RANKED
+    data = json.load(src.open(encoding="utf-8"))
     rows = data["companies"]
     pm = data["peer_multiple"]
+    print(f"  input {rel(src)}")
 
     pool = [(p["name"], p["multiple"]) for p in pm["pool"]]
     mults = sorted(m for _, m in pool)
@@ -201,6 +225,17 @@ def main():
     print("=" * 76)
     print("CHECK 5 - does the top of the ranking survive the multiple?")
     print("=" * 76)
+    import math
+    cfg = data.get("model_config", {})
+    rule = cfg.get("missing_rule", "zero")
+    anchored = data.get("axes", {}).get("bounds_source") == "anchored"
+    if anchored:
+        VB = (data["axes"]["valuation_usd_b"]["log_min"],
+              data["axes"]["valuation_usd_b"]["log_max"])
+        AB = (data["axes"]["arr_usd_m"]["log_min"],
+              data["axes"]["arr_usd_m"]["log_max"])
+    else:
+        VB = AB = None
     mult_options = [10, 12, 15, 20, 25, 30, 40]
     sens = {}
     for m in mult_options:
@@ -216,16 +251,39 @@ def main():
                 if mcap is not None and v > mcap:
                     v = mcap
             vals.append((r["name"], v, a))
-        import math
         vl = [math.log10(v) for _, v, _ in vals if v]
         al = [math.log10(a) for _, _, a in vals if a]
-        vmin, vmax = min(vl), max(vl)
-        amin, amax = min(al), max(al)
+        if VB:
+            vmin, vmax = VB
+            amin, amax = AB
+        else:
+            vmin, vmax = min(vl), max(vl)
+            amin, amax = min(al), max(al)
         scored = []
-        for n, v, a in vals:
-            zv = (math.log10(v) - vmin) / (vmax - vmin) if v else 0.0
-            za = (math.log10(a) - amin) / (amax - amin) if a else 0.0
-            scored.append((n, 100 * (0.5 * zv + 0.5 * za)))
+        for r in rows:
+            v, a = r["valuation_usd_b"], r["arr_usd_m"]
+            if r["valuation_basis"] == "derived" and a:
+                v = a * m / 1000.0
+                mcap = r.get("market_cap_usd_b")
+                if mcap is not None and v > mcap:
+                    v = mcap
+            zv = (math.log10(v) - vmin) / (vmax - vmin) if v else None
+            za = (math.log10(a) - amin) / (amax - amin) if a else None
+            ai_val = r.get("valuation_basis", "actual") == "actual"
+            if zv is None and za is None:
+                s = 0.0
+            elif zv is None:
+                s = 100.0 * (0.5 * za)
+            elif za is None:
+                if rule == "alone":
+                    s = 100.0 * zv
+                elif rule == "hybrid":
+                    s = 100.0 * zv if ai_val else 100.0 * (0.5 * zv)
+                else:
+                    s = 100.0 * (0.5 * zv)
+            else:
+                s = 100.0 * (0.5 * zv + 0.5 * za)
+            scored.append((r["name"], s))
         scored.sort(key=lambda x: -x[1])
         sens[m] = [n for n, _ in scored[:15]]
         top15 = ", ".join(f"{n.split(' (')[0][:12]}" for n, _ in scored[:8])
@@ -283,9 +341,10 @@ def main():
         "companies_with_arr": n_arr,
     }
 
-    (ROOT / "data" / "multiple_check.json").write_text(
-        json.dumps(out, indent=2, ensure_ascii=False), encoding="utf-8")
-    print(f"  wrote data/multiple_check.json")
+    outp = Path(args.out) if args.out else (ROOT / "data" / "multiple_check.json")
+    outp.parent.mkdir(parents=True, exist_ok=True)
+    outp.write_text(json.dumps(out, indent=2, ensure_ascii=False), encoding="utf-8")
+    print(f"  wrote {rel(outp)}")
 
 
 if __name__ == "__main__":

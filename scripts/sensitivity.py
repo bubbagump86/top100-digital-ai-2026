@@ -17,6 +17,7 @@ diagnostic that explains WHY the naive variant fails.
 import json
 import math
 import statistics
+import argparse
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -24,8 +25,32 @@ DATA = ROOT / "data" / "companies.json"
 RANKED = ROOT / "data" / "ranked.json"
 
 
-def minmax(vals):
-    lo, hi = min(vals), max(vals)
+def rel(p):
+    """Path relative to the repo root when possible, else absolute."""
+    p = Path(p).resolve()
+    try:
+        return str(p.relative_to(ROOT))
+    except ValueError:
+        return str(p)
+
+
+def parse_args(argv=None):
+    p = argparse.ArgumentParser(description="Sensitivity of the ranking to the "
+                                             "normalisation choice.")
+    p.add_argument("--input", default=None, metavar="PATH",
+                   help="ranked.json to analyse (default: data/ranked.json)")
+    p.add_argument("--out", default=None, metavar="PATH",
+                   help="where to write the analysis JSON "
+                        "(default: data/sensitivity.json)")
+    return p.parse_args(argv)
+
+
+def minmax(vals, bounds=None):
+    """If bounds=(lo, hi) is given use it (anchored axis); else derive from data."""
+    if bounds:
+        lo, hi = bounds
+    else:
+        lo, hi = min(vals), max(vals)
     span = (hi - lo) or 1
     return {v: (v - lo) / span for v in set(vals)}
 
@@ -47,27 +72,58 @@ def pctrank(vals):
     return out
 
 
-def score(rows, val_fn, arr_fn):
+def missing_score(zv, za, rule, is_ai_valuation):
+    """How a row with a missing axis is scored, per the model's rule."""
+    if zv is None and za is None:
+        return 0.0
+    if zv is None:
+        return 100.0 * (0.5 * za)
+    if za is None:
+        if rule == "alone":
+            return 100.0 * zv
+        if rule == "hybrid":
+            return 100.0 * zv if is_ai_valuation else 100.0 * (0.5 * zv)
+        return 100.0 * (0.5 * zv)
+    return 100.0 * (0.5 * zv + 0.5 * za)
+
+
+def score(rows, val_fn, arr_fn, vbounds=None, abounds=None, rule="zero"):
     """val_fn / arr_fn map a row -> the transformed axis value (or None)."""
     vvals = [val_fn(r) for r in rows if val_fn(r) is not None]
     avals = [arr_fn(r) for r in rows if arr_fn(r) is not None]
 
-    vscale = minmax(vvals) if vvals else {}
-    ascale = minmax(avals) if avals else {}
+    vscale = minmax(vvals, vbounds) if vvals else {}
+    ascale = minmax(avals, abounds) if avals else {}
 
     out = []
     for r in rows:
         v, a = val_fn(r), arr_fn(r)
-        zv = vscale.get(v, 0.0) if v is not None else 0.0
-        za = ascale.get(a, 0.0) if a is not None else 0.0
-        out.append((r["name"], 100 * (0.5 * zv + 0.5 * za)))
+        zv = vscale.get(v, 0.0) if v is not None else None
+        za = ascale.get(a, 0.0) if a is not None else None
+        ai_val = r.get("valuation_basis", "actual") == "actual"
+        out.append((r["name"], missing_score(zv, za, rule, ai_val)))
     out.sort(key=lambda x: -x[1])
     return out
 
 
-def main():
-    ranked = json.load(RANKED.open(encoding="utf-8"))
+def main(argv=None):
+    args = parse_args(argv)
+    src = Path(args.input) if args.input else RANKED
+    ranked = json.load(src.open(encoding="utf-8"))
     rows = ranked["companies"]
+
+    # Reproduce whichever model we were handed: the axis bounds and the
+    # missing-axis rule come from the payload's own model_config.
+    cfg = ranked.get("model_config", {})
+    rule = cfg.get("missing_rule", "zero")
+    vb = ab = None
+    if ranked.get("axes", {}).get("bounds_source") == "anchored":
+        vb = (ranked["axes"]["valuation_usd_b"]["log_min"],
+              ranked["axes"]["valuation_usd_b"]["log_max"])
+        ab = (ranked["axes"]["arr_usd_m"]["log_min"],
+              ranked["axes"]["arr_usd_m"]["log_max"])
+    print(f"  input {rel(src)}  rule={rule}  "
+          f"bounds={'anchored' if vb else 'sample'}")
 
     # --- variant A: the shipped model (log + min-max) -------------------
     def A_val(r):
@@ -76,10 +132,11 @@ def main():
     def A_arr(r):
         return math.log10(r["arr_usd_m"]) if r["arr_usd_m"] else None
 
-    A = score(rows, A_val, A_arr)
+    A = score(rows, A_val, A_arr, vb, ab, rule)
 
     # --- variant B: raw + min-max ---------------------------------------
-    B = score(rows, lambda r: r["valuation_usd_b"], lambda r: r["arr_usd_m"])
+    B = score(rows, lambda r: r["valuation_usd_b"], lambda r: r["arr_usd_m"],
+              vbounds=vb, abounds=ab, rule=rule)
 
     # --- variant C: raw + z-score ---------------------------------------
     def C_score():
@@ -90,9 +147,14 @@ def main():
         for r in rows:
             v = r["valuation_usd_b"]
             a = r["arr_usd_m"]
-            zv = vs.get(v, -3.0) if v is not None else -3.0
-            za = as_.get(a, -3.0) if a is not None else -3.0
-            out.append((r["name"], 100 * (0.5 * zv + 0.5 * za)))
+            zv = vs.get(v) if v is not None else None
+            za = as_.get(a) if a is not None else None
+            if zv is None:
+                zv = -3.0
+            if za is None:
+                za = -3.0
+            ai_val = r.get("valuation_basis", "actual") == "actual"
+            out.append((r["name"], missing_score(zv, za, rule, ai_val)))
         out.sort(key=lambda x: -x[1])
         return out
 
@@ -107,9 +169,10 @@ def main():
         for r in rows:
             v = r["valuation_usd_b"]
             a = r["arr_usd_m"]
-            zv = vs.get(v, 0.0) if v is not None else 0.0
-            za = as_.get(a, 0.0) if a is not None else 0.0
-            out.append((r["name"], 100 * (0.5 * zv + 0.5 * za)))
+            zv = vs.get(v) if v is not None else None
+            za = as_.get(a) if a is not None else None
+            ai_val = r.get("valuation_basis", "actual") == "actual"
+            out.append((r["name"], missing_score(zv, za, rule, ai_val)))
         out.sort(key=lambda x: -x[1])
         return out
 
@@ -222,9 +285,10 @@ def main():
         "rows_below_5_points": len([1 for _, s in A if s < 5.0]),
         "top10": [n for n, _ in A[:10]],
     }
-    out = ROOT / "data" / "sensitivity.json"
+    out = Path(args.out) if args.out else (ROOT / "data" / "sensitivity.json")
+    out.parent.mkdir(parents=True, exist_ok=True)
     out.write_text(json.dumps(summary, indent=2, ensure_ascii=False), encoding="utf-8")
-    print(f"  wrote {out.relative_to(ROOT)}")
+    print(f"  wrote {rel(out)}")
 
 
 if __name__ == "__main__":

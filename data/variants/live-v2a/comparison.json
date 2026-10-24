@@ -1,0 +1,936 @@
+{
+  "baseline": {
+    "path": "data\\ranked.json",
+    "model_config": {
+      "anchored": false,
+      "anchor_val_usd_b": [
+        0.1,
+        1000.0
+      ],
+      "anchor_arr_usd_m": [
+        10.0,
+        100000.0
+      ],
+      "fixed_multiple": null,
+      "computed_peer_median": 20.0,
+      "missing_rule": "zero",
+      "variant": null
+    },
+    "axes": {
+      "valuation_usd_b": {
+        "log_min": -1.0,
+        "log_max": 2.9845273133437926
+      },
+      "arr_usd_m": {
+        "log_min": 1.0,
+        "log_max": 5.0
+      },
+      "bounds_source": "sample"
+    },
+    "peer_multiple": 20.0
+  },
+  "variant": {
+    "path": "data\\variants\\live-v2a\\ranked.json",
+    "model_config": {
+      "anchored": true,
+      "anchor_val_usd_b": [
+        0.1,
+        1000.0
+      ],
+      "anchor_arr_usd_m": [
+        10.0,
+        100000.0
+      ],
+      "fixed_multiple": 20.0,
+      "computed_peer_median": 20.0,
+      "missing_rule": "zero",
+      "variant": "live-v2a"
+    },
+    "axes": {
+      "valuation_usd_b": {
+        "log_min": -1.0,
+        "log_max": 3.0
+      },
+      "arr_usd_m": {
+        "log_min": 1.0,
+        "log_max": 5.0
+      },
+      "bounds_source": "anchored"
+    },
+    "peer_multiple": 20.0
+  },
+  "summary": {
+    "spearman": 0.9997,
+    "unchanged": 88,
+    "up": 4,
+    "down": 8,
+    "top20_moved": 0
+  },
+  "rank_movement": [
+    {
+      "name": "Midjourney",
+      "from": 83,
+      "to": 77,
+      "delta": -6,
+      "baseline_score": 21.24,
+      "variant_score": 21.24
+    },
+    {
+      "name": "PolyAI",
+      "from": 93,
+      "to": 92,
+      "delta": -1,
+      "baseline_score": 17.51,
+      "variant_score": 17.47
+    },
+    {
+      "name": "Suno",
+      "from": 96,
+      "to": 95,
+      "delta": -1,
+      "baseline_score": 16.26,
+      "variant_score": 16.26
+    },
+    {
+      "name": "You.com",
+      "from": 61,
+      "to": 60,
+      "delta": -1,
+      "baseline_score": 26.69,
+      "variant_score": 26.63
+    },
+    {
+      "name": "01.AI (Yi)",
+      "from": 89,
+      "to": 89,
+      "delta": 0,
+      "baseline_score": 18.51,
+      "variant_score": 18.46
+    },
+    {
+      "name": "ADA (Ada Support)",
+      "from": 69,
+      "to": 69,
+      "delta": 0,
+      "baseline_score": 24.83,
+      "variant_score": 24.78
+    },
+    {
+      "name": "AI21 Labs",
+      "from": 73,
+      "to": 73,
+      "delta": 0,
+      "baseline_score": 23.12,
+      "variant_score": 23.06
+    },
+    {
+      "name": "Abridge",
+      "from": 39,
+      "to": 39,
+      "delta": 0,
+      "baseline_score": 34.99,
+      "variant_score": 34.91
+    },
+    {
+      "name": "Alibaba (AI: Qwen + Alibaba Cloud AI)",
+      "from": 8,
+      "to": 8,
+      "delta": 0,
+      "baseline_score": 78.13,
+      "variant_score": 77.97
+    },
+    {
+      "name": "Amazon (AWS AI)",
+      "from": 5,
+      "to": 5,
+      "delta": 0,
+      "baseline_score": 88.89,
+      "variant_score": 88.71
+    },
+    {
+      "name": "Ambience Healthcare",
+      "from": 72,
+      "to": 72,
+      "delta": 0,
+      "baseline_score": 23.49,
+      "variant_score": 23.44
+    },
+    {
+      "name": "Anthropic",
+      "from": 1,
+      "to": 1,
+      "delta": 0,
+      "baseline_score": 100.0,
+      "variant_score": 99.81
+    },
+    {
+      "name": "Arize AI",
+      "from": 90,
+      "to": 90,
+      "delta": 0,
+      "baseline_score": 18.13,
+      "variant_score": 18.09
+    },
+    {
+      "name": "Augment Code",
+      "from": 94,
+      "to": 94,
+      "delta": 0,
+      "baseline_score": 16.95,
+      "variant_score": 16.9
+    },
+    {
+      "name": "Baichuan Intelligence",
+      "from": 76,
+      "to": 76,
+      "delta": 0,
+      "baseline_score": 22.26,
+      "variant_score": 22.19
+    },
+    {
+      "name": "Baidu (AI: ERNIE + Baidu AI Cloud)",
+      "from": 11,
+      "to": 11,
+      "delta": 0,
+      "baseline_score": 66.48,
+      "variant_score": 66.37
+    },
+    {
+      "name": "ByteDance (AI: Doubao + Seed + Volcano Engine)",
+      "from": 28,
+      "to": 28,
+      "delta": 0,
+      "baseline_score": 43.63,
+      "variant_score": 43.46
+    },
+    {
+      "name": "C3.ai",
+      "from": 36,
+      "to": 36,
+      "delta": 0,
+      "baseline_score": 39.85,
+      "variant_score": 39.77
+    },
+    {
+      "name": "Cognition (Devin)",
+      "from": 16,
+      "to": 16,
+      "delta": 0,
+      "baseline_score": 54.8,
+      "variant_score": 54.67
+    },
+    {
+      "name": "Cohere",
+      "from": 25,
+      "to": 25,
+      "delta": 0,
+      "baseline_score": 44.56,
+      "variant_score": 44.45
+    },
+    {
+      "name": "Cohesity",
+      "from": 22,
+      "to": 22,
+      "delta": 0,
+      "baseline_score": 48.17,
+      "variant_score": 48.09
+    },
+    {
+      "name": "Cresta",
+      "from": 62,
+      "to": 62,
+      "delta": 0,
+      "baseline_score": 26.05,
+      "variant_score": 25.99
+    },
+    {
+      "name": "Databricks",
+      "from": 9,
+      "to": 9,
+      "delta": 0,
+      "baseline_score": 76.71,
+      "variant_score": 76.55
+    },
+    {
+      "name": "Decagon",
+      "from": 43,
+      "to": 43,
+      "delta": 0,
+      "baseline_score": 33.25,
+      "variant_score": 33.17
+    },
+    {
+      "name": "Decart",
+      "from": 57,
+      "to": 57,
+      "delta": 0,
+      "baseline_score": 27.45,
+      "variant_score": 27.38
+    },
+    {
+      "name": "DeepL",
+      "from": 52,
+      "to": 52,
+      "delta": 0,
+      "baseline_score": 30.25,
+      "variant_score": 30.19
+    },
+    {
+      "name": "DeepSeek",
+      "from": 40,
+      "to": 40,
+      "delta": 0,
+      "baseline_score": 33.87,
+      "variant_score": 33.74
+    },
+    {
+      "name": "Deepgram",
+      "from": 66,
+      "to": 66,
+      "delta": 0,
+      "baseline_score": 25.27,
+      "variant_score": 25.21
+    },
+    {
+      "name": "ElevenLabs",
+      "from": 24,
+      "to": 24,
+      "delta": 0,
+      "baseline_score": 46.85,
+      "variant_score": 46.75
+    },
+    {
+      "name": "EliseAI",
+      "from": 44,
+      "to": 44,
+      "delta": 0,
+      "baseline_score": 33.11,
+      "variant_score": 33.04
+    },
+    {
+      "name": "EvenUp",
+      "from": 55,
+      "to": 55,
+      "delta": 0,
+      "baseline_score": 29.34,
+      "variant_score": 29.28
+    },
+    {
+      "name": "FAL",
+      "from": 46,
+      "to": 46,
+      "delta": 0,
+      "baseline_score": 32.6,
+      "variant_score": 32.53
+    },
+    {
+      "name": "Factory",
+      "from": 86,
+      "to": 86,
+      "delta": 0,
+      "baseline_score": 20.72,
+      "variant_score": 20.67
+    },
+    {
+      "name": "Fireflies.ai",
+      "from": 70,
+      "to": 70,
+      "delta": 0,
+      "baseline_score": 23.84,
+      "variant_score": 23.79
+    },
+    {
+      "name": "Glean",
+      "from": 32,
+      "to": 32,
+      "delta": 0,
+      "baseline_score": 41.77,
+      "variant_score": 41.68
+    },
+    {
+      "name": "Gong",
+      "from": 31,
+      "to": 31,
+      "delta": 0,
+      "baseline_score": 41.98,
+      "variant_score": 41.9
+    },
+    {
+      "name": "Google / Alphabet (AI: Gemini + Cloud AI)",
+      "from": 4,
+      "to": 4,
+      "delta": 0,
+      "baseline_score": 90.87,
+      "variant_score": 90.69
+    },
+    {
+      "name": "Harvey",
+      "from": 23,
+      "to": 23,
+      "delta": 0,
+      "baseline_score": 47.51,
+      "variant_score": 47.4
+    },
+    {
+      "name": "HeyGen",
+      "from": 84,
+      "to": 84,
+      "delta": 0,
+      "baseline_score": 21.05,
+      "variant_score": 21.02
+    },
+    {
+      "name": "Hippocratic AI",
+      "from": 65,
+      "to": 65,
+      "delta": 0,
+      "baseline_score": 25.34,
+      "variant_score": 25.26
+    },
+    {
+      "name": "Hugging Face",
+      "from": 34,
+      "to": 34,
+      "delta": 0,
+      "baseline_score": 41.2,
+      "variant_score": 41.1
+    },
+    {
+      "name": "Invisible Technologies",
+      "from": 53,
+      "to": 53,
+      "delta": 0,
+      "baseline_score": 30.25,
+      "variant_score": 30.19
+    },
+    {
+      "name": "Inworld AI",
+      "from": 99,
+      "to": 99,
+      "delta": 0,
+      "baseline_score": 14.74,
+      "variant_score": 14.7
+    },
+    {
+      "name": "Jasper AI",
+      "from": 63,
+      "to": 63,
+      "delta": 0,
+      "baseline_score": 26.05,
+      "variant_score": 25.99
+    },
+    {
+      "name": "Kore.ai",
+      "from": 58,
+      "to": 58,
+      "delta": 0,
+      "baseline_score": 27.26,
+      "variant_score": 27.2
+    },
+    {
+      "name": "Legora (formerly Spellbook)",
+      "from": 38,
+      "to": 38,
+      "delta": 0,
+      "baseline_score": 36.64,
+      "variant_score": 36.55
+    },
+    {
+      "name": "Lightricks",
+      "from": 59,
+      "to": 59,
+      "delta": 0,
+      "baseline_score": 27.26,
+      "variant_score": 27.2
+    },
+    {
+      "name": "Lovable",
+      "from": 29,
+      "to": 29,
+      "delta": 0,
+      "baseline_score": 42.91,
+      "variant_score": 42.81
+    },
+    {
+      "name": "Magic AI",
+      "from": 98,
+      "to": 98,
+      "delta": 0,
+      "baseline_score": 14.76,
+      "variant_score": 14.7
+    },
+    {
+      "name": "Mercor",
+      "from": 17,
+      "to": 17,
+      "delta": 0,
+      "baseline_score": 53.86,
+      "variant_score": 53.76
+    },
+    {
+      "name": "Meta (AI: Advantage+ + Meta AI + Llama)",
+      "from": 6,
+      "to": 6,
+      "delta": 0,
+      "baseline_score": 86.46,
+      "variant_score": 86.29
+    },
+    {
+      "name": "Microsoft (AI business)",
+      "from": 3,
+      "to": 3,
+      "delta": 0,
+      "baseline_score": 93.16,
+      "variant_score": 92.97
+    },
+    {
+      "name": "MiniMax",
+      "from": 49,
+      "to": 49,
+      "delta": 0,
+      "baseline_score": 31.39,
+      "variant_score": 31.31
+    },
+    {
+      "name": "Mistral AI",
+      "from": 15,
+      "to": 15,
+      "delta": 0,
+      "baseline_score": 54.87,
+      "variant_score": 54.75
+    },
+    {
+      "name": "Moonshot AI",
+      "from": 56,
+      "to": 56,
+      "delta": 0,
+      "baseline_score": 28.87,
+      "variant_score": 28.76
+    },
+    {
+      "name": "Moveworks",
+      "from": 51,
+      "to": 51,
+      "delta": 0,
+      "baseline_score": 30.76,
+      "variant_score": 30.69
+    },
+    {
+      "name": "Notion AI",
+      "from": 35,
+      "to": 35,
+      "delta": 0,
+      "baseline_score": 40.78,
+      "variant_score": 40.69
+    },
+    {
+      "name": "Observe.AI",
+      "from": 71,
+      "to": 71,
+      "delta": 0,
+      "baseline_score": 23.84,
+      "variant_score": 23.79
+    },
+    {
+      "name": "OpenAI",
+      "from": 2,
+      "to": 2,
+      "delta": 0,
+      "baseline_score": 95.56,
+      "variant_score": 95.37
+    },
+    {
+      "name": "Otter.ai",
+      "from": 82,
+      "to": 82,
+      "delta": 0,
+      "baseline_score": 21.27,
+      "variant_score": 21.24
+    },
+    {
+      "name": "Palantir Technologies",
+      "from": 26,
+      "to": 26,
+      "delta": 0,
+      "baseline_score": 44.47,
+      "variant_score": 44.3
+    },
+    {
+      "name": "Perplexity AI",
+      "from": 18,
+      "to": 18,
+      "delta": 0,
+      "baseline_score": 52.98,
+      "variant_score": 52.86
+    },
+    {
+      "name": "Pika",
+      "from": 100,
+      "to": 100,
+      "delta": 0,
+      "baseline_score": 14.4,
+      "variant_score": 14.37
+    },
+    {
+      "name": "Recursion Pharmaceuticals",
+      "from": 33,
+      "to": 33,
+      "delta": 0,
+      "baseline_score": 41.36,
+      "variant_score": 41.26
+    },
+    {
+      "name": "Reflection AI",
+      "from": 54,
+      "to": 54,
+      "delta": 0,
+      "baseline_score": 30.09,
+      "variant_score": 29.97
+    },
+    {
+      "name": "Replit",
+      "from": 37,
+      "to": 37,
+      "delta": 0,
+      "baseline_score": 37.54,
+      "variant_score": 37.45
+    },
+    {
+      "name": "Roboflow",
+      "from": 97,
+      "to": 97,
+      "delta": 0,
+      "baseline_score": 15.73,
+      "variant_score": 15.69
+    },
+    {
+      "name": "Runway",
+      "from": 47,
+      "to": 47,
+      "delta": 0,
+      "baseline_score": 32.03,
+      "variant_score": 31.95
+    },
+    {
+      "name": "Safe Superintelligence (SSI)",
+      "from": 48,
+      "to": 48,
+      "delta": 0,
+      "baseline_score": 31.44,
+      "variant_score": 31.31
+    },
+    {
+      "name": "Salesforce (Agentforce / AI)",
+      "from": 20,
+      "to": 20,
+      "delta": 0,
+      "baseline_score": 51.45,
+      "variant_score": 51.34
+    },
+    {
+      "name": "Samsara",
+      "from": 50,
+      "to": 50,
+      "delta": 0,
+      "baseline_score": 31.08,
+      "variant_score": 30.96
+    },
+    {
+      "name": "Scale AI",
+      "from": 13,
+      "to": 13,
+      "delta": 0,
+      "baseline_score": 59.66,
+      "variant_score": 59.54
+    },
+    {
+      "name": "Schrodinger",
+      "from": 88,
+      "to": 88,
+      "delta": 0,
+      "baseline_score": 18.54,
+      "variant_score": 18.46
+    },
+    {
+      "name": "ServiceNow (Now Assist AI)",
+      "from": 14,
+      "to": 14,
+      "delta": 0,
+      "baseline_score": 58.29,
+      "variant_score": 58.17
+    },
+    {
+      "name": "Sierra",
+      "from": 27,
+      "to": 27,
+      "delta": 0,
+      "baseline_score": 43.85,
+      "variant_score": 43.75
+    },
+    {
+      "name": "Snorkel AI",
+      "from": 74,
+      "to": 74,
+      "delta": 0,
+      "baseline_score": 22.72,
+      "variant_score": 22.66
+    },
+    {
+      "name": "SpaceXAI (xAI + Cursor + X)",
+      "from": 7,
+      "to": 7,
+      "delta": 0,
+      "baseline_score": 83.22,
+      "variant_score": 83.05
+    },
+    {
+      "name": "Speak",
+      "from": 67,
+      "to": 67,
+      "delta": 0,
+      "baseline_score": 25.05,
+      "variant_score": 25.0
+    },
+    {
+      "name": "Stability AI",
+      "from": 75,
+      "to": 75,
+      "delta": 0,
+      "baseline_score": 22.28,
+      "variant_score": 22.23
+    },
+    {
+      "name": "Stepfun",
+      "from": 91,
+      "to": 91,
+      "delta": 0,
+      "baseline_score": 17.52,
+      "variant_score": 17.47
+    },
+    {
+      "name": "Suki AI",
+      "from": 87,
+      "to": 87,
+      "delta": 0,
+      "baseline_score": 19.49,
+      "variant_score": 19.45
+    },
+    {
+      "name": "Synthesia",
+      "from": 45,
+      "to": 45,
+      "delta": 0,
+      "baseline_score": 32.6,
+      "variant_score": 32.53
+    },
+    {
+      "name": "Talkdesk",
+      "from": 30,
+      "to": 30,
+      "delta": 0,
+      "baseline_score": 42.57,
+      "variant_score": 42.47
+    },
+    {
+      "name": "Tempus AI",
+      "from": 19,
+      "to": 19,
+      "delta": 0,
+      "baseline_score": 52.51,
+      "variant_score": 52.41
+    },
+    {
+      "name": "Tencent (AI: Hunyuan + Tencent Cloud AI)",
+      "from": 10,
+      "to": 10,
+      "delta": 0,
+      "baseline_score": 75.04,
+      "variant_score": 74.89
+    },
+    {
+      "name": "Thinking Machines Lab",
+      "from": 41,
+      "to": 41,
+      "delta": 0,
+      "baseline_score": 33.87,
+      "variant_score": 33.74
+    },
+    {
+      "name": "Together AI",
+      "from": 42,
+      "to": 42,
+      "delta": 0,
+      "baseline_score": 33.76,
+      "variant_score": 33.68
+    },
+    {
+      "name": "VAST Data",
+      "from": 12,
+      "to": 12,
+      "delta": 0,
+      "baseline_score": 59.85,
+      "variant_score": 59.73
+    },
+    {
+      "name": "Vapi",
+      "from": 85,
+      "to": 85,
+      "delta": 0,
+      "baseline_score": 20.78,
+      "variant_score": 20.73
+    },
+    {
+      "name": "Weights & Biases",
+      "from": 68,
+      "to": 68,
+      "delta": 0,
+      "baseline_score": 25.05,
+      "variant_score": 25.0
+    },
+    {
+      "name": "Writer",
+      "from": 64,
+      "to": 64,
+      "delta": 0,
+      "baseline_score": 25.77,
+      "variant_score": 25.71
+    },
+    {
+      "name": "Zhipu AI (Z.ai)",
+      "from": 21,
+      "to": 21,
+      "delta": 0,
+      "baseline_score": 49.77,
+      "variant_score": 49.64
+    },
+    {
+      "name": "AssemblyAI",
+      "from": 80,
+      "to": 81,
+      "delta": 1,
+      "baseline_score": 21.29,
+      "variant_score": 21.24
+    },
+    {
+      "name": "Character.AI",
+      "from": 77,
+      "to": 78,
+      "delta": 1,
+      "baseline_score": 21.29,
+      "variant_score": 21.24
+    },
+    {
+      "name": "Inflection AI",
+      "from": 95,
+      "to": 96,
+      "delta": 1,
+      "baseline_score": 16.33,
+      "variant_score": 16.26
+    },
+    {
+      "name": "Labelbox",
+      "from": 78,
+      "to": 79,
+      "delta": 1,
+      "baseline_score": 21.29,
+      "variant_score": 21.24
+    },
+    {
+      "name": "LangChain",
+      "from": 92,
+      "to": 93,
+      "delta": 1,
+      "baseline_score": 17.52,
+      "variant_score": 17.47
+    },
+    {
+      "name": "Sourcegraph (Amp / Cody)",
+      "from": 60,
+      "to": 61,
+      "delta": 1,
+      "baseline_score": 26.7,
+      "variant_score": 26.63
+    },
+    {
+      "name": "Typeface",
+      "from": 79,
+      "to": 80,
+      "delta": 1,
+      "baseline_score": 21.29,
+      "variant_score": 21.24
+    },
+    {
+      "name": "Forethought",
+      "from": 81,
+      "to": 83,
+      "delta": 2,
+      "baseline_score": 21.29,
+      "variant_score": 21.24
+    }
+  ],
+  "churn": [
+    {
+      "event": "new company enters, $1M ARR (new floor)",
+      "baseline_median_score_shift": 7.22,
+      "baseline_rank_churn_ge3": 39,
+      "variant_median_score_shift": 0.0,
+      "variant_rank_churn_ge3": 0,
+      "baseline_leader": "Anthropic",
+      "variant_leader": "Anthropic"
+    },
+    {
+      "event": "new company enters, $5M ARR",
+      "baseline_median_score_shift": 2.53,
+      "baseline_rank_churn_ge3": 13,
+      "variant_median_score_shift": 0.0,
+      "variant_rank_churn_ge3": 0,
+      "baseline_leader": "Anthropic",
+      "variant_leader": "Anthropic"
+    },
+    {
+      "event": "new company enters, $300B ARR (new ceiling)",
+      "baseline_median_score_shift": -1.33,
+      "baseline_rank_churn_ge3": 10,
+      "variant_median_score_shift": 0.0,
+      "variant_rank_churn_ge3": 0,
+      "baseline_leader": "Anthropic",
+      "variant_leader": "Anthropic"
+    },
+    {
+      "event": "Reworkd AI ARR slips $10M -> $5M (floor moves)",
+      "baseline_median_score_shift": 2.53,
+      "baseline_rank_churn_ge3": 13,
+      "variant_median_score_shift": 0.0,
+      "variant_rank_churn_ge3": 0,
+      "baseline_leader": "Anthropic",
+      "variant_leader": "Anthropic"
+    },
+    {
+      "event": "Anthropic ARR revised $100B -> $80B",
+      "baseline_median_score_shift": 0.31,
+      "baseline_rank_churn_ge3": 2,
+      "variant_median_score_shift": 0.0,
+      "variant_rank_churn_ge3": 0,
+      "baseline_leader": "Anthropic",
+      "variant_leader": "Anthropic"
+    },
+    {
+      "event": "Anthropic ARR revised $100B -> $150B",
+      "baseline_median_score_shift": -0.52,
+      "baseline_rank_churn_ge3": 1,
+      "variant_median_score_shift": 0.0,
+      "variant_rank_churn_ge3": 0,
+      "baseline_leader": "Anthropic",
+      "variant_leader": "Anthropic"
+    },
+    {
+      "event": "OpenAI ARR $50B -> $120B (overtakes Anthropic)",
+      "baseline_median_score_shift": -0.24,
+      "baseline_rank_churn_ge3": 0,
+      "variant_median_score_shift": 0.0,
+      "variant_rank_churn_ge3": 0,
+      "baseline_leader": "OpenAI",
+      "variant_leader": "OpenAI"
+    }
+  ]
+}
