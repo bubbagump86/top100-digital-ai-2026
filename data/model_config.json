@@ -1,0 +1,26 @@
+{
+  "policy_version": "live-v2",
+  "reviewed": "2026-10-24",
+  "note": "Model policy for a live list. The axis bounds and the peer multiple are FIXED here rather than derived from the sample, so that a data update cannot re-base every other company's score. Review quarterly - see review_policy below.",
+
+  "axis": {
+    "bounds_source": "anchored",
+    "valuation_usd_b": [0.1, 1000.0],
+    "arr_usd_m": [10.0, 100000.0],
+    "note": "Valuation $0.1B-$1,000B, ARR $10M-$100,000M. Scores are NOT clipped: a company beyond a bound scores above 100, which is the signal that the anchor is stale."
+  },
+
+  "peer_multiple": 20.0,
+  "peer_multiple_basis": "Median EV/Revenue of the pure-play peer pool as at the 2026-10 edition (n=81, IQR 15-40x, mean 33.6x, trimmed mean 25.5x). The published stress test re-ranks at 10x-40x and the top 11 is identical at every one.",
+  "recompute_peer_multiple": false,
+
+  "missing_arr_rule": "zero",
+  "missing_arr_rule_note": "A row with no ARR gets the ARR axis at 0 and keeps its 50% weight, so its composite is 0.5 x z_val. 'alone' would drop the axis entirely; 'hybrid' would drop it only where the valuation is an AI valuation. Both are available via --missing-rule but neither is adopted: 'alone' promotes market-cap proxies with no disclosed AI revenue into the top 10, and 'hybrid' makes the ranking materially more dependent on the log transform (raw min-max Spearman falls from +0.884 to +0.811).",
+
+  "review_policy": {
+    "cadence": "quarterly",
+    "axis_reanchor_trigger": "a company has breached a bound by more than one third of the axis span - i.e. an anchor that is about to be crossed rather than one that has been crossed",
+    "peer_multiple_retune_trigger": "the pure-play pool median has moved more than one third of the IQR (about 8x) from the pinned value - not merely because one company joined the pool",
+    "changelog": "every revision is logged with the date, the old value, the new value and the reason; scores are otherwise comparable across editions"
+  }
+}

@@ -1,9 +1,14 @@
-# Model revision proposal — "live list" edition
+# Model revision — "live list" edition
 
-**Status: PROPOSAL. Nothing here is published.** The live site still runs the
-current model at commit `91d1ab7`. This branch (`feat/live-v2-anchored-axis`)
-contains the machinery to produce and compare the alternatives, plus the
-methodology wording that would go live if a variant is adopted.
+**DECISION: Option A adopted** (anchored axis bounds + pinned peer multiple +
+the missing-ARR rule left unchanged). Option B — the hybrid missing-ARR rule —
+was tested and **deferred**; see §4 for why.
+
+Shipped in the `live-v2` policy (`data/model_config.json`).
+
+**Status: this document is the decision record for the revision.** The live
+site runs the revised model. The proposal it describes was reviewed on
+2026-10-24; the numbers below are the ones that were measured at review time.
 
 ---
 
@@ -200,42 +205,67 @@ Anchored bounds will eventually be breached. Proposed policy:
 
 ---
 
-## 7. What is being asked
+## 7. What was decided
 
-1. **Option A or Option B?** A is a no-op on today's ranking and removes all
-   churn. B additionally changes how pre-revenue labs are treated, and that
-   change makes the list more dependent on the log transform.
-2. **If B:** accept that a pre-revenue lab outranks a revenue-generating peer
-   of similar valuation?
-3. **Bounds:** $0.1B – $1,000B valuation and $10M – $100,000M ARR, or
-   different round numbers?
-4. **Multiple:** pinned at 20×?
+1. **Option A adopted.** Anchored axis bounds ($0.1B–$1,000B valuation,
+   $10M–$100,000M ARR) and the peer multiple pinned at 20×. The missing-ARR
+   rule is unchanged (`zero`).
+2. **Option B deferred.** The hybrid missing-ARR rule is not shipped. It was
+   a genuine improvement in fairness to pre-revenue labs, but it makes the
+   ranking materially more dependent on the log transform (§4) and it is a
+   separable decision from the stability work. It can be revisited on its own
+   — the machinery is in `scripts/score.py --missing-rule hybrid`.
+3. **Bounds** as proposed above.
+4. **Multiple** pinned at 20×, re-reviewed quarterly.
 
-Nothing is published until this is decided.
+### What changed in the published list
+
+| | Before | After |
+|---|---|---|
+| Anthropic | 100.00 | **99.81** |
+| OpenAI | 95.56 | 95.37 |
+| Microsoft | 93.16 | 92.97 |
+| Alphabet | 90.87 | 90.69 |
+| Amazon | 88.89 | 88.71 |
+| Meta | 86.46 | 86.29 |
+| SpaceXAI | 83.22 | 83.05 |
+| Alibaba | 78.13 | 77.97 |
+| Databricks | 76.71 | 76.55 |
+| Tencent | 75.04 | 74.89 |
+| Baidu | 66.48 | 66.37 |
+
+**88 of 100 ranks unchanged**, 4 up, 8 down — the movers are ties being broken
+differently (Midjourney #83 → #77 is the largest, a tie at 21.24/21.29). The
+top 11 membership is unchanged, and still stable across every multiple from
+10× to 40×.
+
+The only visible change a reader will notice is Anthropic's score: 99.81
+rather than 100.00, because the valuation anchor is $1,000B and Anthropic is at
+$965B. That is the intended behaviour of an anchored scale — a score of 100
+would mean "at the top of the scale", and a score above 100 would mean "past
+the anchor".
 
 ---
 
 ## 8. How to reproduce
 
 ```bash
-# current model (default; identical output to the live site)
+# the shipped model (reads data/model_config.json)
 python scripts/score.py
+python scripts/sensitivity.py
+python scripts/multiple_check.py
 
-# Option A
-python scripts/score.py --variant live-v2a --anchored --fixed-multiple 20 --missing-rule zero
-python scripts/sensitivity.py   --input data/variants/live-v2a/ranked.json --out data/variants/live-v2a/sensitivity.json
-python scripts/multiple_check.py --input data/variants/live-v2a/ranked.json --out data/variants/live-v2a/multiple_check.json
-
-# Option B
-python scripts/score.py --variant live-v2 --anchored --fixed-multiple 20 --missing-rule hybrid
+# the deferred Option B, for reference
+python scripts/score.py --variant live-v2 --axis anchored --peer-multiple 20 --missing-rule hybrid
 python scripts/sensitivity.py   --input data/variants/live-v2/ranked.json --out data/variants/live-v2/sensitivity.json
 python scripts/multiple_check.py --input data/variants/live-v2/ranked.json --out data/variants/live-v2/multiple_check.json
 
 # comparison + churn simulation
 python scripts/compare_live.py --variant data/variants/live-v2/ranked.json \
-    --variant-flags "--anchored --fixed-multiple 20 --missing-rule hybrid" \
+    --variant-flags "--axis anchored --peer-multiple 20 --missing-rule hybrid" \
     --out data/variants/live-v2/comparison.json
 ```
 
 A `--variant` run writes to `data/variants/<name>/` and **cannot** touch
-`data/ranked.json`, `data/ranked.csv` or the site's `ranked.json`.
+`data/ranked.json`, `data/ranked.csv` or the site's `ranked.json`. Variant
+outputs are git-ignored — they are review artifacts, not site content.

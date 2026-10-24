@@ -21,13 +21,34 @@ For each company we collect:
   AI slice, never total company revenue.
 
 Both axes span 5+ orders of magnitude, so we **log-transform** each value and
-**min-max rescale** to `[0, 1]`. The composite is the equal-weighted average:
+**min-max rescale** to `[0, 1]` against **fixed bounds** — valuation $0.1B–$1,000B,
+ARR $10M–$100B. The composite is the equal-weighted average:
 
 ```
 S = 100 * (0.5 * z_log(valuation) + 0.5 * z_log(ARR))
 ```
 
 where `z_log(x) = (log10(x) - log_min) / (log_max - log_min)`.
+
+### Why the bounds are fixed (this list is live)
+
+The list is re-scored as valuations and ARR move. If the bounds were the
+minimum and maximum *observed in the current list*, every data update would
+re-base every other company's score — and the result would be rank churn that
+has nothing to do with any company having changed. We measured it: a company
+joining with $5M ARR shifts the median score by 2.53 points (invisible) and
+still reorders 13 companies by 3+ places. A $1M entrant reorders 39.
+
+With fixed bounds none of that happens. This does **not** freeze the list —
+OpenAI overtaking Anthropic still happens correctly. Anchoring removes spurious
+movement while preserving real movement.
+
+Scores are **not clipped**: a company beyond a bound scores above 100, which is
+the signal that the anchor is stale. Bounds are reviewed quarterly and revised
+only when a company has breached a bound by more than one third of the axis
+span; every revision is logged. The policy lives in
+[`data/model_config.json`](data/model_config.json), version-controlled with the
+data.
 
 ### The three-basis model (how big tech fits in)
 
@@ -37,8 +58,12 @@ where `z_log(x) = (log10(x) - log_min) / (log_max - log_min)`.
 | **AI-attributed** | Microsoft, Alphabet, Amazon, Meta, Alibaba, Baidu, Tencent, Salesforce, ServiceNow, Notion AI | `AI ARR × 20×` — the pure-play median EV/Revenue multiple (n=81, IQR 15–40×), **capped at the company's market cap**. Answers *"what would this AI business be worth standalone?"* |
 | **Market-cap proxy** | Palantir, Samsara, Schrodinger, ByteDance, Cohesity, Talkdesk | No AI-revenue disclosure, so no AI valuation can be derived. Full market cap used as a flagged proxy; ARR axis scored 0. |
 
-The peer multiple is derived from the pure-play pool only, so the imputation
-never feeds back into its own input.
+The peer multiple is **pinned at 20×** — the pure-play median as measured on the
+2026-10 edition — rather than recomputed on every run. The median is itself a
+sample-dependent number: adding one company at 90.9× moves it from 20.00× to
+20.42× and shifts every derived megacap row. The pin is re-reviewed quarterly,
+and revised only when the pool median has moved more than one third of the IQR
+(about 8×) from the pinned value.
 
 **The valuation cap.** A derived AI valuation is a claim about a *part* of a
 company, and a part cannot be worth more than the whole. So the valuation axis
@@ -69,20 +94,20 @@ ranking four ways:
 
 | Variant | Spearman ρ vs shipped | Kendall τ | Rows scoring < 5/100 |
 |---|---:|---:|---:|
-| **A — log + min-max (shipped)** | +1.000 | +1.000 | **3 of 100** |
-| B — raw + min-max | +0.967 | +0.876 | **87 of 100** |
-| C — raw + z-score | +0.799 | +0.744 | **90 of 100** |
-| D — raw + percentile | +0.980 | +0.916 | **2 of 100** |
+| **A — log + min-max (shipped)** | +1.000 | +1.000 | **0 of 100** |
+| B — raw + min-max | +0.937 | +0.831 | **87 of 100** |
+| C — raw + z-score | +0.854 | +0.789 | **90 of 100** |
+| D — raw + percentile | +0.979 | +0.912 | **2 of 100** |
 
 **The headline is robust**: the top 7 are identical under all four variants,
 and the top 12 are identical under the scale-free percentile variant (D).
 
-**But raw min-max would quietly wreck the list.** It correlates +0.967 with
+**But raw min-max would quietly wreck the list.** It correlates +0.937 with
 the shipped model, so it looks fine at a glance — yet 87 of 100 rows collapse
-below 5/100 (vs 3 under A). Anthropic's $100B ARR owns 100% of the raw axis
+below 5/100 (vs 0 under A). Anthropic's $100B ARR owns 100% of the raw axis
 range, so every company under ~$1B ARR is crushed to ~0 and becomes
-indistinguishable. It also promotes pre-revenue labs (DeepSeek #37→#16,
-Thinking Machines #38→#17, SSI #41→#22) purely because "no revenue" wins by
+indistinguishable. It also promotes pre-revenue labs (DeepSeek #40→#16,
+Thinking Machines #41→#17, SSI #48→#22) purely because "no revenue" wins by
 default once everything else is zero.
 
 Percentile (D) is the strongest alternative and agrees even more closely with
@@ -96,6 +121,14 @@ Machine-readable: [`data/sensitivity.json`](data/sensitivity.json).
 
 The second-most-consequential number in the model. `scripts/multiple_check.py`
 runs five checks.
+
+The multiple is **pinned at 20×** — the pure-play median as measured on the
+2026-10 edition — rather than recomputed each run, for the same reason the
+axis bounds are fixed: a live list cannot have its derived valuations move
+because the composition of the peer pool changed. It is re-reviewed quarterly
+and revised only when the pool median has moved more than one third of the
+IQR (about 8×) from the pinned value. The distribution below is always the
+*current* pool, so the pin cannot drift away from the data unnoticed.
 
 **1. Is the median the right statistic?** The pool is a power law:
 min 5×, p25 15×, **median 20×**, mean 33.6×, trimmed mean 25.5×, p75 40×,
@@ -195,11 +228,21 @@ This regenerates `data/ranked.json`, `data/ranked.csv`, and the
 site-level `ranked.json` (used by the live site). Open `index.html` in a
 browser to view the site (no build step).
 
-To tweak the scoring, change the weights at the top of `scripts/score.py`:
+The model policy — axis bounds, the pinned peer multiple, the missing-ARR rule
+and the review triggers — lives in
+[`data/model_config.json`](data/model_config.json). To change it, edit that
+file; `scripts/score.py` reads it on every run. The weights are at the top of
+`scripts/score.py`:
 
 ```python
 W_VAL = 0.5
 W_ARR = 0.5
+```
+
+For a dry run that cannot touch the live outputs:
+
+```bash
+python scripts/score.py --variant review --axis sample --peer-multiple 0
 ```
 
 ## Recent M&A reflected in the ranking
@@ -227,21 +270,23 @@ section 10, has the same commentary.
 
 | Rank | Company                            | AI Valuation      | AI ARR               | Score |
 |------|------------------------------------|-------------------|----------------------|-------|
-| 1    | Anthropic                          | $965B             | $100,000M            | 100.00 |
-| 2    | OpenAI                             | $852B             | $50,000M             | 95.56 |
-| 3    | Microsoft (AI business)            | $740B *derived*   | $37,000M             | 93.16 |
-| 4    | Alphabet (AI: Gemini + Cloud AI)   | $600B *derived*   | $30,000M             | 90.87 |
-| 5    | Amazon (AWS AI)                    | $500B *derived*   | $25,000M             | 88.89 |
-| 6    | Meta (AI)                          | $400B *derived*   | $20,000M             | 86.46 |
-| 7    | SpaceXAI (xAI + Cursor + X)        | $310B             | $14,200M             | 83.22 |
-| 8    | Alibaba (AI)                       | $186B *derived*   | $9,300M              | 78.13 |
-| 9    | Databricks                         | $190B             | $7,000M              | 76.71 |
-| 10   | Tencent (AI)                       | $140B *derived*   | $7,000M              | 75.04 |
-| 11   | Baidu (AI)                         | $27.4B *derived, capped* | $7,440M      | 66.48 |
+| 1    | Anthropic                          | $965B             | $100,000M            | 99.81 |
+| 2    | OpenAI                             | $852B             | $50,000M             | 95.37 |
+| 3    | Microsoft (AI business)            | $740B *derived*   | $37,000M             | 92.97 |
+| 4    | Alphabet (AI: Gemini + Cloud AI)   | $600B *derived*   | $30,000M             | 90.69 |
+| 5    | Amazon (AWS AI)                    | $500B *derived*   | $25,000M             | 88.71 |
+| 6    | Meta (AI)                          | $400B *derived*   | $20,000M             | 86.29 |
+| 7    | SpaceXAI (xAI + Cursor + X)        | $310B             | $14,200M             | 83.05 |
+| 8    | Alibaba (AI)                       | $186B *derived*   | $9,300M              | 77.97 |
+| 9    | Databricks                         | $190B             | $7,000M              | 76.55 |
+| 10   | Tencent (AI)                       | $140B *derived*   | $7,000M              | 74.89 |
+| 11   | Baidu (AI)                         | $27.4B *derived, capped* | $7,440M      | 66.37 |
 
-\* derived = AI-attributed ARR × the 20× pure-play median EV/Revenue multiple,
-capped at the company's market cap (Baidu's uncapped derivation was $148.8B =
-543% of its market cap, so the cap binds).
+\* derived = AI-attributed ARR × the pinned 20× pure-play median EV/Revenue
+multiple, capped at the company's market cap (Baidu's uncapped derivation was
+$148.8B = 543% of its market cap, so the cap binds). Scores are rescaled
+against fixed bounds (valuation $0.1B–$1,000B, ARR $10M–$100B), so Anthropic
+tops out at 99.81 rather than 100.
 
 The full ranking is in [`ranking.html`](ranking.html), and you can filter it
 by valuation basis there.

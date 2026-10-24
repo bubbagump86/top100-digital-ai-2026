@@ -116,14 +116,25 @@ def main(argv=None):
     # missing-axis rule come from the payload's own model_config.
     cfg = ranked.get("model_config", {})
     rule = cfg.get("missing_rule", "zero")
-    vb = ab = None
+    # Anchored bounds exist in two unit systems: variant A works in log10
+    # space, variant B works in raw dollars. Passing log bounds to a raw
+    # variant would put every z-score above 1.
+    log_vb = log_ab = raw_vb = raw_ab = None
     if ranked.get("axes", {}).get("bounds_source") == "anchored":
-        vb = (ranked["axes"]["valuation_usd_b"]["log_min"],
-              ranked["axes"]["valuation_usd_b"]["log_max"])
-        ab = (ranked["axes"]["arr_usd_m"]["log_min"],
-              ranked["axes"]["arr_usd_m"]["log_max"])
+        av = cfg.get("anchor_val_usd_b")
+        aa = cfg.get("anchor_arr_usd_m")
+        if av and aa:
+            log_vb = (math.log10(av[0]), math.log10(av[1]))
+            log_ab = (math.log10(aa[0]), math.log10(aa[1]))
+            raw_vb = (av[0], av[1])
+            raw_ab = (aa[0], aa[1])
+        else:
+            log_vb = (ranked["axes"]["valuation_usd_b"]["log_min"],
+                      ranked["axes"]["valuation_usd_b"]["log_max"])
+            log_ab = (ranked["axes"]["arr_usd_m"]["log_min"],
+                      ranked["axes"]["arr_usd_m"]["log_max"])
     print(f"  input {rel(src)}  rule={rule}  "
-          f"bounds={'anchored' if vb else 'sample'}")
+          f"bounds={'anchored' if log_vb else 'sample'}")
 
     # --- variant A: the shipped model (log + min-max) -------------------
     def A_val(r):
@@ -132,11 +143,11 @@ def main(argv=None):
     def A_arr(r):
         return math.log10(r["arr_usd_m"]) if r["arr_usd_m"] else None
 
-    A = score(rows, A_val, A_arr, vb, ab, rule)
+    A = score(rows, A_val, A_arr, log_vb, log_ab, rule)
 
     # --- variant B: raw + min-max ---------------------------------------
     B = score(rows, lambda r: r["valuation_usd_b"], lambda r: r["arr_usd_m"],
-              vbounds=vb, abounds=ab, rule=rule)
+              vbounds=raw_vb, abounds=raw_ab, rule=rule)
 
     # --- variant C: raw + z-score ---------------------------------------
     def C_score():

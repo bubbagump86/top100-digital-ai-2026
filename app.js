@@ -261,7 +261,7 @@ async function initDetail() {
         multiple, and use that as the valuation axis.
       </p>
       <pre>AI-attributed ARR      = ${fmtM(c.arr_usd_m)}
-peer median multiple    = ${pm.median_ev_revenue ?? "—"}x   (n=${pm.pool_size ?? "—"} pure-play companies)
+peer multiple (pinned)  = ${pm.median_ev_revenue ?? "—"}x   (pure-play median, n=${pm.pool_size ?? "—"})
 implied AI valuation    = ${fmtM(c.arr_usd_m)} x ${pm.median_ev_revenue ?? "—"}x
                         = $${((c.arr_usd_m * (pm.median_ev_revenue || 0)) / 1000).toLocaleString(undefined, { maximumFractionDigits: 1 })}B</pre>
       ${c.valuation_capped ? `
